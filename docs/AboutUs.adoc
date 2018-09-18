@@ -4,53 +4,52 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
+{PROJECT_NAME} was developed by the https://github.com/orgs/nus-cs2103t-w14-3/teams/developers[W14-3] team. +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Zhang Yuntong
+image::yuntongzhang.jpg[width="150", align="left"]
+{empty}[[homepage]] [https://github.com/yuntongzhang[github]] [<<johndoe#, portfolio>>]
 
-Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
-
-Role: Team Lead +
-Responsibilities: UI
+Role: TBD +
+Responsibilities: TBD +
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Darien Chong
+image::snajef.jpg[width="150", align="left"]
+{empty}[http://github.com/snajef[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer +
-Responsibilities: Data
-
-'''
-
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Dev Ops + Threading
+Role: TBD +
+Responsibilities: TBD +
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Ling Zhiyu
+image::omegafishy.jpg[width="150", align="left"]
+{empty}[http://github.com/omegafishy[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer +
-Responsibilities: UI
+Role: TBD +
+Responsibilities: TBD +
+
+'''
+
+=== Jefferson Sie
+image::jeffypie369.jpg[width="150", align="left"]
+{empty}[http://github.com/jeffypie369[github]] [<<johndoe#, portfolio>>]
+
+Role: TBD +
+Responsibilities: TBD +
+
+'''
+
+=== Gao Jiaxin
+image::gaojiaxin666.jpg[width="150", align="left"]
+{empty}[http://github.com/gaojiaxin666[github]] [<<johndoe#, portfolio>>]
+
+Role: TBD +
+Responsibilities: TBD +
 
 '''
