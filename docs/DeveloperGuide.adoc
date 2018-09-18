@@ -902,6 +902,21 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
+[[patients-medical-details]] Patient's medical details::
+Information about the patient's medical history and drug allergies
+
+[[medical-history]] Medical history::
+Past records of healthcare visits, pre-existing medical conditions
+
+[[authorised-visitors]] Authorised visitors::
+Upon check-in of patient, the information of permitted visitors entered
+
+[[checkin]] Checkin::
+Patient registers at the hospital
+
+[[checkout]] Checkout::
+Patient is discharged from the hospital
+
 [appendix]
 == Product Survey
 
