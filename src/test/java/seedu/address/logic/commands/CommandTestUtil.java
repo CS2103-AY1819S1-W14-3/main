@@ -3,10 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOSES_PER_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOSE_UNIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DRUGNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -39,6 +44,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_DRUGNAME = "Paracetamol";
+    public static final int VALID_DOSE = 2;
+    public static final String VALID_DOSE_UNIT = "tablets";
+    public static final int VALID_DOSES_PER_DAY = 4;
+    public static final int VALID_DURATION_IN_DAYS = 14;
+
     public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
     public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -51,6 +62,41 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String VALID_PRESCRIPTION_DESC = " " + PREFIX_DRUGNAME + VALID_DRUGNAME
+            + " " + PREFIX_QUANTITY + VALID_DOSE
+            + " " + PREFIX_DOSE_UNIT + VALID_DOSE_UNIT
+            + " " + PREFIX_DOSES_PER_DAY + VALID_DOSES_PER_DAY
+            + " " + PREFIX_DURATION + VALID_DURATION_IN_DAYS;
+
+    public static final String EMPTY_PRESCRIPTION_DESC = "";
+    public static final String INVALID_PRESCRIPTION_DESC_MISSING_DRUGNAME = " " + PREFIX_QUANTITY + VALID_DOSE
+            + " " + PREFIX_DOSE_UNIT + VALID_DOSE_UNIT
+            + " " + PREFIX_DOSES_PER_DAY + VALID_DOSES_PER_DAY
+            + " " + PREFIX_DURATION + VALID_DURATION_IN_DAYS;
+
+    public static final String INVALID_PRESCRIPTION_DESC_MISSING_QUANTITY = " " + PREFIX_DRUGNAME + VALID_DRUGNAME
+            + " " + PREFIX_DOSE_UNIT + VALID_DOSE_UNIT
+            + " " + PREFIX_DOSES_PER_DAY + VALID_DOSES_PER_DAY
+            + " " + PREFIX_DURATION + VALID_DURATION_IN_DAYS;
+
+    public static final String INVALID_PRESCRIPTION_DESC_MISSING_DOSE_UNIT = " " + PREFIX_DRUGNAME + VALID_DRUGNAME
+            + " " + PREFIX_QUANTITY + VALID_DOSE
+            + " " + PREFIX_DOSES_PER_DAY + VALID_DOSES_PER_DAY
+            + " " + PREFIX_DURATION + VALID_DURATION_IN_DAYS;
+
+    public static final String INVALID_PRESCRIPTION_DESC_MISSING_DOSES_PER_DAY = " " + PREFIX_DRUGNAME + VALID_DRUGNAME
+            + " " + PREFIX_QUANTITY + VALID_DOSE
+            + " " + PREFIX_DOSE_UNIT + VALID_DOSE_UNIT
+            + " " + PREFIX_DURATION + VALID_DURATION_IN_DAYS;
+
+    public static final String INVALID_PRESCRIPTION_DESC_MISSING_DURATION_IN_DAYS = " "
+            + PREFIX_DRUGNAME + VALID_DRUGNAME
+            + " " + PREFIX_QUANTITY + VALID_DOSE
+            + " " + PREFIX_DOSE_UNIT + VALID_DOSE_UNIT
+            + " " + PREFIX_DOSES_PER_DAY + VALID_DOSES_PER_DAY;
+
+
 
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "AAAAAA"; // NRIC must match NRIC format.
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.medicine.Prescription;
+import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -35,7 +37,8 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
-
+    @XmlElement
+    private XmlAdaptedPrescriptionList prescriptions = new XmlAdaptedPrescriptionList();
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -62,6 +65,17 @@ public class XmlAdaptedPerson {
     }
 
     /**
+     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     */
+    public XmlAdaptedPerson(String nric, String name, String phone, String email, String address,
+            List<XmlAdaptedTag> tagged, List<XmlAdaptedPrescription> prescriptions) {
+        this(nric, name, phone, email, address, tagged);
+        if (prescriptions != null) {
+            this.prescriptions.setPrescription(prescriptions);
+        }
+    }
+
+    /**
      * Converts a given Person into this class for JAXB use.
      *
      * @param source
@@ -75,6 +89,11 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = source.getTags().stream().map(XmlAdaptedTag::new).collect(Collectors.toList());
+        this.prescriptions.setPrescription(source.getPrescriptionList()
+                .stream()
+                .map(XmlAdaptedPrescription::new)
+                .collect(Collectors.toList()));
+
     }
 
     /**
@@ -86,8 +105,14 @@ public class XmlAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<Prescription> prescriptions = new ArrayList<>();
+
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        for (XmlAdaptedPrescription prescription : this.prescriptions) {
+            prescriptions.add(prescription.toModelType());
         }
 
         if (nric == null) {
@@ -131,7 +156,9 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final PrescriptionList prescriptionList = new PrescriptionList(new ArrayList<Prescription>(prescriptions));
+        return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags, prescriptionList);
     }
 
     @Override
@@ -145,8 +172,11 @@ public class XmlAdaptedPerson {
         }
 
         XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
-        return Objects.equals(name, otherPerson.name) && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email) && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+        return Objects.equals(name, otherPerson.name)
+                && Objects.equals(phone, otherPerson.phone)
+                && Objects.equals(email, otherPerson.email)
+                && Objects.equals(address, otherPerson.address)
+                && tagged.equals(otherPerson.tagged)
+                && prescriptions.equals(otherPerson.prescriptions);
     }
 }
