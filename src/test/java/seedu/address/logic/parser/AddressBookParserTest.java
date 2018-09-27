@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddmedsCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -28,17 +29,29 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.medicine.Prescription;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PrescriptionBuilder;
+import seedu.address.testutil.PrescriptionUtil;
 
 public class AddressBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void parseCommand_addmeds() throws Exception {
+        Person person = new PersonBuilder().build();
+        Prescription prescription = new PrescriptionBuilder().build();
+        AddmedsCommand command = (AddmedsCommand) parser.parseCommand(
+                PrescriptionUtil.getAddmedsCommand(person.getNric(), prescription));
+        assertEquals(new AddmedsCommand(person.getNric(), prescription), command);
+    }
 
     @Test
     public void parseCommand_add() throws Exception {

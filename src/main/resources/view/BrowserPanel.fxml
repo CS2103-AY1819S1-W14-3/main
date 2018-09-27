@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.web.WebView?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml/1">
-  <WebView fx:id="browser"/>
-</StackPane>
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="true" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+       <URL value="@../css/MedTable.css" />
+   </stylesheets>
+   <children>
+      <TableView prefHeight="386.0" prefWidth="600.0" fx:id="prescriptionTableView">
+        <columns>
+          <TableColumn prefWidth="115.20001220703125" text="Drug Name" fx:id="drugNameCol" />
+          <TableColumn prefWidth="68.79998779296875" text="Dosage" fx:id="dosageCol" />
+            <TableColumn prefWidth="77.60009765625" text="Dosage unit" fx:id="dosageUnitCol" />
+            <TableColumn prefWidth="74.4000244140625" text="Doses/day" fx:id="dosesPerDayCol"/>
+            <TableColumn prefWidth="88.0" text="Start Date" fx:id="startDateCol"/>
+            <TableColumn prefWidth="86.4000244140625" text="End Date" fx:id="endDateCol" />
+            <TableColumn prefWidth="91.20001220703125" text="Duration" fx:id="durationCol" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</VBox>

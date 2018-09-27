@@ -7,8 +7,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.medicine.Dose;
+import seedu.address.model.medicine.Duration;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -136,6 +139,29 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    // @@author snajef
+    /**
+     * Parses a {@code int dose}, {@code String doseUnit},{@int dosePerDay} into a
+     * {@code Dose}.
+     *
+     * @return a Dose object with the parsed parameters as members.
+     */
+    public static Dose parseDose(double dose, String doseUnit, int dosePerDay) throws IllegalValueException {
+        requireNonNull(doseUnit);
+        return new Dose(dose, doseUnit, dosePerDay);
+    }
+
+    // @@author snajef
+    /**
+     * Parses a {@code durationInDays} into a {@code Duration}.
+     *
+     * @return a parsed Duration object.
+     * @throws IllegalValueException If the duration in days is not a positive integer.
+     */
+    public static Duration parseDuration(int durationInDays) throws IllegalValueException {
+        return new Duration(durationInDays);
     }
 
     //@@author

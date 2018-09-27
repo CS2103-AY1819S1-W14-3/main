@@ -1,0 +1,53 @@
+// Sourced from https://stackoverflow.com/questions/39512621/change-javafx-tableview-font-size
+
+// Style of entire tableView
+.table-view{
+	font-size: 0.1em;
+ }
+
+// Style of entire tableView when is getting focused
+.table-view:focused{
+}
+
+// Style of each column header in the tableView
+.table-view .column-header {
+}
+
+// Style of each column header's background in the tableView
+.table-view .column-header-background{
+}
+
+// Style of each column header's label  in the tableView
+.table-view .column-header-background .label{
+	font-size: 0.1em;
+}
+
+// Style of each column in the tableView
+.table-view .table-column{
+}
+
+// Style of each table cell
+.table-view .table-cell{
+}
+
+// Style for each < non odd> row of table view
+.table-row-cell{
+}
+
+// Style for each <odd> row of table view
+.table-row-cell:odd{
+}
+
+
+// Style of each entire row in the table view
+.table-row-cell:selected {
+}
+
+
+// Style of each entire row in the table view when is hovered
+.table-row-cell:hover {
+}
+
+// Style of each entire row in the table view when is getting focused
+.table-row-cell:focused {
+}

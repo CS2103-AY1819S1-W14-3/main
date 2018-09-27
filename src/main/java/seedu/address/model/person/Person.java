@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final PrescriptionList prescriptionList;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +38,19 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        prescriptionList = new PrescriptionList();
+    }
+
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            PrescriptionList prescriptionList) {
+        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList);
+        this.nric = nric;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.prescriptionList = prescriptionList;
     }
 
     public Nric getNric() {
@@ -56,6 +71,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public PrescriptionList getPrescriptionList() {
+        return prescriptionList;
     }
 
     /**
