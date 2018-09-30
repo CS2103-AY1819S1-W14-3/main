@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Zhang Yuntong
-image::yuntongzhang.jpg[width="150", align="left"]
+image::yuntongzhang.png[width="150", align="left"]
 {empty}[[homepage]] [https://github.com/yuntongzhang[github]] [<<johndoe#, portfolio>>]
 
 Role: TBD +
@@ -19,7 +19,7 @@ Responsibilities: TBD +
 '''
 
 === Darien Chong
-image::snajef.jpg[width="150", align="left"]
+image::snajef.png[width="150", align="left"]
 {empty}[http://github.com/snajef[github]] [<<johndoe#, portfolio>>]
 
 Role: TBD +
@@ -28,7 +28,7 @@ Responsibilities: TBD +
 '''
 
 === Ling Zhiyu
-image::omegafishy.jpg[width="150", align="left"]
+image::omegafishy.png[width="150", align="left"]
 {empty}[http://github.com/omegafishy[github]] [<<johndoe#, portfolio>>]
 
 Role: TBD +
@@ -37,7 +37,7 @@ Responsibilities: TBD +
 '''
 
 === Jefferson Sie
-image::jeffypie369.jpg[width="150", align="left"]
+image::jeffypie369.png[width="150", align="left"]
 {empty}[http://github.com/jeffypie369[github]] [<<johndoe#, portfolio>>]
 
 Role: TBD +
@@ -46,7 +46,7 @@ Responsibilities: TBD +
 '''
 
 === Gao Jiaxin
-image::gaojiaxin666.jpg[width="150", align="left"]
+image::gaojiaxin666.png[width="150", align="left"]
 {empty}[http://github.com/gaojiaxin666[github]] [<<johndoe#, portfolio>>]
 
 Role: TBD +
