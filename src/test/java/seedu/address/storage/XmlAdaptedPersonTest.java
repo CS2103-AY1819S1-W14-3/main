@@ -1,21 +1,28 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.storage.XmlAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.medicine.Prescription;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.Assert;
+import seedu.address.testutil.PrescriptionBuilder;
 
 public class XmlAdaptedPersonTest {
     private static final String INVALID_NRIC = "S12345AA";
@@ -32,11 +39,52 @@ public class XmlAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream().map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
+    private static Prescription validPrescription;
+    private static List<XmlAdaptedPrescription> validPrescriptions;
+
+    @Before
+    public void setUp() throws IllegalValueException {
+        validPrescription = new PrescriptionBuilder().build();
+        validPrescriptions = Arrays.asList(new Prescription[] { validPrescription })
+                .stream()
+                .map(XmlAdaptedPrescription::new)
+                .collect(Collectors.toList());
+    }
+
+    @Test
+    public void constructor_zeroArg_works() {
+        new XmlAdaptedPerson();
+    }
+
+    @Test
+    public void constructor_prescriptionList_returnsPerson() throws IllegalValueException {
+        BENSON.getPrescriptionList().add(validPrescription);
+        XmlAdaptedPerson person = new XmlAdaptedPerson(BENSON);
+        assertEquals(BENSON, person.toModelType());
+    }
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        XmlAdaptedPerson person = new XmlAdaptedPerson(BENSON);
+        BENSON.getPrescriptionList().add(validPrescription);
+        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, validPrescriptions);
         assertEquals(BENSON, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidNric_throwsIllegalValueException() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(INVALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS);
+        String expectedMessage = Nric.MESSAGE_NAME_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullNric_throwsIllegalValueException() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(null, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
@@ -112,4 +160,25 @@ public class XmlAdaptedPersonTest {
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 
+    @Test
+    public void equals_objectAndItself_returnsTrue() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_TAGS);
+        assertTrue(person.equals(person));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        assertFalse(new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_TAGS).equals(1));
+    }
+
+    @Test
+    public void equals_personAndCopy_returnsTrue() {
+        XmlAdaptedPerson bensonCopy = new XmlAdaptedPerson(BENSON);
+        XmlAdaptedPerson anotherBensonCopy = new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, new ArrayList<>());
+
+        assertTrue(bensonCopy.equals(anotherBensonCopy));
+    }
 }

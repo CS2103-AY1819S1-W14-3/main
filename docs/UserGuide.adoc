@@ -178,18 +178,11 @@ Add to a patient’s medication history.
 WARNING: You must have the appropriate permissions to invoke this command.
 ****
 
-Format: `addmeds NRIC`
-****
-* This will prompt the user for more information on the medication to prescribe, to be submitted in this format:
-** `d/DRUG_NAME q/QUANTITY_PER_DOSE n/ DOSES_PER_DAY t/DURATION_IN_DAYS`
-* Entering an empty line will submit the medication.
-* Entering an empty line twice will end the medication submission.
-****
+Format: `addmeds ic/NRIC d/DRUG_NAME q/QUANTITY_PER_DOSE u/DOSAGE_UNIT n/DOSES_PER_DAY t/DURATION_IN_DAYS`
 
 Examples:
 
-* `addmeds S1234567A`
-**  `d/Paracetamol q/2 tablets n/4 t/14`
+* `addmeds ic/S1234567A d/Paracetamol q/2 u/tablets n/4 t/14`
 
 === Sign in patient’s visitors: `visitorin`
 Signs in a visitor for a patient.
