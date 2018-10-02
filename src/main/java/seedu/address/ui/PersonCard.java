@@ -40,6 +40,7 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    //todo may have to add more for med history
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);

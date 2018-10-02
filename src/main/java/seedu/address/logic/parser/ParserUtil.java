@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -55,6 +56,23 @@ public class ParserUtil {
             throw new ParseException(Nric.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Nric(trimmedName);
+    }
+
+    // @@ omegafishy
+    /**
+     * Parses a {@code String diagnosis} into a {@code Diagnosis}. Leading
+     * and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     *              if the given {@code diagnosis} is invalid.
+     */
+    public static Diagnosis parseDiagnosis(String diagnosis) throws ParseException {
+        requireNonNull(diagnosis);
+        String trimmedDiagnosis = diagnosis.trim();
+        if (!Diagnosis.isValidDiagnosis(trimmedDiagnosis)) {
+            throw new ParseException((Diagnosis.MESSAGE_NAME_CONSTRAINTS));
+        }
+        return new Diagnosis(trimmedDiagnosis);
     }
 
     //@@author

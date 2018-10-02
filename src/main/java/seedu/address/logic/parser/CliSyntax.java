@@ -13,6 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
-    /** Ordered prefixes for the addmeds command. */
+    /** Ordered prefixes for the addmh command. */
     public static final Prefix PREFIX_NRIC = new Prefix("ic/");
+    public static final Prefix PREFIX_MED_HISTORY = new Prefix("mh/");
+    // todo may want to rename this to better suit other named conventions
 }
