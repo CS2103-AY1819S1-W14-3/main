@@ -181,6 +181,47 @@ Examples:
 
 * `addmeds ic/S1234567A d/Paracetamol q/2 u/tablets n/4 t/14`
 
+=== Add appointment for patient: `addappt`
+Adds a scheduled appointment for a patient.
+
+****
+WARNING: You must have the appropriate permissions to invoke this command.
+****
+
+Format: `addappt ic/NRIC type/TYPE pn/PROCEDURE_NAME dt/DD-MM-YYYY HHMM doc/DOCTOR-IN-CHARGE`
+
+Examples:
+
+* `addappt ic/S1234567A type/SURGERY pn/Brain transplant dt/27-04-2019 1030 doc/Dr. Pepper`
+
+=== Views all appointments for a patient: `viewappt`
+Views all scheduled appointments for a patient.
+
+****
+WARNING: You must have the appropriate permissions to invoke this command.
+****
+
+Format: `viewappt ic/NRIC`
+
+Examples:
+
+* `viewappt ic/S1234567A'
+
+=== Cancel appointment for patient: `xappt`
+Cancels a scheduled appointment for a patient.
+
+****
+WARNING: You must have the appropriate permissions to invoke this command.
+****
+
+Format: `xappt INDEX`
+
+Examples:
+
+* `view S1234567A` +
+`xappt 2` +
+Deletes the second appointment belonging to patient with NRIC S1234567A
+
 === Sign in patient’s visitors: `visitorin`
 Signs in a visitor for a patient.
 
