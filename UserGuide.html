@@ -431,7 +431,20 @@ You must have the appropriate permissions to invoke this functionality.
 </div>
 </div>
 <div class="paragraph">
-<p>Simply click on the person&#8217;s card and the panel on the right will display his prescribed medication.</p>
+<p>Simply click on the person&#8217;s card and the panel on the right will display his prescribed medication.<br>
+You can click on a column heading to sort the medication view by that column&#8217;s key.<br>
+You can also click and hold a column heading to shift it by dragging it to the desired location in the medication view.<br>
+You can also hold <code>Shift</code> while clicking multiple columns to sort by multiple columns in the order of clicking<br></p>
+</div>
+<div class="paragraph">
+<p>Example:
+Holding <code>Shift</code> and clicking both the <code>Drug Name</code> and <code>Dosage</code> headings will sort first by <code>Drug Name</code> in lexicographical order, followed by <code>Dosage</code> in ascending order.<br>
+i.e. Listings with the same <code>Drug Name</code> will be further sorted by <code>Dosage</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ViewmedsTable.png" alt="ViewmedsTable" width="790">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -587,12 +600,8 @@ e.g. <code>viewdiet S1234567A</code></p>
 e.g. <code>adddiet S1234567A</code>; <code>d/halal</code></p>
 </li>
 <li>
-<p><strong>View patient&#8217;s medication</strong> : <code>viewmeds NRIC</code><br>
-e.g. <code>viewmeds S1234567A</code></p>
-</li>
-<li>
-<p><strong>Add patient&#8217;s medication</strong> : <code>addmeds NRIC</code>; <code>d/DRUG_NAME q/QUANTITY_PER_DOSE n/ DOSES_PER_DAY t/DURATION_IN_DAYS</code><br>
-e.g. <code>addmeds S1234567A</code>; <code>d/Paracetamol q/2 tablets n/4 t/14</code></p>
+<p><strong>Add patient&#8217;s medication</strong> : <code>addmeds ic/NRIC d/DRUG_NAME q/QUANTITY_PER_DOSE n/ DOSES_PER_DAY t/DURATION_IN_DAYS</code><br>
+e.g. <code>addmeds S1234567A d/Paracetamol q/2 u/tablets n/4 t/14</code></p>
 </li>
 <li>
 <p><strong>Sign in patient&#8217;s visitors</strong> : <code>visitorin p/PATIENT_NAME v/VISITOR_NAME</code><br>
@@ -609,4 +618,4 @@ e.g. <code>viewvisitors p/Ling Zhiyu</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-08 00:37:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-09 14:55:12 UTC</div></div></div></body></html>
