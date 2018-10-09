@@ -17,7 +17,7 @@ public class Prescription {
     /** Dose to administer. */
     private Dose dose;
 
-    /** Duration of the prescription in milliseconds. */
+    /** Duration of the prescription. */
     private Duration duration;
 
     public Prescription(String name, Dose d, Duration dur) {
@@ -31,7 +31,9 @@ public class Prescription {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(medName).append(DIVIDER).append(dose.toString()).append(DIVIDER).append(duration.toString());
+        sb.append(medName).append(DIVIDER)
+            .append(dose.toString()).append(DIVIDER)
+            .append(duration.toString());
 
         return sb.toString();
     }
@@ -44,7 +46,9 @@ public class Prescription {
 
         if (o instanceof Prescription) {
             Prescription m = (Prescription) o;
-            return medName.equals(m.medName) && dose.equals(m.dose) && duration.equals(m.duration);
+            return medName.equals(m.medName)
+                && dose.equals(m.dose)
+                && duration.equals(m.duration);
         }
 
         return false;
@@ -58,14 +62,14 @@ public class Prescription {
     }
 
     /**
-     * Getter method for the Dose.
+     * Getter method for the internal {@code Dose} object.
      */
     public Dose getDose() {
         return dose;
     }
 
     /**
-     * Getter method for the Duration.
+     * Getter method for the internal {@code Duration} object..
      */
     public Duration getDuration() {
         return duration;

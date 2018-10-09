@@ -166,7 +166,16 @@ View a patient’s medication history.
 WARNING: You must have the appropriate permissions to invoke this functionality.
 ****
 
-Simply click on the person's card and the panel on the right will display his prescribed medication.
+Simply click on the person's card and the panel on the right will display his prescribed medication. +
+You can click on a column heading to sort the medication view by that column's key. +
+You can also click and hold a column heading to shift it by dragging it to the desired location in the medication view. +
+You can also hold `Shift` while clicking multiple columns to sort by multiple columns in the order of clicking +
+
+Example:
+Holding `Shift` and clicking both the `Drug Name` and `Dosage` headings will sort first by `Drug Name` in lexicographical order, followed by `Dosage` in ascending order. +
+i.e. Listings with the same `Drug Name` will be further sorted by `Dosage`.
+
+image::ViewmedsTable.png[width="790"]
 
 === Add patient medication: `addmeds`
 Add to a patient’s medication history.
@@ -241,10 +250,8 @@ e.g. `addmh S1234567A`;  `Saw patient at 2pm today...`
 e.g. `viewdiet S1234567A`
 * *Add patient's dietary needs* : `adddiet NRIC` +
 e.g. `adddiet S1234567A`; `d/halal`
-* *View patient's medication* : `viewmeds NRIC` +
-e.g. `viewmeds S1234567A`
-* *Add patient's medication* : `addmeds NRIC`; `d/DRUG_NAME q/QUANTITY_PER_DOSE n/ DOSES_PER_DAY t/DURATION_IN_DAYS` +
-e.g. `addmeds S1234567A`; `d/Paracetamol q/2 tablets n/4 t/14`
+* *Add patient's medication* : `addmeds ic/NRIC d/DRUG_NAME q/QUANTITY_PER_DOSE n/ DOSES_PER_DAY t/DURATION_IN_DAYS` +
+e.g. `addmeds S1234567A d/Paracetamol q/2 u/tablets n/4 t/14`
 * *Sign in patient's visitors* : `visitorin p/PATIENT_NAME v/VISITOR_NAME` +
 e.g. `visitorin p/Ling Zhiyu v/Sara Ann Nicholas`
 * *Sign out patient's visitors* : `visitorout p/PATIENT_NAME v/VISITOR_NAME

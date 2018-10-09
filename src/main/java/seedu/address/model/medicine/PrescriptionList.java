@@ -10,55 +10,62 @@ import javafx.collections.ObservableList;
 
 //@@author snajef
 /**
- * Wrapper class to hold all medication for a given patient.
+ * Wrapper class to hold all prescription for a given patient.
  *
  * @author Darien Chong
  *
  */
 public class PrescriptionList {
-    private List<Prescription> medicineList;
+    private List<Prescription> prescriptionList;
 
+    /**
+     * Zero-arg c'tor for an empty prescription list.
+     */
     public PrescriptionList() {
-        medicineList = new ArrayList<Prescription>();
+        prescriptionList = new ArrayList<Prescription>();
     }
 
+    /**
+     * Defensive copy c'tor.
+     */
     public PrescriptionList(List<Prescription> medicineList) {
         Objects.requireNonNull(medicineList);
-        this.medicineList = new ArrayList<>(medicineList);
+        this.prescriptionList = new ArrayList<>(medicineList);
     }
 
+    /**
+     * Defensive copy c'tor.
+     */
     public PrescriptionList(PrescriptionList prescriptionList) {
         Objects.requireNonNull(prescriptionList);
-        this.medicineList = new ArrayList<>(Objects.requireNonNull(prescriptionList.medicineList));
+        this.prescriptionList = new ArrayList<>(Objects.requireNonNull(prescriptionList.prescriptionList));
     }
 
     /**
-     * Adds a medication to the list of medications.
+     * Adds a prescription to the list of prescriptions.
      *
-     * @param med
-     *            The medication to add.
+     * @param prescription The prescription to add.
      */
-    public void add(Prescription med) {
-        medicineList.add(med);
+    public void add(Prescription prescription) {
+        prescriptionList.add(prescription);
     }
 
     /**
-     * Removes a medication from the list of medications.
+     * Removes a prescription from the list of prescriptions.
      *
-     * @param med
-     *            The medication to remove.
+     * @param med The prescription to remove.
      */
     public void remove(Prescription med) {
-        medicineList.remove(med);
+        prescriptionList.remove(med);
     }
 
     /**
-     * Checks if a given medication exists in the list.
+     * Checks if a given prescription exists in the list.
      * @param med The prescription to check against.
      * @return true iff the prescription is contained in the list, false otherwise.
      */
     public boolean contains(Prescription med) {
-        for (Prescription p : medicineList) {
+        for (Prescription p : prescriptionList) {
             if (p.equals(med)) {
                 return true;
             }
@@ -69,7 +76,7 @@ public class PrescriptionList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Prescription m : medicineList) {
+        for (Prescription m : prescriptionList) {
             sb.append(m.toString()).append("\n");
         }
 
@@ -84,8 +91,8 @@ public class PrescriptionList {
 
         if (o instanceof PrescriptionList) {
             PrescriptionList ml = (PrescriptionList) o;
-            return medicineList.size() == ml.medicineList.size()
-                    && medicineList.containsAll(ml.medicineList);
+            return prescriptionList.size() == ml.prescriptionList.size()
+                && prescriptionList.containsAll(ml.prescriptionList);
         }
 
         return false;
@@ -93,11 +100,19 @@ public class PrescriptionList {
 
     /** Wrapper method for List::stream */
     public Stream<Prescription> stream() {
-        return medicineList.stream();
+        return prescriptionList.stream();
     }
 
-    /** Helper method to return an unmodifiable view of the medication list. */
-    public ObservableList<Prescription> getReadOnlyList() {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(medicineList));
+    /**
+     * Helper method to return a copy of the prescription list.
+     *
+     * This is a sort of compromise due to the requirements of JavaFX's TableView class,
+     * which requires the backing list to be modifiable to allow sorting by column.
+     * However, we don't want to allow a UI component to have modify-access to an internal of
+     * the PrescriptionList class.
+     * Hence, we provide an observable copy of the internal list.
+     */
+    public ObservableList<Prescription> getObservableCopyOfPrescriptionList() {
+        return FXCollections.observableArrayList(new ArrayList<>(prescriptionList));
     }
 }
