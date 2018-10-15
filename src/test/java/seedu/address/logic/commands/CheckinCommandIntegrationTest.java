@@ -33,7 +33,6 @@ public class CheckinCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
-        expectedModel.commitAddressBook();
 
         assertCommandSuccess(new CheckinCommand(validPerson), model, commandHistory,
                 String.format(CheckinCommand.MESSAGE_SUCCESS, validPerson), expectedModel);

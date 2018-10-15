@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final AddressBook internalAddressBook;
     private final FilteredList<Person> filteredPersons;
 
     /**
@@ -32,8 +32,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        internalAddressBook = new AddressBook(addressBook);
+        filteredPersons = new FilteredList<>(internalAddressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -42,35 +42,35 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
+        internalAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+        return internalAddressBook;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+        raise(new AddressBookChangedEvent(internalAddressBook));
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return internalAddressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
+        internalAddressBook.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+        internalAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
@@ -79,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.updatePerson(target, editedPerson);
+        internalAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
 
@@ -100,35 +100,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
-
-    @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
-    }
-
-    @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
-    }
-
-    @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
-    }
-
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -143,7 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return internalAddressBook.equals(other.internalAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
 

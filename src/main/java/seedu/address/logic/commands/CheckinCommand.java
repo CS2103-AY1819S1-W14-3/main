@@ -59,7 +59,6 @@ public class CheckinCommand extends Command {
         }
 
         model.addPerson(toCheckin);
-        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toCheckin));
     }
 

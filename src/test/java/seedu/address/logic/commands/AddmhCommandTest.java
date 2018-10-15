@@ -151,32 +151,6 @@ public class AddmhCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public boolean canUndoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canRedoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void undoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void redoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
     }
 
     /**
@@ -195,11 +169,6 @@ public class AddmhCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.patient.isSamePerson(person);
-        }
-
-        @Override
-        public void commitAddressBook() {
-            // called by {@code AddmhCommand#execute()}
         }
 
         @Override
