@@ -451,6 +451,78 @@ NOTE: If multiple patients with the entered `NRIC` exist, then the `AddmhCommand
 with an appropriate error message before the use case ends.
 ****
 
+// tag::adddiet[]
+=== Adddiet
+
+==== Current Implementation
+
+The `adddiet` command provides functionality for users to add dietary requirements for a given patient. +
+This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty. +
+This command adds these dietary requirements to a given `Person` , so that the dietary requirements can be viewed later on.
+
+===== Classes Involved
+
+The adding of the dietary requirements involve the following classes:
+
+* `DietCollection`, which is a set of
+** `Diet`, which consists of the detail of the requirement and its type
+*** `DietType`.
+
+A more detailed description of the classes involved is as follows:
+
+* `Diet Collection`
+** Every `Person` object has a `Diet Collection`, which is a collection of all the dietary requirements of the given patient.
+** This class is a wrapper class around the internal representation of a `Set` of `Diet`.
+
+* `Diet`
+** This class encapsulate the information of a single dietary requirement.
+** Specifically, an instance of this class is composed of
+*** a `String` representing the details of the requirement in text, and
+*** a `DietType` representing the type of this dietary requirement (allergy, cultural requirement, or physical difficulty).
+
+* `DietType`
+** This is a `Enum` class representing the three different types of dietary requriements.
+** Implemented as `Enum` class to avoid typo and invalid types being entered.
+
+===== Execution of the Command
+
+Given below is an usage scenario and the details when executing `adddiet` command. +
+For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`:
+
+* The command text is passed to an instance of the `Logic Manager` class.
+* The `Logic Manager` instance calls `AddressBookParser#parseCommand`, which parses the `adddiet` command word.
+* Next, the `AddDietCommandParser#parse` method is parse the differnt dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
+* `Logic Manager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
+* In the `AddDietCommand#execute` method, the new `DietCollection` object is added to a new copy of the `Person` object.
+* The new `Person` object is updated to the model by `Model#updatePerson` method.
+* A new `CommandResult` is returned and the execution ends.
+
+Here is the sequence diagram of the typical execution of an `adddiet` command:
+
+==== Design Considerations
+
+===== Aspect: How to represent different kinds of dietary requirements
+
+* **Alternative 1 (current choice):** Use a `Enum` inside the `Diet class` and contain all `Diet` in one collection.
+** Pros: Less repetitive code and cleaner design.
+** Cons: More efforts are needed to filter or retrieve different types of `Diet` from one `DietCollection`.
+
+* **Alternative 2: Use polymorphism to extends `Diet` class and add three different collections to a `Person`.
+** Pros: Easier to retrieve different types of dietary requirements.
+** Cons: A lot of repetitive codes since the three different types do not differ much.
+
+===== Aspect: Data structure to hold the different `Diet` objects
+
+* **Alternative 1 (current choice):** Use `HashSet` and override the `hashCode` for `Diet`.
+** Pros: Easier to handle duplication in adding dietary requirement.
+** Cons: The sequence of adding dietary requirements is lost. (However, the sequence is not important for the current set of features implemented.)
+
+* **Alternative 2: Use `ArrayList`.
+** Pros: The sequence of adding the dietary requirements is preserved.
+** Cons: Harder to handle duplicates.
+
+// end::adddiet[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
