@@ -481,7 +481,7 @@ A more detailed description of the classes involved is as follows:
 *** a `DietType` representing the type of this dietary requirement (allergy, cultural requirement, or physical difficulty).
 
 * `DietType`
-** This is a `Enum` class representing the three different types of dietary requriements.
+** This is a `Enum` class representing the three different types of dietary requirements.
 ** Implemented as `Enum` class to avoid typo and invalid types being entered.
 
 ===== Execution of the Command
@@ -491,7 +491,7 @@ For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Ha
 
 * The command text is passed to an instance of the `Logic Manager` class.
 * The `Logic Manager` instance calls `AddressBookParser#parseCommand`, which parses the `adddiet` command word.
-* Next, the `AddDietCommandParser#parse` method is parse the differnt dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
+* Next, the `AddDietCommandParser#parse` method parses the different dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
 * `Logic Manager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
 * In the `AddDietCommand#execute` method, the new `DietCollection` object is added to a new copy of the `Person` object.
 * The new `Person` object is updated to the model by `Model#updatePerson` method.
@@ -500,7 +500,7 @@ For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Ha
 [#img-adddietsequencediagram]
 Here is the sequence diagram of the typical execution of an `adddiet` command:
 
-image::AdddietSequenceDiagram.png[width="650"]
+image::AdddietSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
