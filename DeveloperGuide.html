@@ -30,9 +30,10 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#addmeds">3.1. Addmeds</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#addmh-viewmh">3.2. Addmh/Viewmh</a></li>
+<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.4. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -860,20 +861,107 @@ The command execution then ends.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
+<h3 id="addmh-viewmh"><a class="link" href="#addmh-viewmh">3.2. Addmh/Viewmh</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The functionalities of the <code>addmh</code> and <code>viewmh</code> command are interlinked: the former allows the user to record a diagnosis
+into a patient’s medical history, while the latter permits the viewing of a patient’s past diagnoses as recorded in
+medical history.</p>
+</div>
+<div class="paragraph">
+<p>Each patient’s information is stored within the <code>Person</code> objects. The execution of the <code>addmh</code> command results in the retrieval of
+a particular <code>Person</code> object, and the consequent updating of the patient’s <code>MedicalHistory</code>.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, the <code>viewmh</code> command retrieves a particular <code>Person</code> object and displays the <code>Person</code>’s  stored <code>MedicalHistory</code>.</p>
+</div>
+<div class="paragraph">
+<p>Stated below is an example usage scenario and an explanation of the interactions that occurs as a result of the code execution.</p>
+</div>
+<div class="paragraph">
+<p>The user executes the following commands:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol</code></p>
+</li>
+<li>
+<p><code>viewmh ic/S9123124A</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Intent</strong></p>
+</div>
+<div class="paragraph">
+<p>The purpose of the keyed <code>addmh</code> command line is to register and record a diagnosis under the registered patient with
+the <code>NRIC</code> S9123124A. Subsequently, the <code>viewmh</code> command line accesses the <code>MedicalHistory</code> stored within the <code>Person</code>
+with <code>NRIC</code> S9123124A and displays in the command prompt box.</p>
+</div>
+<div class="paragraph">
+<p><strong>Explanation</strong></p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below shows the execution of the given scenario:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddmhViewmh%20SequenceDiagram.png" alt="AddmhViewmh SequenceDiagram" width="1050">
+</div>
+</div>
+<div class="paragraph">
+<p>With reference to the diagram above, a technical explanation of the sequential interactions between the
+relevant instances of various classes may be given.</p>
+</div>
+<div class="paragraph">
+<p>When the user-executed <code>addmh</code> line is passed into an instance of the LogicManager class, <code>AddressBookParser::parse</code> is executed.
+<code>AddressBookParse</code> then parses the leading command word <code>addmh</code> and subsequently executes <code>AddmhCommandParser::parse</code>.</p>
+</div>
+<div class="paragraph">
+<p>The arguments by <code>ic/</code> and <code>mh/</code> are then parse into <code>NRIC</code> and <code>Diagnosis</code> objects to be used in the <code>AddmhCommand</code> constructor.</p>
+</div>
+<div class="paragraph">
+<p>The instantiated <code>AddmhCommand</code> will the medium through which the <code>Person</code> with the <code>NRIC</code> S9123124A is then updated.</p>
+</div>
+<div class="paragraph">
+<p>The command execution then <strong>ends</strong>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If multiple patients with the entered <code>NRIC</code> exist, then the <code>AddmhCommand::execute</code> will throw a <code>CommandException</code>
+with an appropriate error message before the use case ends.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -904,7 +992,7 @@ The command execution then ends.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1976,4 +2064,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 08:16:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 15:29:52 UTC</div></div></div></body></html>
