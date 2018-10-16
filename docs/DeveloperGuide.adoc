@@ -497,7 +497,10 @@ For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Ha
 * The new `Person` object is updated to the model by `Model#updatePerson` method.
 * A new `CommandResult` is returned and the execution ends.
 
+[#img-adddietsequencediagram]
 Here is the sequence diagram of the typical execution of an `adddiet` command:
+
+image::AdddietSequenceDiagram.png[width="650"]
 
 ==== Design Considerations
 
