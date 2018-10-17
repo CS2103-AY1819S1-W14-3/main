@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.appointment.AppointmentsList;
+import seedu.address.model.diet.DietCollection;
 import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.tag.Tag;
@@ -25,8 +27,10 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final DietCollection dietCollection;
     private final Set<Tag> tags = new HashSet<>();
     private final PrescriptionList prescriptionList;
+    private final AppointmentsList appointmentsList;
     private final MedicalHistory medicalHistory = new MedicalHistory();
 
     /**
@@ -40,12 +44,17 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        prescriptionList = new PrescriptionList();
+        this.prescriptionList = new PrescriptionList();
+        this.appointmentsList = new AppointmentsList();
+        this.dietCollection = new DietCollection();
     }
 
+    /**
+     * Overloaded constructor to generate a person that does not have medicalhistory.
+     */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-            PrescriptionList prescriptionList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList);
+                  PrescriptionList prescriptionList, AppointmentsList appointmentsList) {
+        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList);
         this.nric = nric;
         this.name = name;
         this.phone = phone;
@@ -53,6 +62,25 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.prescriptionList = prescriptionList;
+        this.appointmentsList = appointmentsList;
+        this.dietCollection = new DietCollection();
+    }
+
+    /**
+     * Overloaded constructor to generate a person that has existing diet requirement.
+     */
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  DietCollection dietCollection) {
+        requireAllNonNull(nric, name, phone, email, address, tags, dietCollection);
+        this.nric = nric;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.prescriptionList = new PrescriptionList();
+        this.appointmentsList = new AppointmentsList();
+        this.dietCollection = dietCollection;
     }
 
     /**
@@ -69,14 +97,16 @@ public class Person {
         this.tags.addAll(tags);
         this.medicalHistory.addAll(medicalHistory);
         this.prescriptionList = new PrescriptionList();
+        this.appointmentsList = new AppointmentsList();
+        this.dietCollection = new DietCollection();
     }
 
     /**
      * Overloaded constructor to generate a person that has existing medicalhistory.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  MedicalHistory medicalHistory, PrescriptionList prescriptionList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList);
+                  MedicalHistory medicalHistory, PrescriptionList prescriptionList, AppointmentsList appointmentsList) {
+        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, appointmentsList);
         this.nric = nric;
         this.name = name;
         this.phone = phone;
@@ -85,6 +115,8 @@ public class Person {
         this.tags.addAll(tags);
         this.medicalHistory.addAll(medicalHistory);
         this.prescriptionList = prescriptionList;
+        this.appointmentsList = appointmentsList;
+        this.dietCollection = new DietCollection();
     }
 
     public Nric getNric() {
@@ -113,6 +145,14 @@ public class Person {
 
     public MedicalHistory getMedicalHistory() {
         return medicalHistory;
+    }
+
+    public AppointmentsList getAppointmentsList() {
+        return appointmentsList;
+    }
+
+    public DietCollection getDietCollection() {
+        return this.dietCollection;
     }
 
     /**

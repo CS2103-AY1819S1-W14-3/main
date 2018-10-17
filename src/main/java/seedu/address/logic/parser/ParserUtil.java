@@ -1,15 +1,22 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.diet.Diet;
+import seedu.address.model.diet.DietType;
 import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.medicine.Dose;
 import seedu.address.model.medicine.Duration;
@@ -42,6 +49,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    // @@author yuntongzhang
+    /**
+     * Parse a {@code List<String> diets} in to a {@code Set<Diet> diets}, given the {@code DietType type}.
+     * Leading and trialing whitespaces for each item in the List will be trimmed.
+     */
+    public static Set<Diet> parseDiet(List<String> diets, DietType type) {
+        requireAllNonNull(diets, type);
+        Set<Diet> parsedDiets = new HashSet<>();
+        for (String diet: diets) {
+            String trimmedDiet = diet.trim();
+            parsedDiets.add(new Diet(trimmedDiet, type));
+        }
+        return parsedDiets;
     }
 
     // @@author snajef
@@ -180,6 +202,16 @@ public class ParserUtil {
      */
     public static Duration parseDuration(int durationInDays) throws IllegalValueException {
         return new Duration(durationInDays);
+    }
+
+    //@@author jeffypie369
+    /**
+     * Parses a String date into a LocalDateTime date
+     * @param dateTime String of the date
+     * @return LocalDateTime object which contains the date
+     */
+    public static LocalDateTime parseDateTime(String dateTime) {
+        return LocalDateTime.parse(dateTime, Appointment.DATE_TIME_FORMAT);
     }
 
     //@@author

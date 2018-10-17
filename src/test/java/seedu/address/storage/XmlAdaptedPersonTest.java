@@ -15,12 +15,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.PrescriptionBuilder;
 
@@ -40,7 +42,9 @@ public class XmlAdaptedPersonTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream().map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
     private static Prescription validPrescription;
+    private static Appointment validAppointment;
     private static List<XmlAdaptedPrescription> validPrescriptions;
+    private static List<XmlAdaptedAppointment> validAppointments;
 
     @Before
     public void setUp() throws IllegalValueException {
@@ -48,6 +52,11 @@ public class XmlAdaptedPersonTest {
         validPrescriptions = Arrays.asList(new Prescription[] { validPrescription })
                 .stream()
                 .map(XmlAdaptedPrescription::new)
+                .collect(Collectors.toList());
+        validAppointment = new AppointmentBuilder().build();
+        validAppointments = Arrays.asList(new Appointment[] { validAppointment })
+                .stream()
+                .map(XmlAdaptedAppointment::new)
                 .collect(Collectors.toList());
     }
 
@@ -64,10 +73,18 @@ public class XmlAdaptedPersonTest {
     }
 
     @Test
+    public void constructor_appointmentsList_returnsPerson() throws IllegalValueException {
+        BENSON.getAppointmentsList().add(validAppointment);
+        XmlAdaptedPerson person = new XmlAdaptedPerson(BENSON);
+        assertEquals(BENSON, person.toModelType());
+    }
+
+    @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         BENSON.getPrescriptionList().add(validPrescription);
+        BENSON.getAppointmentsList().add(validAppointment);
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, validPrescriptions);
+                VALID_ADDRESS, VALID_TAGS, validPrescriptions, validAppointments);
         assertEquals(BENSON, person.toModelType());
     }
 
@@ -177,7 +194,7 @@ public class XmlAdaptedPersonTest {
     public void equals_personAndCopy_returnsTrue() {
         XmlAdaptedPerson bensonCopy = new XmlAdaptedPerson(BENSON);
         XmlAdaptedPerson anotherBensonCopy = new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, new ArrayList<>());
+                VALID_ADDRESS, VALID_TAGS, new ArrayList<>(), new ArrayList<>());
 
         assertTrue(bensonCopy.equals(anotherBensonCopy));
     }

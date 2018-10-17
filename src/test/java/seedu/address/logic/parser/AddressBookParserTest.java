@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.commands.AddmedsCommand;
 import seedu.address.logic.commands.AddmhCommand;
 import seedu.address.logic.commands.CheckinCommand;
@@ -30,10 +31,13 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ViewmhCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.AppointmentBuilder;
+import seedu.address.testutil.AppointmentUtil;
 import seedu.address.testutil.DiagnosisBuilder;
 import seedu.address.testutil.DiagnosisUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -58,10 +62,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addAppt() throws Exception {
+        Person person = new PersonBuilder().build();
+        Appointment appt = new AppointmentBuilder().build();
+        AddApptCommand command = (AddApptCommand) parser.parseCommand(
+                AppointmentUtil.getAddApptCommand(person.getNric(), appt));
+        assertEquals(new AddApptCommand(person.getNric(), appt), command);
+    }
+
+    @Test
     public void parseCommand_checkin() throws Exception {
         Person person = new PersonBuilder().build();
         CheckinCommand command = (CheckinCommand) parser.parseCommand(PersonUtil.getCheckinCommand(person));
         assertEquals(new CheckinCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_adddiet() throws Exception {
+        //TODO: finish this test
     }
 
     @Test

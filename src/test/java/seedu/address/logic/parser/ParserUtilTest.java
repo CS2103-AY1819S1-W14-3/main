@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Rule;
@@ -15,6 +16,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.diet.Diet;
+import seedu.address.model.diet.DietType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -30,6 +33,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DATE_TIME = "a";
 
     private static final String VALID_NRIC = "S1234567A";
     private static final String VALID_NAME = "Rachel Walker";
@@ -38,6 +42,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final List<String> VALID_DIETS = Arrays.asList("Egg", "Milk");
+    private static final DietType VALID_DIET_TYPE = DietType.ALLERGY;
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -64,6 +70,27 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    //@@author yuntongzhang
+    @Test
+    public void parseDiet_nullDiets_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDiet(null, VALID_DIET_TYPE));
+    }
+
+    @Test
+    public void parseDiet_nullType_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDiet(VALID_DIETS, null));
+    }
+
+    @Test
+    public void parseDiet_allValid_returnDiets() {
+        Set<Diet> expectedDiets = new HashSet<>();
+        for (String diet: VALID_DIETS) {
+            String trimmedDiet = diet.trim();
+            expectedDiets.add(new Diet(trimmedDiet, VALID_DIET_TYPE));
+        }
+        assertEquals(expectedDiets, ParserUtil.parseDiet(VALID_DIETS, VALID_DIET_TYPE));
     }
 
     //@@author snajef

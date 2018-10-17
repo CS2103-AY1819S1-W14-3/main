@@ -20,7 +20,6 @@ public class MedicalHistory extends ArrayList<Diagnosis> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nMedical History: \n");
 
         for (int i = 1; i <= this.size(); i++) {
             String recordEntry = String.format("%s | %s\n", i, this.get(i - 1));

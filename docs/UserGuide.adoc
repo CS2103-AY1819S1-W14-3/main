@@ -149,15 +149,14 @@ View a patient’s dietary needs.
 WARNING: You must have the appropriate permissions to invoke this command.
 ****
 
-Format: `adddiet NRIC`
+Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY`
 ****
-* This prompts the user for dietary restrictions in this format: `d/DIETARY_RESTRICTION`
+* User can pass in any number of allergies, cultural requirements and physical difficulties in one command.
 ****
 
 Examples:
 
-* `adddiet S1234567A`
-** `d/halal d/kosher d/babyfood`
+* `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
 
 === View patient’s medication: UI functionality
 View a patient’s medication history.
@@ -201,7 +200,7 @@ Format: `addappt ic/NRIC type/TYPE pn/PROCEDURE_NAME dt/DD-MM-YYYY HHMM doc/DOCT
 
 Examples:
 
-* `addappt ic/S1234567A type/SURGERY pn/Brain transplant dt/27-04-2019 1030 doc/Dr. Pepper`
+* `addappt ic/S1234567A type/SURGERY pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper`
 
 === Views all appointments for a patient: `viewappt`
 Views all scheduled appointments for a patient.

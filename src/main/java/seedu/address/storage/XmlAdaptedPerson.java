@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentsList;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.person.Address;
@@ -40,6 +42,8 @@ public class XmlAdaptedPerson {
     @XmlElement
     private XmlAdaptedPrescriptionList prescriptions = new XmlAdaptedPrescriptionList();
     @XmlElement
+    private XmlAdaptedAppointmentsList appointments = new XmlAdaptedAppointmentsList();
+    @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     //todo may need to add new list for MedicalHistory
 
@@ -69,10 +73,14 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String nric, String name, String phone, String email, String address,
-        List<XmlAdaptedTag> tagged, List<XmlAdaptedPrescription> prescriptions) {
+                            List<XmlAdaptedTag> tagged, List<XmlAdaptedPrescription> prescriptions,
+                            List<XmlAdaptedAppointment> appointments) {
         this(nric, name, phone, email, address, tagged);
         if (prescriptions != null) {
             this.prescriptions.setPrescription(prescriptions);
+        }
+        if (appointments != null) {
+            this.appointments.setAppt(appointments);
         }
     }
 
@@ -94,7 +102,10 @@ public class XmlAdaptedPerson {
             .stream()
             .map(XmlAdaptedPrescription::new)
             .collect(Collectors.toList()));
-
+        this.appointments.setAppt(source.getAppointmentsList()
+            .stream()
+            .map(XmlAdaptedAppointment::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -106,6 +117,7 @@ public class XmlAdaptedPerson {
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         final List<Prescription> prescriptions = new ArrayList<>();
+        final List<Appointment> appointments = new ArrayList<>();
 
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -113,6 +125,10 @@ public class XmlAdaptedPerson {
 
         for (XmlAdaptedPrescription prescription : this.prescriptions) {
             prescriptions.add(prescription.toModelType());
+        }
+
+        for (XmlAdaptedAppointment appointment : this.appointments) {
+            appointments.add(appointment.toModelType());
         }
 
         if (nric == null) {
@@ -158,7 +174,11 @@ public class XmlAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final PrescriptionList prescriptionList = new PrescriptionList(new ArrayList<Prescription>(prescriptions));
-        return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags, prescriptionList);
+
+        final AppointmentsList appointmentsList = new AppointmentsList(new ArrayList<Appointment>(appointments));
+
+        return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags, prescriptionList,
+                appointmentsList);
     }
 
     @Override
@@ -177,6 +197,7 @@ public class XmlAdaptedPerson {
             && Objects.equals(email, otherPerson.email)
             && Objects.equals(address, otherPerson.address)
             && tagged.equals(otherPerson.tagged)
-            && prescriptions.equals(otherPerson.prescriptions);
+            && prescriptions.equals(otherPerson.prescriptions)
+            && appointments.equals(otherPerson.appointments);
     }
 }

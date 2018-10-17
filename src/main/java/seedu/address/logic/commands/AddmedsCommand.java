@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.AppointmentsList;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.person.Address;
@@ -101,8 +102,9 @@ public class AddmedsCommand extends Command {
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
         Set<Tag> tags = personToEdit.getTags();
+        AppointmentsList appointmentsList = personToEdit.getAppointmentsList();
 
-        return new Person(nric, name, phone, email, address, tags, updatedMedicineList);
+        return new Person(nric, name, phone, email, address, tags, updatedMedicineList, appointmentsList);
     }
 
     /**

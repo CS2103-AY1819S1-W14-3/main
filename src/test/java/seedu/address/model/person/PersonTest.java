@@ -17,7 +17,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.appointment.AppointmentsList;
 import seedu.address.model.medicalhistory.MedicalHistory;
+import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -36,7 +38,14 @@ public class PersonTest {
     public void constructor_nullPrescriptionList_throwsNullPointerException() {
         Person person = new Person(new Nric(VALID_NRIC_BOB), new Name(VALID_NAME_BOB), new Phone(VALID_PHONE_BOB),
                 new Email(VALID_EMAIL_BOB), new Address(VALID_ADDRESS_BOB), new HashSet<Tag>(), new MedicalHistory(),
-                null);
+                null, new AppointmentsList());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void constructor_nullAppointmentsList_throwsNullPointerException() {
+        Person person = new Person(new Nric(VALID_NRIC_BOB), new Name(VALID_NAME_BOB), new Phone(VALID_PHONE_BOB),
+                new Email(VALID_EMAIL_BOB), new Address(VALID_ADDRESS_BOB), new HashSet<Tag>(), new MedicalHistory(),
+                new PrescriptionList(), null);
     }
 
     @Test
