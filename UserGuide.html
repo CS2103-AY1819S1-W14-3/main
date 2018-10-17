@@ -381,14 +381,14 @@ You must have the appropriate permissions to invoke this command.
 </div>
 </div>
 <div class="paragraph">
-<p>Format: <code>adddiet NRIC</code></p>
+<p>Format: <code>adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>This prompts the user for dietary restrictions in this format: <code>d/DIETARY_RESTRICTION</code></p>
+<p>User can pass in any number of allergies, cultural requirements and physical difficulties in one command.</p>
 </li>
 </ul>
 </div>
@@ -400,14 +400,7 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p><code>adddiet S1234567A</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>d/halal d/kosher d/babyfood</code></p>
-</li>
-</ul>
-</div>
+<p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code></p>
 </li>
 </ul>
 </div>
@@ -515,7 +508,7 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p><code>addappt ic/S1234567A type/SURGERY pn/Brain transplant dt/27-04-2019 1030 doc/Dr. Pepper</code></p>
+<p><code>addappt ic/S1234567A type/SURGERY pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper</code></p>
 </li>
 </ul>
 </div>
@@ -728,4 +721,4 @@ e.g. <code>viewvisitors p/Ling Zhiyu</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 15:29:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 04:52:36 UTC</div></div></div></body></html>

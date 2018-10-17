@@ -30,10 +30,12 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#addmeds">3.1. Addmeds</a></li>
-<li><a href="#addmh-viewmh">3.2. Addmh/Viewmh</a></li>
-<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#addappt">3.2. Addappt</a></li>
+<li><a href="#addmh-viewmh">3.3. Addmh/Viewmh</a></li>
+<li><a href="#adddiet">3.4. Adddiet</a></li>
+<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -819,7 +821,7 @@ The command execution then ends.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddmedsSequenceDiagram.png" alt="AddmedsSequenceDiagram" width="650">
+<img src="images/AddmedsSequenceDiagram.png" alt="AddmedsSequenceDiagram" width="800">
 </div>
 </div>
 </div>
@@ -861,9 +863,181 @@ The command execution then ends.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="addmh-viewmh"><a class="link" href="#addmh-viewmh">3.2. Addmh/Viewmh</a></h3>
+<h3 id="addappt"><a class="link" href="#addappt">3.2. Addappt</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>The <code>addappt</code> command provides functionality for users to add an appointment for a given patient.
+This is done by adding appointment-related information to a given person, represented by a <code>Person</code> object.
+This allows for users to track the upcoming appointments for every patient.</p>
+</div>
+<div class="paragraph">
+<p>The adding of appointment-related information is facilitated by the following classes:
+* <code>AppointmentsList</code>, a list of
+<strong> <code>Appointment</code>, each of which have a
+</strong>* <code>Type</code></p>
+</div>
+<div class="paragraph">
+<p>A more detailed description of the classes follows below:
+* <code>AppointmentsList</code>
+<strong> Every <code>Person</code> has an <code>AppointmentsList</code>, the purpose of which is to store all <code>Appointment</code> belonging to a <code>Person</code>.
+</strong> A wrapper class around the internal representation of a list of appointments that exposes only a few select methods in the <code>List</code> API.
+<strong>*</strong> The methods relevant to the <code>addappt</code> command from the API are: <code>add</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Appointment</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Class encapsulating all the information about a particular appointment.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>These information include the type of appointment (enum Type), name of the procedure, date and time of the appointment and the name of the doctor-in-charge of the appointment</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>Type</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>An enumeration that covers all the different types of medical procedures. The four types are:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PROPAEDEUTIC</code>, with <code>PROP</code> as abbreviation</p>
+</li>
+<li>
+<p><code>DIAGNOSTIC</code>, with <code>DIAG</code> as abbreviation</p>
+</li>
+<li>
+<p><code>THERAPEUTIC</code>, with <code>THP</code> as abbreviation</p>
+</li>
+<li>
+<p><code>SURGICAL</code>, with <code>SRG</code> as abbreviation</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the relevant classes behave at each step.
+At the end of the explanation is a <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/docs/images/AddApptSequenceDiagram.png">sequence diagram</a> of a typical addappt command execution.</p>
+</div>
+<div class="paragraph">
+<p>The user executes <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper</code>.
+This command has the following intent: Record the following appointment to a patient with NRIC = S1234567A:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Appointment type</th>
+<th class="tableblock halign-left valign-top">Procedure name</th>
+<th class="tableblock halign-left valign-top">Date and time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Doctor-in-charge</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>SRG</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Heart Bypass</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The command is passed to an instance of the <code>LogicManager</code> class, which in turn executes <code>AddressBookParser::parse</code>.
+The <code>AddressBookParser</code> parses the command word (<code>addappt</code>) and executes <code>AddApptCommandParser::parse</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>AddApptCommandParser::parse</code> method returns an <code>AddApptCommand</code> object which encapsulates the necessary information to update the Person 's appointments(s).
+Control then passes back to the <code>LogicManager</code>, which calls <code>AddApptCommand::execute</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If no/multiple patient(s) with that <code>NRIC</code> exist(s), then the <code>AddApptCommand::execute</code> method will throw a <code>CommandException</code> with the appropriate error message and the usage case will end.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>AddApptCommand::execute</code> method constructs a new <code>Person</code> object using all the details of the old <code>Person</code>, with the sole difference being the <code>AppointmentsList</code> used being a deep copy of the original <code>Person&#8217;s `AppointmentsList</code> with the new <code>Appointment</code> added.
+This updated <code>Person</code> object is used to update the existing <code>Person</code> object using the <code>Model::updatePerson</code> method (or an overridden version) of the backing model.
+Finally, the <code>AddApptCommand::execute</code> method terminates, returning a <code>CommandResult</code> with a success message. The <code>LogicManager</code> then returns the same <code>CommandResult</code> as the return value of the <code>LogicManager::execute</code> method.
+The command execution then ends.</p>
+</div>
+<div id="img-addapptsequencediagram" class="paragraph">
+<p>The following sequence diagram shows the execution of the <code>addappt</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddApptSequenceDiagram.png" alt="AddApptSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-representation-of-types-of-medical-procedures"><a class="link" href="#aspect-representation-of-types-of-medical-procedures">Aspect: Representation of types of medical procedures</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Current implementation):</strong> Use an <code>Enum</code> for <code>Type</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for easier handling of incorrect values</p>
+</li>
+<li>
+<p>Cons: More effort needed to filter and retrieve the different types</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have a switch case to handle the different types</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to handle.</p>
+</li>
+<li>
+<p>Cons: Less clean</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="addmh-viewmh"><a class="link" href="#addmh-viewmh">3.3. Addmh/Viewmh</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The functionalities of the <code>addmh</code> and <code>viewmh</code> command are interlinked: the former allows the user to record a diagnosis
 into a patient’s medical history, while the latter permits the viewing of a patient’s past diagnoses as recorded in
@@ -948,20 +1122,223 @@ with an appropriate error message before the use case ends.
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
+<h3 id="adddiet"><a class="link" href="#adddiet">3.4. Adddiet</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>adddiet</code> command provides functionality for users to add dietary requirements for a given patient.<br>
+This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty.<br>
+This command adds these dietary requirements to a given <code>Person</code> , so that the dietary requirements can be viewed later on.</p>
+</div>
+<div class="sect4">
+<h5 id="classes-involved"><a class="link" href="#classes-involved">Classes Involved</a></h5>
+<div class="paragraph">
+<p>The adding of the dietary requirements involve the following classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DietCollection</code>, which is a set of</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Diet</code>, which consists of the detail of the requirement and its type</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DietType</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A more detailed description of the classes involved is as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Diet Collection</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Every <code>Person</code> object has a <code>Diet Collection</code>, which is a collection of all the dietary requirements of the given patient.</p>
+</li>
+<li>
+<p>This class is a wrapper class around the internal representation of a <code>Set</code> of <code>Diet</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>Diet</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>This class encapsulate the information of a single dietary requirement.</p>
+</li>
+<li>
+<p>Specifically, an instance of this class is composed of</p>
+<div class="ulist">
+<ul>
+<li>
+<p>a <code>String</code> representing the details of the requirement in text, and</p>
+</li>
+<li>
+<p>a <code>DietType</code> representing the type of this dietary requirement (allergy, cultural requirement, or physical difficulty).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>DietType</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>This is a <code>Enum</code> class representing the three different types of dietary requirements.</p>
+</li>
+<li>
+<p>Implemented as <code>Enum</code> class to avoid typo and invalid types being entered.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="execution-of-the-command"><a class="link" href="#execution-of-the-command">Execution of the Command</a></h5>
+<div class="paragraph">
+<p>Given below is an usage scenario and the details when executing <code>adddiet</code> command.<br>
+For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The command text is passed to an instance of the <code>Logic Manager</code> class.</p>
+</li>
+<li>
+<p>The <code>Logic Manager</code> instance calls <code>AddressBookParser#parseCommand</code>, which parses the <code>adddiet</code> command word.</p>
+</li>
+<li>
+<p>Next, the <code>AddDietCommandParser#parse</code> method parses the different dietary requirements into one <code>DietCollection</code> object. An instance of <code>AddDietCommand</code> is returned after the parsing.</p>
+</li>
+<li>
+<p><code>Logic Manager</code> then execute this <code>AddDietCommand</code> by calling <code>AddDietCommand#execute</code>.</p>
+</li>
+<li>
+<p>In the <code>AddDietCommand#execute</code> method, the new <code>DietCollection</code> object is added to a new copy of the <code>Person</code> object.</p>
+</li>
+<li>
+<p>The new <code>Person</code> object is updated to the model by <code>Model#updatePerson</code> method.</p>
+</li>
+<li>
+<p>A new <code>CommandResult</code> is returned and the execution ends.</p>
+</li>
+</ul>
+</div>
+<div id="img-adddietsequencediagram" class="paragraph">
+<p>Here is the sequence diagram of the typical execution of an <code>adddiet</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AdddietSequenceDiagram.png" alt="AdddietSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-represent-different-kinds-of-dietary-requirements"><a class="link" href="#aspect-how-to-represent-different-kinds-of-dietary-requirements">Aspect: How to represent different kinds of dietary requirements</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a <code>Enum</code> inside the <code>Diet class</code> and contain all <code>Diet</code> in one collection.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less repetitive code and cleaner design.</p>
+</li>
+<li>
+<p>Cons: More efforts are needed to filter or retrieve different types of <code>Diet</code> from one <code>DietCollection</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use polymorphism to extends <code>Diet</code> class and add three different collections to a <code>Person</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to retrieve different types of dietary requirements.</p>
+</li>
+<li>
+<p>Cons: A lot of repetitive codes since the three different types do not differ much.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-hold-the-different-code-diet-code-objects"><a class="link" href="#aspect-data-structure-to-hold-the-different-code-diet-code-objects">Aspect: Data structure to hold the different <code>Diet</code> objects</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>HashSet</code> and override the <code>hashCode</code> for <code>Diet</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to handle duplication in adding dietary requirement.</p>
+</li>
+<li>
+<p>Cons: The sequence of adding dietary requirements is lost. (However, the sequence is not important for the current set of features implemented.)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>ArrayList</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The sequence of adding the dietary requirements is preserved.</p>
+</li>
+<li>
+<p>Cons: Harder to handle duplicates.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -992,7 +1369,7 @@ with an appropriate error message before the use case ends.
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2064,4 +2441,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 15:29:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 04:52:36 UTC</div></div></div></body></html>
