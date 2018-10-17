@@ -510,7 +510,7 @@ image::AdddietSequenceDiagram.png[width="800"]
 ** Pros: Less repetitive code and cleaner design.
 ** Cons: More efforts are needed to filter or retrieve different types of `Diet` from one `DietCollection`.
 
-* **Alternative 2: Use polymorphism to extends `Diet` class and add three different collections to a `Person`.
+* **Alternative 2:** Use polymorphism to extends `Diet` class and add three different collections to a `Person`.
 ** Pros: Easier to retrieve different types of dietary requirements.
 ** Cons: A lot of repetitive codes since the three different types do not differ much.
 
@@ -520,7 +520,7 @@ image::AdddietSequenceDiagram.png[width="800"]
 ** Pros: Easier to handle duplication in adding dietary requirement.
 ** Cons: The sequence of adding dietary requirements is lost. (However, the sequence is not important for the current set of features implemented.)
 
-* **Alternative 2: Use `ArrayList`.
+* **Alternative 2:** Use `ArrayList`.
 ** Pros: The sequence of adding the dietary requirements is preserved.
 ** Cons: Harder to handle duplicates.
 
