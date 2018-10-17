@@ -13,8 +13,8 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::yuntongzhang.png[width="150", align="left"]
 {empty}[[homepage]] [https://github.com/yuntongzhang[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer +
-Responsibilities: TBD +
+Role: Developer + Git Expert +
+Responsibilities: In charge of integration +
 
 '''
 
