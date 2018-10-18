@@ -146,13 +146,12 @@ You must have the appropriate permissions to invoke this command.
 </div>
 </div>
 <div class="paragraph">
-<p>Format: <code>checkin NRIC</code></p>
+<p>Format: <code>checkin ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>If the patient is a new patient, then the AddressBook will request for additional information in the following format:<br>
-<code>n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
+<p>If the patient is already checked in, the command will not be allowed.</p>
 </li>
 </ul>
 </div>
@@ -162,14 +161,7 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p><code>checkin S1234567A</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
-</li>
-</ul>
-</div>
+<p><code>checkin ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
 </li>
 </ul>
 </div>
@@ -508,9 +500,13 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p><code>addappt ic/S1234567A type/SURGERY pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper</code></p>
+<p><code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper</code></p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The only valid types are <code>PROP</code> (PROPAEDEUTIC), <code>DIAG</code> (DIAGNOSTIC), <code>THP</code> (THERAPEUTIC), <code>SRG</code> (SURGICAL).
+<strong>Other inputs will not be allowed.</strong></p>
 </div>
 </div>
 <div class="sect2">
@@ -543,7 +539,7 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p>`viewappt ic/S1234567A'</p>
+<p><code>viewappt ic/S1234567A</code></p>
 </li>
 </ul>
 </div>
@@ -578,7 +574,7 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p><code>view S1234567A</code><br>
+<p><code>viewappt S1234567A</code><br>
 <code>xappt 2</code><br>
 Deletes the second appointment belonging to patient with NRIC S1234567A</p>
 </li>
@@ -675,8 +671,8 @@ There is no need to save manually.</p>
 <p><strong>Help</strong> <code>help.</code></p>
 </li>
 <li>
-<p><strong>Check-in</strong> : <code>checkin NRIC</code>; <code>n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code><br>
-e.g. <code>checkin S1234567A</code>; <code>n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
+<p><strong>Check-in</strong> : <code>checkin ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code><br>
+e.g. <code>checkin ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
 </li>
 <li>
 <p><strong>Check-out</strong> : <code>checkout NRIC</code><br>
@@ -691,8 +687,20 @@ e.g. <code>viewqueue</code></p>
 e.g. <code>viewmh S1234567A</code></p>
 </li>
 <li>
-<p><strong>Add medical history</strong> : <code>addmh NRIC</code>; <code>[MEDICAL_ENTRY]</code><br>
-e.g. <code>addmh S1234567A</code>;  <code>Saw patient at 2pm today&#8230;&#8203;</code></p>
+<p><strong>Add medical history</strong> : <code>addmh ic/NRIC mh/[MEDICAL_ENTRY]</code><br>
+e.g. <code>addmh ic/S1234567A mh/Saw patient at 2pm today&#8230;&#8203;</code></p>
+</li>
+<li>
+<p><strong>Add appointment for patient</strong> : <code>addappt ic/NRIC type/TYPE pn/PROCEDURE_NAME dt/DATE_TIME doc/DOCTOR_IN_CHARGE</code><br>
+e.g. <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper</code></p>
+</li>
+<li>
+<p><strong>View appointments of patient</strong> : <code>viewappt ic/NRIC</code><br>
+e.g. <code>viewappt S1234567A</code></p>
+</li>
+<li>
+<p><strong>Cancel appointment for patient</strong> : <code>viewappt NRIC</code> <code>xappt INDEX</code><br>
+e.g. <code>viewappt S1234567A</code> <code>xappt 2</code></p>
 </li>
 <li>
 <p><strong>View patient&#8217;s dietary needs</strong> : <code>viewdiet NRIC</code><br>
@@ -721,4 +729,4 @@ e.g. <code>viewvisitors p/Ling Zhiyu</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-17 04:52:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 01:25:58 UTC</div></div></div></body></html>
