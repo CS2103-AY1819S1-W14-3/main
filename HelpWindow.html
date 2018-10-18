@@ -129,22 +129,6 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="paragraph">
 <p>Adds a person to the patient queue.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Format: <code>checkin ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
 </div>
@@ -170,22 +154,6 @@ You must have the appropriate permissions to invoke this command.
 <h3 id="checking-out-a-patient-code-checkout-code"><a class="link" href="#checking-out-a-patient-code-checkout-code">3.3. Checking out a patient: <code>checkout</code></a></h3>
 <div class="paragraph">
 <p>Remove a patient from the patient queue after this patient checks out of the hospital.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>checkout NRIC</code></p>
@@ -234,26 +202,22 @@ You must have the appropriate permissions to invoke this command.
 <div class="sect2">
 <h3 id="view-patient-s-medical-history-code-viewmh-code"><a class="link" href="#view-patient-s-medical-history-code-viewmh-code">3.5. View patient’s medical history: <code>viewmh</code></a></h3>
 <div class="paragraph">
-<p>View a patient’s medical history.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
+<p>View an existing patient’s recorded medical history.
+Patient must be registered within the system.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>viewmh ic/NRIC</code>​</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If the NRIC does not match to an existing patient in the system, an error will be displayed.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -269,26 +233,11 @@ You must have the appropriate permissions to invoke this command.
 <div class="sect2">
 <h3 id="add-to-patient-s-medical-history-code-addmh-code"><a class="link" href="#add-to-patient-s-medical-history-code-addmh-code">3.6. Add to patient’s medical history: <code>addmh</code></a></h3>
 <div class="paragraph">
-<p>Add a diagnosis entry to a patient’s medical history.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
+<p>Add a diagnosis entry to an existing patient’s medical history.
+Patient must be registered within the system.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>addmh ic/NRIC mh/diagnosis​</code></p>
+<p>Format: <code>addmh ic/NRIC mh/DIAGNOSIS​</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -298,7 +247,7 @@ You must have the appropriate permissions to invoke this command.
 <p>This will prompt the user for more input, to which the user will write an entry.</p>
 </li>
 <li>
-<p>Pressing ‘Enter’ again will submit the entry.</p>
+<p>If the NRIC does not match to an existing patient in the system, an error will be displayed.</p>
 </li>
 </ul>
 </div>
@@ -310,7 +259,7 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p><code>addmh ic/S1234567A mh/ Saw a patient today for flu. Prescribed 2 weeks of panadol, advised patient to
+<p><code>addmh ic/S1234567A mh/ Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
 rest and rehydrate.</code></p>
 </li>
 </ul>
@@ -321,22 +270,6 @@ rest and rehydrate.</code></p>
 <div class="paragraph">
 <p>View a patient’s dietary needs.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Format: <code>viewdiet NRIC</code></p>
 </div>
@@ -346,7 +279,7 @@ You must have the appropriate permissions to invoke this command.
 <div class="ulist">
 <ul>
 <li>
-<p><code>viewdiet S1234567A</code></p>
+<p><code>viewdiet ic/S1234567A</code></p>
 </li>
 </ul>
 </div>
@@ -355,22 +288,6 @@ You must have the appropriate permissions to invoke this command.
 <h3 id="add-patient-s-dietary-needs-code-adddiet-code"><a class="link" href="#add-patient-s-dietary-needs-code-adddiet-code">3.8. Add patient’s dietary needs: <code>adddiet</code></a></h3>
 <div class="paragraph">
 <p>View a patient’s dietary needs.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY</code></p>
@@ -402,22 +319,6 @@ You must have the appropriate permissions to invoke this command.
 <div class="paragraph">
 <p>View a patient’s medication history.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this functionality.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Simply click on the person&#8217;s card and the panel on the right will display his prescribed medication.<br>
 You can click on a column heading to sort the medication view by that column&#8217;s key.<br>
@@ -440,22 +341,6 @@ i.e. Listings with the same <code>Drug Name</code> will be further sorted by <co
 <div class="paragraph">
 <p>Add to a patient’s medication history.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Format: <code>addmeds ic/NRIC d/DRUG_NAME q/QUANTITY_PER_DOSE u/DOSAGE_UNIT n/DOSES_PER_DAY t/DURATION_IN_DAYS</code></p>
 </div>
@@ -474,22 +359,6 @@ You must have the appropriate permissions to invoke this command.
 <h3 id="add-appointment-for-patient-code-addappt-code"><a class="link" href="#add-appointment-for-patient-code-addappt-code">3.11. Add appointment for patient: <code>addappt</code></a></h3>
 <div class="paragraph">
 <p>Adds a scheduled appointment for a patient.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>addappt ic/NRIC type/TYPE pn/PROCEDURE_NAME dt/DD-MM-YYYY HHMM doc/DOCTOR-IN-CHARGE</code></p>
@@ -514,22 +383,6 @@ You must have the appropriate permissions to invoke this command.
 <div class="paragraph">
 <p>Views all scheduled appointments for a patient.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Format: <code>viewappt ic/NRIC</code></p>
 </div>
@@ -548,22 +401,6 @@ You must have the appropriate permissions to invoke this command.
 <h3 id="cancel-appointment-for-patient-code-xappt-code"><a class="link" href="#cancel-appointment-for-patient-code-xappt-code">3.13. Cancel appointment for patient: <code>xappt</code></a></h3>
 <div class="paragraph">
 <p>Cancels a scheduled appointment for a patient.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-You must have the appropriate permissions to invoke this command.
-</td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>xappt INDEX</code></p>
@@ -729,4 +566,4 @@ e.g. <code>viewvisitors p/Ling Zhiyu</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 01:25:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 01:59:09 UTC</div></div></div></body></html>
