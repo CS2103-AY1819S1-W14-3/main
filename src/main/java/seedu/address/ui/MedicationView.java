@@ -25,7 +25,7 @@ import seedu.address.model.person.Person;
 /**
  * The Medication Panel (maybe more in the future?) of the App.
  */
-public class BrowserPanel extends UiPart<Region> {
+public class MedicationView extends UiPart<Region> implements Swappable {
     private static final String FXML = "BrowserPanel.fxml";
     private static final String MESSAGE_CURRENT_SELECTION_NOT_NULL = "There was an attempt "
         + "to set the current selection, but it is not null.";
@@ -64,11 +64,11 @@ public class BrowserPanel extends UiPart<Region> {
     private ObservableList<Person> persons;
 
     /**
-     * C'tor for the BrowserPanel.
+     * C'tor for the Medication View.
      * We need the MainWindow to supply us with a view of the list of {@code Person}s so that we can
      * update our pointer whenever a {@code Person} is updated.
      */
-    public BrowserPanel(ObservableList<Person> persons) {
+    public MedicationView(ObservableList<Person> persons) {
         super(FXML);
         this.persons = persons;
         registerAsAnEventHandler(this);
@@ -249,5 +249,14 @@ public class BrowserPanel extends UiPart<Region> {
         }
 
         return true;
+    }
+
+    @Override
+    public void refreshView() {
+        if (currentSelection == null) {
+            return;
+        }
+
+        refreshTableView(currentSelection);
     }
 }

@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -10,6 +11,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -25,7 +27,6 @@ import seedu.address.model.UserPrefs;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -33,15 +34,24 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
+    // A HashMap of panel names to their corresponding swappable objects.
+    private HashMap<SwappablePanelName, Swappable> panels = new HashMap<>();
+
+    // The current panel to display in the Ui container.
+    private Swappable currentPanel;
+
+    // Swappable panels
+    private BlankPanel blankPanel;
+    private MedicationView medicationView;
+
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane panelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -116,13 +126,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Initalises the members of the MainWindow and the HashMap of swappable panels.
+     */
+    void init() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
+        // Construct swappables
+        blankPanel = new BlankPanel();
+        medicationView = new MedicationView(logic.getFilteredPersonList());
+
+        // Set up the HashMap of Swappable panels
+        panels.put(SwappablePanelName.BLANK, blankPanel);
+        panels.put(SwappablePanelName.MEDICATION, medicationView);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.getFilteredPersonList());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        setCurrentPanel(SwappablePanelName.BLANK);
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
@@ -133,6 +156,23 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    void setCurrentPanel(SwappablePanelName panelName) {
+        Swappable panel = panels.get(panelName);
+
+        if (panel == null) {
+            return;
+        }
+
+        if (currentPanel != null) {
+            panelPlaceholder.getChildren().remove(((UiPart<Region>) currentPanel).getRoot());
+        }
+
+        panelPlaceholder.getChildren().add(((UiPart<Region>) panel).getRoot());
+
+        currentPanel = panel;
+        currentPanel.refreshView();
     }
 
     void hide() {
@@ -160,7 +200,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+            (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
     /**

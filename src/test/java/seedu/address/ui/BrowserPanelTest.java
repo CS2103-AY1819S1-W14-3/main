@@ -37,7 +37,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
     private NewResultAvailableEvent addmedsCommandSuccessEventStub;
-    private BrowserPanel browserPanel;
+    private MedicationView medicationView;
     private BrowserPanelHandle browserPanelHandle;
     private Prescription prescription;
 
@@ -58,16 +58,16 @@ public class BrowserPanelTest extends GuiUnitTest {
      * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
      */
     private void initUi(ObservableList<Person> backingList) {
-        browserPanel = new BrowserPanel(backingList);
-        uiPartRule.setUiPart(browserPanel);
-        browserPanel.setCurrentSelection(ALICE);
-        browserPanelHandle = new BrowserPanelHandle(getChildNode(browserPanel.getRoot(),
+        medicationView = new MedicationView(backingList);
+        uiPartRule.setUiPart(medicationView);
+        medicationView.setCurrentSelection(ALICE);
+        browserPanelHandle = new BrowserPanelHandle(getChildNode(medicationView.getRoot(),
                 BrowserPanelHandle.PRESCRIPTION_TABLE_VIEW_ID));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void setCurrentSelection_notNull_throwsUnsupportedOperationException() {
-        browserPanel.setCurrentSelection(ALICE);
+        medicationView.setCurrentSelection(ALICE);
     }
 
     @Test
