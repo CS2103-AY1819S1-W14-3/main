@@ -58,7 +58,10 @@ public class DietCollectionTest {
         expectedAllergies.add(eggAllergy);
         expectedAllergies.add(milkAllergy);
 
-        // assertEquals(new DietCollection(dietSetOne).getAllergies(), expectedAllergies);
+        List<Diet> actualAllergies = new DietCollection(dietSetOne).getAllergies();
+
+        assertTrue(actualAllergies.containsAll(expectedAllergies)
+                   && expectedAllergies.containsAll(actualAllergies));
     }
 
     @Test
