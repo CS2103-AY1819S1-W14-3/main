@@ -31,7 +31,7 @@
 <ul class="sectlevel2">
 <li><a href="#addmeds">3.1. Addmeds</a></li>
 <li><a href="#addappt">3.2. Addappt</a></li>
-<li><a href="#addmh-viewmh">3.3. Addmh/Viewmh</a></li>
+<li><a href="#addmh-viewmh">3.3. Addmh/viewmh</a></li>
 <li><a href="#adddiet">3.4. Adddiet</a></li>
 <li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.6. Logging</a></li>
@@ -40,29 +40,29 @@
 </li>
 <li><a href="#documentation">4. Documentation</a>
 <ul class="sectlevel2">
-<li><a href="#editing-documentation">4.1. Editing Documentation</a></li>
-<li><a href="#publishing-documentation">4.2. Publishing Documentation</a></li>
-<li><a href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></li>
-<li><a href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></li>
-<li><a href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></li>
-<li><a href="#site-template">4.6. Site Template</a></li>
+<li><a href="#editing-documentation">4.1. Editing documentation</a></li>
+<li><a href="#publishing-documentation">4.2. Publishing documentation</a></li>
+<li><a href="#converting-documentation-to-pdf-format">4.3. Converting documentation to PDF format</a></li>
+<li><a href="#Docs-SiteWideDocSettings">4.4. Site-wide documentation settings</a></li>
+<li><a href="#Docs-PerFileDocSettings">4.5. Per-file documentation settings</a></li>
+<li><a href="#site-template">4.6. Site template</a></li>
 </ul>
 </li>
 <li><a href="#Testing">5. Testing</a>
 <ul class="sectlevel2">
-<li><a href="#running-tests">5.1. Running Tests</a></li>
+<li><a href="#running-tests">5.1. Running tests</a></li>
 <li><a href="#types-of-tests">5.2. Types of tests</a></li>
-<li><a href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></li>
+<li><a href="#troubleshooting-testing">5.3. Troubleshooting testing</a></li>
 </ul>
 </li>
 <li><a href="#dev-ops">6. Dev Ops</a>
 <ul class="sectlevel2">
-<li><a href="#build-automation">6.1. Build Automation</a></li>
-<li><a href="#continuous-integration">6.2. Continuous Integration</a></li>
-<li><a href="#coverage-reporting">6.3. Coverage Reporting</a></li>
-<li><a href="#documentation-previews">6.4. Documentation Previews</a></li>
-<li><a href="#making-a-release">6.5. Making a Release</a></li>
-<li><a href="#managing-dependencies">6.6. Managing Dependencies</a></li>
+<li><a href="#build-automation">6.1. Build automation</a></li>
+<li><a href="#continuous-integration">6.2. Continuous integration</a></li>
+<li><a href="#coverage-reporting">6.3. Coverage reporting</a></li>
+<li><a href="#documentation-previews">6.4. Documentation previews</a></li>
+<li><a href="#making-a-release">6.5. Making a release</a></li>
+<li><a href="#managing-dependencies">6.6. Managing dependencies</a></li>
 </ul>
 </li>
 <li><a href="#product-scope">Appendix A: Product Scope</a></li>
@@ -72,7 +72,7 @@
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
+<li><a href="#launch-and-shutdown">F.1. Launch and shutdown</a></li>
 <li><a href="#deleting-a-patient">F.2. Deleting a patient</a></li>
 <li><a href="#saving-data">F.3. Saving data</a></li>
 </ul>
@@ -292,9 +292,6 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <li>
 <p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
 </li>
-<li>
-<p>Take a look at <a href="#GetStartedProgramming">[GetStartedProgramming]</a>.</p>
-</li>
 </ol>
 </div>
 </div>
@@ -336,7 +333,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
 </li>
 <li>
-<p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
+<p>At shut down: Shuts down the components and invokes cleanup method(s) where necessary.</p>
 </li>
 </ul>
 </div>
@@ -378,10 +375,10 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</p>
+<p>Defines its <em>API</em> in an <code>interface</code> with the same name as the component.</p>
 </li>
 <li>
-<p>Exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
+<p>Exposes its functionality using a <code>{component Name}Manager</code> class.</p>
 </li>
 </ul>
 </div>
@@ -392,9 +389,9 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
-<div class="title">Figure 2. Class Diagram of the Logic Component</div>
+<div class="title">Figure 2. Class Diagram of the Logic component</div>
 </div>
-<h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven nature of the design</h4>
+<h4 id="events-driven-nature-of-the-design" class="discrete">Events-driven nature of the design</h4>
 <div class="paragraph">
 <p>The <em>Sequence Diagram</em> below shows how the components interact for the scenario where the user issues the command <code>delete 1</code>.</p>
 </div>
@@ -447,30 +444,30 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
 </div>
-<div class="title">Figure 5. Structure of the UI Component</div>
+<div class="title">Figure 5. Structure of the UI component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>patientListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>patientListPanel</code>, <code>StatusBarFooter</code>, <code>MedicationView</code>, etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses the JavaFX UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component,</p>
+<p>The <code>UI</code> component does the following:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Executes user commands using the <code>Logic</code> component.</p>
+<p>Executes user commands using the <code>Logic</code> component</p>
 </li>
 <li>
-<p>Binds itself to some data in the <code>Model</code> so that the UI can auto-update when data in the <code>Model</code> change.</p>
+<p>Binds itself to some data in the <code>Model</code> so that the UI can auto-update when data in the <code>Model</code> changes</p>
 </li>
 <li>
-<p>Responds to events raised from various parts of the App and updates the UI accordingly.</p>
+<p>Responds to events raised from various parts of the App and updates the UI accordingly</p>
 </li>
 </ul>
 </div>
@@ -481,7 +478,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
-<div class="title">Figure 6. Structure of the Logic Component</div>
+<div class="title">Figure 6. Structure of the Logic component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
@@ -499,7 +496,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>The command execution can affect the <code>Model</code> (e.g. adding a patient) and/or raise events.</p>
 </li>
 <li>
-<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>UI</code>.</p>
 </li>
 </ol>
 </div>
@@ -508,9 +505,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/DeletepatientsdForLogic.png" alt="DeletepatientsdForLogic" width="800">
+<img src="images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
 </div>
-<div class="title">Figure 7. Interactions Inside the Logic Component for the <code>delete 1</code> Command</div>
+<div class="title">Figure 7. Interactions Inside the Logic component for the <code>delete 1</code> Command</div>
 </div>
 </div>
 <div class="sect2">
@@ -519,7 +516,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 8. Structure of the Model Component</div>
+<div class="title">Figure 8. Structure of the Model component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
@@ -552,7 +549,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <td class="content">
 As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>patient</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>patient</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
-<span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
+ <span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
 </td>
 </tr>
 </table>
@@ -564,7 +561,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
-<div class="title">Figure 9. Structure of the Storage Component</div>
+<div class="title">Figure 9. Structure of the Storage component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
@@ -602,8 +599,8 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The <code>addmeds</code> command provides functionality for users to add prescription-related information for a given patient.<br>
-This is done by adding prescription-related information to a given person, represented by a <code>Person</code> object.<br>
+<p>The <code>addmeds</code> command provides functionality for users to add prescription-related information for a given patient.
+This is done by adding prescription-related information to a given person, represented by a <code>Person</code> object.
 This allows for a patient to build up a history of prescriptions for viewing at a later date.</p>
 </div>
 <div class="paragraph">
@@ -810,10 +807,10 @@ If no/multiple patient(s) with that NRIC exist, then the <code>AddmedsCommand::e
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>AddmedsCommand::execute</code> method constructs a new <code>Person</code> object using all the details of the old Person, with the sole difference being the <code>PrescriptionList</code> used being a deep copy of the original <code>Person</code> 's <code>PrescriptionList</code> with the new <code>Prescription</code> added.<br>
-This updated <code>Person</code> object is used to update the existing <code>Person</code> object using the <code>Model::updatePerson</code> method (or an overridden version) of the backing model.<br>
+<p>The <code>AddmedsCommand::execute</code> method constructs a new <code>Person</code> object using all the details of the old Person, with the sole difference being the <code>PrescriptionList</code> used being a deep copy of the original <code>Person</code> 's <code>PrescriptionList</code> with the new <code>Prescription</code> added.
+This updated <code>Person</code> object is used to update the existing <code>Person</code> object using the <code>Model::updatePerson</code> method (or an overridden version) of the backing model.
 Finally, the <code>AddmedsCommand::execute</code> method terminates, returning a <code>CommandResult</code> with a success message.
-The <code>LogicManager</code> then returns the same <code>CommandResult</code> as the return value of the <code>LogicManager::execute</code> method.<br>
+The <code>LogicManager</code> then returns the same <code>CommandResult</code> as the return value of the <code>LogicManager::execute</code> method.
 The command execution then ends.</p>
 </div>
 <div id="img-addmedssequencediagram" class="paragraph">
@@ -823,10 +820,11 @@ The command execution then ends.</p>
 <div class="content">
 <img src="images/AddmedsSequenceDiagram.png" alt="AddmedsSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 10. Execution sequence of the <code>addmeds</code> command</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-the-medication-data-storage"><a class="link" href="#aspect-data-structure-to-support-the-medication-data-storage">Aspect: Data structure to support the medication data storage</a></h5>
 <div class="ulist">
@@ -839,7 +837,7 @@ The command execution then ends.</p>
 <p>Pros: Maintains the Single Responsibility Principle (e.g. the <code>Prescription</code> class now changes only if there are changes to the structure of a physical prescription, and not due to (e.g.) changes in time representation, or the way that dosage-related information is stored.</p>
 </li>
 <li>
-<p>Cons: More classes to maintain.</p>
+<p>Cons: Increases the number of classes we will have to maintain.</p>
 </li>
 </ul>
 </div>
@@ -849,7 +847,7 @@ The command execution then ends.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easier to handle.</p>
+<p>Pros: Reduces the number of classes we will have to maintain.</p>
 </li>
 <li>
 <p>Cons: Reduces the cohesion of the <code>Prescription</code> class as it now handles multiple different items e.g. dosage-related information and duration-related information.</p>
@@ -995,10 +993,11 @@ The command execution then ends.</p>
 <div class="content">
 <img src="images/AddApptSequenceDiagram.png" alt="AddApptSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 11. Execution sequence of the <code>addappt</code> command</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-representation-of-types-of-medical-procedures"><a class="link" href="#aspect-representation-of-types-of-medical-procedures">Aspect: Representation of types of medical procedures</a></h5>
 <div class="ulist">
@@ -1008,10 +1007,10 @@ The command execution then ends.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Allows for easier handling of incorrect values</p>
+<p>Pros: Makes for easier handling of incorrect values.</p>
 </li>
 <li>
-<p>Cons: More effort needed to filter and retrieve the different types</p>
+<p>Cons: Requires more effort to filter and retrieve the different types.</p>
 </li>
 </ul>
 </div>
@@ -1021,10 +1020,10 @@ The command execution then ends.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easier to handle.</p>
+<p>Pros: Makes the process easier to handle.</p>
 </li>
 <li>
-<p>Cons: Less clean</p>
+<p>Cons: Makes the code more difficult to read.</p>
 </li>
 </ul>
 </div>
@@ -1035,9 +1034,9 @@ The command execution then ends.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="addmh-viewmh"><a class="link" href="#addmh-viewmh">3.3. Addmh/Viewmh</a></h3>
+<h3 id="addmh-viewmh"><a class="link" href="#addmh-viewmh">3.3. Addmh/viewmh</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The functionalities of the <code>addmh</code> and <code>viewmh</code> command are interlinked: the former allows the user to record a diagnosis
 into a patient’s medical history, while the latter permits the viewing of a patient’s past diagnoses as recorded in
@@ -1076,7 +1075,7 @@ with <code>NRIC</code> S9123124A and displays in the command prompt box.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="command-execution"><a class="link" href="#command-execution">3.3.2. Command Execution</a></h4>
+<h4 id="command-execution"><a class="link" href="#command-execution">3.3.2. Command execution</a></h4>
 <div class="paragraph">
 <p>The sequence diagram below shows the execution of the given scenario:</p>
 </div>
@@ -1084,6 +1083,7 @@ with <code>NRIC</code> S9123124A and displays in the command prompt box.</p>
 <div class="content">
 <img src="images/AddmhViewmhSequenceDiagram.png" alt="AddmhViewmhSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 12. Execution sequence of the <code>addmh</code> and <code>viewmh</code> commands</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1160,14 +1160,14 @@ with an appropriate error message before the use case ends.
 <div class="sect2">
 <h3 id="adddiet"><a class="link" href="#adddiet">3.4. Adddiet</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The <code>adddiet</code> command provides functionality for users to add dietary requirements for a given patient.<br>
 This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty.<br>
 This command adds these dietary requirements to a given <code>Person</code> , so that the dietary requirements can be viewed later on.</p>
 </div>
 <div class="sect4">
-<h5 id="classes-involved"><a class="link" href="#classes-involved">Classes Involved</a></h5>
+<h5 id="classes-involved"><a class="link" href="#classes-involved">Classes involved</a></h5>
 <div class="paragraph">
 <p>The adding of the dietary requirements involve the following classes:</p>
 </div>
@@ -1205,7 +1205,7 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <p>Every <code>Person</code> object has a <code>Diet Collection</code>, which is a collection of all the dietary requirements of the given patient.</p>
 </li>
 <li>
-<p>This class is a wrapper class around the internal representation of a <code>Set</code> of <code>Diet</code>.</p>
+<p>This class is a wrapper class around the internal representation of a <code>Set</code> of <code>Diet</code> s.</p>
 </li>
 </ul>
 </div>
@@ -1250,7 +1250,7 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 </div>
 </div>
 <div class="sect4">
-<h5 id="execution-of-the-command"><a class="link" href="#execution-of-the-command">Execution of the Command</a></h5>
+<h5 id="execution-of-the-command"><a class="link" href="#execution-of-the-command">Execution of the command</a></h5>
 <div class="paragraph">
 <p>Given below is an usage scenario and the details when executing <code>adddiet</code> command.<br>
 For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code>:</p>
@@ -1287,24 +1287,25 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <div class="content">
 <img src="images/AdddietSequenceDiagram.png" alt="AdddietSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 13. Execution sequence of the <code>adddiet</code> command</div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-to-represent-different-kinds-of-dietary-requirements"><a class="link" href="#aspect-how-to-represent-different-kinds-of-dietary-requirements">Aspect: How to represent different kinds of dietary requirements</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a <code>Enum</code> inside the <code>Diet class</code> and contain all <code>Diet</code> in one collection.</p>
+<p><strong>Alternative 1 (current implementation):</strong> Use a <code>Enum</code> inside the <code>Diet class</code> and contain all <code>Diet</code> in one collection.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Less repetitive code and cleaner design.</p>
+<p>Pros: Results in less repetitive code and cleaner design.</p>
 </li>
 <li>
-<p>Cons: More efforts are needed to filter or retrieve different types of <code>Diet</code> from one <code>DietCollection</code>.</p>
+<p>Cons: Requires more effort to filter or retrieve different types of <code>Diet</code> from one <code>DietCollection</code>.</p>
 </li>
 </ul>
 </div>
@@ -1314,10 +1315,10 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easier to retrieve different types of dietary requirements.</p>
+<p>Pros: Makes it easier to retrieve different types of dietary requirements.</p>
 </li>
 <li>
-<p>Cons: A lot of repetitive codes since the three different types do not differ much.</p>
+<p>Cons: Results in a lot of repetitive code since the three different types do not differ much.</p>
 </li>
 </ul>
 </div>
@@ -1330,14 +1331,14 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use <code>HashSet</code> and override the <code>hashCode</code> for <code>Diet</code>.</p>
+<p><strong>Alternative 1 (current implementation):</strong> Use <code>HashSet</code> and override the <code>hashCode</code> for <code>Diet</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easier to handle duplication in adding dietary requirement.</p>
+<p>Pros: Makes it easier to handle duplication in adding dietary requirement.</p>
 </li>
 <li>
-<p>Cons: The sequence of adding dietary requirements is lost. (However, the sequence is not important for the current set of features implemented.)</p>
+<p>Cons: Causes the order in which dietary requirements are added to be lost. (However, the sequence is not important for the current set of features implemented.)</p>
 </li>
 </ul>
 </div>
@@ -1347,10 +1348,10 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The sequence of adding the dietary requirements is preserved.</p>
+<p>Pros: Preserves the order in which dietary requirements are added.</p>
 </li>
 <li>
-<p>Cons: Harder to handle duplicates.</p>
+<p>Cons: Makes it harder to handle duplicates.</p>
 </li>
 </ul>
 </div>
@@ -1369,7 +1370,7 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <div class="sect2">
 <h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
-<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
+<p>We are using the <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1380,12 +1381,12 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
 </li>
 <li>
-<p>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
+<p>Currently, log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Logging Levels</strong></p>
+<p><strong>Logging levels</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1407,7 +1408,7 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <div class="sect2">
 <h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
-<p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
+<p>Certain properties of the application can be controlled (e.g app name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 </div>
@@ -1416,7 +1417,7 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We use asciidoc for writing documentation.</p>
+<p>We use AsciiDoc for writing documentation.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1425,26 +1426,26 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
+We chose AsciiDoc over Markdown because AsciiDoc, although a bit more complex than Markdown, provides more flexibility in formatting.
 </td>
 </tr>
 </table>
 </div>
 <div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing Documentation</a></h3>
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing Documentation</a></h3>
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></h3>
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting documentation to PDF format</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
@@ -1471,11 +1472,11 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 10. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 14. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></h3>
+<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">4.4. Site-wide documentation settings</a></h3>
 <div class="paragraph">
 <p>The <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/build.gradle"><code>build.gradle</code></a> file specifies some project-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how all documentation files within this project are rendered.</p>
 </div>
@@ -1534,7 +1535,7 @@ This will render the SE-EDU navigation bar at the top of the page, and add some 
 </table>
 </div>
 <div class="sect2">
-<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></h3>
+<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">4.5. Per-file documentation settings</a></h3>
 <div class="paragraph">
 <p>Each <code>.adoc</code> file may also specify some file-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how the file is rendered.</p>
 </div>
@@ -1591,7 +1592,7 @@ One of: <code>UserGuide</code>, <code>DeveloperGuide</code>, <code>LearningOutco
 </table>
 </div>
 <div class="sect2">
-<h3 id="site-template"><a class="link" href="#site-template">4.6. Site Template</a></h3>
+<h3 id="site-template"><a class="link" href="#site-template">4.6. Site template</a></h3>
 <div class="paragraph">
 <p>The files in <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/docs/stylesheets"><code>docs/stylesheets</code></a> are the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS stylesheets</a> of the site.
 You can modify them to change some properties of the site&#8217;s design.</p>
@@ -1623,7 +1624,7 @@ The SE-EDU team does not provide support for modified template files.</p>
 <h2 id="Testing"><a class="link" href="#Testing">5. Testing</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
+<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running tests</a></h3>
 <div class="paragraph">
 <p>There are three ways to run tests.</p>
 </div>
@@ -1634,7 +1635,7 @@ The SE-EDU team does not provide support for modified template files.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The most reliable way to run tests is the 3rd one. The first two methods might fail some GUI tests due to platform/resolution-specific idiosyncrasies.
+The most reliable way to run tests is the third one. The first two methods might fail some GUI tests due to platform/resolution-specific idiosyncrasies.
 </td>
 </tr>
 </table>
@@ -1727,7 +1728,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></h3>
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting testing</a></h3>
 <div class="paragraph">
 <p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
 </div>
@@ -1748,31 +1749,31 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
+<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build automation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous Integration</a></h3>
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous integration</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://travis-ci.org/">Travis CI</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">6.3. Coverage Reporting</a></h3>
+<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">6.3. Coverage reporting</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://coveralls.io/">Coveralls</a> to track the code coverage of our projects. See <a href="UsingCoveralls.html">UsingCoveralls.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="documentation-previews"><a class="link" href="#documentation-previews">6.4. Documentation Previews</a></h3>
+<h3 id="documentation-previews"><a class="link" href="#documentation-previews">6.4. Documentation previews</a></h3>
 <div class="paragraph">
 <p>When a pull request has changes to asciidoc files, you can use <a href="https://www.netlify.com/">Netlify</a> to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <a href="UsingNetlify.html">UsingNetlify.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">6.5. Making a Release</a></h3>
+<h3 id="making-a-release"><a class="link" href="#making-a-release">6.5. Making a release</a></h3>
 <div class="paragraph">
 <p>Here are the steps to create a new release.</p>
 </div>
@@ -1794,7 +1795,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.6. Managing Dependencies</a></h3>
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.6. Managing dependencies</a></h3>
 <div class="paragraph">
 <p>A project often depends on third-party libraries. For example, Hospital Management System 2K18 depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
@@ -1940,7 +1941,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>Hospital Management System 2K18 (HMS)</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-patients" class="discrete">Use case: Delete patients</h3>
+<h3 id="use-case-delete-patients" class="discrete">Use case: delete patients</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2387,7 +2388,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2477,4 +2478,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-23 04:00:54 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-23 04:07:06 UTC</div></div></div></body></html>
