@@ -38,7 +38,7 @@ public class VisitorinCommand extends Command {
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_VISITOR + "VISITOR_NAME \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "A1234567A "
+            + PREFIX_NRIC + "S1234567A "
             + PREFIX_VISITOR + "Jane";
 
     public static final String MESSAGE_SUCCESS = "New visitor checked in: %1$s";
