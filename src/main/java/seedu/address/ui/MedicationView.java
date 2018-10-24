@@ -2,9 +2,7 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Logger;
-import java.util.stream.IntStream;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -35,8 +33,6 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
         + "to set the current selection, but it is not null.";
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final String loggingPrefix = "[" + getClass().getName() + "]: ";
-
-    private HashMap<Integer, TableColumn<Prescription, String>> colIdxToCol = new HashMap<>();
 
     // Remember to set the fx:id of the elements in the .fxml file!
     @javafx.fxml.FXML
@@ -81,7 +77,6 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
         this.persons = persons;
         this.sortOrder = FXCollections.observableArrayList(new ArrayList<>());
         registerAsAnEventHandler(this);
-        populateColIdxToCol();
     }
 
     /**
@@ -230,28 +225,6 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
         return new SimpleStringProperty(isEndDateStrictlyBeforeToday ? "No" : "Yes");
     }
 
-    /**
-     * Populates the HashMap that coordinates column indexes references
-     * (used in the `sort` command) and their corresponding column.
-     */
-    private void populateColIdxToCol() {
-        TableColumn[] columns = new TableColumn[] {
-            drugNameCol,
-            dosageCol,
-            dosageUnitCol,
-            dosesPerDayCol,
-            startDateCol,
-            endDateCol,
-            durationCol,
-            activePrescriptionCol
-        };
-        int[] columnIndexes = IntStream.range(1, columns.length + 1).toArray();
-
-        for (int i = 0; i < columnIndexes.length; i++) {
-            colIdxToCol.put(columnIndexes[i], columns[i]);
-        }
-    }
-
     @Override
     public void refreshView() {
         if (currentSelection == null) {
@@ -278,12 +251,16 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
 
         sortOrder.clear();
 
+        ObservableList<TableColumn<Prescription, ?>> columns = prescriptionTableView.getColumns();
+
         for (int i = 0; i < colIdx.length; i++) {
-            TableColumn<Prescription, String> col = colIdxToCol.get(colIdx[i]);
-            if (col == null) {
+            // Recall that the column indices passed in are 1-indexed.
+            if (colIdx[i] < 1 || colIdx[i] > columns.size()) {
                 // No corresponding column for that column index exists
                 continue;
             }
+
+            TableColumn<Prescription, ?> col = columns.get(colIdx[i] - 1);
             sortOrder.add(col);
         }
 
