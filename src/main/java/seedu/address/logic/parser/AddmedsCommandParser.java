@@ -64,7 +64,7 @@ public class AddmedsCommandParser implements Parser<AddmedsCommand> {
             throw new ParseException("Exception while parsing duration.", e);
         }
 
-        nric = new Nric(patientNric);
+        nric = ParserUtil.parseNric(patientNric);
         med = new Prescription(drugName, dose, duration);
 
         return new AddmedsCommand(nric, med);

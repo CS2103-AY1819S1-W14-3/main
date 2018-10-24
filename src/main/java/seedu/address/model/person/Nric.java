@@ -10,8 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Nric {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "NRICs should only contain alphanumeric "
-            + "characters and spaces, and it should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "NRICs should consist of a starting letter (capital), "
+        + "followed by 7 numerical digits, followed by a letter (again capital). Please check that the NRIC "
+        + "entered is valid, and try again.";
 
     public static final String NRIC_VALIDATION_REGEX = "(?<nric>[S|T|F|G][0-9]{7}[A-Z])";
 
@@ -20,8 +21,7 @@ public class Nric {
     /**
      * Constructs a {@code Nric}.
      *
-     * @param nric
-     *            A valid nric.
+     * @param nric A valid nric.
      */
     public Nric(String nric) {
         requireNonNull(nric);
