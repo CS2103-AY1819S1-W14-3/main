@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -80,16 +81,7 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
         this.persons = persons;
         this.sortOrder = FXCollections.observableArrayList(new ArrayList<>());
         registerAsAnEventHandler(this);
-
-        // For easy reference when sorting later.
-        colIdxToCol.put(1, drugNameCol);
-        colIdxToCol.put(2, dosageCol);
-        colIdxToCol.put(3, dosageUnitCol);
-        colIdxToCol.put(4, dosesPerDayCol);
-        colIdxToCol.put(5, startDateCol);
-        colIdxToCol.put(6, endDateCol);
-        colIdxToCol.put(7, durationCol);
-        colIdxToCol.put(8, activePrescriptionCol);
+        populateColIdxToCol();
     }
 
     /**
@@ -236,6 +228,28 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
         boolean isEndDateStrictlyBeforeToday = today.compareTo(endDate) > 0;
 
         return new SimpleStringProperty(isEndDateStrictlyBeforeToday ? "No" : "Yes");
+    }
+
+    /**
+     * Populates the HashMap that coordinates column indexes references
+     * (used in the `sort` command) and their corresponding column.
+     */
+    private void populateColIdxToCol() {
+        TableColumn[] columns = new TableColumn[] {
+            drugNameCol,
+            dosageCol,
+            dosageUnitCol,
+            dosesPerDayCol,
+            startDateCol,
+            endDateCol,
+            durationCol,
+            activePrescriptionCol
+        };
+        int[] columnIndexes = IntStream.range(1, columns.length + 1).toArray();
+
+        for (int i = 0; i < columnIndexes.length; i++) {
+            colIdxToCol.put(columnIndexes[i], columns[i]);
+        }
     }
 
     @Override
