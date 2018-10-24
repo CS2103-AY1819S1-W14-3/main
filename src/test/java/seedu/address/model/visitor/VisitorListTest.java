@@ -34,7 +34,7 @@ public class VisitorListTest {
     @Test
     public void add() {
         VisitorList visitorList1 = new VisitorList();
-        VisitorList visitorList2 = new VisitorList(Arrays.asList(new Visitor[] { visitor}));
+        VisitorList visitorList2 = new VisitorList(Arrays.asList(new Visitor[] {visitor}));
 
         assertFalse(visitorList1.equals(visitorList2));
 
@@ -49,12 +49,6 @@ public class VisitorListTest {
 
         visitorList.add(visitor);
         assertTrue(visitorList.contains(visitor));
-    }
-
-    @Test
-    public void toStringTest() {
-        VisitorList visitorList = new VisitorList(Arrays.asList(new Visitor[] {visitor}));
-        assertTrue(visitorList.toString().equals(visitor.toString()));
     }
 
     @Test
