@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentsList;
 import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.medicine.Prescription;
@@ -145,7 +146,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code AppointmentsList} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAppointmentsList(AppointmentsList appointmentsList) {
+    public PersonBuilder withAppointmentsList(List<Appointment> appointmentsList) {
         this.appointmentsList = new AppointmentsList(appointmentsList);
         return this;
     }

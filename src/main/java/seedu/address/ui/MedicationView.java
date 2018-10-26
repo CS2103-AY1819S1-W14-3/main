@@ -300,7 +300,7 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
             return;
         }
 
-        currentSelection = getNewReferenceToPerson(currentSelection);
+        currentSelection = getNewReferenceToPerson();
         refreshView();
         sortTableView();
     }
