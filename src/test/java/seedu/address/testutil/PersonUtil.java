@@ -21,10 +21,17 @@ import seedu.address.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns a checkin command string for adding the {@code person}.
      */
     public static String getCheckinCommand(Person person) {
         return CheckinCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+    /**
+     * Returns a checkin command string for adding the {@code person} with different NRIC
+     */
+    public static String getCheckinCommandDiffNric(Person person) {
+        return CheckinCommand.COMMAND_WORD + " " + getPersonDetailsDiffNric(person);
     }
 
     public static String getViewmhCommand(Person person) {
@@ -37,6 +44,20 @@ public class PersonUtil {
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NRIC + person.getNric().toString() + " ");
+        sb.append(PREFIX_NAME + person.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        person.getTags().stream().forEach(s -> sb.append(PREFIX_DRUG_ALLERGY + s.tagName + " "));
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code person}'s details less NRIC
+     */
+    public static String getPersonDetailsDiffNric(Person person) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_NRIC + "S0000100L" + " ");
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");

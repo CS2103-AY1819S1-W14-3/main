@@ -23,7 +23,7 @@ import seedu.address.model.visitor.VisitorList;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-    public static final String DEFAULT_NRIC = "S1234567A";
+    public static final String DEFAULT_NRIC = "S0000100Z";
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";

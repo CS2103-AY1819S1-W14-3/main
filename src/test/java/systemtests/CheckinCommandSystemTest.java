@@ -20,7 +20,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -52,8 +53,7 @@ public class CheckinCommandSystemTest extends AddressBookSystemTest {
     public void checkin() {
         /* ------------------------ Perform checkin operations on the shown unfiltered list ------------------------- */
 
-        /* Case: checks in a person without drug allergies to a non-empty HMS, command with leading spaces and trailing
-         spaces
+        /* Case: checks in a person to a non-empty HMS, command with leading spaces and trailing spaces
          * -> added
          */
         Person toCheckin = AMY;
@@ -61,16 +61,17 @@ public class CheckinCommandSystemTest extends AddressBookSystemTest {
                 + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + DRUG_ALLERGY_DESC_ASPIRIN + " " + NRIC_DESC_AMY;
         assertCommandSuccess(command, toCheckin);
 
-        /* Case: add a person with all fields same as another person in the HMS except name -> added */
-        toCheckin = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = CheckinCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + DRUG_ALLERGY_DESC_ASPIRIN + NRIC_DESC_AMY;
+        /* Case: add a person with all fields same as another person in the HMS except nric -> added */
+        toCheckin = new PersonBuilder(AMY).withNric(VALID_NRIC_BOB).build();
+        command = CheckinCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + DRUG_ALLERGY_DESC_ASPIRIN + NRIC_DESC_BOB;
         assertCommandSuccess(command, toCheckin);
 
-        /* Case: add a person with all fields same as another person in the HMS except phone and email
+        /* Case: add a person with all fields same as another person in the HMS except phone, email and nric
          * -> added
          */
-        toCheckin = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        toCheckin = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withNric(VALID_NRIC_CHARLIE).build();
         command = PersonUtil.getCheckinCommand(toCheckin);
         assertCommandSuccess(command, toCheckin);
 

@@ -26,6 +26,7 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -162,6 +163,9 @@ public abstract class AddressBookSystemTest {
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
+
+        LogsCenter.getLogger(this.getClass()).info("!!!!!!! IMPORTANT !!!!!!!!!!!" + getResultDisplay().getText());
+
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
