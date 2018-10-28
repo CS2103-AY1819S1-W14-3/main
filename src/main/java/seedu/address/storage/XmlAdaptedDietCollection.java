@@ -3,6 +3,7 @@ package seedu.address.storage;
 //@@author yuntongzhang
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -13,8 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author yuntongzhang
  */
 @XmlRootElement
-public class XmlAdaptedDietCollection {
-    @XmlElement(required = true, name = "diets")
+public class XmlAdaptedDietCollection implements Iterable<XmlAdaptedDiet> {
+    @XmlElement(required = true, name = "diet")
     private Set<XmlAdaptedDiet> dietSet;
 
     public XmlAdaptedDietCollection() {
@@ -27,6 +28,16 @@ public class XmlAdaptedDietCollection {
 
     public XmlAdaptedDietCollection(XmlAdaptedDietCollection dietCollection) {
         this(dietCollection.dietSet);
+    }
+
+    /** Setter method to change the internal dietSet. */
+    public void setDiet(Set<XmlAdaptedDiet> newDietSet) {
+        this.dietSet = new HashSet<>(newDietSet);
+    }
+
+    @Override
+    public Iterator<XmlAdaptedDiet> iterator() {
+        return dietSet.iterator();
     }
 
     @Override

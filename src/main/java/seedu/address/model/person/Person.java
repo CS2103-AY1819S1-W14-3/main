@@ -71,6 +71,24 @@ public class Person {
     }
 
     /**
+     * Overloaded constructor to generate a person that has prescriptionList, AppointmentList and dietCollection.
+     */
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, DietCollection dietCollection) {
+        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList, dietCollection);
+        this.nric = nric;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.prescriptionList = prescriptionList;
+        this.appointmentsList = appointmentsList;
+        this.dietCollection = dietCollection;
+        this.visitorList = new VisitorList();
+    }
+
+    /**
      * Overloaded constructor to generate a person that has existing diet requirement.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
@@ -268,8 +286,7 @@ public class Person {
                .append(" Email: ")
                .append(getEmail())
                .append(" Address: ")
-               .append(getAddress())
-               .append(" Drug Allergies: ");
+               .append(getAddress());
         getTags().forEach(builder::append);
         return builder.toString();
     }

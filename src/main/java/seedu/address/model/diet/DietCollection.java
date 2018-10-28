@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * Represents a Collection of dietary requirement for a patient.
@@ -79,6 +80,11 @@ public class DietCollection {
         Set<Diet> updatedDiets = new HashSet<>(this.dietSet);
         updatedDiets.addAll(newDietCollection.dietSet);
         return new DietCollection(updatedDiets);
+    }
+
+    /** Wrapper method for Collection::stream */
+    public Stream<Diet> stream() {
+        return dietSet.stream();
     }
 
     /**

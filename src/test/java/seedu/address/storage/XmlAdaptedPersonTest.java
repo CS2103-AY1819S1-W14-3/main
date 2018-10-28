@@ -8,7 +8,9 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.Before;
@@ -16,6 +18,7 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.diet.Diet;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -24,6 +27,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.Assert;
+import seedu.address.testutil.DietBuilder;
 import seedu.address.testutil.PrescriptionBuilder;
 
 public class XmlAdaptedPersonTest {
@@ -43,8 +47,10 @@ public class XmlAdaptedPersonTest {
             .collect(Collectors.toList());
     private static Prescription validPrescription;
     private static Appointment validAppointment;
+    private static Diet validDiet;
     private static List<XmlAdaptedPrescription> validPrescriptions;
     private static List<XmlAdaptedAppointment> validAppointments;
+    private static Set<XmlAdaptedDiet> validDiets;
 
     @Before
     public void setUp() throws IllegalValueException {
@@ -53,11 +59,15 @@ public class XmlAdaptedPersonTest {
                 .stream()
                 .map(XmlAdaptedPrescription::new)
                 .collect(Collectors.toList());
+
         validAppointment = new AppointmentBuilder().build();
         validAppointments = Arrays.asList(new Appointment[] { validAppointment })
                 .stream()
                 .map(XmlAdaptedAppointment::new)
                 .collect(Collectors.toList());
+
+        validDiet = new DietBuilder().build();
+        validDiets = new HashSet<>(Set.of(new XmlAdaptedDiet(validDiet)));
     }
 
     @Test
@@ -83,8 +93,9 @@ public class XmlAdaptedPersonTest {
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         BENSON.getPrescriptionList().add(validPrescription);
         BENSON.getAppointmentsList().add(validAppointment);
+        BENSON.getDietCollection().add(validDiet);
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, validPrescriptions, validAppointments);
+                VALID_ADDRESS, VALID_TAGS, validPrescriptions, validAppointments, validDiets);
         assertEquals(BENSON, person.toModelType());
     }
 
@@ -194,7 +205,7 @@ public class XmlAdaptedPersonTest {
     public void equals_personAndCopy_returnsTrue() {
         XmlAdaptedPerson bensonCopy = new XmlAdaptedPerson(BENSON);
         XmlAdaptedPerson anotherBensonCopy = new XmlAdaptedPerson(VALID_NRIC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, new ArrayList<>(), new ArrayList<>());
+                VALID_ADDRESS, VALID_TAGS, new ArrayList<>(), new ArrayList<>(), new HashSet<>());
 
         assertTrue(bensonCopy.equals(anotherBensonCopy));
     }

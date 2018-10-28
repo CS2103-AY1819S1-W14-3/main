@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentsList;
+import seedu.address.model.diet.Diet;
+import seedu.address.model.diet.DietCollection;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.person.Address;
@@ -44,6 +46,8 @@ public class XmlAdaptedPerson {
     @XmlElement
     private XmlAdaptedAppointmentsList appointments = new XmlAdaptedAppointmentsList();
     @XmlElement
+    private XmlAdaptedDietCollection diets = new XmlAdaptedDietCollection();
+    @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     //todo may need to add new list for MedicalHistory
 
@@ -74,13 +78,16 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(String nric, String name, String phone, String email, String address,
                             List<XmlAdaptedTag> tagged, List<XmlAdaptedPrescription> prescriptions,
-                            List<XmlAdaptedAppointment> appointments) {
+                            List<XmlAdaptedAppointment> appointments, Set<XmlAdaptedDiet> diets) {
         this(nric, name, phone, email, address, tagged);
         if (prescriptions != null) {
             this.prescriptions.setPrescription(prescriptions);
         }
         if (appointments != null) {
             this.appointments.setAppt(appointments);
+        }
+        if (diets != null) {
+            this.diets.setDiet(diets);
         }
     }
 
@@ -106,6 +113,10 @@ public class XmlAdaptedPerson {
             .stream()
             .map(XmlAdaptedAppointment::new)
             .collect(Collectors.toList()));
+        this.diets.setDiet(source.getDietCollection()
+            .stream()
+            .map(XmlAdaptedDiet::new)
+            .collect(Collectors.toSet()));
     }
 
     /**
@@ -118,6 +129,7 @@ public class XmlAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         final List<Prescription> prescriptions = new ArrayList<>();
         final List<Appointment> appointments = new ArrayList<>();
+        final Set<Diet> diets = new HashSet<>();
 
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -129,6 +141,10 @@ public class XmlAdaptedPerson {
 
         for (XmlAdaptedAppointment appointment : this.appointments) {
             appointments.add(appointment.toModelType());
+        }
+
+        for (XmlAdaptedDiet diet : this.diets) {
+            diets.add(diet.toModelType());
         }
 
         if (nric == null) {
@@ -177,8 +193,10 @@ public class XmlAdaptedPerson {
 
         final AppointmentsList appointmentsList = new AppointmentsList(new ArrayList<Appointment>(appointments));
 
+        final DietCollection dietCollection = new DietCollection(new HashSet<>(diets));
+
         return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags, prescriptionList,
-                appointmentsList);
+                appointmentsList, dietCollection);
     }
 
     @Override
@@ -198,6 +216,7 @@ public class XmlAdaptedPerson {
             && Objects.equals(address, otherPerson.address)
             && tagged.equals(otherPerson.tagged)
             && prescriptions.equals(otherPerson.prescriptions)
-            && appointments.equals(otherPerson.appointments);
+            && appointments.equals(otherPerson.appointments)
+            && diets.equals(otherPerson.diets);
     }
 }
