@@ -81,6 +81,18 @@ public class DietCollectionTest {
     }
 
     @Test
+    public void add() {
+        Set<Diet> dietSet = new HashSet<>(dietSetOne);
+        dietSet.add(vegeRequirement);
+        DietCollection expectedCollection = new DietCollection(dietSet);
+
+        DietCollection actualCollection = new DietCollection(dietSetOne);
+        actualCollection.add(vegeRequirement);
+
+        assertEquals(actualCollection, expectedCollection);
+    }
+
+    @Test
     public void addMoreDiets() {
         Set<Diet> dietSet = new HashSet<>(dietSetOne);
         dietSet.addAll(dietSetTwo);

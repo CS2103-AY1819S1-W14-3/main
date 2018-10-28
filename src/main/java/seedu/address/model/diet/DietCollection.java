@@ -63,7 +63,15 @@ public class DietCollection {
     }
 
     /**
-     * Add more diet requirement to an existing Diet Collection.
+     * Add one diet requirement to an existing Diet Collection, without creating new copy.
+     * @param newDiet The new diet requirement to be added.
+     */
+    public void add(Diet newDiet) {
+        dietSet.add(newDiet);
+    }
+
+    /**
+     * Add more diet requirement to a copy of the existing Diet Collection.
      * @param newDietCollection The new diet requirements to be added.
      * @return A new copy of DietCollection which has the updated diet requirements.
      */
