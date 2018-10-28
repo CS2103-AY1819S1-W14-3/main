@@ -26,10 +26,6 @@ public class XmlAdaptedDietCollection implements Iterable<XmlAdaptedDiet> {
         this.dietSet = new HashSet<>(dietSet);
     }
 
-    public XmlAdaptedDietCollection(XmlAdaptedDietCollection dietCollection) {
-        this(dietCollection.dietSet);
-    }
-
     /** Setter method to change the internal dietSet. */
     public void setDiet(Set<XmlAdaptedDiet> newDietSet) {
         this.dietSet = new HashSet<>(newDietSet);

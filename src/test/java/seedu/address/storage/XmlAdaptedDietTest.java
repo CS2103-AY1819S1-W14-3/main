@@ -16,10 +16,10 @@ import seedu.address.model.diet.DietType;
  * Test driver for XmlAdaptedDiet class.
  */
 public class XmlAdaptedDietTest {
-    private static final String VALID_DETAIL = "Milk";
-    private static final DietType VALID_TYPE = DietType.ALLERGY;
-    private static final String OTHER_VALID_DETAIL = "Egg";
-    private static final DietType OTHER_VALID_TYPE = DietType.CULTURAL;
+    static final String VALID_DETAIL = "Milk";
+    static final DietType VALID_TYPE = DietType.ALLERGY;
+    static final String OTHER_VALID_DETAIL = "Egg";
+    static final DietType OTHER_VALID_TYPE = DietType.CULTURAL;
 
     private String detail;
     private DietType type;
