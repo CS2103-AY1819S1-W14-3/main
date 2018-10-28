@@ -33,7 +33,7 @@ public class XmlAdaptedDietTest {
     }
 
     @Test
-    public void toModelType_validDetail_validType_returnsDiet() {
+    public void toModelType_validDetailAndType_returnsDiet() {
         XmlAdaptedDiet xmlDiet = new XmlAdaptedDiet(diet);
         assertEquals(diet, xmlDiet.toModelType());
     }

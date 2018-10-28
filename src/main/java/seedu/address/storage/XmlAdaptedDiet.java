@@ -46,7 +46,7 @@ public class XmlAdaptedDiet {
             return true;
         }
 
-        if (!(other instanceof Diet)) {
+        if (!(other instanceof XmlAdaptedDiet)) {
             return false;
         }
 
