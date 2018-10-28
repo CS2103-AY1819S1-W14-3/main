@@ -1,5 +1,6 @@
 package seedu.address.model.diet;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -23,12 +24,14 @@ public class DietTest {
     private String allergyOne;
     private String allergyTwo;
     private String culturalRequirement;
+    private String physicalDifficulty;
 
     @Before
     public void setUp() {
         allergyOne = "Egg";
         allergyTwo = "Milk";
         culturalRequirement = "Halal";
+        physicalDifficulty = "Hands cannot move.";
     }
 
     @Test
@@ -39,6 +42,21 @@ public class DietTest {
     @Test
     public void constructor_nullType_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Diet(allergyOne, null));
+    }
+
+    @Test
+    public void isAllergy() {
+        assertEquals(new Diet(allergyOne, DietType.ALLERGY), DietType.ALLERGY);
+    }
+
+    @Test
+    public void isCulturalRequirement() {
+        assertEquals(new Diet(culturalRequirement, DietType.CULTURAL), DietType.CULTURAL);
+    }
+
+    @Test
+    public void isPhysicalDifficulty() {
+        assertEquals(new Diet(physicalDifficulty, DietType.PHYSICAL), DietType.PHYSICAL);
     }
 
     @Test
