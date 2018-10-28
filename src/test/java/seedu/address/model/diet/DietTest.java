@@ -45,18 +45,18 @@ public class DietTest {
     }
 
     @Test
-    public void isAllergy() {
-        assertEquals(new Diet(allergyOne, DietType.ALLERGY), DietType.ALLERGY);
+    public void isAllergy_true() {
+        assertTrue(new Diet(allergyOne, DietType.ALLERGY).isAllergy());
     }
 
     @Test
-    public void isCulturalRequirement() {
-        assertEquals(new Diet(culturalRequirement, DietType.CULTURAL), DietType.CULTURAL);
+    public void isCulturalRequirement_true() {
+        assertTrue(new Diet(culturalRequirement, DietType.CULTURAL).isCulturalRequirement());
     }
 
     @Test
-    public void isPhysicalDifficulty() {
-        assertEquals(new Diet(physicalDifficulty, DietType.PHYSICAL), DietType.PHYSICAL);
+    public void isPhysicalDifficulty_true() {
+        assertTrue(new Diet(physicalDifficulty, DietType.PHYSICAL).isPhysicalDifficulty());
     }
 
     @Test
