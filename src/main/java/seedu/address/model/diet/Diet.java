@@ -26,6 +26,22 @@ public class Diet {
     }
 
     /**
+     * Getter for the detail of this diet.
+     * @return The String representation of the detail of this diet.
+     */
+    public String getDetail() {
+        return detail;
+    }
+
+    /**
+     * Getter for the type of this diet.
+     * @return The DietType associated with this diet.
+     */
+    public DietType getType() {
+        return type;
+    }
+
+    /**
      * Check whether this diet requirement is allergy.
      * @return True if this diet requirement is an allergy.
      */
