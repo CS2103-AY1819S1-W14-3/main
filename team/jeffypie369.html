@@ -675,6 +675,178 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 </div>
 </div>
 <div class="sect2">
+<h3 id="visitorin-viewvisitors-visitorout"><a class="link" href="#visitorin-viewvisitors-visitorout">Visitorin/Viewvisitors/Visitorout</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current implementation</a></h4>
+<div class="paragraph">
+<p>There three commands related to manage patients' visitors.<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>visitorin</code> command allows user to add visitors into patient&#8217;s visitorList. Every patient will has his/her own <code>VisitorList</code> and
+the maximum number of visitors for a patient is set to be 5 in order to provide patient&#8217;s a comfortable resting environment.<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>viewvisitors</code> command allows user to view a patient&#8217;s current visitors in his/her <code>VisitorList</code>. It displays all the visitors from the requested patient&#8217;s
+<code>visitorList</code> in order of entry.<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>visitorout</code> command allows user to remove a visitor from patient&#8217;s <code>VisitorList</code>.</p>
+</div>
+<div class="sect4">
+<h5 id="classes-associated"><a class="link" href="#classes-associated">Classes associated</a></h5>
+<div class="paragraph">
+<p>The three commands are executed mainly depends on the classes of <code>VisitorList</code> and <code>Visitor</code>. Each <code>Person</code> object contains a
+<code>VisitorList</code>. The <code>visitorin</code> and <code>visitorout</code> commands are created to add/remove a <code>Visitor</code> in the required <code>Person</code> 's <code>VisitorList</code>.
+The <code>viewvisitors</code> command display the <code>Person</code> 's <code>VisitorList</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>VisitorList</code>, a list of</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Visitor</code> s</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A more detailed description of the classes involved is as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Visitor</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>This class encapsulates the given name of the visitor.</p>
+</li>
+<li>
+<p><code>String</code> represent the visitor name.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>VisitorList</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Using <code>List</code> type of structure to store all the <code>Visitor</code> s stored for a particular patient</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="commands-execution"><a class="link" href="#commands-execution">Commands Execution</a></h4>
+<div class="paragraph">
+<p>To illustrate how the three commands work, examples are given below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>visitorin ic/S1234567A v/Jane</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The command inputs are passed to an instance of the <code>LogicManager</code> class.</p>
+</li>
+<li>
+<p><code>AddressBookParser</code> parses the command word (<code>visitorin</code>) and executes <code>VisitorInCommandParser::parse</code>.</p>
+</li>
+<li>
+<p><code>VisitorInCommandParser::parse</code> construct and a <code>Visitor</code> (Jane), <code>Nric</code> (S1234567A) of the patient provided by the user and then returns <code>VisitorinCommand</code> object.</p>
+</li>
+<li>
+<p>In <code>VisitorinCommand</code>, new <code>Visitor</code> object is created and added to a copy of the required <code>Person</code> object&#8217;s <code>VisitorList</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The new <code>Person</code> object is updated to the model by <code>Model#updatePerson</code> method.</p>
+</li>
+<li>
+<p>A new CommandResult object is returned and the execution ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>viewvisitor ic/S1234567A</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Similar to the <code>visitorin</code> command, <code>ViewvisitorsCommandParser::parse</code> the required patient&#8217;s ic(S1234567A) and returns a <code>ViewvisitorsCommand</code> object</p>
+</li>
+<li>
+<p><code>ViewvisitorsCommand</code> retrieves the person with the required patient&#8217;s ic and construct a copy of selected patient&#8217;s VisitorList for display</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A new CommandResult object is returned and the execution ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>visitorout ic/S1234567A v/Jane</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Similar to the <code>visitorin</code> command, <code>VisitoroutCommandParser::parse</code> construct and a <code>Visitor</code> (Jane), <code>Nric</code> (S1234567A) of the patient provided by the user and then returns <code>VisitoroutCommand</code> object.</p>
+</li>
+<li>
+<p>In <code>VisitoroutCommand</code>, new <code>Visitor</code> object is created and removed from the copy of the required <code>Person</code> object&#8217;s <code>VisitorList</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The new <code>Person</code> object is updated to the model by <code>Model#updatePerson</code> method.</p>
+</li>
+<li>
+<p>A new CommandResult object is returned and the execution ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here are the three sequence diagrams below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/VisitorinSequenceDiagram.png" alt="VisitorinSequenceDiagram" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ViewvisitorsSequenceDiagram.png" alt="ViewvisitorsSequenceDiagram" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/VisitoroutSequenceDiagram.png" alt="VisitoroutSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">[Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
@@ -1800,4 +1972,4 @@ Expected: Similar to previous.</p>
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 11:24:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 11:27:44 UTC</div></div></div></body></html>
