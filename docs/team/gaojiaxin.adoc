@@ -1,0 +1,152 @@
+= Gao JiaXin - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: HealthBase
+
+---
+
+== 1. Introduction
+
+
+=== Description of the Application
+
+HealthBase is a desktop application designed to aid in the management of a hospital. It provides patient data input and management capabilities through a command line interface for input and a graphical UI for data display. Its main features include (among others):
+
+* Management of check-in/out status of patients
+* Real-time management of the check-in/out status of patients
+* Patient medication data entry and retrieval
+* Patient medical history data entry and retrieval
+* Patient dietary restriction(s) data entry and retrieval
+* Patient visitor history data entry and retrieval
+* Real-time management of the number of visitors any given patient has
+* Patient appointment management for doctors
+
+== 2. Summary of contributions
+
+* *Major enhancements*: added visitorin, visitorout and viewvisitors commands
+** What the features can do:
+*** *visitorin* allows user to select a patient and add a new visitor into the patient's visitor List.
+*** *visitorout* allows user to select a patient and remove a particular visitor from the patient's visitor List.
+*** *visitorin* user to select a patient and show all the patient's visitors in the list.
+** Justification: This feature designed to provide clerical staff with feature to view and control the patient's visitors.Eventually, it create better resting environment for the patients.
+
+* *Minor enhancements*:
+
+** Project management:
+*** add new visitor and visitorList classes to each patients.
+*** ensured 90% of test cases to ensure the commands work correctly.
+** Documentation:
+*** Add visual guide to User guide in the relative features about visitors.
+*** Update diagram and clear steps to Developer guide in the fields of visitors.
+** Community:
+*** PRs created:
+*** modified features according to team mates advices:
+
+_{you can add/remove categories in the list above}_
+
+== 3. Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== View patient’s visitors: `viewvisitors`
+View a patient’s visitors.
+
+Format: `viewvisitors ic/PATIENT_NRIC`
+
+Example(s):
+
+* `viewvisitors ic/S1234567A`
+
+image::viewvisitors_screenshot.png[width=800]
+
+=== Sign in patient’s visitors: `visitorin`
+Sign in a visitor for a patient.
+
+Format: `visitorin ic/PATIENT_NRIC v/VISITOR_NAME`
+
+Example(s):
+
+* `visitorin ic/S1234567A v/Amy`
+
+image::visitorin_screenshot.png[width=800]
+
+=== Sign out patient’s visitors: `visitorout`
+Sign out a visitor for a patient.
+
+Format: `visitorout ic/PATIENT_NRIC v/VISITOR_NAME`
+
+Example(s):
+
+* `visitorout ic/S1234567A v/Amy`
+
+image::visitorout_screenshot.png[width=800]
+== 3. Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+=== Visitorin/Viewvisitors/Visitorout
+
+==== Current implementation
+There three commands related to manage patients' visitors. +
+
+The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
+the maximum number of visitors for a patient is set to be 5 in order to provide patient's a comfortable resting environment. +
+
+The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
+`visitorList` in order of entry. +
+
+The `visitorout` command allows user to remove a visitor from patient's `VisitorList`.
+
+===== Classes associated
+The three commands are executed mainly depends on the classes of `VisitorList` and `Visitor`. Each `Person` object contains a
+`VisitorList`. The `visitorin` and `visitorout` commands are created to add/remove a `Visitor` in the required `Person` 's `VisitorList`.
+The `viewvisitors` command display the `Person` 's `VisitorList`.
+
+* `VisitorList`, a list of
+** `Visitor` s
+
+A more detailed description of the classes involved is as follows:
+
+* `Visitor`
+** This class encapsulates the given name of the visitor.
+** `String` represent the visitor name.
+
+* `VisitorList`
+** Using `List` type of structure to store all the `Visitor` s stored for a particular patient
+
+==== Commands Execution
+To illustrate how the three commands work, examples are given below.
+
+* `visitorin ic/S1234567A v/Jane`
+** The command inputs are passed to an instance of the `LogicManager` class.
+** `AddressBookParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
+** `VisitorInCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitorinCommand` object.
+** In `VisitorinCommand`, new `Visitor` object is created and added to a copy of the required `Person` object's `VisitorList`
+*** The new `Person` object is updated to the model by `Model#updatePerson` method.
+*** A new CommandResult object is returned and the execution ends.
+
+
+* `viewvisitor ic/S1234567A`
+** Similar to the `visitorin` command, `ViewvisitorsCommandParser::parse` the required patient's ic(S1234567A) and returns a `ViewvisitorsCommand` object
+** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
+*** A new CommandResult object is returned and the execution ends.
+
+
+* `visitorout ic/S1234567A v/Jane`
+** Similar to the `visitorin` command, `VisitoroutCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitoroutCommand` object.
+** In `VisitoroutCommand`, new `Visitor` object is created and removed from the copy of the required `Person` object's `VisitorList`
+*** The new `Person` object is updated to the model by `Model#updatePerson` method.
+*** A new CommandResult object is returned and the execution ends.
+
+Here are the three sequence diagrams below:
+
+image::VisitorinSequenceDiagram.png[width="800"]
+image::ViewvisitorsSequenceDiagram.png[width="800"]
+image::VisitoroutSequenceDiagram.png[width="800"]
