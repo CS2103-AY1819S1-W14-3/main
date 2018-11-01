@@ -31,11 +31,11 @@ HealthBase is a desktop application designed to aid in the management of clinics
 *** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
 *** Managed the project dashboard on Github
 ** Enhancements to existing features:
-*** Updated the user interface mockup to be consistent with our proposed product (Pull request https://github.com/CS2103-AY1819S1-W14-3/main/pull/18)
+*** Updated the user interface mockup to be consistent with our proposed product (Pull request https://github.com/CS2103-AY1819S1-W14-3/main/pull/18[#18])
 ** Documentation:
-*** Updated the User Guide to be aligned with the newly created `adddiet` command: https://github.com/CS2103-AY1819S1-W14-3/main/pull/83
+*** Updated the User Guide to be aligned with the newly created `adddiet` command: https://github.com/CS2103-AY1819S1-W14-3/main/pull/83[#83]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/20, https://github.com/CS2103-AY1819S1-W14-3/main/pull/22, https://github.com/CS2103-AY1819S1-W14-3/main/pull/29, https://github.com/CS2103-AY1819S1-W14-3/main/pull/82, https://github.com/CS2103-AY1819S1-W14-3/main/pull/95, https://github.com/CS2103-AY1819S1-W14-3/main/pull/110
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/20[#20], https://github.com/CS2103-AY1819S1-W14-3/main/pull/22[#22], https://github.com/CS2103-AY1819S1-W14-3/main/pull/29[#29], https://github.com/CS2103-AY1819S1-W14-3/main/pull/82[#82], https://github.com/CS2103-AY1819S1-W14-3/main/pull/95[#95], https://github.com/CS2103-AY1819S1-W14-3/main/pull/110[#110]
 *** Assisted teammates during integration of code for each release
 *** Contributed to forum discussions (examples: `coming soon`)
 *** Reported bugs and suggestions for other teams in the class (examples: `coming soon`)
