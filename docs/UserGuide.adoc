@@ -87,7 +87,7 @@ Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PH
 Example(s):
 
 * `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
-//tag::adddiet[]
+//end::adddiet[]
 
 //tag::addmeds[]
 === Add patient medication: `addmeds`
