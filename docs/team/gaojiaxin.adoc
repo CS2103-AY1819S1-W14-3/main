@@ -44,7 +44,7 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 *** Add visual guide to User guide in the relative features about visitors.
 *** Update diagram and clear steps to Developer guide in the fields of visitors.
 ** Community:
-*** PRs created:
+*** PRs created:#115 #116 #110
 *** modified features according to team mates advices:
 
 == 3. Contributions to the User Guide
