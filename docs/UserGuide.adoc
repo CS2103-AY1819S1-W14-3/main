@@ -85,6 +85,7 @@ Example(s):
 
 * `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
 
+//tag::addmeds[]
 === Add patient medication: `addmeds`
 Add to a patient’s medication history.
 
@@ -93,6 +94,8 @@ Format: `addmeds ic/NRIC d/DRUG_NAME q/QUANTITY_PER_DOSE u/DOSAGE_UNIT n/DOSES_P
 Example(s):
 
 * `addmeds ic/S1234567A d/Paracetamol q/2 u/tablets n/4 t/14`
+
+//end::addmeds[]
 
 === Add to patient’s medical history: `addmh`
 Add an entry to an existing patient’s medical history.
@@ -139,6 +142,7 @@ Open this page.
 
 Format: `help`
 
+//tag::sort[]
 === Sort user view : `sort`
 Sort the current view, if it is sortable.
 
@@ -162,7 +166,9 @@ Example(s):
 ** Sorts the table in the medication view by the first column (Drug Name). Any entries with the same drug name will be further sorted by the second column (Dosage), with any entries with the same drug name and dosage being further sorted by the third column (Dosage Unit).
 * `sort a 1` where the current view is the default view (blank view).
 ** Does nothing (the current view is not sortable).
+//end::sort[]
 
+//tag::select[]
 === Select patient: `select`
 Select a patient through pure command-line functionality.
 The alternative is to click on the patient's card.
@@ -178,6 +184,9 @@ Example(s):
 
 * `select 1`
 
+//end::select[]
+
+//tag::view[]
 [#view-command]
 === View patient’s information: `view`
 View a patient’s information. Exactly what information is displayed depends on the choice of view.
@@ -206,6 +215,8 @@ Example(s):
 
 * `view default`
 * `view meds`
+
+//end::view[]
 
 === View all appointments for a patient: `viewappt`
 View all scheduled appointments for a patient.

@@ -328,6 +328,7 @@ image::AddmedsSequenceDiagram.png[width="800"]
 ** Pros: Reduces the number of classes we will have to maintain.
 ** Cons: Reduces the cohesion of the `Prescription` class as it now handles multiple different items e.g. dosage-related information and duration-related information.
 
+// end::addmeds[]
 // tag::addappt[]
 === Addappt
 ==== Current implementation
