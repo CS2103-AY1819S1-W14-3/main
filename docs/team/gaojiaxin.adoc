@@ -9,6 +9,9 @@
 
 == 1. Introduction
 
+=== My role in the Project
+
+This project is done in a team of 5 for a school moulde CS2103T in 2018. My role in this team is to add in three new features(visitorin, visitorout, viewvisitors)to the application and ensures the features will works correctly without any error and the features do not cause conflicts with the functionality of the app.
 
 === Description of the Application
 
@@ -43,8 +46,6 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 ** Community:
 *** PRs created:
 *** modified features according to team mates advices:
-
-_{you can add/remove categories in the list above}_
 
 == 3. Contributions to the User Guide
 
