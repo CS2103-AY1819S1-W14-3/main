@@ -74,6 +74,7 @@ The only valid types are `PROP` (PROPAEDEUTIC), `DIAG` (DIAGNOSTIC), `THP` (THER
 *Other inputs will not be allowed.*
 //end::addappt[]
 
+//tag::adddiet[]
 === Add patient’s dietary needs: `adddiet`
 Add a patient’s dietary needs into the system.
 
@@ -86,6 +87,7 @@ Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PH
 Example(s):
 
 * `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
+//tag::adddiet[]
 
 //tag::addmeds[]
 === Add patient medication: `addmeds`
