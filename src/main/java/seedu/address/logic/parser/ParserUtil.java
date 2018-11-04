@@ -93,13 +93,18 @@ public class ParserUtil {
      * @throws ParseException
      *              if the given {@code diagnosis} is invalid.
      */
-    public static Diagnosis parseDiagnosis(String diagnosis) throws ParseException {
+    public static Diagnosis parseDiagnosis(String diagnosis, String doctor) throws ParseException {
         requireNonNull(diagnosis);
+        requireNonNull(doctor);
         String trimmedDiagnosis = diagnosis.trim();
+        String trimmedDoctor = doctor.trim();
         if (!Diagnosis.isValidDiagnosis(trimmedDiagnosis)) {
             throw new ParseException((Diagnosis.MESSAGE_NAME_CONSTRAINTS));
         }
-        return new Diagnosis(trimmedDiagnosis);
+        if (!Diagnosis.isValidDoctor(trimmedDoctor)) {
+            throw new ParseException((Diagnosis.MESSAGE_NAME_CONSTRAINTS));
+        }
+        return new Diagnosis(trimmedDiagnosis, trimmedDoctor);
     }
     // @@ GAO JIAXIN
     /**

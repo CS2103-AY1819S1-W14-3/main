@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MED_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -31,10 +32,12 @@ public class AddmhCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patients's medical history. "
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
-            + PREFIX_MED_HISTORY + "DIAGNOSIS/REMARK\n"
+            + PREFIX_MED_HISTORY + "DIAGNOSIS/REMARK"
+            + PREFIX_DOCTOR + "DOCTOR\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S9271847A"
-            + PREFIX_MED_HISTORY + "Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately.";
+            + PREFIX_MED_HISTORY + "Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately."
+            + PREFIX_DOCTOR + "Dr.Ross";
 
     public static final String MESSAGE_SUCCESS = "New medical history/record successfully added: %1$s";
     public static final String MESSAGE_UNREGISTERED = "Patient %1$s is not registered within the system.";
@@ -56,6 +59,23 @@ public class AddmhCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        Person patientToUpdate = getPatient(model);
+        Person updatedPatient = addMedicalHistoryForPatient(patientToUpdate, this.newRecord);
+
+        model.updatePerson(patientToUpdate, updatedPatient);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+    }
+
+    // todo refactor, multiple usages in other command methods as well. consider in future
+    /**
+     * Getter method to get the patient.
+     *
+     * @param model the model used that stores the data of HMK2K18
+     * @return the `Person` with the matching NRIC
+     * @throws CommandException if there is no person in the `model` that matches the person's NRIC.
+     */
+    private Person getPatient(Model model) throws CommandException {
         ObservableList<Person> filteredByNric = model.getFilteredPersonList()
                 .filtered(p -> patientNric.equals(p.getNric()));
 
@@ -63,12 +83,7 @@ public class AddmhCommand extends Command {
             throw new CommandException(MESSAGE_UNREGISTERED);
         }
 
-        Person patientToUpdate = filteredByNric.get(0);
-        Person updatedPatient = addMedicalHistoryForPatient(patientToUpdate, this.newRecord);
-
-        model.updatePerson(patientToUpdate, updatedPatient);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+        return filteredByNric.get(0);
     }
 
     @Override

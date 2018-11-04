@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * List of appointments of a patient
  */
@@ -90,5 +93,12 @@ public class AppointmentsList {
     /** Wrapper method for List::stream */
     public Stream<Appointment> stream() {
         return appointmentsList.stream();
+    }
+
+    /**
+     * Helper method to return a copy of the appointments list
+     */
+    public ObservableList<Appointment> getObservableCopyOfAppointmentsList() {
+        return FXCollections.observableArrayList(new ArrayList<>(appointmentsList));
     }
 }

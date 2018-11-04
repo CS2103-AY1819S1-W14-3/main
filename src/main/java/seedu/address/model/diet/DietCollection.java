@@ -2,11 +2,16 @@ package seedu.address.model.diet;
 
 //@@author yuntongzhang
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a Collection of dietary requirement for a patient.
@@ -63,7 +68,15 @@ public class DietCollection {
     }
 
     /**
-     * Add more diet requirement to an existing Diet Collection.
+     * Add one diet requirement to an existing Diet Collection, without creating new copy.
+     * @param newDiet The new diet requirement to be added.
+     */
+    public void add(Diet newDiet) {
+        dietSet.add(newDiet);
+    }
+
+    /**
+     * Add more diet requirement to a copy of the existing Diet Collection.
      * @param newDietCollection The new diet requirements to be added.
      * @return A new copy of DietCollection which has the updated diet requirements.
      */
@@ -71,6 +84,35 @@ public class DietCollection {
         Set<Diet> updatedDiets = new HashSet<>(this.dietSet);
         updatedDiets.addAll(newDietCollection.dietSet);
         return new DietCollection(updatedDiets);
+    }
+
+    /** Wrapper method for Collection::stream */
+    public Stream<Diet> stream() {
+        return dietSet.stream();
+    }
+
+    /**
+     * Get a list of allergies for JavaFX TableView.
+     * @return A {@code ObservableList} of allergies.
+     */
+    public ObservableList<Diet> getObservableAllergies() {
+        return FXCollections.observableArrayList(new ArrayList<>(getAllergies()));
+    }
+
+    /**
+     * Get a list of cultural requirements for JavaFX TableView.
+     * @return A {@code ObservableList} of cultural requirements.
+     */
+    public ObservableList<Diet> getObservableCulturalRequirements() {
+        return FXCollections.observableArrayList(new ArrayList<>(getCulturalRequirements()));
+    }
+
+    /**
+     * Get a list of physical difficulties for JavaFX TableView.
+     * @return A {@code ObservableList} of physical difficulties.
+     */
+    public ObservableList<Diet> getObservablePhysicalDifficulties() {
+        return FXCollections.observableArrayList(new ArrayList<>(getPhysicalDifficulties()));
     }
 
     /**

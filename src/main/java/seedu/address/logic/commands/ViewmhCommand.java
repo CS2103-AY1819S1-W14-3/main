@@ -41,6 +41,25 @@ public class ViewmhCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        Person patientToView = getPatient(model);
+        MedicalHistory patientMedicalHistory = patientToView.getMedicalHistory();
+
+        if (patientMedicalHistory.getObservableCopyOfMedicalHistory().size() == 0) {
+            return new CommandResult(String.format(MESSAGE_NO_ENTRIES, patientNric));
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientToView.getNric(), patientMedicalHistory));
+    }
+
+    // todo refactor, multiple usages in other command methods as well. consider in future
+    /**
+     * Getter method to get the patient.
+     *
+     * @param model the model used that stores the data of HMK2K18
+     * @return the `Person` with the matching NRIC
+     * @throws CommandException if there is no person in the `model` that matches the person's NRIC.
+     */
+    private Person getPatient(Model model) throws CommandException {
         ObservableList<Person> filteredByNric = model.getFilteredPersonList()
                 .filtered(p -> patientNric.equals(p.getNric()));
 
@@ -48,14 +67,7 @@ public class ViewmhCommand extends Command {
             throw new CommandException(MESSAGE_UNREGISTERED);
         }
 
-        Person patientToView = filteredByNric.get(0);
-        MedicalHistory patientMedicalHistory = patientToView.getMedicalHistory();
-
-        if (patientMedicalHistory.size() == 0) {
-            return new CommandResult(String.format(MESSAGE_NO_ENTRIES, patientNric));
-        }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, patientToView.getNric(), patientMedicalHistory));
+        return filteredByNric.get(0);
     }
 
     @Override

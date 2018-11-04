@@ -43,6 +43,7 @@ public class AddApptCommandTest {
     private Type type;
     private String procedure;
     private String dateTime;
+    private String invalidDateTime;
     private String doctor;
     private Appointment appt;
     private Person patient;
@@ -56,6 +57,7 @@ public class AddApptCommandTest {
         type = Type.SURGICAL;
         procedure = "Heart Bypass";
         dateTime = "12-12-2022 10:30";
+        invalidDateTime = "12-12-1000 23:30";
         doctor = "Dr. Pepper";
         appt = new Appointment(type, procedure, dateTime, doctor);
     }
@@ -80,6 +82,16 @@ public class AddApptCommandTest {
         ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddApptCommand.MESSAGE_NO_SUCH_PATIENT);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithInvalidDateTime_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, invalidDateTime, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_DATE_TIME_INVALID);
         addApptCommand.execute(modelStub, commandHistory);
     }
 

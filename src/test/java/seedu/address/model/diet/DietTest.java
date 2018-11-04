@@ -23,12 +23,14 @@ public class DietTest {
     private String allergyOne;
     private String allergyTwo;
     private String culturalRequirement;
+    private String physicalDifficulty;
 
     @Before
     public void setUp() {
         allergyOne = "Egg";
         allergyTwo = "Milk";
         culturalRequirement = "Halal";
+        physicalDifficulty = "Hands cannot move.";
     }
 
     @Test
@@ -39,6 +41,21 @@ public class DietTest {
     @Test
     public void constructor_nullType_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Diet(allergyOne, null));
+    }
+
+    @Test
+    public void isAllergy_returnsTrue() {
+        assertTrue(new Diet(allergyOne, DietType.ALLERGY).isAllergy());
+    }
+
+    @Test
+    public void isCulturalRequirement_returnsTrue() {
+        assertTrue(new Diet(culturalRequirement, DietType.CULTURAL).isCulturalRequirement());
+    }
+
+    @Test
+    public void isPhysicalDifficulty_returnsTrue() {
+        assertTrue(new Diet(physicalDifficulty, DietType.PHYSICAL).isPhysicalDifficulty());
     }
 
     @Test

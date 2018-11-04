@@ -30,7 +30,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.ViewmhCommand;
-import seedu.address.logic.commands.VisitorInCommand;
+import seedu.address.logic.commands.VisitorinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.medicalhistory.Diagnosis;
@@ -113,9 +113,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         Diagnosis diagnosis = new DiagnosisBuilder().build();
         AddmhCommand command = (AddmhCommand) parser.parseCommand(
-                DiagnosisUtil.getAddmhCommand(person.getNric(), diagnosis));
+            DiagnosisUtil.getAddmhCommand(person.getNric(), diagnosis));
         assertEquals(new AddmhCommand(person.getNric(), diagnosis), command);
-        // test that typing addmh returns an instance of addmhCommand
     }
 
     @Test
@@ -130,9 +129,9 @@ public class AddressBookParserTest {
     public void parseCommand_visitorin() throws Exception {
         Person person = new PersonBuilder().build();
         Visitor visitor = new VisitorBuilder().build();
-        VisitorInCommand command = (VisitorInCommand) parser.parseCommand(
-                VisitorUtil.getVisitorInCommand(person.getName(), visitor));
-        assertEquals(new VisitorInCommand(person.getName(), visitor), command);
+        VisitorinCommand command = (VisitorinCommand) parser.parseCommand(
+                VisitorUtil.getVisitorInCommand(person.getNric(), visitor));
+        assertEquals(new VisitorinCommand(person.getNric(), visitor), command);
         // test that typing visitorin returns an instance of visiterinCommand
     }
 

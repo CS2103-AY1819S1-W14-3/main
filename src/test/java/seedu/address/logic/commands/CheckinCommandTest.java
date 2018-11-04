@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,10 +13,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -104,6 +109,7 @@ public class CheckinCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends CommandTestUtil.ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         @Override
         public boolean hasPerson(Person person) {
@@ -115,6 +121,11 @@ public class CheckinCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return model.getFilteredPersonList();
         }
 
         @Override

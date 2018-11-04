@@ -32,8 +32,8 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final PrescriptionList prescriptionList;
     private final AppointmentsList appointmentsList;
-    private final MedicalHistory medicalHistory = new MedicalHistory();
-    private final VisitorList visitorList = new VisitorList();
+    private final MedicalHistory medicalHistory;
+    private final VisitorList visitorList;
 
     /**
      * Every field must be present and not null.
@@ -48,7 +48,9 @@ public class Person {
         this.tags.addAll(tags);
         this.prescriptionList = new PrescriptionList();
         this.appointmentsList = new AppointmentsList();
+        this.medicalHistory = new MedicalHistory();
         this.dietCollection = new DietCollection();
+        this.visitorList = new VisitorList();
     }
 
     /**
@@ -65,7 +67,28 @@ public class Person {
         this.tags.addAll(tags);
         this.prescriptionList = prescriptionList;
         this.appointmentsList = appointmentsList;
+        this.medicalHistory = new MedicalHistory();
         this.dietCollection = new DietCollection();
+        this.visitorList = new VisitorList();
+    }
+
+    /**
+     * Overloaded constructor to generate a person that has prescriptionList, AppointmentList and dietCollection.
+     */
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, DietCollection dietCollection) {
+        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList, dietCollection);
+        this.nric = nric;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.prescriptionList = prescriptionList;
+        this.appointmentsList = appointmentsList;
+        this.medicalHistory = new MedicalHistory();
+        this.dietCollection = dietCollection;
+        this.visitorList = new VisitorList();
     }
 
     /**
@@ -82,7 +105,9 @@ public class Person {
         this.tags.addAll(tags);
         this.prescriptionList = new PrescriptionList();
         this.appointmentsList = new AppointmentsList();
+        this.medicalHistory = new MedicalHistory();
         this.dietCollection = dietCollection;
+        this.visitorList = new VisitorList();
     }
 
     /**
@@ -97,28 +122,30 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.medicalHistory.addAll(medicalHistory);
+        this.medicalHistory = medicalHistory;
         this.prescriptionList = new PrescriptionList();
         this.appointmentsList = new AppointmentsList();
         this.dietCollection = new DietCollection();
+        this.visitorList = new VisitorList();
     }
 
     /**
      * Overloaded constructor to generate a person that has existing medicalhistory.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  MedicalHistory medicalHistory, PrescriptionList prescriptionList, AppointmentsList appointmentsList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, appointmentsList);
+                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory) {
+        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList, medicalHistory);
         this.nric = nric;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.medicalHistory.addAll(medicalHistory);
         this.prescriptionList = prescriptionList;
         this.appointmentsList = appointmentsList;
+        this.medicalHistory = medicalHistory;
         this.dietCollection = new DietCollection();
+        this.visitorList = new VisitorList();
     }
 
     /**
@@ -134,14 +161,15 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.visitorList.addAll(visitorList);
         this.prescriptionList = new PrescriptionList();
         this.appointmentsList = new AppointmentsList();
+        this.medicalHistory = new MedicalHistory();
         this.dietCollection = new DietCollection();
+        this.visitorList = visitorList;
     }
 
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  MedicalHistory medicalHistory, PrescriptionList prescriptionList, AppointmentsList appointmentsList,
+                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
                   VisitorList visitorList) {
         requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, visitorList);
         this.nric = nric;
@@ -150,11 +178,27 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.medicalHistory.addAll(medicalHistory);
         this.prescriptionList = prescriptionList;
         this.appointmentsList = appointmentsList;
+        this.medicalHistory = medicalHistory;
         this.dietCollection = new DietCollection();
-        this.visitorList.addAll(visitorList);
+        this.visitorList = visitorList;
+    }
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
+                  DietCollection dietCollection) {
+        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, dietCollection);
+        this.nric = nric;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.prescriptionList = prescriptionList;
+        this.appointmentsList = appointmentsList;
+        this.medicalHistory = medicalHistory;
+        this.dietCollection = dietCollection;
+        this.visitorList = new VisitorList();
     }
 
 
@@ -182,16 +226,16 @@ public class Person {
         return prescriptionList;
     }
 
-    public MedicalHistory getMedicalHistory() {
-        return medicalHistory;
-    }
-
     public VisitorList getVisitorList() {
         return visitorList;
     }
 
     public AppointmentsList getAppointmentsList() {
         return appointmentsList;
+    }
+
+    public MedicalHistory getMedicalHistory() {
+        return medicalHistory;
     }
 
     public DietCollection getDietCollection() {
@@ -242,8 +286,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getMedicalHistory().equals(getMedicalHistory());
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
@@ -263,8 +306,7 @@ public class Person {
                .append(" Email: ")
                .append(getEmail())
                .append(" Address: ")
-               .append(getAddress())
-               .append(" Drug Allergies: ");
+               .append(getAddress());
         getTags().forEach(builder::append);
         return builder.toString();
     }

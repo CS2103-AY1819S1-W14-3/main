@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISITOR;
 
 import java.util.Set;
@@ -24,21 +24,20 @@ import seedu.address.model.visitor.VisitorList;
 
 
 
-
+//@@author GAO JIAXIN666
 /**
- * @@author GAO JIAXIN
  * Checks in a visitor into patient's visitor list.
  */
-public class VisitorInCommand extends Command {
+public class VisitorinCommand extends Command {
 
     public static final String COMMAND_WORD = "visitorin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks in a visitor into the patient's visitor list \n"
             + "Parameters: "
-            + PREFIX_NAME + "PATIENT_NAME "
+            + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_VISITOR + "VISITOR_NAME \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Alex Yeoh "
+            + PREFIX_NRIC + "S1234567A "
             + PREFIX_VISITOR + "Jane";
 
     public static final String MESSAGE_SUCCESS = "New visitor checked in: %1$s";
@@ -46,16 +45,16 @@ public class VisitorInCommand extends Command {
     public static final String MESSAGE_UNREGISTERED = "Patient %1$s is not registered within the system.";
     public static final String MESSAGE_FULL = "Patient can not has more than 5 visitor in the list";
 
-    private final Name patientName;
+    private final Nric patientNric;
     private final Visitor visitorName;
 
     /**
      * Creates an VisitorInCommand to add visitors to patient's visitor's list
      */
-    public VisitorInCommand(Name patientName, Visitor visitorName) {
-        requireNonNull(patientName);
+    public VisitorinCommand(Nric patientNric, Visitor visitorName) {
+        requireNonNull(patientNric);
         requireNonNull(visitorName);
-        this.patientName = patientName;
+        this.patientNric = patientNric;
         this.visitorName = visitorName;
     }
 
@@ -63,16 +62,16 @@ public class VisitorInCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> filteredByName = model.getFilteredPersonList()
-                .filtered(p -> patientName.equals(p.getName()));
+        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
+                .filtered(p -> patientNric.equals(p.getNric()));
 
-        if (filteredByName.size() < 1) {
+        if (filteredByNric.size() < 1) {
             throw new CommandException(MESSAGE_UNREGISTERED);
         }
 
-        Person patientToUpdate = filteredByName.get(0);
+        Person patientToUpdate = filteredByNric.get(0);
 
-        if (patientToUpdate.getVisitorList().size() > 5) {
+        if (patientToUpdate.getVisitorList().getSize() >= 5) {
             throw new CommandException(MESSAGE_FULL);
         }
 
@@ -84,15 +83,15 @@ public class VisitorInCommand extends Command {
 
         model.updatePerson(patientToUpdate, updatedPatient);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, patientName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof VisitorInCommand //instanceof handles nulls
-                && patientName.equals(((VisitorInCommand) other).patientName)
-                && visitorName.equals(((VisitorInCommand) other).visitorName));
+                || (other instanceof VisitorinCommand //instanceof handles nulls
+                && patientNric.equals(((VisitorinCommand) other).patientNric)
+                && visitorName.equals(((VisitorinCommand) other).visitorName));
     }
 
     /**

@@ -1,0 +1,69 @@
+= Jefferson Sie - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Hospital Management System 2K18
+
+---
+
+== Overview
+
+AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: Added `addappt` command
+** What it does: adds an appointment for a given patient. Each appointment includes the following information: type of procedure, procedure name, date and time of appointment and the doctor-in-charge
+** Justification: this command provides a core functionality of the HMS2K18 (appointment data entry and retrieval).
+** Highlights: this command affects existing internal representations of the Person class and required significant retooling of tests to fit the new member of the Person class. The implementation was somewhat challenging as it required an extension of the current Person data representation and storage functionality.
+* *Minor enhancement*: incorporate `appt` with the `view` command
+
+* *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=jeffypie369[commits]]
+
+* *Other contributions*:
+
+** Project management:
+*** nil
+** Enhancements to existing features:
+*** Refactored `add` command to `checkin` command (Pull request: https://github.com/CS2103-AY1819S1-W14-3/main/pull/33[#33])
+** Documentation:
+*** Added sequence diagram for `addappt`: https://github.com/CS2103-AY1819S1-W14-3/main/pull/91[#91]
+** Community:
+//*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], https://github.com/CS2103-AY1819S1-W14-3/main/pull/41[#41], https://github.com/CS2103-AY1819S1-W14-3/main/pull/107[#107]
+//*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
+//*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+//** Tools:
+//*** Integrated a third party library (Natty) to the project (https://github.com[#42])
+//*** Integrated a new Github plugin (CircleCI) to the team repo
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=addappt]
+
+include::../UserGuide.adoc[tag=visitorin]
+
+include::../UserGuide.adoc[tag=checkin]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=addappt]
+
+include::../DeveloperGuide.adoc[tag=visitorin]
+
+include::../UserGuide.adoc[tag=checkin]
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_

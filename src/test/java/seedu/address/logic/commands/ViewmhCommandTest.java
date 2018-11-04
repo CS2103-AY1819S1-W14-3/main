@@ -18,7 +18,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
@@ -67,8 +66,7 @@ public class ViewmhCommandTest {
 
     @Test
     public void execute_patientRecordAvailable_viewSuccessful() throws Exception {
-        MedicalHistory mh = SampleDataUtil.getSampleMedicalHistory();
-        Person validPerson = new PersonBuilder().withMedicalHistory(mh).build();
+        Person validPerson = new PersonBuilder().withMedicalHistory(SampleDataUtil.getSampleMedicalHistory()).build();
         ModelStubWithRegisteredPatient modelStub = new ModelStubWithRegisteredPatient(validPerson);
         CommandResult commandResult = new ViewmhCommand(validPerson.getNric()).execute(modelStub, commandHistory);
 

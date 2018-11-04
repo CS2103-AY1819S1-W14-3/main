@@ -1,4 +1,4 @@
-= Hospital Management System 2K18 - User Guide
+= HealthBase - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -19,18 +19,18 @@ By: `Team W14-3`      Since: `September 2018`      Licence: `MIT`
 == Introduction
 
 
-Hospital Management System 2K18 is for hospital administrators, doctors, nurses, and pharmacists who prefer to use a desktop app to manage patients and their associated data.
-More importantly, Hospital Management System 2K18 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, Hospital Management System 2K18 can get your hospital management tasks doen faster than traditional GUI apps.
+HealthBase is for hospital administrators, doctors, nurses, and pharmacists who prefer to use a desktop app to manage patients and their associated data.
+More importantly, HealthBase is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, HealthBase can get your hospital management tasks done faster than traditional GUI apps.
 
 == Quick Start
 
 .  Ensure that your computer has Java version `9` or later installed.
-.  Download the latest release of our application, `hms2k18.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Hospital Management System 2K18.
+.  Download the latest release of our application, `healthbase.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your HealthBase.
 .  Double-click the file to start the app. The Graphical User Interface (GUI) should appear in a few seconds.
 +
-.The GUI of Hospital Management System 2K18
+.The GUI of HealthBase
 image::Ui.png[width="790"]
 +
 +
@@ -59,7 +59,7 @@ Refer to <<Features>> for the details of each command.
 
 TIP: Features are sorted by their command word in lexicographical order.
 
-
+//tag::addappt[]
 === Add appointment for patient: `addappt`
 Add a scheduled appointment for a patient.
 
@@ -71,7 +71,9 @@ Example(s):
 
 The only valid types are `PROP` (PROPAEDEUTIC), `DIAG` (DIAGNOSTIC), `THP` (THERAPEUTIC), `SRG` (SURGICAL).
 *Other inputs will not be allowed.*
+//end::addappt[]
 
+//tag::adddiet[]
 === Add patient’s dietary needs: `adddiet`
 Add a patient’s dietary needs into the system.
 
@@ -84,7 +86,9 @@ Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PH
 Example(s):
 
 * `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
+//tag::adddiet[]
 
+//tag::addmeds[]
 === Add patient medication: `addmeds`
 Add to a patient’s medication history.
 
@@ -94,19 +98,23 @@ Example(s):
 
 * `addmeds ic/S1234567A d/Paracetamol q/2 u/tablets n/4 t/14`
 
+//end::addmeds[]
+//tag::addmh[]
 === Add to patient’s medical history: `addmh`
 Add an entry to an existing patient’s medical history.
 The patient must be registered within the system.
 
-Format: `addmh ic/NRIC mh/DIAGNOSIS​`
+Format: `addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE`
 ****
 * If the NRIC does not match to an existing patient in the system, an error will be displayed.
+* If the format of the doctor's name is incorrect, an error will be displayed.
 ****
 
 Example(s):
 
 * `addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
-rest and rehydrate.`
+rest and rehydrate. doc/Dr. Zhang De`
+//end::addmh[]
 
 === Check-in a patient: `checkin`
 Add a person to the patient queue.
@@ -139,6 +147,7 @@ Open this page.
 
 Format: `help`
 
+//tag::sort[]
 === Sort user view : `sort`
 Sort the current view, if it is sortable.
 
@@ -162,7 +171,9 @@ Example(s):
 ** Sorts the table in the medication view by the first column (Drug Name). Any entries with the same drug name will be further sorted by the second column (Dosage), with any entries with the same drug name and dosage being further sorted by the third column (Dosage Unit).
 * `sort a 1` where the current view is the default view (blank view).
 ** Does nothing (the current view is not sortable).
+//end::sort[]
 
+//tag::select[]
 === Select patient: `select`
 Select a patient through pure command-line functionality.
 The alternative is to click on the patient's card.
@@ -178,34 +189,48 @@ Example(s):
 
 * `select 1`
 
+//end::select[]
+
+//tag::view[]
 [#view-command]
 === View patient’s information: `view`
-View a patient’s information. Exactly what information is displayed depends on the choice of view.
+View a patient’s information in the panel on the right. Exactly what information is displayed depends on the choice of view.
 
 Format: `view VIEW_NAME`
-
-This command switches the user's view (indicated in Fig. 2 below) to a chosen view. +
-
-.Indication of the location of the user view
-image::highlightUserViewLocation.png[width=800]
 
 Current choices for views include:
 
 * default (This is the default blank view, which is displayed when the application is started.)
 * meds (Medication view, contains information about the patient's medications.)
+* mh (Medical history view, contains patient's previous medical diagnoses.)
 
-Listed below are images of each view.
+This command switches the user's view (right panel of the UI, indicated in Fig. 3 below) to a chosen view. +
+
+.Indication of the location of the user view
+image::highlightUserViewLocation.png[width=800]
+
+Example(s):
+
+* `view default`
 
 .Default view
 image::blankPanel.png[width=800]
 
+* `view meds`
+
 .Medication view
 image::medsView.png[width=800]
+
+
+.Medical history view
+image::
 
 Example(s):
 
 * `view default`
 * `view meds`
+
+//end::view[]
 
 === View all appointments for a patient: `viewappt`
 View all scheduled appointments for a patient.
@@ -231,14 +256,10 @@ Format: `viewdiet ic/NRIC`
 === View patient medication: `view meds`
 See <<#view-command, entry>> on the `view` command.
 
-=== View patient’s medical history: `viewmh`
+=== View patient’s medical history: `view mh`
 View an existing patient’s recorded medical history.
-The patient must be registered within the system.
 
-Format: `viewmh ic/NRIC`​
-****
-* If the NRIC does not match that of an existing patient in the system, an error will be displayed.
-****
+See <<#view-command, entry>> on the `view` command.
 
 Example(s):
 
@@ -262,6 +283,8 @@ Example(s):
 
 * `viewvisitors ic/S1234567A`
 
+image::viewvisitors_screenshot.png[width=800]
+
 === Sign in patient’s visitors: `visitorin`
 Sign in a visitor for a patient.
 
@@ -269,7 +292,9 @@ Format: `visitorin ic/PATIENT_NRIC v/VISITOR_NAME`
 
 Example(s):
 
-* `visitorin ic/S1234567A v/Sara Ann Nicholas`
+* `visitorin ic/S1234567A v/Amy`
+
+image::visitorin_screenshot.png[width=800]
 
 === Sign out patient’s visitors: `visitorout`
 Sign out a visitor for a patient.
@@ -278,7 +303,9 @@ Format: `visitorout ic/PATIENT_NRIC v/VISITOR_NAME`
 
 Example(s):
 
-* `visitorout ic/S1234567A v/Sara Ann Nicholas`
+* `visitorout ic/S1234567A v/Amy`
+
+image::visitorout_screenshot.png[width=800]
 
 === Cancel appointment for patient: `xappt`
 Cancels a scheduled appointment for a patient.
@@ -335,8 +362,8 @@ Each command below will be summarised in the following format:
 
 *addmh*
 
-* `addmh ic/NRIC mh/DIAGNOSIS​`
-* `addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to rest and rehydrate.`
+* `addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE`
+* `addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to rest and rehydrate. doc/Dr.Zhang De Chou`
 
 *checkin*
 
@@ -372,11 +399,6 @@ Each command below will be summarised in the following format:
 
 * `viewdiet ic/NRIC`
 * `viewdiet ic/S1234567A`
-
-*viewmh*
-
-* `viewmh ic/NRIC`
-* `viewmh ic/S1234567A`
 
 *viewqueue*
 

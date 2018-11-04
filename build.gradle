@@ -82,7 +82,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'hms2k18.jar'
+    archiveName = 'healthbase.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }

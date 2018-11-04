@@ -18,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRUG_ALLERGY_PENICILLIN;
@@ -31,6 +32,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CHARLIE;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -176,35 +178,36 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 + INVALID_DRUG_ALLERGY_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a person with new values same as another person's values -> rejected */
-        executeCommand(PersonUtil.getCheckinCommand(BOB));
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        executeCommand(PersonUtil.getCheckinCommandDiffNric(BOB));
+
+        // assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + NAME_DESC_BOB
+        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(CHARLIE));
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_CHARLIE + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DRUG_ALLERGY_DESC_ASPIRIN
                 + DRUG_ALLERGY_DESC_PENICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different drug allergies ->
         rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + NAME_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_CHARLIE + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DRUG_ALLERGY_DESC_PENICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different address -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + NAME_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_CHARLIE + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + DRUG_ALLERGY_DESC_ASPIRIN
                 + DRUG_ALLERGY_DESC_PENICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different phone -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + NAME_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_CHARLIE + NAME_DESC_BOB
                 + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DRUG_ALLERGY_DESC_ASPIRIN
                 + DRUG_ALLERGY_DESC_PENICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different email -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + NAME_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_CHARLIE + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + DRUG_ALLERGY_DESC_ASPIRIN
                 + DRUG_ALLERGY_DESC_PENICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);

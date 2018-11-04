@@ -8,11 +8,13 @@ import org.junit.Test;
 public class SwappablePanelNameTest {
     private static final String BLANK_SHORT_FORM = "default";
     private static final String MEDICATION_SHORT_FORM = "meds";
+    private static final String DIET_SHORT_FORM = "diets";
 
     @Test
     public void getShortForm() {
         assertEquals(SwappablePanelName.BLANK.getShortForm(), BLANK_SHORT_FORM);
         assertEquals(SwappablePanelName.MEDICATION.getShortForm(), MEDICATION_SHORT_FORM);
+        assertEquals(SwappablePanelName.DIET.getShortForm(), DIET_SHORT_FORM);
     }
 
     @Test
@@ -21,6 +23,8 @@ public class SwappablePanelNameTest {
             SwappablePanelName.fromShortForm(SwappablePanelName.BLANK.getShortForm()));
         assertEquals(SwappablePanelName.MEDICATION,
             SwappablePanelName.fromShortForm(SwappablePanelName.MEDICATION.getShortForm()));
+        assertEquals(SwappablePanelName.DIET,
+            SwappablePanelName.fromShortForm(SwappablePanelName.DIET.getShortForm()));
     }
 
     @Test

@@ -8,10 +8,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+
 
 /**
  * Checks in a patient into the HMS
@@ -39,6 +41,7 @@ public class CheckinCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New patient checked in: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person is already checked in";
+    public static final String MESSAGE_DUPLICATE_NRIC = "A person of this NRIC is already checked in";
 
     private final Person toCheckin;
 
@@ -56,6 +59,13 @@ public class CheckinCommand extends Command {
 
         if (model.hasPerson(toCheckin)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
+                                                        .filtered(p -> toCheckin.getNric().equals(p.getNric()));
+
+        if (filteredByNric.size() == 1) {
+            throw new CommandException(MESSAGE_DUPLICATE_NRIC);
         }
 
         model.addPerson(toCheckin);

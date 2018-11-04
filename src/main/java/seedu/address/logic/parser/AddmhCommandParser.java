@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MED_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -25,15 +26,16 @@ public class AddmhCommandParser implements Parser<AddmhCommand> {
      */
     @Override
     public AddmhCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MED_HISTORY);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MED_HISTORY, PREFIX_DOCTOR);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_MED_HISTORY)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_MED_HISTORY, PREFIX_DOCTOR)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddmhCommand.MESSAGE_USAGE)));
         }
 
         Nric patientNric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-        Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_MED_HISTORY).get());
+        Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_MED_HISTORY).get(),
+                argMultimap.getValue(PREFIX_DOCTOR).get());
 
         //TODO need to find the right person stored somewhere, then use the person in AddmhCommand
         return new AddmhCommand(patientNric, diagnosis);

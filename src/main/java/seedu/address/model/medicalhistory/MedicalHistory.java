@@ -1,29 +1,43 @@
 package seedu.address.model.medicalhistory;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * The data structure that stores the medical diagnoses of a patient.
  */
-public class MedicalHistory extends ArrayList<Diagnosis> {
+public class MedicalHistory {
+    private List<Diagnosis> medicalHistory;
 
     public MedicalHistory() {
-        super();
+        this.medicalHistory = new ArrayList<>();
     }
 
-    public MedicalHistory(ArrayList<Diagnosis> records) {
+    public MedicalHistory(List<Diagnosis> records) {
         Objects.requireNonNull(records);
-        this.addAll(records);
+        this.medicalHistory = new ArrayList<>(records);
+    }
+
+    public MedicalHistory(MedicalHistory mh) {
+        Objects.requireNonNull(mh);
+        this.medicalHistory = new ArrayList<>(Objects.requireNonNull(mh.medicalHistory));
+    }
+
+    public void add(Diagnosis diagnosis) {
+        this.medicalHistory.add(diagnosis);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 1; i <= this.size(); i++) {
-            String recordEntry = String.format("%s | %s\n", i, this.get(i - 1));
-            sb.append(recordEntry);
+        for (Diagnosis d : medicalHistory) {
+            sb.append(d).append("\n");
         }
 
         return sb.toString().trim();
@@ -35,7 +49,23 @@ public class MedicalHistory extends ArrayList<Diagnosis> {
             return true;
         }
 
-        return (o instanceof MedicalHistory)
-                && super.equals(o);
+        if (o instanceof MedicalHistory) {
+            MedicalHistory mh = (MedicalHistory) o;
+            return medicalHistory.equals(mh);
+        }
+
+        return false;
+    }
+
+    public Stream<Diagnosis> stream() {
+        return medicalHistory.stream();
+    }
+
+    /**
+     * Helper method to return a copy of the medical history.
+     * todo add on to this
+     */
+    public ObservableList<Diagnosis> getObservableCopyOfMedicalHistory() {
+        return FXCollections.observableArrayList(new ArrayList<>(medicalHistory));
     }
 }

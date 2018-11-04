@@ -15,6 +15,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.AppointmentsList;
+import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.person.Address;
@@ -104,8 +105,10 @@ public class AddmedsCommand extends Command {
         Address address = personToEdit.getAddress();
         Set<Tag> tags = personToEdit.getTags();
         AppointmentsList appointmentsList = personToEdit.getAppointmentsList();
+        MedicalHistory medicalHistory = personToEdit.getMedicalHistory();
 
-        return new Person(nric, name, phone, email, address, tags, updatedMedicineList, appointmentsList);
+        return new Person(nric, name, phone, email, address, tags,
+                updatedMedicineList, appointmentsList, medicalHistory);
     }
 
     /**

@@ -1,0 +1,79 @@
+= Darien Chong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:prlink: https://github.com/CS2103-AY1819S1-W14-3/main/pull/
+:staticpageslink: https://cs2103-ay1819s1-w14-3.github.io/main/
+
+== PROJECT: HealthBase
+
+---
+
+== Introduction
+
+This project portfolio page’s purpose is to document my contributions to the project.
+
+HealthBase is a desktop application designed to aid in clinic patient data management. It provides patient data input and management capabilities through a command line interface (CLI) for input and a graphical UI for data display. Its main features include (among others):
+
+* Management of check-in/check-out status of patients
+* Real-time management of the check-in/out status of patients
+* Patient medication data entry and retrieval
+* Patient medical history data entry and retrieval
+* Patient dietary restriction(s) data entry and retrieval
+* Patient visitor history data entry and retrieval
+* Real-time management of the number of visitors any given patient has
+* Patient appointment management for doctors
+
+HealthBase was designed and built by me and my team of NUS Year 2 Computer Science students for the CS2103T module. For more information about us, click link:{staticpageslink}AboutUs.html[here].
+
+== Summary of Contributions
+
+This section's purpose is to summarise my contributions to this project. For more details about the contributions, click the link to the corresponding pull request.
+
+* *Major enhancement*: Added `addmeds` command (Pull request(s): link:{prlink}20[#20], link:{prlink}31[#31], link:{prlink}32[#32], link:{prlink}63[#63], link:{prlink}82[#82], link:{prlink}112[#112])
+** What it does: this command adds a medication entry to a given patient. The medication entry includes information about the drug name, the dosage, dosage unit, doses per day, and the duration of the prescription in days.
+** Justification: this command provides a core functionality of HealthBase (medication data entry and retrieval).
+** Highlights: this command affects existing internal representations of the Person class and required significant retooling of tests to fit the new member of the Person class. The implementation was somewhat challenging as it required an extension of the current Person data representation and storage functionality.
+* *Minor enhancement*:
+** Added `view` command
+** Added `sort` command
+* *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=snajef[my commits]]
+* *Other contributions*:
+
+** Project management:
+*** nil
+** Enhancements to existing features:
+*** Refactored out a large portion of dead code for deprecated features (Pull request(s): link:{prlink}73[#73])
+*** Wrote additional tests for existing features to cover modifications to the Person class (Pull request(s): link:{prlink}22[#22])
+** Documentation:
+*** Updated class diagrams in the User Guide (Pull request(s): link:{prlink}97[#97])
+*** Ordered commands in the User Guide in lexicographical order (Pull request(s): link:{prlink}97[#97])
+*** Standardised language in the User Guide and Developer Guide (Pull request(s): link:{prlink}97[#97])
+** Community:
+*** Reviewed PRs (with non-trivial review comments): (Pull request(s): link:{prlink}76[#76], link:{prlink}77[#77], link:{prlink}79[#79])
+*** Contributed to forum discussions (Examples:  https://github.com/nus-cs2103-AY1819S1/forum/issues/94[#94], https://github.com/nus-cs2103-AY1819S1/forum/issues/91[#91])
+// *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Adoption by several other class mates of parts of the code for the addmeds feature I wrote (Pull request(s): link:{prlink}42[#42], link:{prlink}64[#64], link:{prlink}76[#76], link:{prlink}77[#77])
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=sort]
+
+include::../UserGuide.adoc[tag=select]
+
+include::../UserGuide.adoc[tag=view]
+
+include::../UserGuide.adoc[tag=addmeds]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=addmeds]
+

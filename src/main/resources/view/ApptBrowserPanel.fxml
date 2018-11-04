@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="true" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TableView prefHeight="386.0" prefWidth="600.0" fx:id="appointmentTableView">
+            <columns>
+                <TableColumn prefWidth="173.20001220703125" text="Type" fx:id="typeCol" />
+                <TableColumn prefWidth="173.20001220703125" text="Procedure" fx:id="procedureCol" />
+                <TableColumn prefWidth="173.20001220703125" text="Date and Time" fx:id="dateTimeCol" />
+                <TableColumn prefWidth="173.20001220703125" text="Doctor-in-charge" fx:id="doctorCol"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+    <cursor>
+        <Cursor fx:constant="DEFAULT" />
+    </cursor>
+</VBox>
