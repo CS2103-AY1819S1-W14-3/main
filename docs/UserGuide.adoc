@@ -86,7 +86,7 @@ Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PH
 Example(s):
 
 * `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
-//tag::adddiet[]
+//end::adddiet[]
 
 //tag::addmeds[]
 === Add patient medication: `addmeds`
@@ -162,7 +162,10 @@ How this affects the sorting exactly depends on each view, and will be explained
 |=======================================================================
 | View Name | Sortable? | What `SORT_ORDER` refers to
 | Default | No | -
-| Medication | Yes | The columns of the table in the medication view, one-indexed.
+| Apppointment | Yes | The columns of the table in the view, one-indexed.
+| Diet | Yes | The columns of the table(s) in the view, one-indexed.
+| Medication | Yes | The columns of the table in the view, one-indexed.
+| Medical History | Yes | The columns of the table in the view, one-indexed.
 |=======================================================================
 
 Example(s):
@@ -171,6 +174,7 @@ Example(s):
 ** Sorts the table in the medication view by the first column (Drug Name). Any entries with the same drug name will be further sorted by the second column (Dosage), with any entries with the same drug name and dosage being further sorted by the third column (Dosage Unit).
 * `sort a 1` where the current view is the default view (blank view).
 ** Does nothing (the current view is not sortable).
+
 //end::sort[]
 
 //tag::select[]
@@ -200,12 +204,13 @@ Format: `view VIEW_NAME`
 
 Current choices for views include:
 
-* default (This is the default blank view, which is displayed when the application is started.)
-* meds (Medication view, contains information about the patient's medications.)
-* mh (Medical history view, contains patient's previous medical diagnoses.)
-* diets (Diet view, contains information about the patient's dietary requirements.)
+* default (This is the default blank view, which is displayed when the application is started)
+* appt (Appointment view, contains patient's appointments)
+* diets (Diet view, contains patient's dietary restrictions)
+* meds (Medication view, contains information about the patient's medications)
+* mh (Medical history view, contains patient's previous medical diagnoses)
 
-This command switches the user's view (right panel of the UI, indicated in Fig. 3 below) to a chosen view. +
+This command switches the user's view (right panel of the UI, indicated in the figure directly below) to a chosen view. +
 
 .Indication of the location of the user view
 image::highlightUserViewLocation.png[width=800]
@@ -217,6 +222,16 @@ Example(s):
 .Default view
 image::blankPanel.png[width=800]
 
+* `view appt`
+
+.Appointment view
+image::apptView.png[width=800]
+
+* `view diets`
+
+.Diet view
+image::dietView.png[width=800]
+
 * `view meds`
 
 .Medication view
@@ -225,12 +240,7 @@ image::medsView.png[width=800]
 * `view mh`
 
 .Medical history view
-image::
-
-* `view diets`
-
-.Diet view
-image::dietsView.png[width=800]
+image::mhView.png[width=800]
 //end::view[]
 
 === View all appointments for a patient: `viewappt`

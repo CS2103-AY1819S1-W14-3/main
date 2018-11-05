@@ -207,7 +207,7 @@ asciidoctor {
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'Hospital Management System 2K18',
+        'site-name': 'HealthBase',
         'site-githuburl': 'https://github.com/CS2103-AY1819S1-W14-3/main',
         'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
     ]
