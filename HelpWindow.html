@@ -343,9 +343,24 @@ How this affects the sorting exactly depends on each view, and will be explained
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apppointment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The columns of the table in the view, one-indexed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Diet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The columns of the table(s) in the view, one-indexed.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medication</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The columns of the table in the medication view, one-indexed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The columns of the table in the view, one-indexed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medical History</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The columns of the table in the view, one-indexed.</p></td>
 </tr>
 </tbody>
 </table>
@@ -420,18 +435,24 @@ The alternative is to click on the patient&#8217;s card.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>default (This is the default blank view, which is displayed when the application is started.)</p>
+<p>default (This is the default blank view, which is displayed when the application is started)</p>
 </li>
 <li>
-<p>meds (Medication view, contains information about the patient&#8217;s medications.)</p>
+<p>appt (Appointment view, contains patient&#8217;s appointments)</p>
 </li>
 <li>
-<p>mh (Medical history view, contains patient&#8217;s previous medical diagnoses.)</p>
+<p>diets (Diet view, contains patient&#8217;s dietary restrictions)</p>
+</li>
+<li>
+<p>meds (Medication view, contains information about the patient&#8217;s medications)</p>
+</li>
+<li>
+<p>mh (Medical history view, contains patient&#8217;s previous medical diagnoses)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>This command switches the user&#8217;s view (right panel of the UI, indicated in Fig. 3 below) to a chosen view.<br></p>
+<p>This command switches the user&#8217;s view (right panel of the UI, indicated in the figure directly below) to a chosen view.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -458,6 +479,32 @@ The alternative is to click on the patient&#8217;s card.</p>
 <div class="ulist">
 <ul>
 <li>
+<p><code>view appt</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/apptView.png" alt="apptView" width="800">
+</div>
+<div class="title">Figure 5. Appointment view</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>view diets</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/dietView.png" alt="dietView" width="800">
+</div>
+<div class="title">Figure 6. Diet view</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
 <p><code>view meds</code></p>
 </li>
 </ul>
@@ -466,26 +513,20 @@ The alternative is to click on the patient&#8217;s card.</p>
 <div class="content">
 <img src="images/medsView.png" alt="medsView" width="800">
 </div>
-<div class="title">Figure 5. Medication view</div>
+<div class="title">Figure 7. Medication view</div>
 </div>
-<div class="dlist">
-<div class="title">Medical history view</div>
-<dl>
-<dt class="hdlist1">image</dt>
-<dd>
-<p>Example(s):</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>view default</code></p>
-</li>
-<li>
-<p><code>view meds</code></p>
+<p><code>view mh</code></p>
 </li>
 </ul>
 </div>
-</dd>
-</dl>
+<div class="imageblock">
+<div class="content">
+<img src="images/mhView.png" alt="mhView" width="800">
+</div>
+<div class="title">Figure 8. Medical history view</div>
 </div>
 </div>
 <div class="sect2">
@@ -931,4 +972,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 10:42:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 10:43:43 UTC</div></div></div></body></html>
