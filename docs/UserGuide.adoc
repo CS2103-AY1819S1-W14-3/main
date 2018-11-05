@@ -203,6 +203,7 @@ Current choices for views include:
 * default (This is the default blank view, which is displayed when the application is started.)
 * meds (Medication view, contains information about the patient's medications.)
 * mh (Medical history view, contains patient's previous medical diagnoses.)
+* diets (Diet view, contains information about the patient's dietary requirements.)
 
 This command switches the user's view (right panel of the UI, indicated in Fig. 3 below) to a chosen view. +
 
@@ -221,15 +222,15 @@ image::blankPanel.png[width=800]
 .Medication view
 image::medsView.png[width=800]
 
+* `view mh`
 
 .Medical history view
 image::
 
-Example(s):
+* `view diets`
 
-* `view default`
-* `view meds`
-
+.Diet view
+image::dietsView.png[width=800]
 //end::view[]
 
 === View all appointments for a patient: `viewappt`
@@ -241,17 +242,12 @@ Example(s):
 
 * `viewappt ic/S1234567A`
 
-=== View patient’s dietary needs: `viewdiet`
-View a patient’s dietary needs.
+//tag::viewdiets[]
+=== View patient’s dietary requirements: `view diets`
+View an existing patient's recorded dietary requirements.
 
-Format: `viewdiet ic/NRIC`
-****
-* If the NRIC does not match to an existing patient in the system, an error will be displayed.
-****
-
-​Example(s):
-
-* `viewdiet ic/S1234567A`
+See <<#view-command, entry>> on the `view` command.
+//end::viewdiets[]
 
 === View patient medication: `view meds`
 See <<#view-command, entry>> on the `view` command.
@@ -394,11 +390,6 @@ Each command below will be summarised in the following format:
 
 * `viewappt ic/NRIC`
 * `viewappt ic/S1234567A`
-
-*viewdiet*
-
-* `viewdiet ic/NRIC`
-* `viewdiet ic/S1234567A`
 
 *viewqueue*
 
