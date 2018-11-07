@@ -101,7 +101,7 @@ public class AddApptCommand extends Command {
         }
 
         if (!Diagnosis.isValidDoctor(appt.getDoc_name())) {
-            throw new CommandException(Diagnosis.MESSAGE_NAME_CONSTRAINTS);
+            throw new CommandException(Diagnosis.MESSAGE_NAME_CONSTRAINTS_DOCTOR);
         }
 
         Person patientToUpdate = filteredByNric.get(0);
