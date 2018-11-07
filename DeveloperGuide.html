@@ -74,8 +74,9 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and shutdown</a></li>
-<li><a href="#deleting-a-patient">F.2. Deleting a patient</a></li>
-<li><a href="#saving-data">F.3. Saving data</a></li>
+<li><a href="#generating-test-data">F.2. Generating test data</a></li>
+<li><a href="#deleting-a-patient">F.3. Deleting a patient</a></li>
+<li><a href="#saving-data">F.4. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -2613,7 +2614,84 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-patient"><a class="link" href="#deleting-a-patient">F.2. Deleting a patient</a></h3>
+<h3 id="generating-test-data"><a class="link" href="#generating-test-data">F.2. Generating test data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generating patients with mock data</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Open the application.</p>
+</li>
+<li>
+<p>Run the following commands in the following sequence:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>dev-mode</code> (Enables developer mode; the next command requires developer mode to run.)</p>
+</li>
+<li>
+<p><code>gendata NUMBER_OF_PATIENTS</code>, where <code>NUMBER_OF_PATIENTS</code> is a positive integer value that indicates how many patients you wish to generate.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The application will then generate that number of patients with mock data for their:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Personal particulars</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>NRIC</p>
+</li>
+<li>
+<p>Name</p>
+</li>
+<li>
+<p>Phone number</p>
+</li>
+<li>
+<p>Email address</p>
+</li>
+<li>
+<p>Physical address</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Drug allergies</p>
+</li>
+<li>
+<p>Medications</p>
+</li>
+<li>
+<p>Appointments</p>
+</li>
+<li>
+<p>Dietary restrictions</p>
+</li>
+<li>
+<p>Medical history</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Details on the exact range of values that the mock data can take on can be found in the related <code>.java</code> files.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-patient"><a class="link" href="#deleting-a-patient">F.3. Deleting a patient</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2645,7 +2723,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.4. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2665,4 +2743,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 04:05:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 04:29:16 UTC</div></div></div></body></html>
