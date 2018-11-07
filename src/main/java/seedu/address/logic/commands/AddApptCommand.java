@@ -55,15 +55,12 @@ public class AddApptCommand extends Command {
      */
     public static final String PROCEDURE_VALIDATION_REGEX = "^[A-Za-z- ]+$";
 
-    public static final String DATE_TIME_VALIDATION_REGEX = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)"
-            + "(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1"
-            + "[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1"
-            + "\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2}\\s\\d\\d:\\d\\d)$";
-
     public static final String MESSAGE_INVALID_PROCEDURE = "Procedure name can take any alphabet, and should not be "
             + "blank.";
-    public static final String MESSAGE_INVALID_DATE_TIME = "Input date and time is invalid or before current date and "
-            + "time.";
+    public static final String MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT = "Input date and time is before current date "
+            + "and time.";
+    public static final String MESSAGE_DUPLICATE_DATE_TIME = "There is already an existing appointment at this "
+            + "date and time";
     public static final String MESSAGE_INVALID_TYPE = "Invalid input type. Valid types are: PROP, DIAG, THP, SRG";
 
     private final Appointment appt;
@@ -96,8 +93,12 @@ public class AddApptCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PROCEDURE);
         }
 
-        if (!isValidDateTime(appt.getDate_time())) {
-            throw new CommandException(MESSAGE_INVALID_DATE_TIME);
+        if (!isDateTimeAfterCurrent(appt.getDate_time())) {
+            throw new CommandException(MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT);
+        }
+
+        if (!isNotDuplicateDateTime(appt.getDate_time(), filteredByNric)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DATE_TIME);
         }
 
         if (!Diagnosis.isValidDoctor(appt.getDoc_name())) {
@@ -168,13 +169,30 @@ public class AddApptCommand extends Command {
     }
 
     /**
-     * Checks if date and time input by user is valid
+     * Checks if date and time input by user is after current time
      * @param test date and time input by user
-     * @return true if valid
+     * @return true if after current time
      */
-    public static boolean isValidDateTime(String test) {
+    public static boolean isDateTimeAfterCurrent(String test) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime apptDateTime = LocalDateTime.parse(test, Appointment.DATE_TIME_FORMAT);
-        return test.matches(DATE_TIME_VALIDATION_REGEX) && apptDateTime.isAfter(now);
+        return apptDateTime.isAfter(now);
+    }
+
+    /**
+     * Checks if input date and time is not a duplicate
+     * @param test date and time input by user
+     * @return true if not duplicate
+     */
+    public static boolean isNotDuplicateDateTime(String test, ObservableList<Person> filteredByNric) {
+        Person patient = filteredByNric.get(0);
+        AppointmentsList apptList = patient.getAppointmentsList();
+        ObservableList<Appointment> ObservableApptList = apptList.getObservableCopyOfAppointmentsList();
+        for (Appointment appt : ObservableApptList) {
+            if (appt.getDate_time().equals(test)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

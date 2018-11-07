@@ -39,6 +39,7 @@ public class AddApptCommandTest {
     private String type;
     private String procedure;
     private String dateTime;
+    private String dateTimeBeforeCurrent;
     private String invalidDateTime;
     private String doctor;
     private Appointment appt;
@@ -53,7 +54,8 @@ public class AddApptCommandTest {
         type = "SRG";
         procedure = "Heart Bypass";
         dateTime = "12-12-2022 10:30";
-        invalidDateTime = "12-12-1000 23:30";
+        dateTimeBeforeCurrent = "12-12-1018 23:20";
+        invalidDateTime = "12-13-2025 23:30";
         doctor = "Dr. Pepper";
         appt = new Appointment(type, procedure, dateTime, doctor);
     }
@@ -82,12 +84,12 @@ public class AddApptCommandTest {
     }
 
     @Test
-    public void execute_addapptWithInvalidDateTime_throwsCommandException() throws Exception {
-        appt = new Appointment(type, procedure, invalidDateTime, doctor);
+    public void execute_addapptWithDateTimeBeforeCurrent_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, dateTimeBeforeCurrent, doctor);
         AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
         CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_DATE_TIME);
+        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT);
         addApptCommand.execute(modelStub, commandHistory);
     }
 
