@@ -17,7 +17,7 @@
 <li><a href="#add-patient-s-dietary-needs-code-adddiet-code">3.2. Add patient’s dietary needs: <code>adddiet</code></a></li>
 <li><a href="#add-patient-medication-code-addmeds-code">3.3. Add patient medication: <code>addmeds</code></a></li>
 <li><a href="#add-to-patient-s-medical-history-code-addmh-code">3.4. Add to patient’s medical history: <code>addmh</code></a></li>
-<li><a href="#check-in-a-patient-code-checkin-code">3.5. Check-in a patient: <code>checkin</code></a></li>
+<li><a href="#register-a-new-patient-to-the-system-code-register-code">3.5. Register a new patient to the system: <code>register</code></a></li>
 <li><a href="#check-out-a-patient-code-checkout-code">3.6. Check-out a patient: <code>checkout</code></a></li>
 <li><a href="#view-help-code-help-code">3.7. View help : <code>help</code></a></li>
 <li><a href="#sort-user-view-code-sort-code">3.8. Sort user view : <code>sort</code></a></li>
@@ -245,17 +245,17 @@ rest and rehydrate. doc/Dr. Zhang De</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-in-a-patient-code-checkin-code"><a class="link" href="#check-in-a-patient-code-checkin-code">3.5. Check-in a patient: <code>checkin</code></a></h3>
+<h3 id="register-a-new-patient-to-the-system-code-register-code"><a class="link" href="#register-a-new-patient-to-the-system-code-register-code">3.5. Register a new patient to the system: <code>register</code></a></h3>
 <div class="paragraph">
-<p>Add a person to the patient queue.</p>
+<p>Register a new patient together with necessary information into the system.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>checkin ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
+<p>Format: <code>register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>If the patient is already checked in, the command will not be allowed.</p>
+<p>If the patient is already registered, the command will not be allowed.</p>
 </li>
 </ul>
 </div>
@@ -265,7 +265,7 @@ rest and rehydrate. doc/Dr. Zhang De</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>checkin ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
+<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
 </li>
 </ul>
 </div>
@@ -815,15 +815,15 @@ There is no need to save manually.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>checkin</strong></p>
+<p><strong>register</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>checkin ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
+<p><code>register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
 </li>
 <li>
-<p><code>checkin ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
+<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
 </li>
 </ul>
 </div>
@@ -972,4 +972,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 04:29:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 04:59:03 UTC</div></div></div></body></html>
