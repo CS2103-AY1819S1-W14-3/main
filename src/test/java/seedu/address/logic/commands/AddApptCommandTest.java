@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
-import java.util.function.Predicate;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,8 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Type;
 import seedu.address.model.person.Address;
@@ -79,7 +76,7 @@ public class AddApptCommandTest {
     public void execute_addapptToNonexistentPatient_throwsCommandException() throws Exception {
         Person patientNotInModel = new PersonBuilder().build();
         AddApptCommand addApptCommand = new AddApptCommand(patientNotInModel.getNric(), appt);
-        ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddApptCommand.MESSAGE_NO_SUCH_PATIENT);
         addApptCommand.execute(modelStub, commandHistory);
@@ -89,7 +86,7 @@ public class AddApptCommandTest {
     public void execute_addapptWithInvalidDateTime_throwsCommandException() throws Exception {
         appt = new Appointment(type, procedure, invalidDateTime, doctor);
         AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
-        ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddApptCommand.MESSAGE_DATE_TIME_INVALID);
         addApptCommand.execute(modelStub, commandHistory);
@@ -126,54 +123,9 @@ public class AddApptCommandTest {
     }
 
     /**
-     * A default model stub that has all of the methods failing
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void resetData(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
      * A Model stub that always accepts addappt commands for a single person.
      */
-    private class ModelStubAcceptingAddappt extends ModelStub {
+    private class ModelStubAcceptingAddappt extends CommandTestUtil.ModelStub {
         private Person patient;
 
         public ModelStubAcceptingAddappt(Person patient) {

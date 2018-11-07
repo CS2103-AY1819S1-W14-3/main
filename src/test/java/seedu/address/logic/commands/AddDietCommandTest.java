@@ -97,7 +97,7 @@ public class AddDietCommandTest {
 
         AddDietCommand adddietCommand = new AddDietCommand(patientNric, dietsToAdd);
         AddDietCommand adddietCommandCopy = new AddDietCommand(patientNric, dietsToAdd);
-        CheckinCommand checkinCommand = new CheckinCommand(patient);
+        RegisterCommand registerCommand = new RegisterCommand(patient);
         AddDietCommand adddietOtherDietCommand = new AddDietCommand(patientNric, otherDietCollection);
         AddDietCommand adddietOtherPatientCommand = new AddDietCommand(otherPatient.getNric(), dietsToAdd);
 
@@ -108,7 +108,7 @@ public class AddDietCommandTest {
         assertTrue(adddietCommand.equals(adddietCommandCopy));
 
         // compare with a different type of command, returns false
-        assertFalse(adddietCommand.equals(checkinCommand));
+        assertFalse(adddietCommand.equals(registerCommand));
 
         // same patientNric, different dietsToAdd, return false
         assertFalse(adddietCommand.equals(adddietOtherDietCommand));

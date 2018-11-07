@@ -36,7 +36,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CheckinCommand;
+import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -47,163 +47,164 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
-public class CheckinCommandSystemTest extends AddressBookSystemTest {
+public class RegisterCommandSystemTest extends AddressBookSystemTest {
 
     @Test
-    public void checkin() {
-        /* ------------------------ Perform checkin operations on the shown unfiltered list ------------------------- */
+    public void register() {
+        /* ----------------------- Perform register operations on the shown unfiltered list ------------------------- */
 
-        /* Case: checks in a person to a non-empty HMS, command with leading spaces and trailing spaces
+        /* Case: register a person to a non-empty HealthBase, command with leading spaces and trailing spaces
          * -> added
          */
-        Person toCheckin = AMY;
-        String command = "   " + CheckinCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + DRUG_ALLERGY_DESC_ASPIRIN + " " + NRIC_DESC_AMY;
-        assertCommandSuccess(command, toCheckin);
+        Person toRegister = AMY;
+        String command = "   " + RegisterCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
+                         + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   "
+                         + DRUG_ALLERGY_DESC_ASPIRIN + " " + NRIC_DESC_AMY;
+        assertCommandSuccess(command, toRegister);
 
-        /* Case: add a person with all fields same as another person in the HMS except nric -> added */
-        toCheckin = new PersonBuilder(AMY).withNric(VALID_NRIC_BOB).build();
-        command = CheckinCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        /* Case: register a person with all fields same as another person in the HealthBase except nric -> added */
+        toRegister = new PersonBuilder(AMY).withNric(VALID_NRIC_BOB).build();
+        command = RegisterCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + DRUG_ALLERGY_DESC_ASPIRIN + NRIC_DESC_BOB;
-        assertCommandSuccess(command, toCheckin);
+        assertCommandSuccess(command, toRegister);
 
-        /* Case: add a person with all fields same as another person in the HMS except phone, email and nric
+        /* Case: register a person with all fields same as another person in the HealthBase except phone, email and nric
          * -> added
          */
-        toCheckin = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        toRegister = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withNric(VALID_NRIC_CHARLIE).build();
-        command = PersonUtil.getCheckinCommand(toCheckin);
-        assertCommandSuccess(command, toCheckin);
+        command = PersonUtil.getRegisterCommand(toRegister);
+        assertCommandSuccess(command, toRegister);
 
-        /* Case: add to empty HMS -> added */
+        /* Case: register to empty HealthBase -> added */
         deleteAllPersons();
         assertCommandSuccess(ALICE);
 
-        /* Case: add a person with drug allergies, command with parameters in random order -> added */
-        toCheckin = BOB;
-        command = CheckinCommand.COMMAND_WORD + DRUG_ALLERGY_DESC_ASPIRIN + PHONE_DESC_BOB + ADDRESS_DESC_BOB
+        /* Case: register a person with drug allergies, command with parameters in random order -> added */
+        toRegister = BOB;
+        command = RegisterCommand.COMMAND_WORD + DRUG_ALLERGY_DESC_ASPIRIN + PHONE_DESC_BOB + ADDRESS_DESC_BOB
                 + NAME_DESC_BOB
                 + DRUG_ALLERGY_DESC_PENICILLIN + EMAIL_DESC_BOB + NRIC_DESC_BOB;
-        assertCommandSuccess(command, toCheckin);
+        assertCommandSuccess(command, toRegister);
 
-        /* Case: add a person, missing tags -> added */
+        /* Case: register a person, missing tags -> added */
         assertCommandSuccess(HOON);
 
-        /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
+        /* ------------------------- Perform register operation on the shown filtered list -------------------------- */
 
-        /* Case: filters the person list before adding -> added */
+        /* Case: filters the person list before registering -> added */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a person card is selected --------------------------- */
+        /* ---------------------- Perform register operation while a person card is selected ------------------------ */
 
-        /* Case: selects first card in the person list, add a person -> added, card selection remains unchanged */
+        /* Case: selects first card in the person list, register a person -> added, card selection remains unchanged */
         selectPerson(Index.fromOneBased(1));
         assertCommandSuccess(CARL);
 
-        /* ----------------------------------- Perform invalid add operations --------------------------------------- */
+        /* --------------------------------- Perform invalid register operations ------------------------------------ */
 
-        /* Case: add a duplicate person -> rejected */
-        command = PersonUtil.getCheckinCommand(HOON);
-        assertCommandFailure(command, CheckinCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: register a duplicate person -> rejected */
+        command = PersonUtil.getRegisterCommand(HOON);
+        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate person except with different phone -> rejected */
-        toCheckin = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = PersonUtil.getCheckinCommand(toCheckin);
-        assertCommandFailure(command, CheckinCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: register a duplicate person except with different phone -> rejected */
+        toRegister = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
+        command = PersonUtil.getRegisterCommand(toRegister);
+        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate person except with different email -> rejected */
-        toCheckin = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getCheckinCommand(toCheckin);
-        assertCommandFailure(command, CheckinCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: register a duplicate person except with different email -> rejected */
+        toRegister = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
+        command = PersonUtil.getRegisterCommand(toRegister);
+        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate person except with different address -> rejected */
-        toCheckin = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = PersonUtil.getCheckinCommand(toCheckin);
-        assertCommandFailure(command, CheckinCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: register a duplicate person except with different address -> rejected */
+        toRegister = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        command = PersonUtil.getRegisterCommand(toRegister);
+        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate person except with different tags -> rejected */
-        command = PersonUtil.getCheckinCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, CheckinCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: register a duplicate person except with different tags -> rejected */
+        command = PersonUtil.getRegisterCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing nric -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckinCommand.MESSAGE_USAGE));
+        command = RegisterCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
 
         /* Case: missing name -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckinCommand.MESSAGE_USAGE));
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckinCommand.MESSAGE_USAGE));
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckinCommand.MESSAGE_USAGE));
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
 
         /* Case: missing address -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckinCommand.MESSAGE_USAGE));
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "checksin " + PersonUtil.getPersonDetails(toCheckin);
+        command = "registers " + PersonUtil.getPersonDetails(toRegister);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + INVALID_NAME_DESC
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + INVALID_NAME_DESC
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + INVALID_PHONE_DESC
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + INVALID_PHONE_DESC
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
                 + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid drug allergy -> rejected */
-        command = CheckinCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+        command = RegisterCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + INVALID_DRUG_ALLERGY_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     /**
-     * Executes the {@code CheckinCommand} that adds {@code toCheckin} to the model and asserts that the,<br>
+     * Executes the {@code RegisterCommand} that adds {@code toRegister} to the model and asserts that the,<br>
      * 1. Command box displays an empty string.<br>
      * 2. Command box has the default style class.<br>
-     * 3. Result display box displays the success message of executing {@code CheckinCommand} with the details of
-     * {@code toCheckin}.<br>
+     * 3. Result display box displays the success message of executing {@code RegisterCommand} with the details of
+     * {@code toRegister}.<br>
      * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
-     * the current model added with {@code toCheckin}.<br>
+     * the current model added with {@code toRegister}.<br>
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandSuccess(Person toCheckin) {
-        assertCommandSuccess(PersonUtil.getCheckinCommand(toCheckin), toCheckin);
+    private void assertCommandSuccess(Person toRegister) {
+        assertCommandSuccess(PersonUtil.getRegisterCommand(toRegister), toRegister);
     }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(Person)}. Executes {@code command}
      * instead.
-     * @see CheckinCommandSystemTest#assertCommandSuccess(Person)
+     * @see RegisterCommandSystemTest#assertCommandSuccess(Person)
      */
-    private void assertCommandSuccess(String command, Person toCheckin) {
+    private void assertCommandSuccess(String command, Person toRegister) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toCheckin);
-        String expectedResultMessage = String.format(CheckinCommand.MESSAGE_SUCCESS, toCheckin);
+        expectedModel.addPerson(toRegister);
+        String expectedResultMessage = String.format(RegisterCommand.MESSAGE_SUCCESS, toRegister);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
@@ -214,7 +215,7 @@ public class CheckinCommandSystemTest extends AddressBookSystemTest {
      * 1. Result display box displays {@code expectedResultMessage}.<br>
      * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
-     * @see CheckinCommandSystemTest#assertCommandSuccess(String, Person)
+     * @see RegisterCommandSystemTest#assertCommandSuccess(String, Person)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);

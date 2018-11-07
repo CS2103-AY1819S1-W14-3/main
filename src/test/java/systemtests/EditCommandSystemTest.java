@@ -178,7 +178,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 + INVALID_DRUG_ALLERGY_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a person with new values same as another person's values -> rejected */
-        executeCommand(PersonUtil.getCheckinCommandDiffNric(BOB));
+        executeCommand(PersonUtil.getRegisterCommandDiffNric(BOB));
 
         // assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;

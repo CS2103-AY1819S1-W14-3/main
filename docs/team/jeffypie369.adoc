@@ -48,7 +48,7 @@ include::../UserGuide.adoc[tag=addappt]
 
 include::../UserGuide.adoc[tag=visitorin]
 
-include::../UserGuide.adoc[tag=checkin]
+include::../UserGuide.adoc[tag=register]
 
 == Contributions to the Developer Guide
 
@@ -60,7 +60,7 @@ include::../DeveloperGuide.adoc[tag=addappt]
 
 include::../DeveloperGuide.adoc[tag=visitorin]
 
-include::../UserGuide.adoc[tag=checkin]
+include::../UserGuide.adoc[tag=register]
 
 == PROJECT: PowerPointLabs
 

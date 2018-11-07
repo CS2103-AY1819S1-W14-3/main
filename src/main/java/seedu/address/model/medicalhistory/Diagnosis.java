@@ -1,16 +1,16 @@
 package seedu.address.model.medicalhistory;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 
 /**
  * The medical diagnosis entry for a patient.
  */
 public class Diagnosis {
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Diagnosis should not be blank, doctor's full name should be"
-            + " spelt out, with capitalisation at the start of every new name word.";
-    public static final String DOCTOR_VALIDATION_REGEX = "Dr(\\.|\\.\\s|\\s)([A-Z][a-z]*)(\\s[A-Z][a-z]*)*";
+    public static final String MESSAGE_NAME_CONSTRAINT_DIAGNOSIS = "Diagnosis should not be blank.";
+    public static final String MESSAGE_NAME_CONSTRAINTS_DOCTOR = "Doctor's title should precede his full name, "
+            + "which should be spelt out with capitalisation at the start of every new name word.";
+    public static final String DOCTOR_VALIDATION_REGEX = "Dr(\\.|\\.\\s|\\s)([A-Z][a-z]+)(\\s[A-Z][a-z]*)*";
+    public static final String DIAGNOSIS_VALIDATION_REGEX = ".*\\S.*";
 
     private final String diagnosis;
     private final String doctorInCharge;
@@ -24,7 +24,6 @@ public class Diagnosis {
     public Diagnosis(String description, String doctorName) {
         requireNonNull(description);
         requireNonNull(doctorName);
-        checkArgument(isValidDoctor(doctorName), MESSAGE_NAME_CONSTRAINTS);
         this.diagnosis = description;
         this.doctorInCharge = doctorName;
         this.timestamp = new Timestamp();
@@ -34,7 +33,7 @@ public class Diagnosis {
      * Constructs a {@code Diagnosis} from another {@code Diagnosis}
      *
      * @param d A valid diagnosis.
-     *///todo is it required to make diagnosis immutable?
+     */
     public Diagnosis(Diagnosis d) {
         requireNonNull(d);
         this.diagnosis = d.getDiagnosis();
@@ -55,17 +54,17 @@ public class Diagnosis {
     }
 
     /**
-     * Returns true if a given string is a valid diagnosis.
+     * Returns true if a given string is a valid doctor's name.
      */
-    public static boolean isValidDiagnosis(String test) {
-        return true;
+    public static boolean isValidDoctor(String doctorName) {
+        return doctorName.matches(DOCTOR_VALIDATION_REGEX);
     }
 
     /**
-     * Returns true if a given string is a valid doctor's name.
+     * Returns true if given string is not an empty description.
      */
-    public static boolean isValidDoctor(String test) {
-        return test.matches(DOCTOR_VALIDATION_REGEX);
+    public static boolean isValidDiagnosis(String diagnosis) {
+        return diagnosis.matches(DIAGNOSIS_VALIDATION_REGEX);
     }
 
     @Override

@@ -14,4 +14,10 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns an unmodifiable view of the checked out persons lists.
+     * This list will not contain any duplicate persons.
+     */
+    ObservableList<Person> getCheckedOutPersonList();
+
 }

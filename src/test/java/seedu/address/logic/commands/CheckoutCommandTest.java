@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-//@@author yuntongzhang
+//@@ author yuntongzhang
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -28,10 +28,10 @@ import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Test driver for CheckinCommand class.
+ * Test driver for CheckoutCommand class.
  * @author yuntongzhang
  */
-public class CheckinCommandTest {
+public class CheckoutCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -47,93 +47,82 @@ public class CheckinCommandTest {
 
     @Test
     public void constructor_nullNric_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new CheckinCommand(null));
+        Assert.assertThrows(NullPointerException.class, () -> new CheckoutCommand(null));
     }
 
     @Test
-    public void execute_checkinExistingRecord_checkinSuccessful() throws CommandException {
-        ModelStubAcceptingCheckin modelStub = new ModelStubAcceptingCheckin();
-        CommandResult commandResult = new CheckinCommand(patientNric).execute(modelStub, commandHistory);
+    public void execute_checkoutExistingPatient_checkoutSuccessful() throws CommandException {
+        ModelStubAcceptingCheckout modelStub = new ModelStubAcceptingCheckout();
+        CommandResult commandResult = new CheckoutCommand(patientNric).execute(modelStub, commandHistory);
 
-        assertEquals(commandResult.feedbackToUser, String.format(CheckinCommand.MESSAGE_SUCCESS, patientNric));
-        assertEquals(Arrays.asList(patient), modelStub.persons);
-        assertTrue(modelStub.checkedOutPersons.isEmpty());
+        assertEquals(commandResult.feedbackToUser, String.format(CheckoutCommand.MESSAGE_SUCCESS, patientNric));
+        assertEquals(Arrays.asList(patient), modelStub.checkedOutPersons);
+        assertTrue(modelStub.persons.isEmpty());
     }
 
     @Test
-    public void execute_checkinNonExistingRecord_throwsCommandException() throws Exception {
-        ModelStubAcceptingCheckin modelStub = new ModelStubAcceptingCheckin();
+    public void execute_checkoutNonExistingPatient_throwsCommandException() throws Exception {
+        ModelStubAcceptingCheckout modelStub = new ModelStubAcceptingCheckout();
         Nric nonExistingNric = DANIEL.getNric();
-        CheckinCommand command = new CheckinCommand(nonExistingNric);
+        CheckoutCommand command = new CheckoutCommand(nonExistingNric);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(String.format(CheckinCommand.MESSAGE_RECORD_NOT_FOUND, nonExistingNric));
+        thrown.expectMessage(CheckoutCommand.MESSAGE_NO_SUCH_PATIENT);
         command.execute(modelStub, commandHistory);
     }
-
-    //TODO: another test to check the situation when a person is already checked in.
 
     @Test
     public void equals() {
         Person otherPatient = new PersonBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB).build();
-        CheckinCommand checkinCommand = new CheckinCommand(patientNric);
-        CheckinCommand checkinCommandCopy = new CheckinCommand(patientNric);
+        CheckoutCommand checkoutCommand = new CheckoutCommand(patientNric);
+        CheckoutCommand checkoutCommandCopy = new CheckoutCommand(patientNric);
         RegisterCommand registerCommand = new RegisterCommand(patient);
-        CheckinCommand checkinOtherNricCommand = new CheckinCommand(otherPatient.getNric());
+        CheckoutCommand checkoutOtherNricCommand = new CheckoutCommand(otherPatient.getNric());
 
         // compare with itself -> returns true
-        assertTrue(checkinCommand.equals(checkinCommand));
+        assertTrue(checkoutCommand.equals(checkoutCommand));
 
         // compare with a copy of the same command -> returns true
-        assertTrue(checkinCommand.equals(checkinCommandCopy));
+        assertTrue(checkoutCommand.equals(checkoutCommandCopy));
 
         // compare with a different type of command -> returns false
-        assertFalse(checkinCommand.equals(registerCommand));
+        assertFalse(checkoutCommand.equals(registerCommand));
 
         // different Nric -> returns false
-        assertFalse(checkinCommand.equals(checkinOtherNricCommand));
+        assertFalse(checkoutCommand.equals(checkoutOtherNricCommand));
     }
 
     /**
-     * A Model stub that always accepts checkin commands for a person recorded in the system.
-     * By default, this model stub has a valid person in its checkedOutPersons list at the moment of initialization.
+     * A Model stub that always accepts checkout commands for a person in the model.
+     * By default, this model stub has a valid person in its persons list at the moment of initialization.
      */
-    private class ModelStubAcceptingCheckin extends CommandTestUtil.ModelStub {
+    private class ModelStubAcceptingCheckout extends CommandTestUtil.ModelStub {
         final ArrayList<Person> persons;
         final ArrayList<Person> checkedOutPersons;
         private Person patient;
 
-        public ModelStubAcceptingCheckin() {
+        public ModelStubAcceptingCheckout() {
             this.patient = new PersonBuilder().build();
             this.persons = new ArrayList<>();
             this.checkedOutPersons = new ArrayList<>();
 
-            checkedOutPersons.add(patient);
+            persons.add(patient);
         }
 
         @Override
-        public void reCheckInPerson(Person person) {
-            checkedOutPersons.remove(person);
-            persons.add(person);
+        public void checkOutPerson(Person person) {
+            persons.remove(person);
+            checkedOutPersons.add(person);
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            // called by {@code CheckinCommand#execute()}
+            // called by {@code CheckoutCommand#execute()}
             ObservableList<Person> patients = FXCollections.observableArrayList();
+            patients.add(patient);
 
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredCheckedOutPersonList() {
-            // called by {@code CheckinCommand#execute()}
-            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
-            checkedOutPatients.add(patient);
-
-            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
-            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
     }
 }

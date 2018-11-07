@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddDietCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.diet.Diet;
 import seedu.address.model.diet.DietCollection;
 import seedu.address.model.diet.DietType;
@@ -46,7 +45,7 @@ public class AddDietCommandParserTest {
     }
 
     @Test
-    public void parse_success() throws ParseException {
+    public void parse_success() {
         assertParseSuccess(parser, NRIC_DESC_AMY + VALID_DIET_COLLECTION_DESC,
                 new AddDietCommand(patientNric, dietToAdd));
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <persons>
+    <person>
         <id>1</id>
         <nric>S1234567A</nric>
         <firstName>John</firstName>
@@ -9,5 +9,5 @@
         <street></street>
         <postalCode></postalCode>
         <city></city>
-    </persons>
+    </person>
 </addressbook>

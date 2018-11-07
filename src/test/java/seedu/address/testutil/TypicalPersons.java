@@ -75,10 +75,17 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        for (Person person : getTypicalCheckedOutPersons()) {
+            ab.addCheckedOutPerson(person);
+        }
         return ab;
     }
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalCheckedOutPersons() {
+        return new ArrayList<>(Arrays.asList(HOON, IDA));
     }
 }

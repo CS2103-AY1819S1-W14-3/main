@@ -201,6 +201,23 @@ public class Person {
         this.visitorList = new VisitorList();
     }
 
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+        PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
+        DietCollection dietCollection, VisitorList visitorList) {
+        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, dietCollection);
+        this.nric = nric;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.prescriptionList = prescriptionList;
+        this.appointmentsList = appointmentsList;
+        this.medicalHistory = medicalHistory;
+        this.dietCollection = dietCollection;
+        this.visitorList = visitorList;
+    }
+
 
     public Nric getNric() {
         return nric;

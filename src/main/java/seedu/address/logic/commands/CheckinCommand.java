@@ -1,81 +1,80 @@
 package seedu.address.logic.commands;
 
+//@@author yuntongzhang
+
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DRUG_ALLERGY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
-
 /**
- * Checks in a patient into the HMS
+ * Check in a patient whose records already exist in the HealthBase system.
+ * @author yuntongzhang
  */
 public class CheckinCommand extends Command {
-
     public static final String COMMAND_WORD = "checkin";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks in a patient into the HMS \n"
-            + "Parameters: "
-            + PREFIX_NRIC + "NRIC "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_DRUG_ALLERGY + "DRUG ALLERGIES]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "S1234567A "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_DRUG_ALLERGY + "aspirin "
-            + PREFIX_DRUG_ALLERGY + "insulin";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check in a patient whose information was "
+                                               + "previously stored in the system. "
+                                               + "Parameters: "
+                                               + PREFIX_NRIC + "NRIC\n"
+                                               + "Example " + COMMAND_WORD + " "
+                                               + PREFIX_NRIC + "S1234567A ";
 
-    public static final String MESSAGE_SUCCESS = "New patient checked in: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person is already checked in";
-    public static final String MESSAGE_DUPLICATE_NRIC = "A person of this NRIC is already checked in";
+    public static final String MESSAGE_SUCCESS = "Patient %1$s has been successfully checked in.";
+    public static final String MESSAGE_ALREADY_CHECKED_IN = "Patient %1$s is already checked in.";
+    public static final String MESSAGE_RECORD_NOT_FOUND = "Record for patient %1$s not found in the system.\n"
+                                                        + "Please use register command to register this new patient.";
 
-    private final Person toCheckin;
+    private final Nric patientNric;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a CheckinCommand to check in an pre-existing patient to the system.
+     * @param patientNric NRIC of the patient to be checked in.
      */
-    public CheckinCommand(Person person) {
-        requireNonNull(person);
-        toCheckin = person;
+    public CheckinCommand(Nric patientNric) {
+        this.patientNric = requireNonNull(patientNric);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model); // note: throws a nullpt exception
+        requireNonNull(model);
 
-        if (model.hasPerson(toCheckin)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        ObservableList<Person> filteredPersonByNric = model.getFilteredPersonList()
+            .filtered(p -> patientNric.equals(p.getNric()));
+
+        ObservableList<Person> filteredCheckedOutByNric = model.getFilteredCheckedOutPersonList()
+            .filtered(p -> patientNric.equals(p.getNric()));
+
+        if (filteredPersonByNric.size() > 0) {
+            throw new CommandException(String.format(MESSAGE_ALREADY_CHECKED_IN, patientNric));
         }
 
-        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
-                                                        .filtered(p -> toCheckin.getNric().equals(p.getNric()));
-
-        if (filteredByNric.size() == 1) {
-            throw new CommandException(MESSAGE_DUPLICATE_NRIC);
+        if (filteredCheckedOutByNric.size() < 1) {
+            throw new CommandException(String.format(MESSAGE_RECORD_NOT_FOUND, patientNric));
         }
 
-        model.addPerson(toCheckin);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toCheckin));
+        Person patientToCheckIn = filteredCheckedOutByNric.get(0);
+        model.reCheckInPerson(patientToCheckIn);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof CheckinCommand // instanceof handles nulls
-                        && toCheckin.equals(((CheckinCommand) other).toCheckin));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof CheckinCommand)) {
+            return false;
+        }
+
+        CheckinCommand otherCheckinCommand = (CheckinCommand) other;
+        return otherCheckinCommand.patientNric.equals(patientNric);
     }
 }

@@ -28,6 +28,14 @@ public class AddressBookBuilder {
         return this;
     }
 
+    /**
+     * Adds a new {@code checkedOutPerson} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withCheckedOutPerson(Person person) {
+        addressBook.addCheckedOutPerson(person);
+        return this;
+    }
+
     public AddressBook build() {
         return addressBook;
     }

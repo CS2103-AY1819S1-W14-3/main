@@ -24,9 +24,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code CheckinCommand}.
+ * Contains integration tests (interaction with the Model) for {@code RegisterCommand}.
  */
-public class CheckinCommandIntegrationTest {
+public class RegisterCommandIntegrationTest {
 
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
@@ -43,15 +43,15 @@ public class CheckinCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new CheckinCommand(validPerson), model, commandHistory,
-                String.format(CheckinCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new RegisterCommand(validPerson), model, commandHistory,
+                String.format(RegisterCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new CheckinCommand(personInList), model, commandHistory,
-                CheckinCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new RegisterCommand(personInList), model, commandHistory,
+                RegisterCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -61,8 +61,8 @@ public class CheckinCommandIntegrationTest {
         tags.add(new Tag("insulin"));
         Person personWithDuplicateNric = new Person(nricInList, new Name("Boon Ping"), new Phone("90000000"),
                 new Email("newemail@email.com"), new Address("New Address Road"), tags);
-        assertCommandFailure(new CheckinCommand(personWithDuplicateNric), model, commandHistory,
-                CheckinCommand.MESSAGE_DUPLICATE_NRIC);
+        assertCommandFailure(new RegisterCommand(personWithDuplicateNric), model, commandHistory,
+                RegisterCommand.MESSAGE_DUPLICATE_NRIC);
     }
 
 }

@@ -977,10 +977,10 @@ Use case ends
 Use case ends.
 
 [discrete]
-=== Use case: Checkin patient
+=== Use case: Register patient
 *MSS*
 
-1.  Counter nurse request to check in patient
+1.  Counter nurse request to register a new patient
 2.  Counter nurse inputs the patient's NRIC
 3.  HealthBase adds the patient into the patient queue
 +
@@ -1059,7 +1059,7 @@ Past records of healthcare visits, pre-existing medical conditions
 [[authorised-visitors]] Authorised visitors::
 Upon check-in of patient, the information of permitted visitors entered
 
-[[checkin]] Checkin::
+[[register]] Register::
 Patient registers at the hospital
 
 [[checkout]] Checkout::
@@ -1088,6 +1088,30 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The most recent window size and location is retained.
 
 _{ more test cases ... }_
+
+=== Generating test data
+. Generating patients with mock data
+
+.. Open the application.
+.. Run the following commands in the following sequence:
+... `dev-mode` (Enables developer mode; the next command requires developer mode to run.)
+... `gendata NUMBER_OF_PATIENTS`, where `NUMBER_OF_PATIENTS` is a positive integer value that indicates how many patients you wish to generate.
+
+The application will then generate that number of patients with mock data for their:
+
+. Personal particulars
+.. NRIC
+.. Name
+.. Phone number
+.. Email address
+.. Physical address
+. Drug allergies
+. Medications
+. Appointments
+. Dietary restrictions
+. Medical history
+
+Details on the exact range of values that the mock data can take on can be found in the related `.java` files.
 
 === Deleting a patient
 

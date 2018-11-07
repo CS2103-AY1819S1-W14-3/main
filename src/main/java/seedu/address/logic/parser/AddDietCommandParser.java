@@ -17,7 +17,8 @@ import seedu.address.model.diet.DietType;
 import seedu.address.model.person.Nric;
 
 /**
- * Parses input arguments and creates a new AddDietCommand object
+ * Parses input arguments and creates a new AddDietCommand object.
+ * @author yuntongzhang
  */
 public class AddDietCommandParser implements Parser<AddDietCommand> {
     /**
