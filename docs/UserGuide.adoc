@@ -221,6 +221,16 @@ Example(s):
 * `view meds`
 
 //end::view[]
+<<<<<<< HEAD
+=======
+
+=== View all appointments for a patient: `viewappt`
+View all scheduled appointments for a patient.
+
+Format: `viewappt ic/NRIC`
+
+Example(s):
+>>>>>>> ddaa07f4... Add Project Portfolio Page for Darien (#106)
 
 === View all appointments for a patient: `view appt`
 See <<#view-command, entry>> on the `view` command.
