@@ -9,33 +9,34 @@
 <div class="sect1">
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
-<div class="literalblock">
+<div class="paragraph">
+<p>This portfolio details the contributions I made to the development of a desktop application as part of an NUS Software Engineering module,
+CS2103T. Over the span of 8 weeks in AY18/19 Semester 1, my team and I were given the freedom to morph an existing desktop application
+made up of 10KLOC in Java.</p>
+</div>
+<div class="paragraph">
+<p>Throughout the 8-week period, we were challenged to incorporate the new Software Engineering concepts taught in class
+via a series of milestones which were part of the project management process. On top of that, we planned out weekly
+goals and consistently reassessed our employed programming methodologies and practices, developing our software HealthBase
+incrementally and iteratively.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre>First sentence PPP details, introduce appropriately
-make clear so person does not have to ask unnecessary qn
-consistency in language structure</pre>
+<img src="../images/AB4toHealthBase.png" alt="AB4toHealthBase" width="1600">
 </div>
-</div>
-<div class="paragraph">
-<p>This portfolio details the contributions I made to the development of a desktop application, as part of a team-based NUS Software Engineering module,
-CS2103T.</p>
+<div class="title">Figure 1. AB4 was morphed into a hospital management system, HealthBase.</div>
 </div>
 <div class="paragraph">
-<p>HealthBase is a lightweight and free desktop application, designed to reduce the mundane yet important administrative duties faced by hospital staff.
-By automating the tedious and providing convenient features crafted for its users, HealthBase allows for efficient management of patients' information.</p>
+<p>HealthBase is a lightweight and free desktop application which automates the tedious data-handling processes of hospital staff.
+By complementing the roles of receptionists, nurses and doctors and providing convenient features, the app allows its users to
+efficiently manage patients’ information, thus easing their workload and allowing them to focus on caring for their patients.</p>
 </div>
 <div class="paragraph">
-<p>The application&#8217;s capabilities complement the roles of nurses and doctors, so that they serve patients better.</p>
-</div>
-<div class="paragraph">
-<p>All features can be easily accessed by simply typing short commands into an input field.
+<p>The app&#8217;s features can be easily accessed by typing short commands into an input field.
 These features include (among others):</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p>Management of check-in/out status of patients</p>
-</li>
 <li>
 <p>Real-time management of the check-in/out status of patients</p>
 </li>
@@ -76,6 +77,13 @@ These features include (among others):</p>
 <li>
 <p>Justification: This feature serves as the primary storage of important patient data, as adjudged by the examining doctor&#8217;s assessment. Past diagnoses are easily viewed on the desktop application to provide quick access for the examining doctor.</p>
 </li>
+<li>
+<p>Highlights: This enhancement required a detailed understanding of the Java Architecture for XML Binding software frame work (JAXB) for data storage as XML files.
+Also, the integration of the UI in the feature needed JAVAFX know-how.</p>
+</li>
+<li>
+<p>Credits:</p>
+</li>
 </ul>
 </div>
 </li>
@@ -83,7 +91,17 @@ These features include (among others):</p>
 <p><strong>Minor enhancement</strong>:</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=omegafishy">my commits</a>]</p>
+<p><strong>Code contributed</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=omegafishy">GitHub Commits</a></p>
+</li>
+<li>
+<p><a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=omegafishy&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-07&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">Project Code Dashboard</a></p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -117,13 +135,16 @@ These features include (among others):</p>
 <div class="ulist">
 <ul>
 <li>
+<p>Set up GitHub organisation and project repository.</p>
+</li>
+<li>
 <p>Managed organisation code repository as administrator.</p>
 </li>
 <li>
 <p>Reviewed pull requests and provided feedback. (Pull Requests: <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pulls/121">#121</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pulls/122">#122</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pulls/127">#127</a>)</p>
 </li>
 <li>
-<p>Reported feature bugs discovered during system testing. (Pull Request: <a href="https://github.com/CS2103-AY1819S1-W14-3/main/issues/131">#131</a>)</p>
+<p>Reported feature bugs discovered during system testing. (Issue: <a href="https://github.com/CS2103-AY1819S1-W14-3/main/issues/131">#131</a>)</p>
 </li>
 </ul>
 </div>
@@ -164,7 +185,7 @@ These features include (among others):</p>
 <div class="sect2">
 <h3 id="add-to-patient-s-medical-history-code-addmh-code"><a class="link" href="#add-to-patient-s-medical-history-code-addmh-code">Add to patient’s medical history: <code>addmh</code></a></h3>
 <div class="paragraph">
-<p>Add an entry to an existing patient’s medical history.
+<p>Add an non-blank diagnosis entry to an existing patient’s medical history.
 The patient must be registered within the system.</p>
 </div>
 <div class="paragraph">
@@ -172,13 +193,52 @@ The patient must be registered within the system.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The following invalid inputs will result in a command failure, and the display of an appropriate error message.
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>If the NRIC does not match to an existing patient in the system, an error will be displayed.</p>
+<p>Invalid NRIC</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The patient NRIC does not match to an existing patient in the system. The person will first need to be registered.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>If the format of the doctor&#8217;s name is incorrect, an error will be displayed.</p>
+<p>Incorrect format of the doctor&#8217;s name.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Doctor&#8217;s title must be included.</p>
+</li>
+<li>
+<p>The first letter of all words in doctor&#8217;s name must be captalised.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Blank Diagnosis</p>
+<div class="ulist">
+<ul>
+<li>
+<p>An empty diagnosis will not be accepted as a valid diagnosis.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -193,7 +253,28 @@ The patient must be registered within the system.</p>
 <p><code>addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
 rest and rehydrate. doc/Dr. Zhang De</code></p>
 </li>
+<li>
+<p><code>addmh ic/T9876543Z mh/Patient appears to have chronic cough. Referred to specialist. doc/Dr.Timothy</code></p>
+</li>
 </ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you want to view the newly added diagnoses to a particular patient, simply enter <code>view mh</code>.
+You may have to enter select &lt;patient index&gt;` or click on the patient panel card.
+To use the full capabilities of the <code>view</code> command, click <a href="#view-command">here</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -252,9 +333,9 @@ the <code>NRIC</code> S9123124A.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddmhViewmhSequenceDiagram.png" alt="AddmhViewmhSequenceDiagram" width="800">
+<img src="../images/AddmhSequenceDiagram.png" alt="AddmhSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 1. Execution sequence of the <code>addmh</code> command</div>
+<div class="title">Figure 2. Execution sequence of the <code>addmh</code> command</div>
 </div>
 <div class="ulist">
 <ul>
@@ -311,6 +392,10 @@ with an appropriate error message before the use case ends.
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 09:10:01 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 05:27:34 UTC</div></div></div></body></html>
