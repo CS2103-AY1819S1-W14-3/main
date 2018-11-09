@@ -98,14 +98,14 @@ public class AddmhCommand extends Command {
      * Updates a patient with new medical history by creating the person and the medical history
      *
      * @param patientToEdit The patient to update.
-     * @param d The diagnosis to be added to patient's existing medical history.
+     * @param diagnosis The diagnosis to be added to patient's existing medical history.
      * @return An updated patient with an updated medical history.
      */
-    private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosis d) {
-        requireAllNonNull(patientToEdit, d);
+    private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosis diagnosis) {
+        requireAllNonNull(patientToEdit, diagnosis);
 
         MedicalHistory updatedMedicalHistory = patientToEdit.getMedicalHistory();
-        updatedMedicalHistory.add(d);
+        updatedMedicalHistory.add(diagnosis);
 
         Nric nric = patientToEdit.getNric();
         Name name = patientToEdit.getName();

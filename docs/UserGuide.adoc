@@ -101,19 +101,34 @@ Example(s):
 //end::addmeds[]
 //tag::addmh[]
 === Add to patient’s medical history: `addmh`
-Add an entry to an existing patient’s medical history.
+Add an non-blank diagnosis entry to an existing patient’s medical history.
 The patient must be registered within the system.
 
 Format: `addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE`
 ****
-* If the NRIC does not match to an existing patient in the system, an error will be displayed.
-* If the format of the doctor's name is incorrect, an error will be displayed.
+WARNING: The following invalid inputs will result in a command failure, and the display of an appropriate error message.
+
+* Invalid NRIC
+** The patient NRIC does not match to an existing patient in the system. The person will first need to be registered.
+* Incorrect format of the doctor's name.
+** Doctor's title must be included.
+** The first letter of all words in doctor's name must be captalised.
+* Blank Diagnosis
+** An empty diagnosis will not be accepted as a valid diagnosis.
 ****
 
 Example(s):
 
 * `addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
 rest and rehydrate. doc/Dr. Zhang De`
+* `addmh ic/T9876543Z mh/Patient appears to have chronic cough. Referred to specialist. doc/Dr.Timothy`
+
+****
+TIP: If you want to view the newly added diagnoses to a particular patient, simply enter `view mh`.
+You may have to enter select <patient index>` or click on the patient panel card.
+To use the full capabilities of the `view` command, click <<#view-command, here>>.
+****
+
 //end::addmh[]
 
 //tag::register[]
@@ -270,7 +285,7 @@ See <<#view-command, entry>> on the `view` command.
 
 Example(s):
 
-* `viewmh ic/S1234567A`
+* `view mh ic/S1234567A`
 
 === View patient queue: `viewqueue`
 View the current patient queue.
