@@ -432,7 +432,7 @@ the `NRIC` S9123124A.
 The sequence diagram below shows the execution of the given scenario:
 
 .Execution sequence of the `addmh` command
-image::AddmhViewmhSequenceDiagram.png[width="800"]
+image::AddmhSequenceDiagram.png[width="800"]
 
 * `addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol`
 ** When the user-executed `addmh` line is passed into an instance of the LogicManager class, the method `AddressBookParser::parse` is executed.
@@ -448,11 +448,13 @@ image::AddmhViewmhSequenceDiagram.png[width="800"]
 
 * Command execution ends.
 
-
 ****
 NOTE: If multiple patients with the entered `NRIC` exist, then the `AddmhCommand::execute` will throw a `CommandException`
 with an appropriate error message before the use case ends.
 ****
+
+==== Design Considerations
+
 // end::addmh[]
 // tag::adddiet[]
 === Adddiet
