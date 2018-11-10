@@ -192,20 +192,20 @@ to register this new patient with his necessary information.
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
-<p>WARNING:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If the patient with the specified <code>NRIC</code> is still active in the system (which means that the patient in the system has
-not been checked out yet), the command is considered as invalid.</p>
-</li>
-<li>
-<p>The <code>checkin</code> command is only considered valid when the patient with the <code>NRIC</code> specified were checked out before
-with the <code>checkout</code> command.</p>
-</li>
-</ul>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If the patient with the specified <code>NRIC</code> is still active in the system (which means that the patient in the system has
+not been checked out yet), the command is considered as invalid.<br>
+The <code>checkin</code> command is only considered valid when the patient with the <code>NRIC</code> specified were checked out before
+with the <code>checkout</code> command.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -229,19 +229,34 @@ Upon checking out a particular patient, this patient will not be displayed in th
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
-<p>WARNING:</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+</td>
+</tr>
+</table>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.</p>
-</li>
-<li>
-<p>After a patient has been checked out from the system, any commands which select or add information to this patient
-will be considered as an invalid command.</p>
-</li>
-</ul>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+After a patient has been checked out from the system, any commands which select or add information to this
+patient will be considered as an invalid command.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -481,4 +496,4 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 13:29:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 13:49:41 UTC</div></div></div></body></html>
