@@ -131,9 +131,66 @@ To use the full capabilities of the `view` command, click <<#view-command, here>
 
 //end::addmh[]
 
+//tag::checkin[]
+=== Check in a returning patient: `checkin`
+Check in a returning patient back to the HealthBase system, and retrieve his/her information from backend and display
+them in the left panel of the application window. The patient being checked in must have been previously registered
+to the system and were checked out of the system sometime before with the `checkout` command.
+
+Format: `checkin ic/NRCI`
+
+****
+TIP: If there is no record of this patient in our system (which means that the patient with the specified `NRIC` has
+not visited the hospital and registered in the system, the application will direct user to use the `register` command
+to register this new patient with his necessary information.
+****
+
+****
+WARNING:
+
+* If the patient with the specified `NRIC` is still active in the system (which means that the patient in the system has
+not been checked out yet), the command is considered as invalid.
+* The `checkin` command is only considered valid when the patient with the `NRIC` specified were checked out before
+with the `checkout` command.
+****
+
+Example(s):
+
+* `checkin ic/S1234567A` +
+   Note that the patient with `NRIC S1234567A` must have been previously registered to the system and were checked out of
+   the system sometime before with the `checkout` command.
+//end::checkin[]
+
+
+//tag::checkout[]
+=== Check out a patient: `checkout`
+Check out a patient from the HealthBase system, while still keeping the information of the patient at the backend.
+Upon checking out a particular patient, this patient will not be displayed in the left panel of the application.
+
+Format: `checkout ic/NRIC`
+
+****
+WARNING:
+
+* If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+* After a patient has been checked out from the system, any commands which select or add information to this patient
+will be considered as an invalid command.
+****
+
+Example(s):
+
+* `checkout ic/S1234567A`
+//end::checkout[]
+
+=== View help : `help`
+Open this page.
+
+Format: `help`
+
 //tag::register[]
 === Register a new patient to the system: `register`
 Register a new patient together with necessary information into the system.
+
 
 Format: `register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES`
 
@@ -143,25 +200,6 @@ Example(s):
 
 * `register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil`
 //end::register[]
-
-=== Check-out a patient: `checkout`
-Remove a patient from the patient queue.
-
-
-Format: `checkout ic/NRIC`
-
-****
-* If the NRIC does not match that of an existing patient in the system, an error will be displayed.
-****
-
-Example(s):
-
-* `checkout ic/S1234567A`
-
-=== View help : `help`
-Open this page.
-
-Format: `help`
 
 //tag::sort[]
 === Sort user view : `sort`
@@ -222,7 +260,7 @@ Current choices for views include:
 
 * default (This is the default blank view, which is displayed when the application is started)
 * appt (Appointment view, contains patient's appointments)
-* diets (Diet view, contains patient's dietary restrictions)
+* diets (Diet view, contains patient's dietary requirements)
 * meds (Medication view, contains information about the patient's medications)
 * mh (Medical history view, contains patient's previous medical diagnoses)
 
@@ -263,17 +301,12 @@ image::mhView.png[width=800]
 === View all appointments for a patient: `view appt`
 See <<#view-command, entry>> on the `view` command.
 
-=== View patient’s dietary needs: `viewdiet`
-View a patient’s dietary needs.
+//tag::viewdiets[]
+=== View patient’s dietary requirements: `view diets`
+View an existing patient's recorded dietary requirements.
 
-Format: `viewdiet ic/NRIC`
-****
-* If the NRIC does not match to an existing patient in the system, an error will be displayed.
-****
-
-​Example(s):
-
-* `viewdiet ic/S1234567A`
+See <<#view-command, entry>> on the `view` command.
+//end::viewdiets[]
 
 === View patient medication: `view meds`
 See <<#view-command, entry>> on the `view` command.
@@ -378,15 +411,20 @@ Each command below will be summarised in the following format:
 * `addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE`
 * `addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to rest and rehydrate. doc/Dr.Zhang De Chou`
 
-*register*
+*checkin*
 
-* `register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES`
-* `register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil`
+* `checkin ic/NRIC`
+* `checkin ic/S1234567A`
 
 *checkout*
 
 * `checkout ic/NRIC`
 * `checkout ic/S1234567A`
+
+*register*
+
+* `register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES`
+* `register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil`
 
 *help*
 
@@ -407,11 +445,6 @@ Each command below will be summarised in the following format:
 
 * `viewappt ic/NRIC`
 * `viewappt ic/S1234567A`
-
-*viewdiet*
-
-* `viewdiet ic/NRIC`
-* `viewdiet ic/S1234567A`
 
 *viewqueue*
 
