@@ -17,22 +17,23 @@
 <li><a href="#add-patient-s-dietary-needs-code-adddiet-code">3.2. Add patient’s dietary needs: <code>adddiet</code></a></li>
 <li><a href="#add-patient-medication-code-addmeds-code">3.3. Add patient medication: <code>addmeds</code></a></li>
 <li><a href="#add-to-patient-s-medical-history-code-addmh-code">3.4. Add to patient’s medical history: <code>addmh</code></a></li>
-<li><a href="#register-a-new-patient-to-the-system-code-register-code">3.5. Register a new patient to the system: <code>register</code></a></li>
-<li><a href="#check-out-a-patient-code-checkout-code">3.6. Check-out a patient: <code>checkout</code></a></li>
+<li><a href="#check-in-a-returning-patient-code-checkin-code">3.5. Check in a returning patient: <code>checkin</code></a></li>
+<li><a href="#check-out-a-patient-code-checkout-code">3.6. Check out a patient: <code>checkout</code></a></li>
 <li><a href="#view-help-code-help-code">3.7. View help : <code>help</code></a></li>
-<li><a href="#sort-user-view-code-sort-code">3.8. Sort user view : <code>sort</code></a></li>
-<li><a href="#select-patient-code-select-code">3.9. Select patient: <code>select</code></a></li>
-<li><a href="#view-command">3.10. View patient’s information: <code>view</code></a></li>
-<li><a href="#view-all-appointments-for-a-patient-code-view-appt-code">3.11. View all appointments for a patient: <code>view appt</code></a></li>
-<li><a href="#view-patient-s-dietary-needs-code-viewdiet-code">3.12. View patient’s dietary needs: <code>viewdiet</code></a></li>
-<li><a href="#view-patient-medication-code-view-meds-code">3.13. View patient medication: <code>view meds</code></a></li>
-<li><a href="#view-patient-s-medical-history-code-view-mh-code">3.14. View patient’s medical history: <code>view mh</code></a></li>
-<li><a href="#view-patient-queue-code-viewqueue-code">3.15. View patient queue: <code>viewqueue</code></a></li>
-<li><a href="#view-patient-s-visitors-code-viewvisitors-code">3.16. View patient’s visitors: <code>viewvisitors</code></a></li>
-<li><a href="#sign-in-patient-s-visitors-code-visitorin-code">3.17. Sign in patient’s visitors: <code>visitorin</code></a></li>
-<li><a href="#sign-out-patient-s-visitors-code-visitorout-code">3.18. Sign out patient’s visitors: <code>visitorout</code></a></li>
-<li><a href="#saving-the-data">3.19. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.20. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#register-a-new-patient-to-the-system-code-register-code">3.8. Register a new patient to the system: <code>register</code></a></li>
+<li><a href="#sort-user-view-code-sort-code">3.9. Sort user view : <code>sort</code></a></li>
+<li><a href="#select-patient-code-select-code">3.10. Select patient: <code>select</code></a></li>
+<li><a href="#view-command">3.11. View patient’s information: <code>view</code></a></li>
+<li><a href="#view-all-appointments-for-a-patient-code-view-appt-code">3.12. View all appointments for a patient: <code>view appt</code></a></li>
+<li><a href="#view-patient-s-dietary-requirements-code-view-diets-code">3.13. View patient’s dietary requirements: <code>view diets</code></a></li>
+<li><a href="#view-patient-medication-code-view-meds-code">3.14. View patient medication: <code>view meds</code></a></li>
+<li><a href="#view-patient-s-medical-history-code-view-mh-code">3.15. View patient’s medical history: <code>view mh</code></a></li>
+<li><a href="#view-patient-queue-code-viewqueue-code">3.16. View patient queue: <code>viewqueue</code></a></li>
+<li><a href="#view-patient-s-visitors-code-viewvisitors-code">3.17. View patient’s visitors: <code>viewvisitors</code></a></li>
+<li><a href="#sign-in-patient-s-visitors-code-visitorin-code">3.18. Sign in patient’s visitors: <code>visitorin</code></a></li>
+<li><a href="#sign-out-patient-s-visitors-code-visitorout-code">3.19. Sign out patient’s visitors: <code>visitorout</code></a></li>
+<li><a href="#saving-the-data">3.20. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.21. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -326,19 +327,51 @@ To use the full capabilities of the <code>view</code> command, click <a href="#v
 </div>
 </div>
 <div class="sect2">
-<h3 id="register-a-new-patient-to-the-system-code-register-code"><a class="link" href="#register-a-new-patient-to-the-system-code-register-code">3.5. Register a new patient to the system: <code>register</code></a></h3>
+<h3 id="check-in-a-returning-patient-code-checkin-code"><a class="link" href="#check-in-a-returning-patient-code-checkin-code">3.5. Check in a returning patient: <code>checkin</code></a></h3>
 <div class="paragraph">
-<p>Register a new patient together with necessary information into the system.</p>
+<p>Check in a returning patient back to the HealthBase system, and retrieve his/her information from backend and display
+them in the left panel of the application window. The patient being checked in must have been previously registered
+to the system and were checked out of the system sometime before with the <code>checkout</code> command.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>register ic/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS da/DRUG_ALLERGIES</code></p>
+<p>Format: <code>checkin ic/NRCI</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If there is no record of this patient in our system (which means that the patient with the specified <code>NRIC</code> has
+not visited the hospital and registered in the system, the application will direct user to use the <code>register</code> command
+to register this new patient with his necessary information.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>WARNING:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>If the patient is already registered, the command will not be allowed.</p>
+<p>If the patient with the specified <code>NRIC</code> is still active in the system (which means that the patient in the system has
+not been checked out yet), the command is considered as invalid.</p>
+</li>
+<li>
+<p>The <code>checkin</code> command is only considered valid when the patient with the <code>NRIC</code> specified were checked out before
+with the <code>checkout</code> command.</p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -346,25 +379,35 @@ To use the full capabilities of the <code>view</code> command, click <a href="#v
 <div class="ulist">
 <ul>
 <li>
-<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 e/zhiyu@example.com a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 da/insulin da/aspirin</code></p>
+<p><code>checkin ic/S1234567A</code><br>
+Note that the patient with <code>NRIC S1234567A</code> must have been previously registered to the system and were checked out of
+the system sometime before with the <code>checkout</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-out-a-patient-code-checkout-code"><a class="link" href="#check-out-a-patient-code-checkout-code">3.6. Check-out a patient: <code>checkout</code></a></h3>
+<h3 id="check-out-a-patient-code-checkout-code"><a class="link" href="#check-out-a-patient-code-checkout-code">3.6. Check out a patient: <code>checkout</code></a></h3>
 <div class="paragraph">
-<p>Remove a patient from the patient queue.</p>
+<p>Check out a patient from the HealthBase system, while still keeping the information of the patient at the backend.
+Upon checking out a particular patient, this patient will not be displayed in the left panel of the application.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>checkout ic/NRIC</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="paragraph">
+<p>WARNING:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>If the NRIC does not match that of an existing patient in the system, an error will be displayed.</p>
+<p>If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.</p>
+</li>
+<li>
+<p>After a patient has been checked out from the system, any commands which select or add information to this patient
+will be considered as an invalid command.</p>
 </li>
 </ul>
 </div>
@@ -391,7 +434,33 @@ To use the full capabilities of the <code>view</code> command, click <a href="#v
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-user-view-code-sort-code"><a class="link" href="#sort-user-view-code-sort-code">3.8. Sort user view : <code>sort</code></a></h3>
+<h3 id="register-a-new-patient-to-the-system-code-register-code"><a class="link" href="#register-a-new-patient-to-the-system-code-register-code">3.8. Register a new patient to the system: <code>register</code></a></h3>
+<div class="paragraph">
+<p>Register a new patient together with necessary information into the system.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>register ic/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS da/DRUG_ALLERGIES</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the patient is already registered, the command will not be allowed.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example(s):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 e/zhiyu@example.com a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 da/insulin da/aspirin</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sort-user-view-code-sort-code"><a class="link" href="#sort-user-view-code-sort-code">3.9. Sort user view : <code>sort</code></a></h3>
 <div class="paragraph">
 <p>Sort the current view, if it is sortable.</p>
 </div>
@@ -474,7 +543,7 @@ How this affects the sorting exactly depends on each view, and will be explained
 </div>
 </div>
 <div class="sect2">
-<h3 id="select-patient-code-select-code"><a class="link" href="#select-patient-code-select-code">3.9. Select patient: <code>select</code></a></h3>
+<h3 id="select-patient-code-select-code"><a class="link" href="#select-patient-code-select-code">3.10. Select patient: <code>select</code></a></h3>
 <div class="paragraph">
 <p>Select a patient through pure command-line functionality.
 The alternative is to click on the patient&#8217;s card.</p>
@@ -503,7 +572,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-command"><a class="link" href="#view-command">3.10. View patient’s information: <code>view</code></a></h3>
+<h3 id="view-command"><a class="link" href="#view-command">3.11. View patient’s information: <code>view</code></a></h3>
 <div class="paragraph">
 <p>View a patient’s information in the panel on the right. Exactly what information is displayed depends on the choice of view.</p>
 </div>
@@ -522,7 +591,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 <p>appt (Appointment view, contains patient&#8217;s appointments)</p>
 </li>
 <li>
-<p>diets (Diet view, contains patient&#8217;s dietary restrictions)</p>
+<p>diets (Diet view, contains patient&#8217;s dietary requirements)</p>
 </li>
 <li>
 <p>meds (Medication view, contains information about the patient&#8217;s medications)</p>
@@ -611,49 +680,28 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-all-appointments-for-a-patient-code-view-appt-code"><a class="link" href="#view-all-appointments-for-a-patient-code-view-appt-code">3.11. View all appointments for a patient: <code>view appt</code></a></h3>
+<h3 id="view-all-appointments-for-a-patient-code-view-appt-code"><a class="link" href="#view-all-appointments-for-a-patient-code-view-appt-code">3.12. View all appointments for a patient: <code>view appt</code></a></h3>
 <div class="paragraph">
 <p>See <a href="#view-command">entry</a> on the <code>view</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-patient-s-dietary-needs-code-viewdiet-code"><a class="link" href="#view-patient-s-dietary-needs-code-viewdiet-code">3.12. View patient’s dietary needs: <code>viewdiet</code></a></h3>
+<h3 id="view-patient-s-dietary-requirements-code-view-diets-code"><a class="link" href="#view-patient-s-dietary-requirements-code-view-diets-code">3.13. View patient’s dietary requirements: <code>view diets</code></a></h3>
 <div class="paragraph">
-<p>View a patient’s dietary needs.</p>
+<p>View an existing patient&#8217;s recorded dietary requirements.</p>
 </div>
-<div class="paragraph">
-<p>Format: <code>viewdiet ic/NRIC</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>If the NRIC does not match to an existing patient in the system, an error will be displayed.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>​Example(s):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>viewdiet ic/S1234567A</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="view-patient-medication-code-view-meds-code"><a class="link" href="#view-patient-medication-code-view-meds-code">3.13. View patient medication: <code>view meds</code></a></h3>
 <div class="paragraph">
 <p>See <a href="#view-command">entry</a> on the <code>view</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-patient-s-medical-history-code-view-mh-code"><a class="link" href="#view-patient-s-medical-history-code-view-mh-code">3.14. View patient’s medical history: <code>view mh</code></a></h3>
+<h3 id="view-patient-medication-code-view-meds-code"><a class="link" href="#view-patient-medication-code-view-meds-code">3.14. View patient medication: <code>view meds</code></a></h3>
+<div class="paragraph">
+<p>See <a href="#view-command">entry</a> on the <code>view</code> command.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-patient-s-medical-history-code-view-mh-code"><a class="link" href="#view-patient-s-medical-history-code-view-mh-code">3.15. View patient’s medical history: <code>view mh</code></a></h3>
 <div class="paragraph">
 <p>View an existing patient’s recorded medical history.</p>
 </div>
@@ -672,7 +720,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-patient-queue-code-viewqueue-code"><a class="link" href="#view-patient-queue-code-viewqueue-code">3.15. View patient queue: <code>viewqueue</code></a></h3>
+<h3 id="view-patient-queue-code-viewqueue-code"><a class="link" href="#view-patient-queue-code-viewqueue-code">3.16. View patient queue: <code>viewqueue</code></a></h3>
 <div class="paragraph">
 <p>View the current patient queue.</p>
 </div>
@@ -691,7 +739,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-patient-s-visitors-code-viewvisitors-code"><a class="link" href="#view-patient-s-visitors-code-viewvisitors-code">3.16. View patient’s visitors: <code>viewvisitors</code></a></h3>
+<h3 id="view-patient-s-visitors-code-viewvisitors-code"><a class="link" href="#view-patient-s-visitors-code-viewvisitors-code">3.17. View patient’s visitors: <code>viewvisitors</code></a></h3>
 <div class="paragraph">
 <p>View a patient’s visitors.</p>
 </div>
@@ -715,7 +763,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sign-in-patient-s-visitors-code-visitorin-code"><a class="link" href="#sign-in-patient-s-visitors-code-visitorin-code">3.17. Sign in patient’s visitors: <code>visitorin</code></a></h3>
+<h3 id="sign-in-patient-s-visitors-code-visitorin-code"><a class="link" href="#sign-in-patient-s-visitors-code-visitorin-code">3.18. Sign in patient’s visitors: <code>visitorin</code></a></h3>
 <div class="paragraph">
 <p>Sign in a visitor for a patient.</p>
 </div>
@@ -739,7 +787,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sign-out-patient-s-visitors-code-visitorout-code"><a class="link" href="#sign-out-patient-s-visitors-code-visitorout-code">3.18. Sign out patient’s visitors: <code>visitorout</code></a></h3>
+<h3 id="sign-out-patient-s-visitors-code-visitorout-code"><a class="link" href="#sign-out-patient-s-visitors-code-visitorout-code">3.19. Sign out patient’s visitors: <code>visitorout</code></a></h3>
 <div class="paragraph">
 <p>Sign out a visitor for a patient.</p>
 </div>
@@ -763,14 +811,14 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.19. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.20. Saving the data</a></h3>
 <div class="paragraph">
 <p>Patient data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.20. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.21. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -862,15 +910,15 @@ There is no need to save manually.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>register</strong></p>
+<p><strong>checkin</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
+<p><code>checkin ic/NRIC</code></p>
 </li>
 <li>
-<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
+<p><code>checkin ic/S1234567A</code></p>
 </li>
 </ul>
 </div>
@@ -884,6 +932,19 @@ There is no need to save manually.</p>
 </li>
 <li>
 <p><code>checkout ic/S1234567A</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>register</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
+</li>
+<li>
+<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
 </li>
 </ul>
 </div>
@@ -936,19 +997,6 @@ There is no need to save manually.</p>
 </li>
 <li>
 <p><code>viewappt ic/S1234567A</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>viewdiet</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>viewdiet ic/NRIC</code></p>
-</li>
-<li>
-<p><code>viewdiet ic/S1234567A</code></p>
 </li>
 </ul>
 </div>
@@ -1019,4 +1067,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 13:21:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 13:29:47 UTC</div></div></div></body></html>
