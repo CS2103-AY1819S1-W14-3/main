@@ -62,12 +62,11 @@ public class GendataCommand extends Command {
             generator.generatePhone(),
             generator.generateEmail(),
             generator.generateAddress(),
-            generator.generateDrugAllergies(),
-            generator.generatePrescriptionList(),
-            generator.generateAppointmentsList(),
-            generator.generateMedicalHistory(),
-            generator.generateDietCollection(),
-            generator.generateVisitorList()
-            );
+            generator.generateDrugAllergies())
+                .withAppointmentsList(generator.generateAppointmentsList())
+                .withDietCollection(generator.generateDietCollection())
+                .withMedicalHistory(generator.generateMedicalHistory())
+                .withPrescriptionList(generator.generatePrescriptionList())
+                .withVisitorList(generator.generateVisitorList());
     }
 }
