@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
-import java.util.function.Predicate;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,10 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Type;
+import seedu.address.model.medicalhistory.Diagnosis;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,10 +38,16 @@ public class AddApptCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private String validNric;
-    private Type type;
+    private String type;
+    private String invalidType;
     private String procedure;
+    private String invalidProcedure;
     private String dateTime;
+    private String dateTimeBeforeCurrent;
+    private String duplicateDateTime;
+    private String invalidDateTime;
     private String doctor;
+    private String invalidDoctor;
     private Appointment appt;
     private Person patient;
     private CommandHistory commandHistory = new CommandHistory();
@@ -53,10 +57,16 @@ public class AddApptCommandTest {
         validNric = "S8888888A";
         patient = new Person(new Nric(validNric), new Name("AddAppt Test"), new Phone("91234567"),
                 new Email("addappttest@gmail.com"), new Address("12 Addappt Ave, #01-01"), new HashSet<Tag>());
-        type = Type.SURGICAL;
+        type = "SRG";
+        invalidType = "SRGy";
         procedure = "Heart Bypass";
+        invalidProcedure = "123";
         dateTime = "12-12-2022 10:30";
+        dateTimeBeforeCurrent = "12-12-1018 23:20";
+        duplicateDateTime = "12-12-2022 10:30";
+        invalidDateTime = "12-13-2025 23:30";
         doctor = "Dr. Pepper";
+        invalidDoctor = "12 Pepper";
         appt = new Appointment(type, procedure, dateTime, doctor);
     }
 
@@ -77,9 +87,62 @@ public class AddApptCommandTest {
     public void execute_addapptToNonexistentPatient_throwsCommandException() throws Exception {
         Person patientNotInModel = new PersonBuilder().build();
         AddApptCommand addApptCommand = new AddApptCommand(patientNotInModel.getNric(), appt);
-        ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddApptCommand.MESSAGE_NO_SUCH_PATIENT);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithDateTimeBeforeCurrent_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, dateTimeBeforeCurrent, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithInvalidType_throwsCommandException() throws Exception {
+        appt = new Appointment(invalidType, procedure, dateTime, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_TYPE);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithInvalidProcedure_throwsCommandException() throws Exception {
+        appt = new Appointment(type, invalidProcedure, dateTime, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_PROCEDURE);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithDuplicateDateTime_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, dateTime, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        appt = new Appointment(type, procedure, duplicateDateTime, doctor);
+        AddApptCommand addDuplicateDateTime = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_DUPLICATE_DATE_TIME);
+        addApptCommand.execute(modelStub, commandHistory);
+        addDuplicateDateTime.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithInvalidDoctor_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, dateTime, invalidDoctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(Diagnosis.MESSAGE_NAME_CONSTRAINTS_DOCTOR);
         addApptCommand.execute(modelStub, commandHistory);
     }
 
@@ -114,54 +177,9 @@ public class AddApptCommandTest {
     }
 
     /**
-     * A default model stub that has all of the methods failing
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void resetData(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
      * A Model stub that always accepts addappt commands for a single person.
      */
-    private class ModelStubAcceptingAddappt extends ModelStub {
+    private class ModelStubAcceptingAddappt extends CommandTestUtil.ModelStub {
         private Person patient;
 
         public ModelStubAcceptingAddappt(Person patient) {

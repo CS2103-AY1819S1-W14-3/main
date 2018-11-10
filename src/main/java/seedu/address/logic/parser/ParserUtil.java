@@ -85,7 +85,6 @@ public class ParserUtil {
         return new Nric(trimmedName);
     }
 
-    // @@ omegafishy
     /**
      * Parses a {@code String diagnosis} into a {@code Diagnosis}. Leading
      * and trailing whitespaces will be trimmed.
@@ -93,13 +92,18 @@ public class ParserUtil {
      * @throws ParseException
      *              if the given {@code diagnosis} is invalid.
      */
-    public static Diagnosis parseDiagnosis(String diagnosis) throws ParseException {
+    public static Diagnosis parseDiagnosis(String diagnosis, String doctor) throws ParseException {
         requireNonNull(diagnosis);
+        requireNonNull(doctor);
         String trimmedDiagnosis = diagnosis.trim();
-        if (!Diagnosis.isValidDiagnosis(trimmedDiagnosis)) {
-            throw new ParseException((Diagnosis.MESSAGE_NAME_CONSTRAINTS));
+        String trimmedDoctor = doctor.trim();
+        if (!Diagnosis.isValidDoctor(trimmedDoctor)) {
+            throw new ParseException(Diagnosis.MESSAGE_NAME_CONSTRAINTS_DOCTOR);
         }
-        return new Diagnosis(trimmedDiagnosis);
+        if (!Diagnosis.isValidDiagnosis(trimmedDiagnosis)) {
+            throw new ParseException(Diagnosis.MESSAGE_NAME_CONSTRAINT_DIAGNOSIS);
+        }
+        return new Diagnosis(trimmedDiagnosis, trimmedDoctor);
     }
     // @@ GAO JIAXIN
     /**

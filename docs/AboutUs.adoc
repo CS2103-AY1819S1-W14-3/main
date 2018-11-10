@@ -4,14 +4,14 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-Hospital Management System 2K18 (HMS) was developed by the https://github.com/orgs/CS2103-AY1819S1-W14-3/teams/developers[W14-3] team. +
+HealthBase was developed by the https://github.com/orgs/CS2103-AY1819S1-W14-3/teams/developers[W14-3] team. +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
 === Zhang Yuntong
 image::yuntongzhang.png[width="150", align="left"]
-{empty}[[homepage]] [https://github.com/yuntongzhang[github]] [<<johndoe#, portfolio>>]
+{empty}[[homepage]] [https://github.com/yuntongzhang[github]] [<<yuntongzhang#, portfolio>>]
 
 Role: Developer + Git Expert +
 Responsibilities: In charge of integration +
@@ -20,7 +20,7 @@ Responsibilities: In charge of integration +
 
 === Darien Chong
 image::snajef.png[width="150", align="left"]
-{empty}[http://github.com/snajef[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/snajef[github]] [<<snajef#, portfolio>>]
 
 Role: Developer + Gradle Expert +
 Responsibilities: In charge of the `Model` component +
@@ -29,7 +29,7 @@ Responsibilities: In charge of the `Model` component +
 
 === Ling Zhiyu
 image::omegafishy.png[width="150", align="left"]
-{empty}[http://github.com/omegafishy[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/omegafishy[github]] [<<omegafishy#, portfolio>>]
 
 Role: Developer +
 Responsibilities: TBD +
@@ -38,7 +38,7 @@ Responsibilities: TBD +
 
 === Jefferson Sie
 image::jeffypie369.jpg[width="150", align="left"]
-{empty}[http://github.com/jeffypie369[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/jeffypie369[github]] [<<jeffypie369#, portfolio>>]
 
 Role: Developer +
 Responsibilities: TBD +
@@ -47,7 +47,7 @@ Responsibilities: TBD +
 
 === Gao Jiaxin
 image::gaojiaxin666.png[width="150", align="left"]
-{empty}[http://github.com/gaojiaxin666[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/gaojiaxin666[github]] [<<GAOJIAXIN666#, portfolio>>]
 
 Role: Developer +
 Responsibilities: TBD +

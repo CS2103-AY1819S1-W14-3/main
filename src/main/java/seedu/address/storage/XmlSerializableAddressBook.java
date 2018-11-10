@@ -19,9 +19,14 @@ import seedu.address.model.person.Person;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_CHECKED_OUT_PERSON =
+        "CheckedOutPersons list contains duplicate person(s).";
 
-    @XmlElement
+    @XmlElement(name = "person")
     private List<XmlAdaptedPerson> persons;
+
+    @XmlElement(name = "checkedout")
+    private List<XmlAdaptedPerson> checkedOutPersons;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +34,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
+        checkedOutPersons = new ArrayList<>();
     }
 
     /**
@@ -37,10 +43,12 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        checkedOutPersons.addAll(src.getCheckedOutPersonList().stream()
+            .map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.
@@ -54,6 +62,14 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+
+        for (XmlAdaptedPerson p : checkedOutPersons) {
+            Person person = p.toModelType();
+            if (addressBook.hasCheckedOutPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CHECKED_OUT_PERSON);
+            }
+            addressBook.addCheckedOutPerson(person);
+        }
         return addressBook;
     }
 
@@ -66,6 +82,7 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableAddressBook) other).persons)
+            && checkedOutPersons.equals(((XmlSerializableAddressBook) other).checkedOutPersons);
     }
 }

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -40,14 +42,41 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasCheckedOutPerson_nullPerson_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasCheckedOutPerson(null);
+    }
+
+    @Test
+    public void hasCheckedOutPerson_personNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasCheckedOutPerson(ALICE));
+    }
+
+    @Test
+    public void hasCheckedOutPerson_personInAddressBook_returnsTrue() {
+        AddressBook internalAddressBook = new AddressBook();
+        internalAddressBook.addCheckedOutPerson(ALICE);
+        modelManager.resetData(internalAddressBook);
+        assertTrue(modelManager.hasCheckedOutPerson(ALICE));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
     }
 
     @Test
+    public void getFilteredCheckedOutPersonList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredCheckedOutPersonList().remove(0);
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+            .withPerson(ALICE).withPerson(BENSON)
+            .withCheckedOutPerson(CARL).withCheckedOutPerson(DANIEL).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -34,8 +34,6 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
         + "to set the current selection, but it is not null.";
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final String loggingPrefix = "[" + getClass().getName() + "]: ";
-
-    private HashMap<Integer, TableColumn<Prescription, String>> colIdxToCol = new HashMap<>();
 
     // Remember to set the fx:id of the elements in the .fxml file!
     @javafx.fxml.FXML
@@ -80,16 +78,6 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
         this.persons = persons;
         this.sortOrder = FXCollections.observableArrayList(new ArrayList<>());
         registerAsAnEventHandler(this);
-
-        // For easy reference when sorting later.
-        colIdxToCol.put(1, drugNameCol);
-        colIdxToCol.put(2, dosageCol);
-        colIdxToCol.put(3, dosageUnitCol);
-        colIdxToCol.put(4, dosesPerDayCol);
-        colIdxToCol.put(5, startDateCol);
-        colIdxToCol.put(6, endDateCol);
-        colIdxToCol.put(7, durationCol);
-        colIdxToCol.put(8, activePrescriptionCol);
     }
 
     /**
@@ -101,8 +89,72 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
             tc.setSortType(sortType);
         }
 
+        setCustomComparatorsForColumns();
+
         prescriptionTableView.getSortOrder().setAll(sortOrder);
         prescriptionTableView.sort();
+    }
+
+    /**
+     * Sets the custom comparators we use.
+     */
+    private void setCustomComparatorsForColumns() {
+        /**
+         *  Yes, this is in a sense implicit coupling between the
+         *  Duration class and this Ui component. No, I don't have
+         *  a better way to do this.
+         */
+        Function<String[], Integer> durationAsInteger = arr -> {
+            int result = 0;
+            for (String item : arr) {
+                String[] items = item.split(" ");
+                switch (items[1]) {
+                case "year(s)":
+                    result += Integer.parseInt(items[0]) * 365;
+                    break;
+                case "month(s)":
+                    result += Integer.parseInt(items[0]) * 30;
+                    break;
+                case "week(s)":
+                    result += Integer.parseInt(items[0]) * 7;
+                    break;
+                case "day(s)":
+                    result += Integer.parseInt(items[0]);
+                    break;
+                default:
+                    break;
+                }
+            }
+
+            return result;
+        };
+
+        // We need to set a few custom comparators because
+        // JavaFX stores our data entries as Strings, so
+        // it sorts them by lexicographical order. This is not
+        // desired behaviour when working with numbers and the like,
+        // so we need a few custom comparators to fix that.
+        dosageCol.comparatorProperty().set((d1, d2) -> {
+            double doseOne = Double.parseDouble(d1);
+            double doseTwo = Double.parseDouble(d2);
+
+            return Double.compare(doseOne, doseTwo);
+        });
+
+        dosesPerDayCol.comparatorProperty().set((d1, d2) -> {
+            int dosesPerDayOne = Integer.parseInt(d1);
+            int dosesPerDayTwo = Integer.parseInt(d2);
+
+            return Double.compare(dosesPerDayOne, dosesPerDayTwo);
+        });
+
+        durationCol.comparatorProperty().set((d1, d2) -> {
+            // More implicit coupling.
+            String[] d1arr = d1.split(", ");
+            String[] d2arr = d2.split(", ");
+
+            return Integer.compare(durationAsInteger.apply(d1arr), durationAsInteger.apply(d2arr));
+        });
     }
 
     /**
@@ -128,7 +180,7 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
      * helps to refresh our reference to the currently selected {@code Person} object
      * to point to the new {@code Person} object.
      */
-    private Person getNewReferenceToPerson(Person p) {
+    private Person getNewReferenceToPerson() {
         return persons.filtered(person -> currentSelection.isSamePerson(person)).get(0);
     }
     /**
@@ -264,12 +316,16 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
 
         sortOrder.clear();
 
+        ObservableList<TableColumn<Prescription, ?>> columns = prescriptionTableView.getColumns();
+
         for (int i = 0; i < colIdx.length; i++) {
-            TableColumn<Prescription, String> col = colIdxToCol.get(colIdx[i]);
-            if (col == null) {
+            // Recall that the column indices passed in are 1-indexed.
+            if (colIdx[i] < 1 || colIdx[i] > columns.size()) {
                 // No corresponding column for that column index exists
                 continue;
             }
+
+            TableColumn<Prescription, ?> col = columns.get(colIdx[i] - 1);
             sortOrder.add(col);
         }
 
@@ -300,7 +356,7 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
             return;
         }
 
-        currentSelection = getNewReferenceToPerson(currentSelection);
+        currentSelection = getNewReferenceToPerson();
         refreshView();
         sortTableView();
     }

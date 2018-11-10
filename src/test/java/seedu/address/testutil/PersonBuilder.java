@@ -4,7 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentsList;
+import seedu.address.model.diet.Diet;
+import seedu.address.model.diet.DietCollection;
+import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
@@ -22,7 +26,7 @@ import seedu.address.model.visitor.VisitorList;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-    public static final String DEFAULT_NRIC = "S1234567A";
+    public static final String DEFAULT_NRIC = "S0000100Z";
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
@@ -38,7 +42,7 @@ public class PersonBuilder {
     private PrescriptionList prescriptionList;
     private VisitorList visitorList;
     private AppointmentsList appointmentsList;
-
+    private DietCollection dietCollection;
 
     public PersonBuilder() {
         nric = new Nric(DEFAULT_NRIC);
@@ -51,6 +55,7 @@ public class PersonBuilder {
         medicalHistory = new MedicalHistory();
         visitorList = new VisitorList();
         appointmentsList = new AppointmentsList();
+        dietCollection = new DietCollection();
     }
 
     /**
@@ -63,10 +68,11 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        medicalHistory = new MedicalHistory(personToCopy.getMedicalHistory());
+        medicalHistory = personToCopy.getMedicalHistory();
         prescriptionList = personToCopy.getPrescriptionList();
         visitorList = new VisitorList(personToCopy.getVisitorList());
         appointmentsList = personToCopy.getAppointmentsList();
+        dietCollection = personToCopy.getDietCollection();
     }
 
     /**
@@ -129,8 +135,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code ArrayList<Diagnosis> medicalhistory} of the {@code Person} that we are building.
      */
-    public PersonBuilder withMedicalHistory(MedicalHistory mh) {
-        this.medicalHistory = mh;
+    public PersonBuilder withMedicalHistory(List<Diagnosis> medicalHistory) {
+        this.medicalHistory = new MedicalHistory(medicalHistory);
         return this;
     }
 
@@ -145,8 +151,18 @@ public class PersonBuilder {
     /**
      * Sets the {@code AppointmentsList} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAppointmentsList(AppointmentsList appointmentsList) {
+    public PersonBuilder withAppointmentsList(List<Appointment> appointmentsList) {
         this.appointmentsList = new AppointmentsList(appointmentsList);
+        return this;
+    }
+
+    /**
+     * Sets the {@code DietCollection} of the {@code Person} that we are building.
+     * @param dietSet The set of Diet which this person should have.
+     * @return The updated PersonBuilder.
+     */
+    public PersonBuilder withDietCollection(Set<Diet> dietSet) {
+        this.dietCollection = new DietCollection(dietSet);
         return this;
     }
 
@@ -154,8 +170,8 @@ public class PersonBuilder {
      * construct person class
      */
     public Person build() {
-        return new Person(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, appointmentsList,
-                visitorList);
+        return new Person(nric, name, phone, email, address, tags, prescriptionList, appointmentsList,
+                medicalHistory, visitorList);
     }
 
 }

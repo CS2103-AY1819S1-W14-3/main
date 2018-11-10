@@ -44,7 +44,8 @@ public class AddmhCommandTest {
         thrown.expect(NullPointerException.class);
 
         Person validPerson = new PersonBuilder().withMedicalHistory(SampleDataUtil.getSampleMedicalHistory()).build();
-        Diagnosis validPersonRecord = new Diagnosis("Prescribed patient with 2g paracetamol for slight fever");
+        Diagnosis validPersonRecord = new Diagnosis("Prescribed patient with 2g paracetamol for slight fever",
+                "Dr. Zhang");
         new AddmhCommand(null, validPersonRecord);
     }
 
@@ -52,7 +53,8 @@ public class AddmhCommandTest {
     public void execute_patientRecordAcceptedByModel_addSuccessful() throws Exception {
         Person validPerson = new PersonBuilder().build();
         Nric validPersonNric = validPerson.getNric();
-        Diagnosis validPersonRecord = new Diagnosis("Prescribed patient with 2g paracetamol for slight fever");
+        Diagnosis validPersonRecord = new Diagnosis("Prescribed patient with 2g paracetamol for slight fever",
+                "Dr. Zhang");
 
         ModelStubWithRegisteredPatient modelStub = new ModelStubWithRegisteredPatient(validPerson);
         CommandResult commandResult = new AddmhCommand(validPersonNric, validPersonRecord)
@@ -69,7 +71,8 @@ public class AddmhCommandTest {
         CommandTestUtil.ModelStub modelStub = new ModelStubWithRegisteredPatient(validPerson);
 
         Person diffValidPerson = new PersonBuilder().withNric("S9121222A").withName("Zhang Xin Ze").build();
-        Diagnosis record = new Diagnosis("Prescribed patient with 2g paracetamol for slight fever");
+        Diagnosis record = new Diagnosis("Prescribed patient with 2g paracetamol for slight fever",
+                "Dr. Ling");
         AddmhCommand addmhCommand = new AddmhCommand(diffValidPerson.getNric(), record);
 
         thrown.expect(CommandException.class);
@@ -81,8 +84,8 @@ public class AddmhCommandTest {
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        Diagnosis aliceDiagnosis = new Diagnosis("Alice has an unknown illness");
-        Diagnosis bobDiagnosis = new Diagnosis("Bob has a chronic knee injury");
+        Diagnosis aliceDiagnosis = new Diagnosis("Alice has an unknown illness", "Dr. Zhang");
+        Diagnosis bobDiagnosis = new Diagnosis("Bob has a chronic knee injury", "Dr Sie");
         AddmhCommand addAliceMhCommand = new AddmhCommand(alice.getNric(), aliceDiagnosis);
         AddmhCommand addBobMhCommand = new AddmhCommand(bob.getNric(), bobDiagnosis);
 

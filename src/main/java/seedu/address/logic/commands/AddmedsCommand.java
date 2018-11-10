@@ -15,6 +15,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.AppointmentsList;
+import seedu.address.model.diet.DietCollection;
+import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.person.Address;
@@ -24,7 +26,9 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.visitor.VisitorList;
 
+//@@author snajef
 /**
  * Adds a person to the address book.
  */
@@ -103,8 +107,12 @@ public class AddmedsCommand extends Command {
         Address address = personToEdit.getAddress();
         Set<Tag> tags = personToEdit.getTags();
         AppointmentsList appointmentsList = personToEdit.getAppointmentsList();
+        MedicalHistory medicalHistory = personToEdit.getMedicalHistory();
+        DietCollection dietCollection = personToEdit.getDietCollection();
+        VisitorList visitorList = personToEdit.getVisitorList();
 
-        return new Person(nric, name, phone, email, address, tags, updatedMedicineList, appointmentsList);
+        return new Person(nric, name, phone, email, address, tags,
+            updatedMedicineList, appointmentsList, medicalHistory, dietCollection);
     }
 
     /**

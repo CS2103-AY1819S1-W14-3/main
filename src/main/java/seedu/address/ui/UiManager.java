@@ -32,7 +32,7 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String MESSAGE_NO_SUCH_PANEL = "No such panel exists!";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/hospital-icon-png-12.png";
 
     private Logic logic;
     private Config config;

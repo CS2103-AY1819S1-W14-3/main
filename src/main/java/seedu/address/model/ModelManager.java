@@ -22,6 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook internalAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> filteredCheckedOutPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         internalAddressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(internalAddressBook.getPersonList());
+        filteredCheckedOutPersons = new FilteredList<>(internalAddressBook.getCheckedOutPersonList());
     }
 
     public ModelManager() {
@@ -63,6 +65,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasCheckedOutPerson(Person person) {
+        requireNonNull(person);
+        return internalAddressBook.hasCheckedOutPerson(person);
+    }
+
+    @Override
+    public void checkOutPerson(Person person) {
+        internalAddressBook.checkOutPerson(person);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void reCheckInPerson(Person person) {
+        internalAddressBook.reCheckInPerson(person);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         internalAddressBook.removePerson(target);
         indicateAddressBookChanged();
@@ -87,11 +107,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code AddressBook}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code checkedOutPerson} backed by the internal list of
+     * {@code AddressBook}
+     */
+    @Override
+    public ObservableList<Person> getFilteredCheckedOutPersonList() {
+        return FXCollections.unmodifiableObservableList(filteredCheckedOutPersons);
     }
 
     @Override

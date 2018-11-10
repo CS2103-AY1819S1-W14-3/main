@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <persons>
+    <person>
     	<nric>S1234567A</nric>
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S2345678B</nric>
         <name>Ruth Mueller</name>
         <phone isPrivate="false">87249245</phone>
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S3456789C</nric>
         <name>Heinz Kurz</name>
         <phone isPrivate="false">95352563</phone>
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S4567890D</nric>
         <name>Cornelia Meier</name>
         <phone isPrivate="false">87652533</phone>
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S5678901E</nric>
         <name>Werner Meyer</name>
         <phone isPrivate="false">9482224</phone>
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S6789012F</nric>
         <name>Lydia Kunz</name>
         <phone isPrivate="false">9482427</phone>
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S7890123G</nric>
         <name>Anna Best</name>
         <phone isPrivate="false">9482442</phone>
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S8901234H</nric>
         <name>Stefan Meier</name>
         <phone isPrivate="false">8482424</phone>
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
+    </person>
+    <person>
     	<nric>S9012345I</nric>
         <name>Martin Mueller</name>
         <phone isPrivate="false">8482131</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
-    </persons>
+    </person>
 </addressbook>

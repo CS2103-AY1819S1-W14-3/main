@@ -1,0 +1,63 @@
+= Zhang Yuntong - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: HealthBase
+
+---
+
+== Overview
+
+This portfolio documents my contributions to the development of application for CS2103T (Software Engineering) project, as part of the team W14-3. My contributions mainly include the addition of a new command and project management.
+
+HealthBase is a desktop application designed to aid in the management of clinics and hospitals. Doctors and nurses can use this application to record patient information such as medical history, medication, dietary requirement and medical appointments, through a command line interface. Besides, receptionists can use this application to register the visitors for each patient. The recorded data can be viewed through a graphical user interface.
+
+== Summary of contributions
+
+* *Major enhancement*: added *`adddiet` command*
+** What it does: allows the user enter dietary requirements information for a given patient.
+** Justification: This feature enables the dietary information of a patient to be recorded upon checking in or being registered, and to be reviewed subsequently, so that the nurses can prepare food for patients efficiently.
+** Highlights: This enhancement brings a unique feature for the application, which is not usually included in other hospital management systems. There are three types of dietary requirements included, so the implementation required to take into consideration how to separate different types of dietary requirements.
+** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+
+* *Minor enhancement*: added a view panel that allows the user to inspect the added dietary requirements of a patient.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
+*** Managed the project dashboard on Github
+** Enhancements to existing features:
+*** Refactored `checkin` command to `register` command (Commit: `link to commit`)
+*** Updated the user interface mockup to be consistent with our proposed product (Pull request https://github.com/CS2103-AY1819S1-W14-3/main/pull/18[#18])
+** Documentation:
+*** Updated the User Guide to be aligned with the newly created `adddiet` command: https://github.com/CS2103-AY1819S1-W14-3/main/pull/83[#83]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/20[#20], https://github.com/CS2103-AY1819S1-W14-3/main/pull/22[#22], https://github.com/CS2103-AY1819S1-W14-3/main/pull/29[#29], https://github.com/CS2103-AY1819S1-W14-3/main/pull/82[#82], https://github.com/CS2103-AY1819S1-W14-3/main/pull/95[#95], https://github.com/CS2103-AY1819S1-W14-3/main/pull/110[#110]
+*** Assisted teammates during integration of code for each release
+*** Contributed to forum discussions (examples: `coming soon`)
+*** Reported bugs and suggestions for other teams in the class (examples: `coming soon`)
+** Tools:
+*** nil
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=adddiet]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=adddiet]

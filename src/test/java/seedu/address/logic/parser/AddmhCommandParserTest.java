@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIAGNOSIS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DOCTOR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -25,7 +26,7 @@ public class AddmhCommandParserTest {
     public void setUp() throws IllegalValueException {
         parser = new AddmhCommandParser();
         patientNric = new Nric(VALID_NRIC_BOB);
-        diagnosis = new Diagnosis(VALID_DIAGNOSIS);
+        diagnosis = new Diagnosis(VALID_DIAGNOSIS, VALID_DOCTOR);
     }
 
     @Test

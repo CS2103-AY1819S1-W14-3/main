@@ -1,4 +1,4 @@
-= Hospital Management System 2K18 - Developer Guide
+= HealthBase - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -337,20 +337,20 @@ This is done by adding appointment-related information to a given person, repres
 This allows for users to track the upcoming appointments for every patient.
 
 The adding of appointment-related information is facilitated by the following classes:
+
 * `AppointmentsList`, a list of
 ** `Appointment`, each of which have a
 *** `Type`
 
 A more detailed description of the classes follows below:
+
 * `AppointmentsList`
 ** Every `Person` has an `AppointmentsList`, the purpose of which is to store all `Appointment` belonging to a `Person`.
 ** A wrapper class around the internal representation of a list of appointments that exposes only a few select methods in the `List` API.
 *** The methods relevant to the `addappt` command from the API are: `add`.
-
 * `Appointment`
 ** Class encapsulating all the information about a particular appointment.
 *** These information include the type of appointment (enum Type), name of the procedure, date and time of the appointment and the name of the doctor-in-charge of the appointment
-
 * `Type`
 ** An enumeration that covers all the different types of medical procedures. The four types are:
 *** `PROPAEDEUTIC`, with `PROP` as abbreviation
@@ -364,9 +364,9 @@ At the end of the explanation is a link:{repoURL}/src/main/docs/images/AddApptSe
 The user executes `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper`.
 This command has the following intent: Record the following appointment to a patient with NRIC = S1234567A:
 
-[cols="1,2a,1", options="header"]
+[cols="1,2a,2,2", options="header"]
 |===
-|Appointment type |Procedure name |Date and time |Doctor-in-charge
+|Appt. type |Procedure name |Date and time |Doctor-in-charge
 
 |`SRG`
 |Heart Bypass
@@ -404,37 +404,35 @@ image::AddApptSequenceDiagram.png[width="800"]
 ** Pros: Makes the process easier to handle.
 ** Cons: Makes the code more difficult to read.
 
-=== Addmh/viewmh
+// tag::addmh[]
+=== Addmh
 ==== Current implementation
 
-The functionalities of the `addmh` and `viewmh` command are interlinked: the former allows the user to record a diagnosis
+The functionalities of the `addmh` command are interlinked: the former allows the user to record a diagnosis
 into a patient’s medical history, while the latter permits the viewing of a patient’s past diagnoses as recorded in
 medical history.
 
 Each patient’s information is stored within the `Person` objects. The execution of the `addmh` command results in the retrieval of
 a particular `Person` object, and the consequent updating of the patient’s `MedicalHistory`.
 
-Similarly, the `viewmh` command retrieves a particular `Person` object and displays the `Person`’s  stored `MedicalHistory`.
 
 Stated below is an example usage scenario and an explanation of the interactions that occurs as a result of the code execution.
 
 The user executes the following commands:
 
 * `addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol`
-* `viewmh ic/S9123124A`
 
 *Intent*
 
 The purpose of the keyed `addmh` command line is to register and record a diagnosis under the registered patient with
-the `NRIC` S9123124A. Subsequently, the `viewmh` command line accesses the `MedicalHistory` stored within the `Person`
-with `NRIC` S9123124A and displays in the command prompt box.
+the `NRIC` S9123124A.
 
 ==== Command execution
 
 The sequence diagram below shows the execution of the given scenario:
 
-.Execution sequence of the `addmh` and `viewmh` commands
-image::AddmhViewmhSequenceDiagram.png[width="800"]
+.Execution sequence of the `addmh` command
+image::AddmhSequenceDiagram.png[width="800"]
 
 * `addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol`
 ** When the user-executed `addmh` line is passed into an instance of the LogicManager class, the method `AddressBookParser::parse` is executed.
@@ -446,23 +444,18 @@ image::AddmhViewmhSequenceDiagram.png[width="800"]
 
 *** In the `AddmhCommand#execute` method, a new `MedicalHistory` object is added to a new copy of the `Person` object.
 *** The new `Person` object is updated by the model by the `Model::updatePerson` method.
-*** A new `CommandResult` object is returned and the execution ends.
-
-* `viewmh ic/S9123124A`
-** Similarly, the `viewmh` line is passed to and parsed by the same `LogicManager` instance.
-With the supplied arguments in the command, the `AddressBookParser` object creates a `ViewmhParser`, which subsequently
-instantiates a new `ViewmhCommand` object.
-** The `ViewmhCommand#execute` method when executed, retrieves the `Person` with the matching `NRIC` and displays his
-`MedicalHistory`, and the execution ends.
+*** A new `CommandResult` object is returned.
 
 * Command execution ends.
-
 
 ****
 NOTE: If multiple patients with the entered `NRIC` exist, then the `AddmhCommand::execute` will throw a `CommandException`
 with an appropriate error message before the use case ends.
 ****
 
+==== Design Considerations
+
+// end::addmh[]
 // tag::adddiet[]
 === Adddiet
 
@@ -807,7 +800,7 @@ Here are the steps to create a new release.
 
 === Managing dependencies
 
-A project often depends on third-party libraries. For example, Hospital Management System 2K18 depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
+A project often depends on third-party libraries. For example, HealthBase depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
@@ -851,7 +844,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `Hospital Management System 2K18 (HMS)` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `HealthBase` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: delete patients
@@ -859,9 +852,9 @@ _{More to be added}_
 *MSS*
 
 1.  User requests to list patients
-2.  HMS shows a list of patients
+2.  HealthBase shows a list of patients
 3.  User requests to delete a specific patient in the list
-4.  HMS deletes the patient
+4.  HealthBase deletes the patient
 +
 Use case ends.
 
@@ -875,7 +868,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. HMS shows an error message.
+** 3a1. HealthBase shows an error message.
 +
 Use case resumes at step 2.
 
@@ -885,7 +878,7 @@ Use case resumes at step 2.
 *MSS*
 
 1.  Doctor requests to list patient’s medical details
-2.  HMS shows a list of the patient’s medical details
+2.  HealthBase shows a list of the patient’s medical details
 +
 Use case ends.
 
@@ -895,7 +888,7 @@ Use case ends.
 * 2a. The patient does not exist.
 +
 [none]
-** 2a1. HMS shows an error message.
+** 2a1. HealthBase shows an error message.
 +
 Use case ends.
 
@@ -905,7 +898,7 @@ Use case ends.
 *MSS*
 
 1.  Doctor/Pharmacist requests to list patient’s current medication
-2.  HMS shows a list of the patient’s current medication
+2.  HealthBase shows a list of the patient’s current medication
 +
 Use case ends.
 
@@ -915,7 +908,7 @@ Use case ends.
 * 2a. The patient does not exist.
 +
 [none]
-** 2a1. HMS shows an error message.
+** 2a1. HealthBase shows an error message.
 +
 Use case ends.
 
@@ -925,9 +918,9 @@ Use case ends.
 *MSS*
 
 1.  User searches the name of a patient
-2.  HMS shows a list of patients
+2.  HealthBase shows a list of patients
 3.  User requests to view a patient’s dietary details
-4.  HMS shows requested details
+4.  HealthBase shows requested details
 +
 Use case ends.
 
@@ -941,7 +934,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. HMS shows an error message.
+** 3a1. HealthBase shows an error message.
 +
 Use case ends.
 
@@ -951,7 +944,7 @@ Use case ends.
 *MSS*
 
 1.  Counter staff inputs the visited patient’s number
-2.  HMS displays the number of visitors the patiently currently has
+2.  HealthBase displays the number of visitors the patiently currently has
 3.  Visitor is registered
 
 +
@@ -963,7 +956,7 @@ Use case ends.
 * 2a. Number of visitors for that patient exceeds maximum number allowed.
 +
 [none]
-** 2a1. HMS rejects visitor.
+** 2a1. HealthBase rejects visitor.
 +
 Use case ends.
 
@@ -986,12 +979,12 @@ Use case ends
 Use case ends.
 
 [discrete]
-=== Use case: Checkin patient
+=== Use case: Register patient
 *MSS*
 
-1.  Counter nurse request to check in patient
+1.  Counter nurse request to register a new patient
 2.  Counter nurse inputs the patient's NRIC
-3.  HMS adds the patient into the patient queue
+3.  HealthBase adds the patient into the patient queue
 +
 Use case ends
 
@@ -999,15 +992,15 @@ Use case ends
 
 [none]
 * 1a. The patient is already checked in.
-**  1a1. HMS shows an error message.
+**  1a1. HealthBase shows an error message.
 +
 Use case resumes at step 2.
 * 2a. The patient has no existing data.
-**  2a1. HMS prompts for additional data.
+**  2a1. HealthBase prompts for additional data.
 +
 User case resumes at step 2.
 [none]
-** 3a1. HMS shows an error message.
+** 3a1. HealthBase shows an error message.
 +
 Use case resumes at step 2.
 
@@ -1019,7 +1012,7 @@ Use case resumes at step 2.
 1.  Counter nurse request to checkout patient
 2.  Counter nurse inputs the details for the patient to be checked out.
 3.  User requests to delete a specific person in the list
-4.  HMS removes the patient from patient queue
+4.  HealthBase removes the patient from patient queue
 +
 Use case ends.
 
@@ -1031,7 +1024,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. HMS shows an error message.
+** 3a1. HealthBase shows an error message.
 +
 Use case resumes at step 2.
 
@@ -1068,7 +1061,7 @@ Past records of healthcare visits, pre-existing medical conditions
 [[authorised-visitors]] Authorised visitors::
 Upon check-in of patient, the information of permitted visitors entered
 
-[[checkin]] Checkin::
+[[register]] Register::
 Patient registers at the hospital
 
 [[checkout]] Checkout::
@@ -1097,6 +1090,30 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The most recent window size and location is retained.
 
 _{ more test cases ... }_
+
+=== Generating test data
+. Generating patients with mock data
+
+.. Open the application.
+.. Run the following commands in the following sequence:
+... `dev-mode` (Enables developer mode; the next command requires developer mode to run.)
+... `gendata NUMBER_OF_PATIENTS`, where `NUMBER_OF_PATIENTS` is a positive integer value that indicates how many patients you wish to generate.
+
+The application will then generate that number of patients with mock data for their:
+
+. Personal particulars
+.. NRIC
+.. Name
+.. Phone number
+.. Email address
+.. Physical address
+. Drug allergies
+. Medications
+. Appointments
+. Dietary restrictions
+. Medical history
+
+Details on the exact range of values that the mock data can take on can be found in the related `.java` files.
 
 === Deleting a patient
 

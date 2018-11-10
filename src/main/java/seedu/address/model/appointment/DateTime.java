@@ -13,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class DateTime {
     public static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    public static final String MESSAGE_DATE_TIME_BEFORE_NOW = "Duration must be a positive value!";
+    public static final String MESSAGE_DATE_TIME_BEFORE_NOW = "Date and time must be after current date and time";
     // TODO: improve time to be restricted
     public static final String DATE_TIME_VALIDATION_REGEX = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)"
             + "(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1"

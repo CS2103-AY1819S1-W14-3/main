@@ -1,126 +1,139 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+//@@author yuntongzhang
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Test driver for CheckinCommand class.
+ * @author yuntongzhang
+ */
 public class CheckinCommandTest {
-
-    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private Person patient;
+    private Nric patientNric;
     private CommandHistory commandHistory = new CommandHistory();
 
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new CheckinCommand(null);
+    @Before
+    public void setUp() {
+        patient = new PersonBuilder().build();
+        patientNric = patient.getNric();
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new CheckinCommand(validPerson).execute(modelStub, commandHistory);
-
-        assertEquals(String.format(CheckinCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    public void constructor_nullNric_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new CheckinCommand(null));
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        CheckinCommand checkinCommand = new CheckinCommand(validPerson);
-        CommandTestUtil.ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_checkinExistingRecord_checkinSuccessful() throws CommandException {
+        ModelStubAcceptingCheckin modelStub = new ModelStubAcceptingCheckin();
+        CommandResult commandResult = new CheckinCommand(patientNric).execute(modelStub, commandHistory);
+
+        assertEquals(commandResult.feedbackToUser, String.format(CheckinCommand.MESSAGE_SUCCESS, patientNric));
+        assertEquals(Arrays.asList(patient), modelStub.persons);
+        assertTrue(modelStub.checkedOutPersons.isEmpty());
+    }
+
+    @Test
+    public void execute_checkinNonExistingRecord_throwsCommandException() throws Exception {
+        ModelStubAcceptingCheckin modelStub = new ModelStubAcceptingCheckin();
+        Nric nonExistingNric = DANIEL.getNric();
+        CheckinCommand command = new CheckinCommand(nonExistingNric);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(CheckinCommand.MESSAGE_DUPLICATE_PERSON);
-        checkinCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(String.format(CheckinCommand.MESSAGE_RECORD_NOT_FOUND, nonExistingNric));
+        command.execute(modelStub, commandHistory);
     }
+
+    //TODO: another test to check the situation when a person is already checked in.
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        CheckinCommand checkinAliceCommand = new CheckinCommand(alice);
-        CheckinCommand checkinBobCommand = new CheckinCommand(bob);
+        Person otherPatient = new PersonBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB).build();
+        CheckinCommand checkinCommand = new CheckinCommand(patientNric);
+        CheckinCommand checkinCommandCopy = new CheckinCommand(patientNric);
+        RegisterCommand registerCommand = new RegisterCommand(patient);
+        CheckinCommand checkinOtherNricCommand = new CheckinCommand(otherPatient.getNric());
 
-        // same object -> returns true
-        assertTrue(checkinAliceCommand.equals(checkinAliceCommand));
+        // compare with itself -> returns true
+        assertTrue(checkinCommand.equals(checkinCommand));
 
-        // same values -> returns true
-        CheckinCommand checkinAliceCommandCopy = new CheckinCommand(alice);
-        assertTrue(checkinAliceCommand.equals(checkinAliceCommandCopy));
+        // compare with a copy of the same command -> returns true
+        assertTrue(checkinCommand.equals(checkinCommandCopy));
 
-        // different types -> returns false
-        assertFalse(checkinAliceCommand.equals(1));
+        // compare with a different type of command -> returns false
+        assertFalse(checkinCommand.equals(registerCommand));
 
-        // null -> returns false
-        assertFalse(checkinAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(checkinAliceCommand.equals(checkinBobCommand));
+        // different Nric -> returns false
+        assertFalse(checkinCommand.equals(checkinOtherNricCommand));
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that always accepts checkin commands for a person recorded in the system.
+     * By default, this model stub has a valid person in its checkedOutPersons list at the moment of initialization.
      */
-    private class ModelStubWithPerson extends CommandTestUtil.ModelStub {
-        private final Person person;
+    private class ModelStubAcceptingCheckin extends CommandTestUtil.ModelStub {
+        final ArrayList<Person> persons;
+        final ArrayList<Person> checkedOutPersons;
+        private Person patient;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        public ModelStubAcceptingCheckin() {
+            this.patient = new PersonBuilder().build();
+            this.persons = new ArrayList<>();
+            this.checkedOutPersons = new ArrayList<>();
+
+            checkedOutPersons.add(patient);
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public void reCheckInPerson(Person person) {
+            checkedOutPersons.remove(person);
+            persons.add(person);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            // called by {@code CheckinCommand#execute()}
+            ObservableList<Person> patients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredPatients = new FilteredList<>(patients);
+            return FXCollections.unmodifiableObservableList(filteredPatients);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            // called by {@code CheckinCommand#execute()}
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+            checkedOutPatients.add(patient);
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
     }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends CommandTestUtil.ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }

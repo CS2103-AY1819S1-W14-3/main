@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRUG_ALLERGY_PENICILLIN;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -33,6 +34,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getCheckedOutPersonList());
     }
 
     @Test
@@ -54,7 +56,8 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_DRUG_ALLERGY_PENICILLIN).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Person> checkedOutPersons = Arrays.asList(BENSON);
+        AddressBookStub newData = new AddressBookStub(newPersons, checkedOutPersons);
 
         thrown.expect(DuplicatePersonException.class);
         addressBook.resetData(newData);
@@ -86,24 +89,62 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasCheckedOutPerson_nullPerson_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasCheckedOutPerson(null);
+    }
+
+    @Test
+    public void hasCheckOutPerson_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasCheckedOutPerson(ALICE));
+    }
+
+    @Test
+    public void hasCheckedOutPerson_personInAddressBook_returnsTrue() {
+        addressBook.addCheckedOutPerson(ALICE);
+        assertTrue(addressBook.hasCheckedOutPerson(ALICE));
+    }
+
+    @Test
+    public void hasCheckedOutPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addCheckedOutPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+            .withTags(VALID_DRUG_ALLERGY_PENICILLIN).build();
+        assertTrue(addressBook.hasCheckedOutPerson(editedAlice));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getPersonList().remove(0);
     }
 
+    @Test
+    public void getCheckedOutPersonList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getCheckedOutPersonList().remove(0);
+    }
+
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons list and checkedOutPersons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Person> checkedOutPersons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Person> checkedOutPersons) {
             this.persons.setAll(persons);
+            this.checkedOutPersons.setAll(checkedOutPersons);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Person> getCheckedOutPersonList() {
+            return checkedOutPersons;
         }
     }
 

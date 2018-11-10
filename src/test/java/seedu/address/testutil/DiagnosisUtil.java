@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MED_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -23,7 +24,8 @@ public class DiagnosisUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(AddmhCommand.COMMAND_WORD).append(" ")
                 .append(PREFIX_NRIC).append(nric.toString()).append(" ")
-                .append(PREFIX_MED_HISTORY).append(diagnosis.getDiagnosis());
+                .append(PREFIX_MED_HISTORY).append(diagnosis.getDiagnosis()).append(" ")
+                .append(PREFIX_DOCTOR).append(diagnosis.getDoctorInCharge());
 
         return sb.toString();
     }

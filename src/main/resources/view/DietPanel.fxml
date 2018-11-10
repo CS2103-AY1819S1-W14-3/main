@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="967.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="allergyTableView" layoutX="31.0" layoutY="103.0" prefHeight="377.0" prefWidth="277.0">
+        <columns>
+          <TableColumn fx:id="allergyCol" prefWidth="275.99998474121094" text="Allergy" />
+        </columns>
+      </TableView>
+      <TableView fx:id="physicalDifficultyTableView" layoutX="663.0" layoutY="103.0" prefHeight="377.0" prefWidth="277.0">
+        <columns>
+          <TableColumn fx:id="physicalDifficultyCol" prefWidth="276.0" text="Physical Difficulty" />
+        </columns>
+      </TableView>
+      <TableView fx:id="culturalRequirementTableView" layoutX="336.0" layoutY="103.0" prefHeight="377.0" prefWidth="296.0">
+        <columns>
+          <TableColumn fx:id="culturalRequirementCol" prefWidth="295.0" text="Cultural Requirement" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

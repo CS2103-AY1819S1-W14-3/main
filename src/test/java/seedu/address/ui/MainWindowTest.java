@@ -89,6 +89,10 @@ public class MainWindowTest extends GuiUnitTest {
         throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
         setPrivateFieldFromObject(CURRENT_PANEL_FIELD_NAME, mainWindow, panels.get(SwappablePanelName.MEDICATION));
         mainWindow.sortCurrentPanel(SortOrder.ASCENDING, new int[] { 1 });
+        setPrivateFieldFromObject(CURRENT_PANEL_FIELD_NAME, mainWindow, panels.get(SwappablePanelName.HISTORY));
+        mainWindow.sortCurrentPanel(SortOrder.ASCENDING, new int[] { 1 });
+        setPrivateFieldFromObject(CURRENT_PANEL_FIELD_NAME, mainWindow, panels.get(SwappablePanelName.APPOINTMENT));
+        mainWindow.sortCurrentPanel(SortOrder.ASCENDING, new int[] { 1 });
     }
 
     private Object getPrivateFieldFromObject(String fieldName, Object obj)

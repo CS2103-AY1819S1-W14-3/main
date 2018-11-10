@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Type;
 
 /**
  * JAXB-friendly adapted version of the Appointment
@@ -15,7 +14,7 @@ import seedu.address.model.appointment.Type;
 public class XmlAdaptedAppointment {
 
     @XmlElement(required = true)
-    private Type type;
+    private String type;
 
     @XmlElement(required = true)
     private String procedureName;
@@ -35,7 +34,7 @@ public class XmlAdaptedAppointment {
     /**
      * Constructs a {@code XmlAdaptedAppointment} with the given details.
      */
-    public XmlAdaptedAppointment(Type type, String procedureName, String dateTime, String docName) {
+    public XmlAdaptedAppointment(String type, String procedureName, String dateTime, String docName) {
         this.type = type;
         this.procedureName = procedureName;
         this.dateTime = dateTime;

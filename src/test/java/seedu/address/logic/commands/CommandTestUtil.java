@@ -44,8 +44,9 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-    public static final String VALID_NRIC_AMY = "S1234567A";
-    public static final String VALID_NRIC_BOB = "S2345678B";
+    public static final String VALID_NRIC_AMY = "S0000100H";
+    public static final String VALID_NRIC_BOB = "S0000100K";
+    public static final String VALID_NRIC_CHARLIE = "S0000100L";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -64,6 +65,7 @@ public class CommandTestUtil {
     public static final String VALID_TYPE = Type.SURGICAL.getAbbreviation();
     public static final String VALID_PROCEDURE = "Heart Bypass";
     public static final String VALID_DATE_TIME = "12-12-2022 12:00";
+    public static final String INVALID_DATE_TIME = "12-13-2025 23:30";
     public static final String VALID_DOCTOR = "Dr. Gregory House";
 
     public static final String VALID_DRUGNAME = "Paracetamol";
@@ -78,6 +80,7 @@ public class CommandTestUtil {
 
     public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
     public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
+    public static final String NRIC_DESC_CHARLIE = " " + PREFIX_NRIC + VALID_NRIC_CHARLIE;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -90,7 +93,8 @@ public class CommandTestUtil {
     public static final String DRUG_ALLERGY_DESC_PENICILLIN = " " + PREFIX_DRUG_ALLERGY + VALID_DRUG_ALLERGY_PENICILLIN;
     public static final String VALID_VISITOR_DESC = " " + PREFIX_VISITOR + VALID_VISITOR;
 
-    public static final String VALID_DIAGNOSIS_DESC = " " + PREFIX_MED_HISTORY + VALID_DIAGNOSIS;
+    public static final String VALID_DIAGNOSIS_DESC = " " + PREFIX_MED_HISTORY + VALID_DIAGNOSIS
+            + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
     public static final String VALID_DIET_COLLECTION_DESC = " " + PREFIX_ALLERGY + VALID_ALLERGY
             + " " + PREFIX_CULTURAL_REQUIREMENT + VALID_CULTURAL_REQUIREMENT
@@ -135,8 +139,6 @@ public class CommandTestUtil {
             + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
-    public static final String EMPTY_APPOINTMENT_DESC = "";
-
     public static final String INVALID_APPOINTMENT_DESC_MISSING_TYPE = " " + PREFIX_PROCEDURE + VALID_PROCEDURE
             + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
@@ -147,6 +149,11 @@ public class CommandTestUtil {
 
     public static final String INVALID_APPOINTMENT_DESC_MISSING_DATE_TIME = " " + PREFIX_TYPE + VALID_TYPE
             + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
+            + " " + PREFIX_DOCTOR + VALID_DOCTOR;
+
+    public static final String INVALID_APPOINTMENT_DESC_INVALID_DATE_TIME = " " + PREFIX_TYPE + VALID_TYPE
+            + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
+            + " " + PREFIX_DATE_TIME + INVALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
     public static final String INVALID_APPOINTMENT_DESC_MISSING_DOCTOR = " " + PREFIX_TYPE + VALID_TYPE
@@ -271,6 +278,21 @@ public class CommandTestUtil {
         }
 
         @Override
+        public boolean hasCheckedOutPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void checkOutPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void reCheckInPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -282,6 +304,11 @@ public class CommandTestUtil {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -9,18 +9,22 @@ import seedu.address.model.medicalhistory.Diagnosis;
  */
 public class DiagnosisBuilder {
     private static final String DEFAULT_DIAGNOSIS = "Patient has acute bronchitis.";
+    private static final String DEFAULT_DOCTOR = "Dr. Zhang";
 
     private String diagnosis;
+    private String doctorInCharge;
 
     public DiagnosisBuilder() {
-        diagnosis = DEFAULT_DIAGNOSIS;
+        this.diagnosis = DEFAULT_DIAGNOSIS;
+        this.doctorInCharge = DEFAULT_DOCTOR;
     }
 
     /**
      * Constructs a new diagnosis based on another diagnosis.
      */
     public DiagnosisBuilder(Diagnosis d) {
-        diagnosis = d.getDiagnosis();
+        this.diagnosis = d.getDiagnosis();
+        this.doctorInCharge = d.getDoctorInCharge();
     }
 
     /**
@@ -33,7 +37,7 @@ public class DiagnosisBuilder {
     }
 
     public Diagnosis build() {
-        return new Diagnosis(diagnosis); //todo param naming can be improved
+        return new Diagnosis(diagnosis, doctorInCharge);
     }
 
 }

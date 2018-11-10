@@ -1,4 +1,4 @@
-= Hospital Management System 2K18
+= HealthBase
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2103-AY1819S1-W14-3/main[image:https://travis-ci.org/CS2103-AY1819S1-W14-3/main.svg?branch=master[Build Status]]
@@ -14,7 +14,7 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 * Have you ever wished for a digital alternative to pen and paper management for your hospital? Tired of sifting through boxes of patient records for that one visit you need? Then this is the app for you!
-* Hospital Management System 2K18 can store all your medical data for easy retrieval, anytime!
+* HealthBase can store all your medical data for easy retrieval, anytime!
 ** No longer will you have to wade through reams of documents for that patient record you need!
 ** Never again will you have to go through all the counter staff to find out if that one patient left two hours ago!
 

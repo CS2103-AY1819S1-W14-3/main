@@ -2,13 +2,13 @@ package seedu.address.model.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.medicalhistory.Diagnosis;
-import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -60,20 +60,19 @@ public class SampleDataUtil {
         return Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
     }
 
-
-    //@@ omegafishy
     /**
      * Returns a {@code MedicalHistory} containing an {@code ArrayList<Diagnosis>}, made from a pre-made list of
-     * Strings.
+     * Diagnoses.
      */
-    public static MedicalHistory getSampleMedicalHistory() {
-        String[] records = { "Diagnosed with acute bronchitis, drink more water", "Patient shows symptoms of dengue"
-                + " fever, if fever persists at 39 degrees, ward patient"};
-        ArrayList<Diagnosis> mh = Arrays.stream(records)
-                .map(Diagnosis::new)
-                .collect(Collectors.toCollection(ArrayList::new));
-        MedicalHistory test = new MedicalHistory(mh);
-        return test;
+    public static List<Diagnosis> getSampleMedicalHistory() {
+        Diagnosis[] records = {
+            new Diagnosis("Diagnosed with acute bronchitis, drink more water", "Dr. Zhang"),
+            new Diagnosis("Patient shows symptoms of dengue fever, monitor carefully", "Dr Jeff"),
+            new Diagnosis("Patient is ill", "Dr Ling")
+        };
+        ArrayList<Diagnosis> recordList = Arrays.stream(records)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        return recordList;
     }
     //@@author GAO JIAXIN
     public static VisitorList getSampleVisitorList() {
