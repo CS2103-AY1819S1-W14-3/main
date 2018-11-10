@@ -73,14 +73,30 @@
 </div>
 </li>
 <li>
+<p><strong>Major enhancement</strong>: Added <code>view</code> command (Pull request(s): <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/95">#95</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/127">#127</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/169">#169</a>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: this command adds functionality for users to view patient-specific information in the right-side panel of the UI.</p>
+</li>
+<li>
+<p>Justification: this command provides a code functionality of HealthBase (viewing patient data), while preventing UI clutter.</p>
+</li>
+<li>
+<p>Highlights: this command was designed to be extensible and allows developers to design their own panels for data display without impacting other developers' data displays.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p><strong>Minor enhancement</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Added <code>view</code> command</p>
+<p>Added <code>sort</code> command</p>
 </li>
 <li>
-<p>Added <code>sort</code> command</p>
+<p>Added <code>gendata</code> command</p>
 </li>
 </ul>
 </div>
@@ -687,5 +703,82 @@ The command execution then ends.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="generating-test-data"><a class="link" href="#generating-test-data">Generating test data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generating patients with mock data</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Open the application.</p>
+</li>
+<li>
+<p>Run the following commands in the following sequence:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>dev-mode</code> (Enables developer mode; the next command requires developer mode to run.)</p>
+</li>
+<li>
+<p><code>gendata NUMBER_OF_PATIENTS</code>, where <code>NUMBER_OF_PATIENTS</code> is a positive integer value that indicates how many patients you wish to generate.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 12:35:42 UTC</div></div></div></body></html>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The application will then generate that number of patients with mock data for their:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Personal particulars</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>NRIC</p>
+</li>
+<li>
+<p>Name</p>
+</li>
+<li>
+<p>Phone number</p>
+</li>
+<li>
+<p>Email address</p>
+</li>
+<li>
+<p>Physical address</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Drug allergies</p>
+</li>
+<li>
+<p>Medications</p>
+</li>
+<li>
+<p>Appointments</p>
+</li>
+<li>
+<p>Dietary restrictions</p>
+</li>
+<li>
+<p>Medical history</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Details on the exact range of values that the mock data can take on can be found in the related <code>.java</code> files.</p>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 13:12:30 UTC</div></div></div></body></html>
