@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_MISSING_DOCTOR;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_MISSING_PROCEDURE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_MISSING_TYPE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TIME;
@@ -42,12 +41,6 @@ public class AddApptCommandParserTest {
     public void parse_allFieldsPresent_success() {
         assertParseSuccess(parser, NRIC_DESC_BOB + VALID_APPOINTMENT_DESC,
                 new AddApptCommand(patientNric, appt));
-    }
-
-    @Test
-    public void parse_invalidNric_failure() {
-        assertParseFailure(parser, INVALID_NRIC_DESC_BOB + VALID_APPOINTMENT_DESC,
-                Nric.MESSAGE_NAME_CONSTRAINTS);
     }
 
     @Test
