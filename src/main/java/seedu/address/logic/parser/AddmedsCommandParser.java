@@ -35,7 +35,7 @@ public class AddmedsCommandParser implements Parser<AddmedsCommand> {
     public static final String MESSAGE_DOSAGE_UNIT_FORMAT = "Dosage unit cannot be empty.";
 
     private Pattern emptyString = Pattern.compile("(\\s)*");
-  
+
     /**
      * Parses the given {@code String} of arguments in the context of the
      * AddmedsCommand and returns an AddmedsCommand object for execution.
