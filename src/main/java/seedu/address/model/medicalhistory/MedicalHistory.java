@@ -63,7 +63,6 @@ public class MedicalHistory {
 
     /**
      * Helper method to return a copy of the medical history.
-     * todo add on to this
      */
     public ObservableList<Diagnosis> getObservableCopyOfMedicalHistory() {
         return FXCollections.observableArrayList(new ArrayList<>(medicalHistory));

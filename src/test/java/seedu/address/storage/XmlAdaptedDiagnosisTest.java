@@ -20,7 +20,6 @@ public class XmlAdaptedDiagnosisTest {
     private Diagnosis diagnosis;
     private Diagnosis diagnosisWithDifferentTimestamp;
 
-    //todo this test may be improved, currently comparing string values of timestamp, after formatting
     @Before
     public void setUp() {
         diagnosis = new Diagnosis(VALID_DIAGNOSIS_DESC, VALID_DOCTOR_NAME);

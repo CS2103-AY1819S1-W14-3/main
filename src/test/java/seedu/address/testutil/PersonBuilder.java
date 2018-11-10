@@ -170,8 +170,12 @@ public class PersonBuilder {
      * construct person class
      */
     public Person build() {
-        return new Person(nric, name, phone, email, address, tags, prescriptionList, appointmentsList,
-                medicalHistory, visitorList);
+        return new Person(nric, name, phone, email, address, tags)
+            .withAppointmentsList(appointmentsList)
+            .withDietCollection(dietCollection)
+            .withMedicalHistory(medicalHistory)
+            .withPrescriptionList(prescriptionList)
+            .withVisitorList(visitorList);
     }
 
 }

@@ -1,24 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISITOR;
-
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.visitor.Visitor;
 import seedu.address.model.visitor.VisitorList;
 
@@ -55,7 +47,7 @@ public class VisitoroutCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Person> filteredByNric = model.getFilteredPersonList()
-                .filtered(p -> patientNric.equals(p.getNric()));
+            .filtered(p -> patientNric.equals(p.getNric()));
 
         if (filteredByNric.size() < 1) {
             throw new CommandException(MESSAGE_UNREGISTERED);
@@ -101,13 +93,6 @@ public class VisitoroutCommand extends Command {
         VisitorList updatedVisitorList = patientToEdit.getVisitorList();
         updatedVisitorList.remove(visitor);
 
-        Nric nric = patientToEdit.getNric();
-        Name name = patientToEdit.getName();
-        Phone phone = patientToEdit.getPhone();
-        Email email = patientToEdit.getEmail();
-        Address address = patientToEdit.getAddress();
-        Set<Tag> tags = patientToEdit.getTags();
-
-        return new Person(nric, name, phone, email, address, tags, updatedVisitorList);
+        return patientToEdit.withVisitorList(updatedVisitorList);
     }
 }

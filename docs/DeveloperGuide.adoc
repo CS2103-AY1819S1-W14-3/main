@@ -243,6 +243,157 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::addappt[]
+=== Addappt
+==== Current implementation
+The `addappt` command provides functionality for users to add an appointment for a given patient.
+This is done by adding appointment-related information to a given person, represented by a `Person` object.
+This allows for users to track the upcoming appointments for every patient.
+
+The adding of appointment-related information is facilitated by the following classes:
+
+* `AppointmentsList`, a list of
+** `Appointment`, each of which have a
+*** `Type`
+
+A more detailed description of the classes follows below:
+
+* `AppointmentsList`
+** Every `Person` has an `AppointmentsList`, the purpose of which is to store all `Appointment` belonging to a `Person`.
+** A wrapper class around the internal representation of a list of appointments that exposes only a few select methods in the `List` API.
+*** The methods relevant to the `addappt` command from the API are: `add`.
+* `Appointment`
+** Class encapsulating all the information about a particular appointment.
+*** These information include the type of appointment (enum Type), name of the procedure, date and time of the appointment and the name of the doctor-in-charge of the appointment
+* `Type`
+** An enumeration that covers all the different types of medical procedures. The four types are:
+*** `PROPAEDEUTIC`, with `PROP` as abbreviation
+*** `DIAGNOSTIC`, with `DIAG` as abbreviation
+*** `THERAPEUTIC`, with `THP` as abbreviation
+*** `SURGICAL`, with `SRG` as abbreviation
+
+Given below is an example usage scenario and how the relevant classes behave at each step.
+At the end of the explanation is a link:{repoURL}/src/main/docs/images/AddApptSequenceDiagram.png[sequence diagram] of a typical addappt command execution.
+
+The user executes `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper`.
+This command has the following intent: Record the following appointment to a patient with NRIC = S1234567A:
+
+[cols="1,2a,2,2", options="header"]
+|===
+|Appt. type |Procedure name |Date and time |Doctor-in-charge
+
+|`SRG`
+|Heart Bypass
+|27-04-2019 1030
+|Dr. Pepper
+|===
+
+The command is passed to an instance of the `LogicManager` class, which in turn executes `AddressBookParser::parse`.
+The `AddressBookParser` parses the command word (`addappt`) and executes `AddApptCommandParser::parse`.
+
+The `AddApptCommandParser::parse` method returns an `AddApptCommand` object which encapsulates the necessary information to update the Person 's appointments(s).
+Control then passes back to the `LogicManager`, which calls `AddApptCommand::execute`.
+
+[NOTE]
+If no/multiple patient(s) with that `NRIC` exist(s), then the `AddApptCommand::execute` method will throw a `CommandException` with the appropriate error message and the usage case will end.
+
+The `AddApptCommand::execute` method constructs a new `Person` object using all the details of the old `Person`, with the sole difference being the `AppointmentsList` used being a deep copy of the original `Person`'s `AppointmentsList` with the new `Appointment` added.
+This updated `Person` object is used to update the existing `Person` object using the `Model::updatePerson` method (or an overridden version) of the backing model.
+Finally, the `AddApptCommand::execute` method terminates, returning a `CommandResult` with a success message. The `LogicManager` then returns the same `CommandResult` as the return value of the `LogicManager::execute` method.
+The command execution then ends.
+
+[#img-addapptsequencediagram]
+The following sequence diagram shows the execution of the `addappt` command:
+
+.Execution sequence of the `addappt` command
+image::AddapptSequenceDiagram.png[width="800"]
+
+==== Design considerations
+
+===== Aspect: Representation of types of medical procedures
+* **Alternative 1 (Current implementation):** Use an `Enum` for `Type`
+** Pros: Makes for easier handling of incorrect values.
+** Cons: Requires more effort to filter and retrieve the different types.
+* **Alternative 2:** Have a switch case to handle the different types
+** Pros: Makes the process easier to handle.
+** Cons: Makes the code more difficult to read.
+
+// end::addappt[]
+// tag::adddiet[]
+=== Adddiet
+
+==== Current implementation
+
+The `adddiet` command provides functionality for users to add dietary requirements for a given patient. +
+This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty. +
+This command adds these dietary requirements to a given `Person` , so that the dietary requirements can be viewed later on.
+
+===== Classes involved
+
+The adding of the dietary requirements involve the following classes:
+
+* `DietCollection`, which is a set of
+** `Diet`, which consists of the detail of the requirement and its type
+*** `DietType`.
+
+A more detailed description of the classes involved is as follows:
+
+* `Diet Collection`
+** Every `Person` object has a `Diet Collection`, which is a collection of all the dietary requirements of the given patient.
+** This class is a wrapper class around the internal representation of a `Set` of `Diet` s.
+
+* `Diet`
+** This class encapsulate the information of a single dietary requirement.
+** Specifically, an instance of this class is composed of
+*** a `String` representing the details of the requirement in text, and
+*** a `DietType` representing the type of this dietary requirement (allergy, cultural requirement, or physical difficulty).
+
+* `DietType`
+** This is a `Enum` class representing the three different types of dietary requirements.
+** Implemented as `Enum` class to avoid typo and invalid types being entered.
+
+===== Execution of the command
+
+Given below is an usage scenario and the details when executing `adddiet` command. +
+For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`:
+
+* The command text is passed to an instance of the `Logic Manager` class.
+* The `Logic Manager` instance calls `AddressBookParser#parseCommand`, which parses the `adddiet` command word.
+* Next, the `AddDietCommandParser#parse` method parses the different dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
+* `Logic Manager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
+* In the `AddDietCommand#execute` method, the new `DietCollection` object is added to a new copy of the `Person` object.
+* The new `Person` object is updated to the model by `Model#updatePerson` method.
+* A new `CommandResult` is returned and the execution ends.
+
+[#img-adddietsequencediagram]
+Here is the sequence diagram of the typical execution of an `adddiet` command:
+
+.Execution sequence of the `adddiet` command
+image::AdddietSequenceDiagram.png[width="800"]
+
+==== Design considerations
+
+===== Aspect: How to represent different kinds of dietary requirements
+
+* **Alternative 1 (current implementation):** Use a `Enum` inside the `Diet class` and contain all `Diet` in one collection.
+** Pros: Results in less repetitive code and cleaner design.
+** Cons: Requires more effort to filter or retrieve different types of `Diet` from one `DietCollection`.
+
+* **Alternative 2:** Use polymorphism to extends `Diet` class and add three different collections to a `Person`.
+** Pros: Makes it easier to retrieve different types of dietary requirements.
+** Cons: Results in a lot of repetitive code since the three different types do not differ much.
+
+===== Aspect: Data structure to hold the different `Diet` objects
+
+* **Alternative 1 (current implementation):** Use `HashSet` and override the `hashCode` for `Diet`.
+** Pros: Makes it easier to handle duplication in adding dietary requirement.
+** Cons: Causes the order in which dietary requirements are added to be lost. (However, the sequence is not important for the current set of features implemented.)
+
+* **Alternative 2:** Use `ArrayList`.
+** Pros: Preserves the order in which dietary requirements are added.
+** Cons: Makes it harder to handle duplicates.
+
+// end::adddiet[]
 // tag::addmeds[]
 === Addmeds
 ==== Current implementation
@@ -329,81 +480,6 @@ image::AddmedsSequenceDiagram.png[width="800"]
 ** Cons: Reduces the cohesion of the `Prescription` class as it now handles multiple different items e.g. dosage-related information and duration-related information.
 
 // end::addmeds[]
-// tag::addappt[]
-=== Addappt
-==== Current implementation
-The `addappt` command provides functionality for users to add an appointment for a given patient.
-This is done by adding appointment-related information to a given person, represented by a `Person` object.
-This allows for users to track the upcoming appointments for every patient.
-
-The adding of appointment-related information is facilitated by the following classes:
-
-* `AppointmentsList`, a list of
-** `Appointment`, each of which have a
-*** `Type`
-
-A more detailed description of the classes follows below:
-
-* `AppointmentsList`
-** Every `Person` has an `AppointmentsList`, the purpose of which is to store all `Appointment` belonging to a `Person`.
-** A wrapper class around the internal representation of a list of appointments that exposes only a few select methods in the `List` API.
-*** The methods relevant to the `addappt` command from the API are: `add`.
-* `Appointment`
-** Class encapsulating all the information about a particular appointment.
-*** These information include the type of appointment (enum Type), name of the procedure, date and time of the appointment and the name of the doctor-in-charge of the appointment
-* `Type`
-** An enumeration that covers all the different types of medical procedures. The four types are:
-*** `PROPAEDEUTIC`, with `PROP` as abbreviation
-*** `DIAGNOSTIC`, with `DIAG` as abbreviation
-*** `THERAPEUTIC`, with `THP` as abbreviation
-*** `SURGICAL`, with `SRG` as abbreviation
-
-Given below is an example usage scenario and how the relevant classes behave at each step.
-At the end of the explanation is a link:{repoURL}/src/main/docs/images/AddApptSequenceDiagram.png[sequence diagram] of a typical addappt command execution.
-
-The user executes `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper`.
-This command has the following intent: Record the following appointment to a patient with NRIC = S1234567A:
-
-[cols="1,2a,2,2", options="header"]
-|===
-|Appt. type |Procedure name |Date and time |Doctor-in-charge
-
-|`SRG`
-|Heart Bypass
-|27-04-2019 1030
-|Dr. Pepper
-|===
-
-The command is passed to an instance of the `LogicManager` class, which in turn executes `AddressBookParser::parse`.
-The `AddressBookParser` parses the command word (`addappt`) and executes `AddApptCommandParser::parse`.
-
-The `AddApptCommandParser::parse` method returns an `AddApptCommand` object which encapsulates the necessary information to update the Person 's appointments(s).
-Control then passes back to the `LogicManager`, which calls `AddApptCommand::execute`.
-
-[NOTE]
-If no/multiple patient(s) with that `NRIC` exist(s), then the `AddApptCommand::execute` method will throw a `CommandException` with the appropriate error message and the usage case will end.
-
-The `AddApptCommand::execute` method constructs a new `Person` object using all the details of the old `Person`, with the sole difference being the `AppointmentsList` used being a deep copy of the original `Person`'s `AppointmentsList` with the new `Appointment` added.
-This updated `Person` object is used to update the existing `Person` object using the `Model::updatePerson` method (or an overridden version) of the backing model.
-Finally, the `AddApptCommand::execute` method terminates, returning a `CommandResult` with a success message. The `LogicManager` then returns the same `CommandResult` as the return value of the `LogicManager::execute` method.
-The command execution then ends.
-
-[#img-addapptsequencediagram]
-The following sequence diagram shows the execution of the `addappt` command:
-
-.Execution sequence of the `addappt` command
-image::AddApptSequenceDiagram.png[width="800"]
-
-==== Design considerations
-
-===== Aspect: Representation of types of medical procedures
-* **Alternative 1 (Current implementation):** Use an `Enum` for `Type`
-** Pros: Makes for easier handling of incorrect values.
-** Cons: Requires more effort to filter and retrieve the different types.
-* **Alternative 2:** Have a switch case to handle the different types
-** Pros: Makes the process easier to handle.
-** Cons: Makes the code more difficult to read.
-
 // tag::addmh[]
 === Addmh
 ==== Current implementation
@@ -432,7 +508,7 @@ the `NRIC` S9123124A.
 The sequence diagram below shows the execution of the given scenario:
 
 .Execution sequence of the `addmh` command
-image::AddmhViewmhSequenceDiagram.png[width="800"]
+image::AddmhSequenceDiagram.png[width="800"]
 
 * `addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol`
 ** When the user-executed `addmh` line is passed into an instance of the LogicManager class, the method `AddressBookParser::parse` is executed.
@@ -448,87 +524,15 @@ image::AddmhViewmhSequenceDiagram.png[width="800"]
 
 * Command execution ends.
 
-
 ****
 NOTE: If multiple patients with the entered `NRIC` exist, then the `AddmhCommand::execute` will throw a `CommandException`
 with an appropriate error message before the use case ends.
 ****
+
+==== Design Considerations
+
 // end::addmh[]
-// tag::adddiet[]
-=== Adddiet
 
-==== Current implementation
-
-The `adddiet` command provides functionality for users to add dietary requirements for a given patient. +
-This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty. +
-This command adds these dietary requirements to a given `Person` , so that the dietary requirements can be viewed later on.
-
-===== Classes involved
-
-The adding of the dietary requirements involve the following classes:
-
-* `DietCollection`, which is a set of
-** `Diet`, which consists of the detail of the requirement and its type
-*** `DietType`.
-
-A more detailed description of the classes involved is as follows:
-
-* `Diet Collection`
-** Every `Person` object has a `Diet Collection`, which is a collection of all the dietary requirements of the given patient.
-** This class is a wrapper class around the internal representation of a `Set` of `Diet` s.
-
-* `Diet`
-** This class encapsulate the information of a single dietary requirement.
-** Specifically, an instance of this class is composed of
-*** a `String` representing the details of the requirement in text, and
-*** a `DietType` representing the type of this dietary requirement (allergy, cultural requirement, or physical difficulty).
-
-* `DietType`
-** This is a `Enum` class representing the three different types of dietary requirements.
-** Implemented as `Enum` class to avoid typo and invalid types being entered.
-
-===== Execution of the command
-
-Given below is an usage scenario and the details when executing `adddiet` command. +
-For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`:
-
-* The command text is passed to an instance of the `Logic Manager` class.
-* The `Logic Manager` instance calls `AddressBookParser#parseCommand`, which parses the `adddiet` command word.
-* Next, the `AddDietCommandParser#parse` method parses the different dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
-* `Logic Manager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
-* In the `AddDietCommand#execute` method, the new `DietCollection` object is added to a new copy of the `Person` object.
-* The new `Person` object is updated to the model by `Model#updatePerson` method.
-* A new `CommandResult` is returned and the execution ends.
-
-[#img-adddietsequencediagram]
-Here is the sequence diagram of the typical execution of an `adddiet` command:
-
-.Execution sequence of the `adddiet` command
-image::AdddietSequenceDiagram.png[width="800"]
-
-==== Design considerations
-
-===== Aspect: How to represent different kinds of dietary requirements
-
-* **Alternative 1 (current implementation):** Use a `Enum` inside the `Diet class` and contain all `Diet` in one collection.
-** Pros: Results in less repetitive code and cleaner design.
-** Cons: Requires more effort to filter or retrieve different types of `Diet` from one `DietCollection`.
-
-* **Alternative 2:** Use polymorphism to extends `Diet` class and add three different collections to a `Person`.
-** Pros: Makes it easier to retrieve different types of dietary requirements.
-** Cons: Results in a lot of repetitive code since the three different types do not differ much.
-
-===== Aspect: Data structure to hold the different `Diet` objects
-
-* **Alternative 1 (current implementation):** Use `HashSet` and override the `hashCode` for `Diet`.
-** Pros: Makes it easier to handle duplication in adding dietary requirement.
-** Cons: Causes the order in which dietary requirements are added to be lost. (However, the sequence is not important for the current set of features implemented.)
-
-* **Alternative 2:** Use `ArrayList`.
-** Pros: Preserves the order in which dietary requirements are added.
-** Cons: Makes it harder to handle duplicates.
-
-// end::adddiet[]
 === Visitorin/Viewvisitors/Visitorout
 
 ==== Current implementation
@@ -1089,6 +1093,8 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
+// tag::gendata[]
+
 === Generating test data
 . Generating patients with mock data
 
@@ -1112,6 +1118,8 @@ The application will then generate that number of patients with mock data for th
 . Medical history
 
 Details on the exact range of values that the mock data can take on can be found in the related `.java` files.
+
+// end::gendata[]
 
 === Deleting a patient
 

@@ -6,21 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MED_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
-import java.util.Set;
-
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.medicalhistory.MedicalHistory;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Adds a diagnosis to the medical records of an existing patient.
@@ -98,23 +91,16 @@ public class AddmhCommand extends Command {
      * Updates a patient with new medical history by creating the person and the medical history
      *
      * @param patientToEdit The patient to update.
-     * @param d The diagnosis to be added to patient's existing medical history.
+     * @param diagnosis The diagnosis to be added to patient's existing medical history.
      * @return An updated patient with an updated medical history.
      */
-    private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosis d) {
-        requireAllNonNull(patientToEdit, d);
+    private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosis diagnosis) {
+        requireAllNonNull(patientToEdit, diagnosis);
 
         MedicalHistory updatedMedicalHistory = patientToEdit.getMedicalHistory();
-        updatedMedicalHistory.add(d);
+        updatedMedicalHistory.add(diagnosis);
 
-        Nric nric = patientToEdit.getNric();
-        Name name = patientToEdit.getName();
-        Phone phone = patientToEdit.getPhone();
-        Email email = patientToEdit.getEmail();
-        Address address = patientToEdit.getAddress();
-        Set<Tag> tags = patientToEdit.getTags();
-
-        return new Person(nric, name, phone, email, address, tags, updatedMedicalHistory);
+        return patientToEdit.withMedicalHistory(updatedMedicalHistory);
     }
 
 }

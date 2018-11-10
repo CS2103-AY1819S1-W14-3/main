@@ -12,16 +12,18 @@ import seedu.address.testutil.Assert;
  * Test driver class for Appointment POJO class functionality
  */
 public class AppointmentTest {
-    private Type type;
+    private String type;
     private String procedure;
     private String dateTime;
     private String doctor;
+    private String invalidDateTime;
 
     @Before
     public void setUp() {
-        type = Type.SURGICAL;
+        type = "SRG";
         procedure = "Heart Bypass";
         dateTime = "12-12-2022 12:00";
+        invalidDateTime = "12-12-1000 23:30";
         doctor = "Dr. Pepper";
     }
 
@@ -65,7 +67,7 @@ public class AppointmentTest {
     @Test
     public void toStringTest() {
         Appointment a = new Appointment(type, procedure, dateTime, doctor);
-        assertEquals(type + " | " + procedure + " | " + dateTime.toString() + " | " + doctor, a.toString());
+        assertEquals(type + " | " + procedure + " | " + dateTime + " | " + doctor, a.toString());
 
     }
 }

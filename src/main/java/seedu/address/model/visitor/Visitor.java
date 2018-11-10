@@ -6,17 +6,19 @@ import static java.util.Objects.requireNonNull;
  * The visitor entry for a patient.
  */
 public class Visitor {
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Visitor's name should not be blank";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "Visitor's name should not be blank.";
     private String visitorName;
 
     public Visitor(String visitorName) {
         requireNonNull(visitorName);
         this.visitorName = visitorName;
     }
+
     public Visitor(Visitor visitor) {
         requireNonNull(visitor);
         this.visitorName = visitor.getVisitorName();
     }
+
     @Override
     public String toString() {
         return visitorName;

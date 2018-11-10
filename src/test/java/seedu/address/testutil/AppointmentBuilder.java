@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Type;
 
 /**
  * A utility class for Appointment
@@ -10,12 +9,12 @@ import seedu.address.model.appointment.Type;
 public class AppointmentBuilder {
 
     /** We don't construct a default DATE_TIME object here because of the IllegalValueException. */
-    private static final Type DEFAULT_TYPE = Type.SURGICAL;
+    private static final String DEFAULT_TYPE = "SRG";
     private static final String DEFAULT_PROCEDURE = "Heart Bypass";
     private static final String DEFAULT_DATE_TIME = "12-12-2022 12:00";
     private static final String DEFAULT_DOCTOR = "Dr. Pepper";
 
-    private Type type;
+    private String type;
     private String procedure;
     private String dateTime;
     private String doctor;
@@ -40,7 +39,7 @@ public class AppointmentBuilder {
      * @param type The type of appointment
      * @return this
      */
-    public AppointmentBuilder withType(Type type) {
+    public AppointmentBuilder withType(String type) {
         this.type = type;
         return this;
     }

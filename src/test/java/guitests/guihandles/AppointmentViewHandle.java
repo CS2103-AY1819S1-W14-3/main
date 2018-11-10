@@ -7,6 +7,7 @@ import seedu.address.model.appointment.Appointment;
 /**
  * Provides an Appointment view handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
  */
+
 public class AppointmentViewHandle extends NodeHandle<TableView<Appointment>> {
     public static final String APPOINTMENT_TABLE_VIEW_ID = "#appointmentTableView";
 

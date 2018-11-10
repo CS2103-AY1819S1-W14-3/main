@@ -14,7 +14,7 @@ import org.junit.Test;
  * Test driver class for AppointmentsList wrapper class functionality
  */
 public class AppointmentsListTest {
-    private Type type;
+    private String type;
     private String procedure;
     private String dateTime;
     private String doctor;
@@ -23,7 +23,7 @@ public class AppointmentsListTest {
 
     @Before
     public void setUp() {
-        type = Type.SURGICAL;
+        type = "SRG";
         procedure = "Heart Bypass";
         dateTime = "12-12-2022 12:00";
         doctor = "Dr. Pepper";

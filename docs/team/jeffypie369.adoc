@@ -3,21 +3,29 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Hospital Management System 2K18
+== PROJECT: HealthBase
 
 ---
 
 == Overview
+This page encompasses my contributions to HealthBase. This includes the implementation of features, refactoring and documentation.
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+HealthBase is a desktop application designed to aid in the management of a hospital. It provides patient data input and management capabilities through a command line interface for input and a graphical UI for data display. Its main features include (among others):
+
+* Patient medication data entry and retrieval
+* Patient medical history data entry and retrieval
+* Patient dietary restriction(s) data entry and retrieval
+* Patient visitor history data entry and retrieval
+* Real-time management of the number of visitors any given patient has
+* Patient appointment management for doctors
 
 == Summary of contributions
 
 * *Major enhancement*: Added `addappt` command
 ** What it does: adds an appointment for a given patient. Each appointment includes the following information: type of procedure, procedure name, date and time of appointment and the doctor-in-charge
-** Justification: this command provides a core functionality of the HMS2K18 (appointment data entry and retrieval).
+** Justification: this command provides a core functionality of the HealthBase (appointment data entry and retrieval).
 ** Highlights: this command affects existing internal representations of the Person class and required significant retooling of tests to fit the new member of the Person class. The implementation was somewhat challenging as it required an extension of the current Person data representation and storage functionality.
-* *Minor enhancement*: incorporate `appt` with the `view` command
+* *Minor enhancement*: Incorporate `appt` with the `view` command
 
 * *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=jeffypie369[commits]]
 
@@ -30,7 +38,9 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 ** Documentation:
 *** Added sequence diagram for `addappt`: https://github.com/CS2103-AY1819S1-W14-3/main/pull/91[#91]
 ** Community:
-//*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], https://github.com/CS2103-AY1819S1-W14-3/main/pull/41[#41], https://github.com/CS2103-AY1819S1-W14-3/main/pull/107[#107]
+*** nil
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], https://github.com/CS2103-AY1819S1-W14-3/main/pull/41[#41],
+ https://github.com/CS2103-AY1819S1-W14-3/main/pull/107[#107], https://github.com/CS2103-AY1819S1-W14-3/main/pull/183[#183]
 //*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 //*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 //** Tools:
@@ -58,12 +68,15 @@ include::../UserGuide.adoc[tag=register]
 
 include::../DeveloperGuide.adoc[tag=addappt]
 
-include::../DeveloperGuide.adoc[tag=visitorin]
+== PROJECT: Accuride SG
 
 include::../UserGuide.adoc[tag=register]
 
-== PROJECT: PowerPointLabs
+An Android offline MRT app where you can get the fastest duration and the least transfers duration from one station to another.
 
----
+Other features include:
 
-_{Optionally, you may include other projects in your portfolio.}_
+* Last train timings
+* Link to LTA's Twitter page for updates on breakdowns/early closures (requires the Internet)
+
+

@@ -19,7 +19,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Type;
+import seedu.address.model.medicalhistory.Diagnosis;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -37,11 +38,15 @@ public class AddApptCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private String validNric;
-    private Type type;
+    private String type;
+    private String invalidType;
     private String procedure;
+    private String invalidProcedure;
     private String dateTime;
-    private String invalidDateTime;
+    private String dateTimeBeforeCurrent;
+    private String duplicateDateTime;
     private String doctor;
+    private String invalidDoctor;
     private Appointment appt;
     private Person patient;
     private CommandHistory commandHistory = new CommandHistory();
@@ -51,11 +56,15 @@ public class AddApptCommandTest {
         validNric = "S8888888A";
         patient = new Person(new Nric(validNric), new Name("AddAppt Test"), new Phone("91234567"),
                 new Email("addappttest@gmail.com"), new Address("12 Addappt Ave, #01-01"), new HashSet<Tag>());
-        type = Type.SURGICAL;
+        type = "SRG";
+        invalidType = "SRGy";
         procedure = "Heart Bypass";
+        invalidProcedure = "123";
         dateTime = "12-12-2022 10:30";
-        invalidDateTime = "12-12-1000 23:30";
+        dateTimeBeforeCurrent = "12-12-1018 23:20";
+        duplicateDateTime = "12-12-2022 10:30";
         doctor = "Dr. Pepper";
+        invalidDoctor = "12 Pepper";
         appt = new Appointment(type, procedure, dateTime, doctor);
     }
 
@@ -83,12 +92,55 @@ public class AddApptCommandTest {
     }
 
     @Test
-    public void execute_addapptWithInvalidDateTime_throwsCommandException() throws Exception {
-        appt = new Appointment(type, procedure, invalidDateTime, doctor);
+    public void execute_addapptWithDateTimeBeforeCurrent_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, dateTimeBeforeCurrent, doctor);
         AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
         CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddApptCommand.MESSAGE_DATE_TIME_INVALID);
+        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithInvalidType_throwsCommandException() throws Exception {
+        appt = new Appointment(invalidType, procedure, dateTime, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_TYPE);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithInvalidProcedure_throwsCommandException() throws Exception {
+        appt = new Appointment(type, invalidProcedure, dateTime, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_INVALID_PROCEDURE);
+        addApptCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithDuplicateDateTime_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, dateTime, doctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        appt = new Appointment(type, procedure, duplicateDateTime, doctor);
+        AddApptCommand addDuplicateDateTime = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddApptCommand.MESSAGE_DUPLICATE_DATE_TIME);
+        addApptCommand.execute(modelStub, commandHistory);
+        addDuplicateDateTime.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_addapptWithInvalidDoctor_throwsCommandException() throws Exception {
+        appt = new Appointment(type, procedure, dateTime, invalidDoctor);
+        AddApptCommand addApptCommand = new AddApptCommand(patient.getNric(), appt);
+        CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(Diagnosis.MESSAGE_NAME_CONSTRAINTS_DOCTOR);
         addApptCommand.execute(modelStub, commandHistory);
     }
 
@@ -150,12 +202,7 @@ public class AddApptCommandTest {
         @Override
         public void updatePerson(Person personToUpdate, Person updatedPerson) {
             requireAllNonNull(personToUpdate, updatedPerson);
-            if (!personToUpdate.isSamePerson(updatedPerson)) {
-                // TODO: what should be an appropriate response?
-                assertTrue(false);
-                return;
-            }
-
+            assertTrue(personToUpdate.isSamePerson(updatedPerson));
             patient = updatedPerson;
         }
     }

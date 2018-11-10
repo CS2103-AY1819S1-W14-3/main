@@ -7,14 +7,13 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Type;
 
 public class XmlAdaptedAppointmentTest {
     private static final String INVALID_PROCEDURE = "!";
     private static final String INVALID_DATE_TIME = "@";
     private static final String INVALID_DOCTOR = "1";
 
-    private static final Type VALID_TYPE = Type.SURGICAL;
+    private static final String VALID_TYPE = "SRG";
     private static final String VALID_PROCEDURE = "Heart Bypass";
     private static final String VALID_DATE_TIME = "12-12-2022 12:00";
     private static final String VALID_DOCTOR = "Dr. Pepper";
