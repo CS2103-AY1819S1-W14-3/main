@@ -45,7 +45,6 @@ public class AddApptCommandTest {
     private String dateTime;
     private String dateTimeBeforeCurrent;
     private String duplicateDateTime;
-    private String invalidDateTime;
     private String doctor;
     private String invalidDoctor;
     private Appointment appt;
@@ -64,7 +63,6 @@ public class AddApptCommandTest {
         dateTime = "12-12-2022 10:30";
         dateTimeBeforeCurrent = "12-12-1018 23:20";
         duplicateDateTime = "12-12-2022 10:30";
-        invalidDateTime = "12-13-2025 23:30";
         doctor = "Dr. Pepper";
         invalidDoctor = "12 Pepper";
         appt = new Appointment(type, procedure, dateTime, doctor);
@@ -204,12 +202,7 @@ public class AddApptCommandTest {
         @Override
         public void updatePerson(Person personToUpdate, Person updatedPerson) {
             requireAllNonNull(personToUpdate, updatedPerson);
-            if (!personToUpdate.isSamePerson(updatedPerson)) {
-                // TODO: what should be an appropriate response?
-                assertTrue(false);
-                return;
-            }
-
+            assertTrue(personToUpdate.isSamePerson(updatedPerson));
             patient = updatedPerson;
         }
     }
