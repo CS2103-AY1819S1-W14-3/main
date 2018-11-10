@@ -8,22 +8,26 @@
 == PROJECT: HealthBase
 
 == Overview
- First sentence PPP details, introduce appropriately
- make clear so person does not have to ask unnecessary qn
- consistency in language structure
 
-This portfolio details the contributions I made to the development of a desktop application, as part of a team-based NUS Software Engineering module,
-CS2103T.
+This portfolio details the contributions I made to the development of a desktop application as part of an NUS Software Engineering module,
+CS2103T. Over the span of 8 weeks in AY18/19 Semester 1, my team and I were given the freedom to morph an existing desktop application
+made up of 10KLOC in Java.
 
-HealthBase is a lightweight and free desktop application, designed to reduce the mundane yet important administrative duties faced by hospital staff.
-By automating the tedious and providing convenient features crafted for its users, HealthBase allows for efficient management of patients' information.
+Throughout the 8-week period, we were challenged to incorporate the new Software Engineering concepts taught in class
+via a series of milestones which were part of the project management process. On top of that, we planned out weekly
+goals and consistently reassessed our employed programming methodologies and practices, developing our software HealthBase
+incrementally and iteratively.
 
-The application's capabilities complement the roles of nurses and doctors, so that they serve patients better.
+.AB4 was morphed into a hospital management system, HealthBase.
+image::AB4toHealthBase.png[width="1600"]
 
-All features can be easily accessed by simply typing short commands into an input field.
+HealthBase is a lightweight and free desktop application which automates the tedious data-handling processes of hospital staff.
+By complementing the roles of receptionists, nurses and doctors and providing convenient features, the app allows its users to
+efficiently manage patients’ information, thus easing their workload and allowing them to focus on caring for their patients.
+
+The app's features can be easily accessed by typing short commands into an input field.
 These features include (among others):
 
-* Management of check-in/out status of patients
 * Real-time management of the check-in/out status of patients
 * Patient medication data entry and retrieval
 * Patient medical history data entry and retrieval
@@ -37,12 +41,15 @@ These features include (among others):
 * *Major enhancement*: Added the functionality to record and view patients' past medical diagnoses
 ** What it does: Records a diagnosis entry into the medical history of a given patient. Each entry includes the diagnosis description, the name of the examining and a timestamp.
 ** Justification: This feature serves as the primary storage of important patient data, as adjudged by the examining doctor's assessment. Past diagnoses are easily viewed on the desktop application to provide quick access for the examining doctor.
-//** Highlights: The feature is
-//** Credits:
+** Highlights: This enhancement required a detailed understanding of the Java Architecture for XML Binding software frame work (JAXB) for data storage as XML files.
+Also, the integration of the UI in the feature needed JAVAFX know-how.
+** Credits:
 
 * *Minor enhancement*:
 
-* *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=omegafishy[my commits]]
+* *Code contributed*:
+** https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=omegafishy[GitHub Commits]
+** https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=omegafishy&sort=displayName&since=2018-09-12&until=2018-11-07&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]
 * *Other contributions*:
 ** Project management:
 *** Spearheaded project planning and managed project scope as project leader
@@ -51,9 +58,10 @@ These features include (among others):
 *** Amended existing contents of documentation according : (Pull Request: {main}/pulls/130[#130])
 
 ** Community:
+*** Set up GitHub organisation and project repository.
 *** Managed organisation code repository as administrator.
 *** Reviewed pull requests and provided feedback. (Pull Requests: {main}/pulls/121[#121], {main}/pulls/122[#122], {main}/pulls/127[#127])
-*** Reported feature bugs discovered during system testing. (Pull Request: {main}/issues/131[#131])
+*** Reported feature bugs discovered during system testing. (Issue: {main}/issues/131[#131])
 
 ** Tools:
 *** Integrated Github Plugins (Coveralls, Travis CI)

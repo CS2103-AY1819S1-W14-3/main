@@ -20,6 +20,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.medicalhistory.Diagnosis;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -44,6 +45,7 @@ public class AddApptCommandTest {
     private String dateTime;
     private String dateTimeBeforeCurrent;
     private String duplicateDateTime;
+    private String invalidDateTime;
     private String doctor;
     private String invalidDoctor;
     private Appointment appt;
@@ -62,6 +64,7 @@ public class AddApptCommandTest {
         dateTime = "12-12-2022 10:30";
         dateTimeBeforeCurrent = "12-12-1018 23:20";
         duplicateDateTime = "12-12-2022 10:30";
+        invalidDateTime = "12-13-2025 23:30";
         doctor = "Dr. Pepper";
         invalidDoctor = "12 Pepper";
         appt = new Appointment(type, procedure, dateTime, doctor);

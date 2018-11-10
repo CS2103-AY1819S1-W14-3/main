@@ -61,7 +61,7 @@ public class AddApptCommand extends Command {
             + "and time.";
     public static final String MESSAGE_DUPLICATE_DATE_TIME = "There is already an existing appointment at this "
             + "date and time";
-    public static final String MESSAGE_INVALID_TYPE = "Invalid type input. Valid types are: PROP, DIAG, THP, SRG";
+    public static final String MESSAGE_INVALID_TYPE = "Invalid input type. Valid types are: PROP, DIAG, THP, SRG";
 
     private final Appointment appt;
     private final Nric patientNric;
@@ -187,8 +187,8 @@ public class AddApptCommand extends Command {
     public static boolean isNotDuplicateDateTime(String test, ObservableList<Person> filteredByNric) {
         Person patient = filteredByNric.get(0);
         AppointmentsList apptList = patient.getAppointmentsList();
-        ObservableList<Appointment> observableApptList = apptList.getObservableCopyOfAppointmentsList();
-        for (Appointment appt : observableApptList) {
+        ObservableList<Appointment> ObservableApptList = apptList.getObservableCopyOfAppointmentsList();
+        for (Appointment appt : ObservableApptList) {
             if (appt.getDate_time().equals(test)) {
                 return false;
             }
