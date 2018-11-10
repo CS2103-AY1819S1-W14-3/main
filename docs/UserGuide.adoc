@@ -151,11 +151,9 @@ to register this new patient with his necessary information.
 ****
 
 ****
-WARNING:
-
-* If the patient with the specified `NRIC` is still active in the system (which means that the patient in the system has
-not been checked out yet), the command is considered as invalid.
-* The `checkin` command is only considered valid when the patient with the `NRIC` specified were checked out before
+WARNING: If the patient with the specified `NRIC` is still active in the system (which means that the patient in the system has
+not been checked out yet), the command is considered as invalid. +
+The `checkin` command is only considered valid when the patient with the `NRIC` specified were checked out before
 with the `checkout` command.
 ****
 
@@ -174,11 +172,12 @@ Upon checking out a particular patient, this patient will not be displayed in th
 Format: `checkout ic/NRIC`
 
 ****
-WARNING:
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
 
-* If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
-* After a patient has been checked out from the system, any commands which select or add information to this patient
-will be considered as an invalid command.
+****
+WARNING: After a patient has been checked out from the system, any commands which select or add information to this
+patient will be considered as an invalid command.
 ****
 
 Example(s):
