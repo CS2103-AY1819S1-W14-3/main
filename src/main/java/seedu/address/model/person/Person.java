@@ -53,171 +53,95 @@ public class Person {
         this.visitorList = new VisitorList();
     }
 
-    /**
-     * Overloaded constructor to generate a person that does not have medicalhistory.
-     */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = new DietCollection();
-        this.visitorList = new VisitorList();
+    private Person(Person p, PrescriptionList pl) {
+        nric = p.getNric();
+        name = p.getName();
+        phone = p.getPhone();
+        email = p.getEmail();
+        address = p.getAddress();
+        tags.addAll(p.getTags());
+        prescriptionList = new PrescriptionList(pl);
+        appointmentsList = new AppointmentsList(p.getAppointmentsList());
+        medicalHistory = new MedicalHistory(p.getMedicalHistory());
+        dietCollection = new DietCollection(p.getDietCollection());
+        visitorList = new VisitorList(p.getVisitorList());
     }
 
-    /**
-     * Overloaded constructor to generate a person that has prescriptionList, AppointmentList and dietCollection.
-     */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, DietCollection dietCollection) {
-        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = dietCollection;
-        this.visitorList = new VisitorList();
+    private Person(Person p, AppointmentsList al) {
+        nric = p.getNric();
+        name = p.getName();
+        phone = p.getPhone();
+        email = p.getEmail();
+        address = p.getAddress();
+        tags.addAll(p.getTags());
+        prescriptionList = new PrescriptionList(p.getPrescriptionList());
+        appointmentsList = new AppointmentsList(al);
+        medicalHistory = new MedicalHistory(p.getMedicalHistory());
+        dietCollection = new DietCollection(p.getDietCollection());
+        visitorList = new VisitorList(p.getVisitorList());
     }
 
-    /**
-     * Overloaded constructor to generate a person that has existing diet requirement.
-     */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  DietCollection dietCollection) {
-        requireAllNonNull(nric, name, phone, email, address, tags, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = new PrescriptionList();
-        this.appointmentsList = new AppointmentsList();
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = dietCollection;
-        this.visitorList = new VisitorList();
+    private Person(Person p, MedicalHistory mh) {
+        nric = p.getNric();
+        name = p.getName();
+        phone = p.getPhone();
+        email = p.getEmail();
+        address = p.getAddress();
+        tags.addAll(p.getTags());
+        prescriptionList = new PrescriptionList(p.getPrescriptionList());
+        appointmentsList = new AppointmentsList(p.getAppointmentsList());
+        medicalHistory = new MedicalHistory(mh);
+        dietCollection = new DietCollection(p.getDietCollection());
+        visitorList = new VisitorList(p.getVisitorList());
     }
 
-    /**
-     * Overloaded constructor to generate a person that has existing medicalhistory.
-     */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  MedicalHistory medicalHistory) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.medicalHistory = medicalHistory;
-        this.prescriptionList = new PrescriptionList();
-        this.appointmentsList = new AppointmentsList();
-        this.dietCollection = new DietCollection();
-        this.visitorList = new VisitorList();
+    private Person(Person p, DietCollection dc) {
+        nric = p.getNric();
+        name = p.getName();
+        phone = p.getPhone();
+        email = p.getEmail();
+        address = p.getAddress();
+        tags.addAll(p.getTags());
+        prescriptionList = new PrescriptionList(p.getPrescriptionList());
+        appointmentsList = new AppointmentsList(p.getAppointmentsList());
+        medicalHistory = new MedicalHistory(p.getMedicalHistory());
+        dietCollection = new DietCollection(dc);
+        visitorList = new VisitorList(p.getVisitorList());
     }
 
-    /**
-     * Overloaded constructor to generate a person that has existing medicalhistory.
-     */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory) {
-        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList, medicalHistory);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = new DietCollection();
-        this.visitorList = new VisitorList();
+    private Person(Person p, VisitorList vl) {
+        nric = p.getNric();
+        name = p.getName();
+        phone = p.getPhone();
+        email = p.getEmail();
+        address = p.getAddress();
+        tags.addAll(p.getTags());
+        prescriptionList = new PrescriptionList(p.getPrescriptionList());
+        appointmentsList = new AppointmentsList(p.getAppointmentsList());
+        medicalHistory = new MedicalHistory(p.getMedicalHistory());
+        dietCollection = new DietCollection(p.getDietCollection());
+        visitorList = new VisitorList(vl);
     }
 
-    /**
-     * Overloaded constructor to include visitors.
-     */
-
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  VisitorList visitorList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, visitorList);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = new PrescriptionList();
-        this.appointmentsList = new AppointmentsList();
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = new DietCollection();
-        this.visitorList = visitorList;
+    public Person withPrescriptionList(PrescriptionList pl) {
+        return new Person(this, pl);
     }
 
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
-                  VisitorList visitorList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, visitorList);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = new DietCollection();
-        this.visitorList = visitorList;
-    }
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
-                  DietCollection dietCollection) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = dietCollection;
-        this.visitorList = new VisitorList();
+    public Person withAppointmentsList(AppointmentsList al) {
+        return new Person(this, al);
     }
 
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
-        DietCollection dietCollection, VisitorList visitorList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = dietCollection;
-        this.visitorList = visitorList;
+    public Person withMedicalHistory(MedicalHistory mh) {
+        return new Person(this, mh);
     }
 
+    public Person withDietCollection(DietCollection dc) {
+        return new Person(this, dc);
+    }
+
+    public Person withVisitorList(VisitorList vl) {
+        return new Person(this, vl);
+    }
 
     public Nric getNric() {
         return nric;

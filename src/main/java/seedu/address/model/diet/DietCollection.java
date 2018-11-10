@@ -37,6 +37,10 @@ public class DietCollection {
         }
     }
 
+    public DietCollection(DietCollection dietCollection) {
+        this.dietSet = new HashSet<>(dietCollection.dietSet);
+    }
+
     public List<Diet> getAllergies() {
         List<Diet> allergies = new LinkedList<>();
         for (Diet diet: dietSet) {
