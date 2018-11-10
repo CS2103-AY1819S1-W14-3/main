@@ -136,7 +136,7 @@
 <p>Add a scheduled appointment for a patient.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>addappt ic/NRIC type/TYPE pn/PROCEDURE_NAME dt/DD-MM-YYYY HHMM doc/DOCTOR-IN-CHARGE</code></p>
+<p>Format: <code>addappt ic/NRIC type/TYPE pn/PROCEDURE_NAME dt/DD-MM-YYYY HH:MM doc/DOCTOR-IN-CHARGE</code></p>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -144,13 +144,35 @@
 <div class="ulist">
 <ul>
 <li>
-<p><code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper</code></p>
+<p><code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>The only valid types are <code>PROP</code> (PROPAEDEUTIC), <code>DIAG</code> (DIAGNOSTIC), <code>THP</code> (THERAPEUTIC), <code>SRG</code> (SURGICAL).
-<strong>Other inputs will not be allowed.</strong></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The only valid types are <code>PROP</code> (PROPAEDEUTIC), <code>DIAG</code> (DIAGNOSTIC), <code>THP</code> (THERAPEUTIC), <code>SRG</code> (SURGICAL).
+<strong>Other inputs are not allowed.</strong>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The HealthBase System assumes that there are <code>31</code> days for all months. For the inputs of the dates <code>31</code> and <code>29</code> (for February), it is the onus of the user to ensure that
+the input month has <code>31</code> days (for months except February) and <code>29</code> days for February in a leap year.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -183,7 +205,7 @@
 <p>Register a new patient together with necessary information into the system.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
+<p>Format: <code>register ic/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS da/DRUG_ALLERGIES</code></p>
 </div>
 <div class="ulist">
 <ul>
@@ -198,7 +220,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
+<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 e/zhiyu@example.com a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 da/insulin da/aspirin</code></p>
 </li>
 </ul>
 </div>
@@ -386,7 +408,7 @@ The command execution then ends.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddApptSequenceDiagram.png" alt="AddApptSequenceDiagram" width="800">
+<img src="../images/AddapptSequenceDiagram.png" alt="AddapptSequenceDiagram" width="800">
 </div>
 <div class="title">Figure 1. Execution sequence of the <code>addappt</code> command</div>
 </div>
@@ -2113,7 +2135,7 @@ Expected: Similar to previous.</p>
 <p>Register a new patient together with necessary information into the system.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>register ic/NRIC n/NAME p/PHONE_NUMBER a/ADDRESS d/DRUG_ALLERGIES</code></p>
+<p>Format: <code>register ic/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS da/DRUG_ALLERGIES</code></p>
 </div>
 <div class="ulist">
 <ul>
@@ -2128,7 +2150,7 @@ Expected: Similar to previous.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 d/nil</code></p>
+<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 e/zhiyu@example.com a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 da/insulin da/aspirin</code></p>
 </li>
 </ul>
 </div>
@@ -2150,4 +2172,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 12:32:59 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 12:35:42 UTC</div></div></div></body></html>
