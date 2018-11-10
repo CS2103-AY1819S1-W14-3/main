@@ -324,6 +324,10 @@ public class Person {
                .append(getEmail())
                .append(" Address: ")
                .append(getAddress());
+        if (getTags().isEmpty()) {
+            return builder.toString();
+        }
+        builder.append(" Drug Allergies: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

@@ -392,7 +392,7 @@ The command execution then ends.
 The following sequence diagram shows the execution of the `addappt` command:
 
 .Execution sequence of the `addappt` command
-image::AddApptSequenceDiagram.png[width="800"]
+image::AddapptSequenceDiagram.png[width="800"]
 
 ==== Design considerations
 
@@ -1091,6 +1091,8 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
+// tag::gendata[]
+
 === Generating test data
 . Generating patients with mock data
 
@@ -1114,6 +1116,8 @@ The application will then generate that number of patients with mock data for th
 . Medical history
 
 Details on the exact range of values that the mock data can take on can be found in the related `.java` files.
+
+// end::gendata[]
 
 === Deleting a patient
 

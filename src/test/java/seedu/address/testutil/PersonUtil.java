@@ -13,7 +13,6 @@ import seedu.address.logic.commands.CheckinCommand;
 import seedu.address.logic.commands.CheckoutCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.RegisterCommand;
-import seedu.address.logic.commands.ViewmhCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -48,10 +47,6 @@ public class PersonUtil {
      */
     public static String getRegisterCommandDiffNric(Person person) {
         return RegisterCommand.COMMAND_WORD + " " + getPersonDetailsDiffNric(person);
-    }
-
-    public static String getViewmhCommand(Person person) {
-        return ViewmhCommand.COMMAND_WORD + " " + PREFIX_NRIC + person.getNric();
     }
 
     /**
