@@ -12,7 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.person.Nric;
 
-//@@ omegafishy
 /**
  * Parses input arguments and creates a new AddmhCommand object
  */
@@ -37,7 +36,6 @@ public class AddmhCommandParser implements Parser<AddmhCommand> {
         Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_MED_HISTORY).get(),
                 argMultimap.getValue(PREFIX_DOCTOR).get());
 
-        //TODO need to find the right person stored somewhere, then use the person in AddmhCommand
         return new AddmhCommand(patientNric, diagnosis);
     }
 

@@ -65,6 +65,7 @@ public class CommandTestUtil {
     public static final String VALID_TYPE = Type.SURGICAL.getAbbreviation();
     public static final String VALID_PROCEDURE = "Heart Bypass";
     public static final String VALID_DATE_TIME = "12-12-2022 12:00";
+    public static final String INVALID_DATE_TIME = "12-13-2025 23:30";
     public static final String VALID_DOCTOR = "Dr. Gregory House";
 
     public static final String VALID_DRUGNAME = "Paracetamol";
@@ -138,8 +139,6 @@ public class CommandTestUtil {
             + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
-    public static final String EMPTY_APPOINTMENT_DESC = "";
-
     public static final String INVALID_APPOINTMENT_DESC_MISSING_TYPE = " " + PREFIX_PROCEDURE + VALID_PROCEDURE
             + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
@@ -150,6 +149,11 @@ public class CommandTestUtil {
 
     public static final String INVALID_APPOINTMENT_DESC_MISSING_DATE_TIME = " " + PREFIX_TYPE + VALID_TYPE
             + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
+            + " " + PREFIX_DOCTOR + VALID_DOCTOR;
+
+    public static final String INVALID_APPOINTMENT_DESC_INVALID_DATE_TIME = " " + PREFIX_TYPE + VALID_TYPE
+            + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
+            + " " + PREFIX_DATE_TIME + INVALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
     public static final String INVALID_APPOINTMENT_DESC_MISSING_DOCTOR = " " + PREFIX_TYPE + VALID_TYPE

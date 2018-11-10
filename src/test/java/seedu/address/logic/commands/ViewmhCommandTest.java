@@ -19,7 +19,8 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 
 
-//@@ omegafishy
+// @@author omegafishy
+// Old code removed from HealthBase, no longer relevant.
 public class ViewmhCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 

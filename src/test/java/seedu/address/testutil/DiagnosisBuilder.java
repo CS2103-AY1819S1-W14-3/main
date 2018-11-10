@@ -2,8 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.model.medicalhistory.Diagnosis;
 
-//todo unstage this file
-
 /**
  * A builder class for a diagnosis.
  */
@@ -17,14 +15,6 @@ public class DiagnosisBuilder {
     public DiagnosisBuilder() {
         this.diagnosis = DEFAULT_DIAGNOSIS;
         this.doctorInCharge = DEFAULT_DOCTOR;
-    }
-
-    /**
-     * Constructs a new diagnosis based on another diagnosis.
-     */
-    public DiagnosisBuilder(Diagnosis d) {
-        this.diagnosis = d.getDiagnosis();
-        this.doctorInCharge = d.getDoctorInCharge();
     }
 
     /**

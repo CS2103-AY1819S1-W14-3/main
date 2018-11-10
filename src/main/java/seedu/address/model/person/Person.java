@@ -2,11 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Level;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.AppointmentsList;
 import seedu.address.model.diet.DietCollection;
 import seedu.address.model.medicalhistory.MedicalHistory;
@@ -19,6 +22,14 @@ import seedu.address.model.visitor.VisitorList;
  * not null, field values are validated, immutable.
  */
 public class Person {
+    // We used the Reflection API in some places.
+    // These constants enable that usage.
+    // If the below data fields are renamed, these constants should be changed accordingly.
+    private static final String APPOINTMENTSLIST_FIELD_NAME = "appointmentsList";
+    private static final String DIETCOLLECTION_FIELD_NAME = "dietCollection";
+    private static final String MEDICALHISTORY_FIELD_NAME = "medicalHistory";
+    private static final String PRESCRIPTIONLIST_FIELD_NAME = "prescriptionList";
+    private static final String VISITORLIST_FIELD_NAME = "visitorList";
 
     // Identity fields
     private final Nric nric;
@@ -54,170 +65,66 @@ public class Person {
     }
 
     /**
-     * Overloaded constructor to generate a person that does not have medicalhistory.
+     * Defensive copy c'tor.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = new DietCollection();
-        this.visitorList = new VisitorList();
+    public Person(Person p) {
+        nric = p.getNric();
+        name = p.getName();
+        phone = p.getPhone();
+        email = p.getEmail();
+        address = p.getAddress();
+        tags.addAll(p.getTags());
+        prescriptionList = new PrescriptionList(p.getPrescriptionList());
+        appointmentsList = new AppointmentsList(p.getAppointmentsList());
+        medicalHistory = new MedicalHistory(p.getMedicalHistory());
+        dietCollection = new DietCollection(p.getDietCollection());
+        visitorList = new VisitorList(p.getVisitorList());
     }
 
     /**
-     * Overloaded constructor to generate a person that has prescriptionList, AppointmentList and dietCollection.
+     * Returns a copy of this {@code Person} with the PrescriptionList changed.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, DietCollection dietCollection) {
-        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = dietCollection;
-        this.visitorList = new VisitorList();
+    public Person withPrescriptionList(PrescriptionList pl) {
+        Person p = new Person(this);
+        setPropertyForObject(PRESCRIPTIONLIST_FIELD_NAME, new PrescriptionList(pl), p);
+        return p;
     }
 
     /**
-     * Overloaded constructor to generate a person that has existing diet requirement.
+     * Returns a copy of this {@code Person} with the AppointmentsList changed.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  DietCollection dietCollection) {
-        requireAllNonNull(nric, name, phone, email, address, tags, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = new PrescriptionList();
-        this.appointmentsList = new AppointmentsList();
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = dietCollection;
-        this.visitorList = new VisitorList();
+    public Person withAppointmentsList(AppointmentsList al) {
+        Person p = new Person(this);
+        setPropertyForObject(APPOINTMENTSLIST_FIELD_NAME, new AppointmentsList(al), p);
+        return p;
     }
 
     /**
-     * Overloaded constructor to generate a person that has existing medicalhistory.
+     * Returns a copy of this {@code Person} with the MedicalHistory changed.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  MedicalHistory medicalHistory) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.medicalHistory = medicalHistory;
-        this.prescriptionList = new PrescriptionList();
-        this.appointmentsList = new AppointmentsList();
-        this.dietCollection = new DietCollection();
-        this.visitorList = new VisitorList();
+    public Person withMedicalHistory(MedicalHistory mh) {
+        Person p = new Person(this);
+        setPropertyForObject(MEDICALHISTORY_FIELD_NAME, new MedicalHistory(mh), p);
+        return p;
     }
 
     /**
-     * Overloaded constructor to generate a person that has existing medicalhistory.
+     * Returns a copy of this {@code Person} with the DietCollection changed.
      */
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory) {
-        requireAllNonNull(nric, name, phone, email, address, tags, prescriptionList, appointmentsList, medicalHistory);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = new DietCollection();
-        this.visitorList = new VisitorList();
+    public Person withDietCollection(DietCollection dc) {
+        Person p = new Person(this);
+        setPropertyForObject(DIETCOLLECTION_FIELD_NAME, new DietCollection(dc), p);
+        return p;
     }
 
     /**
-     * Overloaded constructor to include visitors.
+     * Returns a copy of this {@code Person} with the VisitorList changed.
      */
-
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  VisitorList visitorList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, visitorList);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = new PrescriptionList();
-        this.appointmentsList = new AppointmentsList();
-        this.medicalHistory = new MedicalHistory();
-        this.dietCollection = new DietCollection();
-        this.visitorList = visitorList;
+    public Person withVisitorList(VisitorList vl) {
+        Person p = new Person(this);
+        setPropertyForObject(VISITORLIST_FIELD_NAME, new VisitorList(vl), p);
+        return p;
     }
-
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
-                  VisitorList visitorList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, visitorList);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = new DietCollection();
-        this.visitorList = visitorList;
-    }
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
-                  DietCollection dietCollection) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = dietCollection;
-        this.visitorList = new VisitorList();
-    }
-
-    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        PrescriptionList prescriptionList, AppointmentsList appointmentsList, MedicalHistory medicalHistory,
-        DietCollection dietCollection, VisitorList visitorList) {
-        requireAllNonNull(nric, name, phone, email, address, tags, medicalHistory, prescriptionList, dietCollection);
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.prescriptionList = prescriptionList;
-        this.appointmentsList = appointmentsList;
-        this.medicalHistory = medicalHistory;
-        this.dietCollection = dietCollection;
-        this.visitorList = visitorList;
-    }
-
 
     public Nric getNric() {
         return nric;
@@ -278,9 +185,21 @@ public class Person {
         }
 
         return otherPerson != null && otherPerson.getNric().equals(getNric())
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone())
-                        || otherPerson.getEmail().equals(getEmail()));
+            && otherPerson.getName().equals(getName())
+            && (otherPerson.getPhone().equals(getPhone())
+                || otherPerson.getEmail().equals(getEmail()));
+    }
+
+    private void setPropertyForObject(String fieldName, Object prop, Object obj) {
+        Field f;
+        try {
+            f = obj.getClass().getDeclaredField(fieldName);
+            f.setAccessible(true);
+            f.set(obj, prop);
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+            LogsCenter.getLogger(this.getClass()).log(Level.SEVERE, "", e);
+        }
+
     }
 
     /**
@@ -299,11 +218,11 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getNric().equals(getNric())
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+            && otherPerson.getName().equals(getName())
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail())
+            && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getTags().equals(getTags());
     }
 
     @Override
@@ -316,16 +235,21 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getNric())
-               .append(" Name: ")
-               .append(getName())
-               .append(" Phone: ")
-               .append(getPhone())
-               .append(" Email: ")
-               .append(getEmail())
-               .append(" Address: ")
-               .append(getAddress());
+            .append(" Name: ")
+            .append(getName())
+            .append(" Phone: ")
+            .append(getPhone())
+            .append(" Email: ")
+            .append(getEmail())
+            .append(" Address: ")
+            .append(getAddress());
+
+        if (getTags().isEmpty()) {
+            return builder.toString();
+        }
+
+        builder.append(" Drug Allergies: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

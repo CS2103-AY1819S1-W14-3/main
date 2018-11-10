@@ -10,7 +10,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Nric;
 
 
-//@@ omegafishy
+// @@author omegafishy
+// Old code removed from HealthBase, no longer relevant.
 /**
  * Parses input arguments and creates a new ViewmhCommand object
  */

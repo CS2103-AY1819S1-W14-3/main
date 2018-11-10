@@ -30,11 +30,12 @@ public class AddmedsCommandParser implements Parser<AddmedsCommand> {
     public static final String MESSAGE_DURATION_FORMAT = "Incorrect format for duration detected. "
         + "Please ensure that the duration is a positive integer value, "
         + "and that that value is not too high!";
+
     public static final String MESSAGE_DRUGNAME_FORMAT = "Drug name cannot be empty.";
     public static final String MESSAGE_DOSAGE_UNIT_FORMAT = "Dosage unit cannot be empty.";
 
     private Pattern emptyString = Pattern.compile("(\\s)*");
-
+  
     /**
      * Parses the given {@code String} of arguments in the context of the
      * AddmedsCommand and returns an AddmedsCommand object for execution.

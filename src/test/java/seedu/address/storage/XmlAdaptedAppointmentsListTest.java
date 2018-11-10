@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.appointment.Type;
 
 public class XmlAdaptedAppointmentsListTest {
     private XmlAdaptedAppointmentsList xmlAdaptedAppointmentsList;
@@ -18,7 +17,7 @@ public class XmlAdaptedAppointmentsListTest {
     @Before
     public void setUp() throws IllegalValueException {
         xmlAdaptedAppointmentsList = new XmlAdaptedAppointmentsList();
-        xmlAdaptedAppointment = new XmlAdaptedAppointment(Type.SURGICAL, "Heart Bypass",
+        xmlAdaptedAppointment = new XmlAdaptedAppointment("SRG", "Heart Bypass",
                 "12-12-2022 12:00", "Dr. Pepper");
     }
 

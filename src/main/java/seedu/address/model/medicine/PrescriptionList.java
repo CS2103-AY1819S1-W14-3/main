@@ -1,6 +1,7 @@
 package seedu.address.model.medicine;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -15,7 +16,7 @@ import javafx.collections.ObservableList;
  * @author Darien Chong
  *
  */
-public class PrescriptionList {
+public class PrescriptionList implements Iterable<Prescription> {
     private List<Prescription> prescriptionList;
 
     /**
@@ -114,5 +115,10 @@ public class PrescriptionList {
      */
     public ObservableList<Prescription> getObservableCopyOfPrescriptionList() {
         return FXCollections.observableArrayList(new ArrayList<>(prescriptionList));
+    }
+
+    @Override
+    public Iterator<Prescription> iterator() {
+        return getObservableCopyOfPrescriptionList().iterator();
     }
 }

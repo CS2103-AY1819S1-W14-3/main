@@ -1244,7 +1244,7 @@ public class DataGenerator {
                 }
 
                 toReturn.add(new Appointment(
-                    type,
+                    type.getAbbreviation(),
                     getRandom(procedureNames),
                     Appointment.DATE_TIME_FORMAT.format(
                         LocalDateTime.of(getRandomFutureLocalDate(), getRandomLocalTime())),

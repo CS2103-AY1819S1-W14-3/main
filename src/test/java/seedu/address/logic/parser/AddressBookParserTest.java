@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -34,7 +33,6 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.ViewmhCommand;
 import seedu.address.logic.commands.VisitorinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
@@ -144,14 +142,6 @@ public class AddressBookParserTest {
         AddmhCommand command = (AddmhCommand) parser.parseCommand(
             DiagnosisUtil.getAddmhCommand(person.getNric(), diagnosis));
         assertEquals(new AddmhCommand(person.getNric(), diagnosis), command);
-    }
-
-    @Test
-    public void parseCommand_viewmh() throws Exception {
-        Person person = new PersonBuilder().build();
-        ViewmhCommand command = (ViewmhCommand) parser.parseCommand(
-                ViewmhCommand.COMMAND_WORD + " " + PREFIX_NRIC + person.getNric());
-        assertEquals(new ViewmhCommand(person.getNric()), command);
     }
 
     @Test
