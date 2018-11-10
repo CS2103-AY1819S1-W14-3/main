@@ -37,14 +37,6 @@ public class DietCollection {
         }
     }
 
-    /**
-     * Create a defensive copy of a DietCollection.
-     * @param toCopy The DietCollection to be copied.
-     */
-    public DietCollection(DietCollection toCopy) {
-        this.dietSet = new HashSet<>(toCopy.dietSet);
-    }
-
     public List<Diet> getAllergies() {
         List<Diet> allergies = new LinkedList<>();
         for (Diet diet: dietSet) {
