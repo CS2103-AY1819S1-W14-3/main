@@ -26,7 +26,7 @@ public class DietCollection {
 
     public DietCollection(Set<Diet> dietSet) {
         Objects.requireNonNull(dietSet);
-        this.dietSet = dietSet;
+        this.dietSet = new HashSet<>(dietSet);
     }
 
     public DietCollection(Set<Diet>... dietSets) {
@@ -37,8 +37,12 @@ public class DietCollection {
         }
     }
 
-    public DietCollection(DietCollection dietCollection) {
-        this.dietSet = new HashSet<>(dietCollection.dietSet);
+    /**
+     * Create a defensive copy of a DietCollection.
+     * @param toCopy The DietCollection to be copied.
+     */
+    public DietCollection(DietCollection toCopy) {
+        this.dietSet = new HashSet<>(toCopy.dietSet);
     }
 
     public List<Diet> getAllergies() {

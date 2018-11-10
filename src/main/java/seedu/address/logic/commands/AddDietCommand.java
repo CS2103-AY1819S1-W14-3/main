@@ -88,7 +88,7 @@ public class AddDietCommand extends Command {
     private static Person addDietsForPatient(Person patientToUpdate, DietCollection dietsToAdd) {
         assert patientToUpdate != null;
 
-        DietCollection updatedDiet = patientToUpdate.getDietCollection().addMoreDiets(dietsToAdd);
+        DietCollection updatedDiet = new DietCollection(patientToUpdate.getDietCollection()).addMoreDiets(dietsToAdd);
 
         return patientToUpdate.withDietCollection(updatedDiet);
     }
