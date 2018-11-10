@@ -38,7 +38,7 @@ public class VisitoroutCommand extends Command {
 
     public static final String MESSAGE_UNREGISTERED = "Person %1$s is not registered within the system.\n";
     public static final String MESSAGE_NO_VISITORS = "Patient %1$s has no existing visitors at present";
-    public static final String MESSAGE_NO_REQUIRED_VISITOR = "Patient %1$s has no existing visitors at present";
+    public static final String MESSAGE_NO_REQUIRED_VISITOR = "Patient %1$s has not the required visitor in the list";
     public static final String MESSAGE_SUCCESS = "visitor is checked out from %1$s";
 
     private final Nric patientNric;

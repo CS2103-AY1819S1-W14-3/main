@@ -99,11 +99,7 @@ Example(s):
 * `addmeds ic/S1234567A d/Paracetamol q/2 u/tablets n/4 t/14`
 
 //end::addmeds[]
-<<<<<<< HEAD
-
-=======
 //tag::addmh[]
->>>>>>> bf99e675f06bb1d0938f7afd5201ec6bf7752b1f
 === Add to patient’s medical history: `addmh`
 Add an non-blank diagnosis entry to an existing patient’s medical history.
 The patient must be registered within the system.
@@ -194,13 +190,9 @@ Example(s):
 ** Sorts the table in the medication view by the first column (Drug Name). Any entries with the same drug name will be further sorted by the second column (Dosage), with any entries with the same drug name and dosage being further sorted by the third column (Dosage Unit).
 * `sort a 1` where the current view is the default view (blank view).
 ** Does nothing (the current view is not sortable).
+
 //end::sort[]
 
-<<<<<<< HEAD
-=======
-//end::sort[]
-
->>>>>>> bf99e675f06bb1d0938f7afd5201ec6bf7752b1f
 //tag::select[]
 === Select patient: `select`
 Select a patient through pure command-line functionality.
@@ -258,15 +250,8 @@ image::dietView.png[width=800]
 
 * `view meds`
 
-<<<<<<< HEAD
-//end::view[]
-
-=== View all appointments for a patient: `viewappt`
-View all scheduled appointments for a patient.
-=======
 .Medication view
 image::medsView.png[width=800]
->>>>>>> bf99e675f06bb1d0938f7afd5201ec6bf7752b1f
 
 * `view mh`
 
