@@ -40,7 +40,6 @@ public class XmlAdaptedMedicalHistory implements Iterable<XmlAdaptedDiagnosis> {
     }
 
     @Override
-    //todo amend
     public boolean equals(Object o) {
         if (this == o) {
             return true;

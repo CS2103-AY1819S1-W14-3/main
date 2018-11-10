@@ -34,9 +34,13 @@ This section's purpose is to summarise my contributions to this project. For mor
 ** What it does: this command adds a medication entry to a given patient. The medication entry includes information about the drug name, the dosage, dosage unit, doses per day, and the duration of the prescription in days.
 ** Justification: this command provides a core functionality of HealthBase (medication data entry and retrieval).
 ** Highlights: this command affects existing internal representations of the Person class and required significant retooling of tests to fit the new member of the Person class. The implementation was somewhat challenging as it required an extension of the current Person data representation and storage functionality.
+* *Major enhancement*: Added `view` command (Pull request(s): link:{prlink}95[#95], link:{prlink}127[#127], link:{prlink}169[#169])
+** What it does: this command adds functionality for users to view patient-specific information in the right-side panel of the UI.
+** Justification: this command provides a code functionality of HealthBase (viewing patient data), while preventing UI clutter.
+** Highlights: this command was designed to be extensible and allows developers to design their own panels for data display without impacting other developers' data displays.
 * *Minor enhancement*:
-** Added `view` command
 ** Added `sort` command
+** Added `gendata` command
 * *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=snajef[my commits]]
 * *Other contributions*:
 
@@ -77,3 +81,4 @@ include::../UserGuide.adoc[tag=addmeds]
 
 include::../DeveloperGuide.adoc[tag=addmeds]
 
+include::../DeveloperGuide.adoc[tag=gendata]
