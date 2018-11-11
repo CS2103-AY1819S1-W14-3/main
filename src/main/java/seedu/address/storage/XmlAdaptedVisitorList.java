@@ -24,11 +24,6 @@ public class XmlAdaptedVisitorList implements Iterable<XmlAdaptedVisitor> {
         this.visitorList = new ArrayList<>(vl);
     }
 
-    /** Defensive copy constructor. */
-    public XmlAdaptedVisitorList(XmlAdaptedVisitorList vl) {
-        this(vl.visitorList);
-    }
-
     /** Setter method to hot swap the internal list. */
     public void setVisitorList(List<XmlAdaptedVisitor> vl) {
         this.visitorList = new ArrayList<>(vl);

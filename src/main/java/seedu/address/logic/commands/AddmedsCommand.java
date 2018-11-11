@@ -112,7 +112,7 @@ public class AddmedsCommand extends Command {
         VisitorList visitorList = personToEdit.getVisitorList();
 
         return new Person(nric, name, phone, email, address, tags,
-            updatedMedicineList, appointmentsList, medicalHistory, dietCollection);
+            updatedMedicineList, appointmentsList, medicalHistory, dietCollection, visitorList);
     }
 
     /**
