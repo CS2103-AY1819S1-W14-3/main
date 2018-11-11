@@ -295,23 +295,76 @@ The following sequence diagram shows the execution of the `addappt` command:
 .Execution sequence of the `addappt` command
 image::AddapptSequenceDiagram.png[width="800"]
 
-With reference to Figure 1, the following steps occur on the execution of the `addappt` command:
+With reference to Figure 10, the following steps occur on the execution of the `addappt` command
+(code snippets have been included for the first 3 steps to further aid understanding):
 
+[LogicManager.java, java]
+----
+...
+    @Override
+    public CommandResult execute(String commandText) throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        try {
+            Command command = addressBookParser.parseCommand(commandText); // <1>
+            return command.execute(model, history);
+        } finally {
+            history.add(commandText);
+        }
+    }
+...
+----
+[AddressBookParser.java, java]
+----
+...
+    public Command parseCommand(String userInput) throws ParseException { // <1>
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        switch (commandWord) {
+
+        case RegisterCommand.COMMAND_WORD:
+            return new RegisterCommandParser().parse(arguments);
+        ...
+        case AddApptCommand.COMMAND_WORD:
+            return new AddApptCommandParser().parse(arguments); // <2>
+        ...
+    }
+...
+----
+[AddApptCommandParser.java, java]
+----
+...
+    @Override
+    public AddApptCommand parse(String args) throws ParseException { // <2>
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_TYPE, PREFIX_PROCEDURE,
+                PREFIX_DATE_TIME, PREFIX_DOCTOR);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_TYPE, PREFIX_PROCEDURE,
+                PREFIX_DATE_TIME, PREFIX_DOCTOR) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApptCommand.MESSAGE_USAGE));
+        }
+        ...
+        nric = new Nric(patientNric);
+        appt = new Appointment(type, procedure, dateTime, doctor);
+
+        return new AddApptCommand(nric, appt); // <3>
+    }
+...
+----
 <1> The command is first passed to an instance of the `LogicManager` class which in turn executes `AddressBookParser::parseCommand`.
-
 <2> The `AddressBookParser` parses the command word (`addappt`) and executes `AddApptCommandParser::parse`.
-
 <3> The `AddApptCommandParser::parse` method returns an `AddApptCommand` object which encapsulates the necessary information to update the `Person` 's `Appointment` (s).
-
 <4> Control then passes back to the `LogicManager`, which calls `AddApptCommand::execute`.
-
 <5> The `AddApptCommand::execute` method constructs a new `Person` object using all the details of the old `Person` with the exception that the `AppointmentsList` is a copy of the original `Person` 's `AppointmentsList` with an added `Appointment`.
-
 <6> This updated `Person` object is used to update the existing `Person` object using the `Model::updatePerson` method of the backing model.
-
-<7> Finally, the `AddApptCommand::execute` method terminates, returning a `CommandResult` with a success message. The `LogicManager` then returns the same `CommandResult` as the return value of the `LogicManager::execute` method.
-
-<8> The command execution then ends.
+<7> Finally, the `AddApptCommand::execute` method terminates, returning a `CommandResult` with a success message
+<8> The `LogicManager` then returns the same `CommandResult` as the return value of the `LogicManager::execute` method.
+<9> The command execution ends.
 
 [NOTE]
 If no/multiple patient(s) with that `NRIC` exist(s), then the `AddApptCommand::execute` method will throw a `CommandException` with the appropriate error message and the usage case will end.
