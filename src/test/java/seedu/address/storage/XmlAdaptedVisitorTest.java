@@ -32,6 +32,13 @@ public class XmlAdaptedVisitorTest {
     }
 
     @Test
+    public void equals_copyOfSource_returnsTrue() {
+        XmlAdaptedVisitor xv = new XmlAdaptedVisitor(VALID_VISITOR);
+        XmlAdaptedVisitor xv1 = new XmlAdaptedVisitor(visitor);
+        assertTrue(xv.equals(xv1));
+    }
+
+    @Test
     public void equals_itself_returnsTrue() {
         XmlAdaptedVisitor xv = new XmlAdaptedVisitor(visitor);
         assertTrue(xv.equals(xv));

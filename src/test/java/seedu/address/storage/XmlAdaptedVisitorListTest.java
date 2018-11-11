@@ -43,4 +43,9 @@ public class XmlAdaptedVisitorListTest {
     public void equals_differentVisitorList_returnsFalse() {
         assertFalse(xmlAdaptedVisitorList.equals(xmlAdaptedVisitorList1));
     }
+
+    @Test
+    public void equals_objectAndDefensiveCopy_returnsTrue() {
+        assertTrue(xmlAdaptedVisitorList.equals(new XmlAdaptedVisitorList(xmlAdaptedVisitorList)));
+    }
 }

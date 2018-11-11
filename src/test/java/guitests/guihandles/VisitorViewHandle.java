@@ -16,7 +16,7 @@ public class VisitorViewHandle extends NodeHandle<TableView<Visitor>> {
         super(browserPanelHandleNode);
     }
 
-    public ObservableList<Visitor> getBackingListOfDiagnoses() {
+    public ObservableList<Visitor> getBackingListOfVisitor() {
         return getRootNode().getItems();
     }
 }
