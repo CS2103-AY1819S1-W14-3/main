@@ -324,6 +324,10 @@ See <<#view-command, entry>> on the `view` command.
 === View patient medication: `view meds`
 See <<#view-command, entry>> on the `view` command.
 
+=== View patient visitors: `view visitors`
+See <<#view-command, entry>> on the `view` command.
+
+
 === View patient’s medical history: `view mh`
 View an existing patient’s recorded medical history.
 
@@ -334,7 +338,7 @@ Example(s):
 * `view mh ic/S1234567A`
 
 === View patient’s visitors: `viewvisitors`
-View a patient’s visitors.
+View a particular patient’s visitors.
 
 Format: `viewvisitors ic/PATIENT_NRIC`
 
@@ -343,6 +347,10 @@ Example:
 * `viewvisitors ic/S1234567A`
 
 image::viewvisitors_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
 
 //tag::visitorin[]
 === Sign in patient’s visitors: `visitorin`
@@ -355,6 +363,14 @@ Example:
 * `visitorin ic/S1234567A v/Amy`
 
 image::visitorin_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: User can't add visitor to a patient who has more than 5 visitors.
+****
 //end::visitorin[]
 
 === Sign out patient’s visitors: `visitorout`
@@ -367,6 +383,14 @@ Example:
 * `visitorout ic/S1234567A v/Amy`
 
 image::visitorout_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: If the required visior in not in the patient's visitor list, an error message will be displayed.
+****
 
 === Saving the data
 
