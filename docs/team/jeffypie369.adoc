@@ -5,26 +5,35 @@
 
 == PROJECT: HealthBase
 
----
+== 1. Overview
+HealthBase is an application that evolved from a brown-field project, Addressbook,
+which consisted of 10KLOC. Over the course of 3 months, my team has gradually morphed the Addressbook into
+HealthBase by fortnightly meeting milestones that we set in the infancy stages of the project.
 
-== Overview
-This page encompasses my contributions to HealthBase. This includes the implementation of features, refactoring and documentation.
+This page encompasses my contributions to HealthBase. This includes the implementation of features, refactoring
+and documentation.
 
-HealthBase is a desktop application designed to aid in the management of a hospital. It provides patient data input and management capabilities through a command line interface for input and a graphical UI for data display. Its main features include (among others):
+HealthBase is a desktop application designed to aid in the management of a hospital. It provides patient data
+input and management capabilities through a command-line interface for input and a graphical user interface for data display.
+Its main features (among others) include:
 
+* Patient registration into the HealthBase system
+* Patient dietary restriction(s) data entry and retrieval
 * Patient medication data entry and retrieval
 * Patient medical history data entry and retrieval
-* Patient dietary restriction(s) data entry and retrieval
 * Patient visitor history data entry and retrieval
 * Real-time management of the number of visitors any given patient has
-* Patient appointment management for doctors
+* Patient appointment management for nurses
+* Patient discharge from the hospital
+* Patient check in for subsequent visits
 
-== Summary of contributions
+== 2. Summary of contributions
 
 * *Major enhancement*: Added `addappt` command
-** What it does: adds an appointment for a given patient. Each appointment includes the following information: type of procedure, procedure name, date and time of appointment and the doctor-in-charge
+** What it does: adds an appointment for a given patient. Each appointment includes the following information: type of procedure, procedure name, date and time of appointment and the Doctor-in-charge
 ** Justification: this command provides a core functionality of the HealthBase (appointment data entry and retrieval).
-** Highlights: this command affects existing internal representations of the Person class and required significant retooling of tests to fit the new member of the Person class. The implementation was somewhat challenging as it required an extension of the current Person data representation and storage functionality.
+** Highlights: This feature currently allows for nurses to add and view upcoming appointments for patients. In V2.0 of
+HealtBase, doctors will be able to view the appointments they have with different patients.
 * *Minor enhancement*: Incorporate `appt` with the `view` command
 
 * *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=jeffypie369[commits]]
@@ -32,23 +41,16 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 * *Other contributions*:
 
 ** Project management:
-*** nil
+*** Bug Tester
 ** Enhancements to existing features:
-*** Refactored `add` command to `checkin` command (Pull request: https://github.com/CS2103-AY1819S1-W14-3/main/pull/33[#33])
+*** Refactored `add` command to `register` command (Pull request: https://github.com/CS2103-AY1819S1-W14-3/main/pull/33[#33])
 ** Documentation:
 *** Added sequence diagram for `addappt`: https://github.com/CS2103-AY1819S1-W14-3/main/pull/91[#91]
 ** Community:
-*** nil
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], https://github.com/CS2103-AY1819S1-W14-3/main/pull/41[#41],
- https://github.com/CS2103-AY1819S1-W14-3/main/pull/107[#107], https://github.com/CS2103-AY1819S1-W14-3/main/pull/183[#183]
-//*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-//*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-//** Tools:
-//*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-//*** Integrated a new Github plugin (CircleCI) to the team repo
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/177[#177],
+https://github.com/CS2103-AY1819S1-W14-3/main/pull/183[#183],
 
-== Contributions to the User Guide
-
+== 3. Contributions to the User Guide
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
@@ -56,11 +58,9 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 
 include::../UserGuide.adoc[tag=addappt]
 
-include::../UserGuide.adoc[tag=visitorin]
-
 include::../UserGuide.adoc[tag=register]
 
-== Contributions to the Developer Guide
+== 4. Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
@@ -68,9 +68,7 @@ include::../UserGuide.adoc[tag=register]
 
 include::../DeveloperGuide.adoc[tag=addappt]
 
-== PROJECT: Accuride SG
-
-include::../UserGuide.adoc[tag=register]
+== 6. PROJECT: Accuride SG
 
 An Android offline MRT app where you can get the fastest duration and the least transfers duration from one station to another.
 

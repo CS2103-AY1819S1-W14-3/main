@@ -201,7 +201,7 @@ Format: `register ic/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS da/DRUG_ALLERG
 If the patient is already registered, the command will not be allowed.
 
 [WARNING]
-The prefix `da/` must be separated from the last character of the previous input by a whitespace
+The prefix `da/` must be separated from the last input by a whitespace
 
 Example(s):
 
