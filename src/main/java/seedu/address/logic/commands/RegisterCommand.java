@@ -38,9 +38,10 @@ public class RegisterCommand extends Command {
             + PREFIX_DRUG_ALLERGY + "aspirin "
             + PREFIX_DRUG_ALLERGY + "insulin";
 
-    public static final String MESSAGE_SUCCESS = "New patient registered successfully: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "A patient of this NRIC is already registered and checked in";
-    public static final String MESSAGE_ALREADY_CHECKED_OUT = "A patient of this NRIC is already registered, but "
+    public static final String MESSAGE_SUCCESS = "New patient with NRIC %1$s registered successfully.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "A patient with this NRIC is already registered and "
+                                                          + "checked in.";
+    public static final String MESSAGE_ALREADY_CHECKED_OUT = "A patient with this NRIC is already registered, but "
                                                              + "was previously checked out. \n"
                                                              + "Please use the checkin command to check in this "
                                                              + "patient instead of registering him/her again.";
