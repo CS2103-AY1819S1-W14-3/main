@@ -42,6 +42,8 @@ public class AddApptCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Appointment added for patient: %1$s";
     public static final String MESSAGE_NO_SUCH_PATIENT = "No such patient exists.";
+    public static final String MESSAGE_MULTIPLE_PATIENTS = "Multiple such patients exist. "
+            + "Please contact the system administrator.";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -71,12 +73,7 @@ public class AddApptCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
-                .filtered(p -> patientNric.equals(p.getNric()));
-
-        if (filteredByNric.size() < 1) {
-            throw new CommandException(MESSAGE_NO_SUCH_PATIENT);
-        }
+        Person patientToUpdate = getPatient(patientNric, model);
 
         if (!isValidType(appt.getType())) {
             throw new CommandException(MESSAGE_INVALID_TYPE);
@@ -90,7 +87,7 @@ public class AddApptCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT);
         }
 
-        if (!isNotDuplicateDateTime(appt.getDate_time(), filteredByNric)) {
+        if (!isNotDuplicateDateTime(appt.getDate_time(), patientToUpdate)) {
             throw new CommandException(MESSAGE_DUPLICATE_DATE_TIME);
         }
 
@@ -98,7 +95,6 @@ public class AddApptCommand extends Command {
             throw new CommandException(Diagnosis.MESSAGE_NAME_CONSTRAINTS_DOCTOR);
         }
 
-        Person patientToUpdate = filteredByNric.get(0);
         Person updatedPatient = addApptForPerson(patientToUpdate, appt);
 
         model.updatePerson(patientToUpdate, updatedPatient);
@@ -169,8 +165,7 @@ public class AddApptCommand extends Command {
      * @param test date and time input by user
      * @return true if not duplicate
      */
-    public static boolean isNotDuplicateDateTime(String test, ObservableList<Person> filteredByNric) {
-        Person patient = filteredByNric.get(0);
+    public static boolean isNotDuplicateDateTime(String test, Person patient) {
         AppointmentsList apptList = patient.getAppointmentsList();
         ObservableList<Appointment> observableApptList = apptList.getObservableCopyOfAppointmentsList();
         for (Appointment appt : observableApptList) {
@@ -179,5 +174,28 @@ public class AddApptCommand extends Command {
             }
         }
         return true;
+    }
+
+    /**
+     * Helper method to get the requested patient from the Model.
+     *
+     * @param nric The NRIC of the patient (should be unique to the patient)
+     * @param model The backing model to query
+     * @return The patient in the model
+     * @throws CommandException if there are no/multiple patients matching the NRIC given.
+     */
+    private static Person getPatient(Nric nric, Model model) throws CommandException {
+        ObservableList<Person> patientCandidates = model.getFilteredPersonList()
+                .filtered(p -> nric.equals(p.getNric()));
+
+        if (patientCandidates.size() < 1) {
+            throw new CommandException(MESSAGE_NO_SUCH_PATIENT);
+        }
+
+        if (patientCandidates.size() > 1) {
+            throw new CommandException(MESSAGE_MULTIPLE_PATIENTS);
+        }
+
+        return patientCandidates.get(0);
     }
 }
