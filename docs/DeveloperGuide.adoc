@@ -538,13 +538,13 @@ with an appropriate error message before the use case ends.
 ==== Current implementation
 There three commands related to manage patients' visitors. +
 
-The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
-the maximum number of visitors for a patient is set to be 5 in order to provide patient's a comfortable resting environment. +
+* The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
+the maximum number of visitors for a patient is 5 in order to provide patient's a comfortable resting environment. +
 
-The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
+* The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
 `visitorList` in order of entry. +
 
-The `visitorout` command allows user to remove a visitor from patient's `VisitorList`.
+* The `visitorout` command allows user to remove a visitor from patient's `VisitorList`.
 
 ===== Classes associated
 The three commands are executed mainly depends on the classes of `VisitorList` and `Visitor`. Each `Person` object contains a
@@ -574,12 +574,18 @@ To illustrate how the three commands work, examples are given below.
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
+Here is `visitorin` sequence diagram below:
+
+image::VisitorinSequenceDiagram.png[width="800"]
 
 * `viewvisitor ic/S1234567A`
 ** Similar to the `visitorin` command, `ViewvisitorsCommandParser::parse` the required patient's ic(S1234567A) and returns a `ViewvisitorsCommand` object
 ** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
 *** A new CommandResult object is returned and the execution ends.
 
+Here is `viewvisitor` sequence diagram below:
+
+image::ViewvisitorsSequenceDiagram.png[width="800"]
 
 * `visitorout ic/S1234567A v/Jane`
 ** Similar to the `visitorin` command, `VisitoroutCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitoroutCommand` object.
@@ -587,10 +593,8 @@ To illustrate how the three commands work, examples are given below.
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here are the three sequence diagrams below:
+Here is `visitorout` sequence diagram below:
 
-image::VisitorinSequenceDiagram.png[width="800"]
-image::ViewvisitorsSequenceDiagram.png[width="800"]
 image::VisitoroutSequenceDiagram.png[width="800"]
 
 // tag::dataencryption[]
@@ -945,8 +949,7 @@ Use case ends.
 
 *MSS*
 
-1.  Counter staff inputs the visited patient’s number
-2.  HealthBase displays the number of visitors the patiently currently has
+1.  Counter staff inputs the visited patient’s Nric
 3.  Visitor is registered
 
 +
@@ -955,7 +958,7 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. Number of visitors for that patient exceeds maximum number allowed.
+* 2a. Number of visitors for that patient exceeds maximum number(5) allowed.
 +
 [none]
 ** 2a1. HealthBase rejects visitor.
@@ -967,7 +970,7 @@ Use case ends.
 
 *MSS*
 
-1.  Counter staff inputs the visited patient's number and visitor name
+1.  Counter staff inputs the visited patient's Nric and visitor name
 2.  Visitor is signed out
 +
 Use case ends

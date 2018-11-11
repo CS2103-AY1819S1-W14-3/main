@@ -270,6 +270,7 @@ Current choices for views include:
 * diets (Diet view, contains patient's dietary requirements)
 * meds (Medication view, contains information about the patient's medications)
 * mh (Medical history view, contains patient's previous medical diagnoses)
+* visitors (Visitor list view, contains patient's visitors' names)
 
 This command switches the user's view (right panel of the UI, indicated in the figure directly below) to a chosen view. +
 
@@ -303,6 +304,11 @@ image::medsView.png[width=800]
 .Medical history view
 image::mhView.png[width=800]
 
+* `view visitors`
+
+.Visitor view
+image::visitorsView.png[width=800]
+
 //end::view[]
 
 === View all appointments for a patient: `view appt`
@@ -332,7 +338,7 @@ View a patient’s visitors.
 
 Format: `viewvisitors ic/PATIENT_NRIC`
 
-Example(s):
+Example:
 
 * `viewvisitors ic/S1234567A`
 
@@ -344,7 +350,7 @@ Sign in a visitor for a patient.
 
 Format: `visitorin ic/PATIENT_NRIC v/VISITOR_NAME`
 
-Example(s):
+Example:
 
 * `visitorin ic/S1234567A v/Amy`
 
@@ -356,7 +362,7 @@ Sign out a visitor for a patient.
 
 Format: `visitorout ic/PATIENT_NRIC v/VISITOR_NAME`
 
-Example(s):
+Example:
 
 * `visitorout ic/S1234567A v/Amy`
 

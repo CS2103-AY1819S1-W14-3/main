@@ -89,19 +89,6 @@ public class AddmedsCommand extends Command {
         PrescriptionList updatedMedicineList = new PrescriptionList(personToEdit.getPrescriptionList());
         updatedMedicineList.add(m);
 
-        Nric nric = personToEdit.getNric();
-        Name name = personToEdit.getName();
-        Phone phone = personToEdit.getPhone();
-        Email email = personToEdit.getEmail();
-        Address address = personToEdit.getAddress();
-        Set<Tag> tags = personToEdit.getTags();
-        AppointmentsList appointmentsList = personToEdit.getAppointmentsList();
-        MedicalHistory medicalHistory = personToEdit.getMedicalHistory();
-        DietCollection dietCollection = personToEdit.getDietCollection();
-        VisitorList visitorList = personToEdit.getVisitorList();
-
-        return new Person(nric, name, phone, email, address, tags,
-            updatedMedicineList, appointmentsList, medicalHistory, dietCollection, visitorList);
         return personToEdit.withPrescriptionList(updatedMedicineList);
     }
 
