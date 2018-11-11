@@ -52,6 +52,9 @@ HealthBase is a desktop application designed to aid in the management of clinics
 |===
 
 include::../UserGuide.adoc[tag=adddiet]
+include::../UserGuide.adoc[tag=checkin]
+include::../UserGuide.adoc[tag=checkout]
+include::../UserGuide.adoc[tag=viewdiets]
 
 
 == Contributions to the Developer Guide

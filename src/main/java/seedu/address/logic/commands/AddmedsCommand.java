@@ -8,25 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
-import java.util.Set;
-
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.appointment.AppointmentsList;
-import seedu.address.model.diet.DietCollection;
-import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.visitor.VisitorList;
 
 //@@author snajef
 /**
@@ -113,6 +102,7 @@ public class AddmedsCommand extends Command {
 
         return new Person(nric, name, phone, email, address, tags,
             updatedMedicineList, appointmentsList, medicalHistory, dietCollection, visitorList);
+        return personToEdit.withPrescriptionList(updatedMedicineList);
     }
 
     /**

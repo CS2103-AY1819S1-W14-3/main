@@ -213,7 +213,6 @@ public class HistoryView extends UiPart<Region> implements Swappable, Sortable {
      * Current strategy is to refresh every panel every time a new result is available.
      * This might potentially burden the app for every new result available.
      * Might want to consider creating a new type of event for submitting medication and subscribing only to that.
-     * TODO?
      */
     @Subscribe
     private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {

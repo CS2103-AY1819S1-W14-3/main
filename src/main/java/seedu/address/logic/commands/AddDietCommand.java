@@ -6,20 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CULTURAL_REQUIREMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHYSICAL_DIFFICULTY;
 
-import java.util.Set;
-
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.diet.DietCollection;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 
 //@author yuntongzhang
@@ -95,16 +88,9 @@ public class AddDietCommand extends Command {
     private static Person addDietsForPatient(Person patientToUpdate, DietCollection dietsToAdd) {
         assert patientToUpdate != null;
 
-        DietCollection updatedDiet = patientToUpdate.getDietCollection().addMoreDiets(dietsToAdd);
+        DietCollection updatedDiet = new DietCollection(patientToUpdate.getDietCollection()).addMoreDiets(dietsToAdd);
 
-        Nric nric = patientToUpdate.getNric();
-        Name name = patientToUpdate.getName();
-        Phone phone = patientToUpdate.getPhone();
-        Email email = patientToUpdate.getEmail();
-        Address address = patientToUpdate.getAddress();
-        Set<Tag> tags = patientToUpdate.getTags();
-
-        return new Person(nric, name, phone, email, address, tags, updatedDiet);
+        return patientToUpdate.withDietCollection(updatedDiet);
     }
 
     @Override

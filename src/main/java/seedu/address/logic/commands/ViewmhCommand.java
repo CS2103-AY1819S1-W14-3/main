@@ -11,8 +11,11 @@ import seedu.address.model.medicalhistory.MedicalHistory;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
-//@@ omegafishy
+// @@author omegafishy
 /**
+ * Old code removed from HealthBase, no longer relevant.
+ * Viewing of patients is now done using the UI, {@code HistoryView}
+ *
  * Views the existing medical records of a patient.
  */
 public class ViewmhCommand extends Command {
@@ -28,7 +31,6 @@ public class ViewmhCommand extends Command {
             + "Please register patient with \"addmh\" command";
     public static final String MESSAGE_NO_ENTRIES = "Patient %1$s has no existing records at present";
     public static final String MESSAGE_SUCCESS = "Displaying patient %s's medical records: %s\n";
-    //todo add last updated timing
 
     private final Nric patientNric;
 
@@ -51,7 +53,6 @@ public class ViewmhCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, patientToView.getNric(), patientMedicalHistory));
     }
 
-    // todo refactor, multiple usages in other command methods as well. consider in future
     /**
      * Getter method to get the patient.
      *

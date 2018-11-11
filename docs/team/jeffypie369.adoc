@@ -39,7 +39,8 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 *** Added sequence diagram for `addappt`: https://github.com/CS2103-AY1819S1-W14-3/main/pull/91[#91]
 ** Community:
 *** nil
-//*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], https://github.com/CS2103-AY1819S1-W14-3/main/pull/41[#41], https://github.com/CS2103-AY1819S1-W14-3/main/pull/107[#107]
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W14-3/main/pull/31[#31], https://github.com/CS2103-AY1819S1-W14-3/main/pull/38[#38], https://github.com/CS2103-AY1819S1-W14-3/main/pull/41[#41],
+ https://github.com/CS2103-AY1819S1-W14-3/main/pull/107[#107], https://github.com/CS2103-AY1819S1-W14-3/main/pull/183[#183]
 //*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 //*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 //** Tools:

@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROCEDURE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
@@ -18,14 +17,8 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentsList;
 import seedu.address.model.appointment.Type;
 import seedu.address.model.medicalhistory.Diagnosis;
-import seedu.address.model.medicine.PrescriptionList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Adds an appointment for a patient
@@ -134,15 +127,7 @@ public class AddApptCommand extends Command {
         AppointmentsList updatedAppointmentsList = new AppointmentsList(personToEdit.getAppointmentsList());
         updatedAppointmentsList.add(appt);
 
-        Nric nric = personToEdit.getNric();
-        Name name = personToEdit.getName();
-        Phone phone = personToEdit.getPhone();
-        Email email = personToEdit.getEmail();
-        Address address = personToEdit.getAddress();
-        Set<Tag> tags = personToEdit.getTags();
-        PrescriptionList prescriptionList = personToEdit.getPrescriptionList();
-
-        return new Person(nric, name, phone, email, address, tags, prescriptionList, updatedAppointmentsList);
+        return personToEdit.withAppointmentsList(updatedAppointmentsList);
     }
 
     /**
@@ -187,8 +172,8 @@ public class AddApptCommand extends Command {
     public static boolean isNotDuplicateDateTime(String test, ObservableList<Person> filteredByNric) {
         Person patient = filteredByNric.get(0);
         AppointmentsList apptList = patient.getAppointmentsList();
-        ObservableList<Appointment> ObservableApptList = apptList.getObservableCopyOfAppointmentsList();
-        for (Appointment appt : ObservableApptList) {
+        ObservableList<Appointment> observableApptList = apptList.getObservableCopyOfAppointmentsList();
+        for (Appointment appt : observableApptList) {
             if (appt.getDate_time().equals(test)) {
                 return false;
             }
