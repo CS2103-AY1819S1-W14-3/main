@@ -35,17 +35,15 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 *** *visitorin* user to select a patient and show all the patient's visitors in the list.
 ** Justification: This feature designed to provide clerical staff with feature to view and control the patient's visitors.Eventually, it create better resting environment for the patients.
 
-* *Minor enhancements*:
+* *Minor enhancements*: Incorporate `visitors` with the `view` command
 
 ** Project management:
-*** add new visitor and visitorList classes to each patients.
-*** ensured 90% of test cases to ensure the commands work correctly.
+*** nil
 ** Documentation:
 *** Add visual guide to User guide in the relative features about visitors.
 *** Update diagram and clear steps to Developer guide in the fields of visitors.
 ** Community:
-*** PRs created:#115 #116 #110
-*** modified features according to team mates advices:
+*** PRs reviewed:#129
 
 == 3. Contributions to the User Guide
 
@@ -55,37 +53,59 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 |===
 
 === View patient’s visitors: `viewvisitors`
-View a patient’s visitors.
+View a particular patient’s visitors.
 
 Format: `viewvisitors ic/PATIENT_NRIC`
 
-Example(s):
+Example:
 
 * `viewvisitors ic/S1234567A`
 
 image::viewvisitors_screenshot.png[width=800]
 
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+//tag::visitorin[]
 === Sign in patient’s visitors: `visitorin`
 Sign in a visitor for a patient.
 
 Format: `visitorin ic/PATIENT_NRIC v/VISITOR_NAME`
 
-Example(s):
+Example:
 
 * `visitorin ic/S1234567A v/Amy`
 
 image::visitorin_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: User can't add visitor to a patient who has more than 5 visitors.
+****
+//end::visitorin[]
 
 === Sign out patient’s visitors: `visitorout`
 Sign out a visitor for a patient.
 
 Format: `visitorout ic/PATIENT_NRIC v/VISITOR_NAME`
 
-Example(s):
+Example:
 
 * `visitorout ic/S1234567A v/Amy`
 
 image::visitorout_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: If the required visior in not in the patient's visitor list, an error message will be displayed.
+****
 == 3. Contributions to the Developer Guide
 
 |===
@@ -97,13 +117,13 @@ image::visitorout_screenshot.png[width=800]
 ==== Current implementation
 There three commands related to manage patients' visitors. +
 
-The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
-the maximum number of visitors for a patient is set to be 5 in order to provide patient's a comfortable resting environment. +
+* The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
+the maximum number of visitors for a patient is 5 in order to provide patient's a comfortable resting environment. +
 
-The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
+* The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
 `visitorList` in order of entry. +
 
-The `visitorout` command allows user to remove a visitor from patient's `VisitorList`.
+* The `visitorout` command allows user to remove a visitor from patient's `VisitorList`.
 
 ===== Classes associated
 The three commands are executed mainly depends on the classes of `VisitorList` and `Visitor`. Each `Person` object contains a
@@ -133,12 +153,18 @@ To illustrate how the three commands work, examples are given below.
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
+Here is `visitorin` sequence diagram below:
+
+image::VisitorinSequenceDiagram.png[width="800"]
 
 * `viewvisitor ic/S1234567A`
 ** Similar to the `visitorin` command, `ViewvisitorsCommandParser::parse` the required patient's ic(S1234567A) and returns a `ViewvisitorsCommand` object
 ** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
 *** A new CommandResult object is returned and the execution ends.
 
+Here is `viewvisitor` sequence diagram below:
+
+image::ViewvisitorsSequenceDiagram.png[width="800"]
 
 * `visitorout ic/S1234567A v/Jane`
 ** Similar to the `visitorin` command, `VisitoroutCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitoroutCommand` object.
@@ -146,8 +172,6 @@ To illustrate how the three commands work, examples are given below.
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here are the three sequence diagrams below:
+Here is `visitorout` sequence diagram below:
 
-image::VisitorinSequenceDiagram.png[width="800"]
-image::ViewvisitorsSequenceDiagram.png[width="800"]
 image::VisitoroutSequenceDiagram.png[width="800"]
