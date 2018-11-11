@@ -176,8 +176,8 @@ WARNING: If the NRIC does not match that of any checked in patient in the system
 ****
 
 ****
-WARNING: After a patient has been checked out from the system, any commands which select or add information to this
-patient will be considered as an invalid command.
+WARNING: After a patient has been checked out from the system, all commands concerning this patient (except `checkin`
+command) will be considered as invalid commands.
 ****
 
 Example(s):
