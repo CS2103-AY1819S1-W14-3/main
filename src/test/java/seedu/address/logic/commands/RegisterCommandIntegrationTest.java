@@ -62,7 +62,7 @@ public class RegisterCommandIntegrationTest {
         Person personWithDuplicateNric = new Person(nricInList, new Name("Boon Ping"), new Phone("90000000"),
                 new Email("newemail@email.com"), new Address("New Address Road"), tags);
         assertCommandFailure(new RegisterCommand(personWithDuplicateNric), model, commandHistory,
-                RegisterCommand.MESSAGE_DUPLICATE_NRIC);
+                RegisterCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

@@ -25,6 +25,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DRUG_ALLERGY_PE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_CHARLIE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRUG_ALLERGY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -74,24 +76,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 + DRUG_ALLERGY_DESC_PENICILLIN;
         assertCommandSuccess(command, index, BOB);
 
-        /* Case: edit a person with new values same as another person's values but with different name -> edited */
+        /* Case: edit a person with new values same as another person's values but with different nric -> edited */
         assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + NAME_DESC_AMY
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_CHARLIE + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DRUG_ALLERGY_DESC_ASPIRIN
                 + DRUG_ALLERGY_DESC_PENICILLIN;
-        editedPerson = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
-        assertCommandSuccess(command, index, editedPerson);
-
-        /* Case: edit a person with new values same as another person's values but with different phone and email
-         * -> edited
-         */
-        index = INDEX_SECOND_PERSON;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NRIC_DESC_BOB + NAME_DESC_BOB
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + DRUG_ALLERGY_DESC_ASPIRIN
-                + DRUG_ALLERGY_DESC_PENICILLIN;
-        editedPerson = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedPerson = new PersonBuilder(BOB).withNric(VALID_NRIC_CHARLIE).build();
         assertCommandSuccess(command, index, editedPerson);
 
         /* Case: clear drug allergies -> cleared */
