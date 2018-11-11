@@ -275,7 +275,7 @@ A more detailed description of the classes follows below:
 Given below is an example usage scenario and how the relevant classes behave at each step.
 At the end of the explanation is a link:{repoURL}/src/main/docs/images/AddApptSequenceDiagram.png[sequence diagram] of a typical addappt command execution.
 
-The user executes `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 1030 doc/Dr. Pepper`.
+The user executes `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`.
 This command has the following intent: Record the following appointment to a patient with NRIC = S1234567A:
 
 [cols="1,2a,2,2", options="header"]
