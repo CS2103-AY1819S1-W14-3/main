@@ -59,14 +59,7 @@ public class RegisterCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model); // note: throws a nullpt exception
-
-        if (model.hasPerson(toRegister)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        if (model.hasCheckedOutPerson(toRegister)) {
-            throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
-        }
+        checkValidRegister(toRegister, model);
 
         model.addPerson(toRegister);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRegister));
@@ -77,5 +70,21 @@ public class RegisterCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof RegisterCommand // instanceof handles nulls
                         && toRegister.equals(((RegisterCommand) other).toRegister));
+    }
+
+    /**
+     * Checks whether is valid to register the {@code person} with the given {@model}.
+     * @param person The person being registered.
+     * @param model The backing model.
+     * @throws CommandException If the person was previously registered, or was registered and checked out.
+     */
+    private static void checkValidRegister(Person person, Model model) throws CommandException {
+        if (model.hasPerson(person)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasCheckedOutPerson(person)) {
+            throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
+        }
     }
 }

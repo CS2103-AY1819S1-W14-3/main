@@ -27,9 +27,6 @@ public class CheckinCommand extends Command {
                                                + PREFIX_NRIC + "S1234567A ";
 
     public static final String MESSAGE_SUCCESS = "Patient %1$s has been successfully checked in.";
-    public static final String MESSAGE_ALREADY_CHECKED_IN = "Patient %1$s is already checked in.";
-    public static final String MESSAGE_RECORD_NOT_FOUND = "Record for patient %1$s not found in the system.\n"
-                                                        + "Please use register command to register this new patient.";
 
     private final Nric patientNric;
 
@@ -45,21 +42,7 @@ public class CheckinCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> filteredPersonByNric = model.getFilteredPersonList()
-            .filtered(p -> patientNric.equals(p.getNric()));
-
-        ObservableList<Person> filteredCheckedOutByNric = model.getFilteredCheckedOutPersonList()
-            .filtered(p -> patientNric.equals(p.getNric()));
-
-        if (filteredPersonByNric.size() > 0) {
-            throw new CommandException(String.format(MESSAGE_ALREADY_CHECKED_IN, patientNric));
-        }
-
-        if (filteredCheckedOutByNric.size() < 1) {
-            throw new CommandException(String.format(MESSAGE_RECORD_NOT_FOUND, patientNric));
-        }
-
-        Person patientToCheckIn = filteredCheckedOutByNric.get(0);
+        Person patientToCheckIn = CommandUtil.getCheckedOutPatient(patientNric, model);
         model.reCheckInPerson(patientToCheckIn);
         return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
     }

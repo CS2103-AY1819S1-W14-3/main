@@ -41,9 +41,6 @@ public class AddmedsCommand extends Command {
         + PREFIX_DURATION + "14";
 
     public static final String MESSAGE_SUCCESS = "Medication added for patient: %1$s";
-    public static final String MESSAGE_NO_SUCH_PATIENT = "No such patient exists.";
-    public static final String MESSAGE_MULTIPLE_PATIENTS = "Multiple such patients exist. "
-        + "Please contact the system administrator.";
 
     private final Prescription med;
     private final Nric patientNric;
@@ -60,7 +57,7 @@ public class AddmedsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Person patientToUpdate = getPatient(patientNric, model);
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
         Person updatedPatient = addMedicineForPerson(patientToUpdate, med);
 
         model.updatePerson(patientToUpdate, updatedPatient);
@@ -90,28 +87,5 @@ public class AddmedsCommand extends Command {
         updatedMedicineList.add(m);
 
         return personToEdit.withPrescriptionList(updatedMedicineList);
-    }
-
-    /**
-     * Helper method to get the requested patient from the Model.
-     *
-     * @param nric The NRIC of the patient (should be unique to the patient)
-     * @param model The backing model to query
-     * @return The patient in the model
-     * @throws CommandException if there are no/multiple patients matching the NRIC given.
-     */
-    private static Person getPatient(Nric nric, Model model) throws CommandException {
-        ObservableList<Person> patientCandidates = model.getFilteredPersonList()
-            .filtered(p -> nric.equals(p.getNric()));
-
-        if (patientCandidates.size() < 1) {
-            throw new CommandException(MESSAGE_NO_SUCH_PATIENT);
-        }
-
-        if (patientCandidates.size() > 1) {
-            throw new CommandException(MESSAGE_MULTIPLE_PATIENTS);
-        }
-
-        return patientCandidates.get(0);
     }
 }

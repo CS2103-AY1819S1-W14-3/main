@@ -70,7 +70,7 @@ public class VisitoroutCommandTest {
         ModelStubAcceptingVisitorout modelStub = new ModelStubAcceptingVisitorout(patient);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(VisitoroutCommand.MESSAGE_UNREGISTERED);
+        thrown.expectMessage(CommandUtil.MESSAGE_NO_SUCH_PATIENT);
         addDietCommand.execute(modelStub, commandHistory);
     }
 
@@ -109,6 +109,14 @@ public class VisitoroutCommandTest {
 
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
 
         @Override

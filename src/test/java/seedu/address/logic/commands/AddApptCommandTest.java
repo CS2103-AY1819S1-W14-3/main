@@ -87,7 +87,7 @@ public class AddApptCommandTest {
         AddApptCommand addApptCommand = new AddApptCommand(patientNotInModel.getNric(), appt);
         CommandTestUtil.ModelStub modelStub = new ModelStubAcceptingAddappt(patient);
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddApptCommand.MESSAGE_NO_SUCH_PATIENT);
+        thrown.expectMessage(CommandUtil.MESSAGE_NO_SUCH_PATIENT);
         addApptCommand.execute(modelStub, commandHistory);
     }
 
@@ -197,6 +197,14 @@ public class AddApptCommandTest {
 
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
 
         @Override

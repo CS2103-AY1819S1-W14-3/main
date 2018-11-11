@@ -84,7 +84,7 @@ public class AddDietCommandTest {
         ModelStubAcceptingAdddiet modelStub = new ModelStubAcceptingAdddiet(patient);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddDietCommand.MESSAGE_NO_SUCH_PATIENT);
+        thrown.expectMessage(CommandUtil.MESSAGE_NO_SUCH_PATIENT);
         addDietCommand.execute(modelStub, commandHistory);
     }
 
@@ -135,6 +135,15 @@ public class AddDietCommandTest {
 
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            // called by {@code AddDietCommand#execute()}
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
 
         @Override
