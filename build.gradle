@@ -52,7 +52,13 @@ jacocoTestReport {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
 }
+
+
 
 dependencies {
     String testFxVersion = '4.0.12-alpha'
