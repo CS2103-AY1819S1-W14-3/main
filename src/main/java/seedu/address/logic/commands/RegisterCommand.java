@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -41,10 +40,10 @@ public class RegisterCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New patient registered successfully: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "A patient of this NRIC is already registered and checked in";
-    public static final String MESSAGE_ALREADY_CHECKED_OUT = "A patient of this NRIC is already registered, but " +
-                                                             "was previously checked out. \n" +
-                                                             "Please use the checkin command to check in this " +
-                                                             "patient instead of registering him/her again.";
+    public static final String MESSAGE_ALREADY_CHECKED_OUT = "A patient of this NRIC is already registered, but "
+                                                             + "was previously checked out. \n"
+                                                             + "Please use the checkin command to check in this "
+                                                             + "patient instead of registering him/her again.";
 
     private final Person toRegister;
 
