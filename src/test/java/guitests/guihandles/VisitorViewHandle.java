@@ -10,7 +10,7 @@ import seedu.address.model.visitor.Visitor;
  * Provides visitor view handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
  */
 public class VisitorViewHandle extends NodeHandle<TableView<Visitor>> {
-    public static final String VISITOR_TABLE_VIEW_ID = "#visitorTableView";
+    public static final String VISITOR_TABLE_VIEW_ID = "#visitorsTableView";
 
     public VisitorViewHandle(TableView<Visitor> browserPanelHandleNode) {
         super(browserPanelHandleNode);
