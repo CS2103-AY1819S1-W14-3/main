@@ -8,11 +8,12 @@ import java.util.Objects;
  * Represents dietary requirement for a person.
  */
 public class Diet {
-    private final String detail;
-    private final DietType type;
 
     public static final String MESSAGE_INVALID_DIET = "Diet detail can only take alphabets, and should not be blank.";
     private static final String DIET_VALIDATION_REGEX = "^[A-Za-z- ]+$";
+
+    private final String detail;
+    private final DietType type;
 
     /**
      * Constructor for a Diet Object.
