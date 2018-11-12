@@ -15,7 +15,7 @@ public class XmlAdaptedVisitor {
     private String visitor;
 
     /**
-     * Constructs an XmlAdaptedDiagnosis.
+     * Constructs an XmlAdaptedVisitor.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedVisitor() {}
