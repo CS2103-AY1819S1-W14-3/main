@@ -16,7 +16,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Add diet requirements to a patient.
+ * Adds diet requirements to a patient.
  *
  * @author yuntongzhang
  */
@@ -65,7 +65,7 @@ public class AddDietCommand extends Command {
     }
 
     /**
-     * Add more dietary requirements to a patient.
+     * Adds more dietary requirements to a patient.
      *
      * @param patientToUpdate The patient to be updated.
      * @param dietsToAdd The diet requirements to be added to the patient.

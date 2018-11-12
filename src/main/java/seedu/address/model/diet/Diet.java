@@ -48,7 +48,7 @@ public class Diet {
     }
 
     /**
-     * Check whether this diet requirement is allergy.
+     * Checks whether this diet requirement is allergy.
      * @return True if this diet requirement is an allergy.
      */
     public boolean isAllergy() {
@@ -56,7 +56,7 @@ public class Diet {
     }
 
     /**
-     * Check whether this diet requirement is cultural requirement.
+     * Checks whether this diet requirement is cultural requirement.
      * @return True if this diet requirement is a cultural requirement.
      */
     public boolean isCulturalRequirement() {
@@ -64,7 +64,7 @@ public class Diet {
     }
 
     /**
-     * Check whether this diet requirement is physical difficulty.
+     * Checks whether this diet requirement is physical difficulty.
      * @return True if this diet requirement is a physical difficulty.
      */
     public boolean isPhysicalDifficulty() {
@@ -80,9 +80,9 @@ public class Diet {
     }
 
     /**
-     * Check whether this diet is equal to the given object.
-     * @param other The other object to compare with
-     * @return Whether this diet is equal to the given object.
+     * Checks whether this diet is equal to the given object.
+     * @param other The other object to be compared with.
+     * @return True if this diet is equal to the given object.
      */
     @Override
     public boolean equals(Object other) {
@@ -100,8 +100,9 @@ public class Diet {
     }
 
     /**
-     * Compute the hashCode for a Diet. This method is used when comparing whether two sets of diets are equal,
-     * because the hashCode for a set is the sum of hashCode of the elements in the set.
+     * Computes the hashCode of a Diet object.
+     * This method is used when comparing whether two sets of diets are equal, because the hashCode for a set is the
+     * sum of hashCode of the elements in the set.
      * @return hashCode of a Diet object.
      */
     @Override
@@ -110,8 +111,8 @@ public class Diet {
     }
 
     /**
-     * Convert the diet to String for representation.
-     * @return The string representation for this diet.
+     * Converts the Diet to String for representation.
+     * @return The String representation of this diet.
      */
     @Override
     public String toString() {

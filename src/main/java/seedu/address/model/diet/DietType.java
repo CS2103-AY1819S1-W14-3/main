@@ -3,7 +3,8 @@ package seedu.address.model.diet;
 //@@author yuntongzhang
 
 /**
- * Represents a set of types for the diet requirement.
+ * Represents a set of types for a dietary requirement.
+ * @author yuntongzhang
  */
 public enum DietType {
     ALLERGY,

@@ -7,8 +7,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Contains utility methods used for executing commands in the various *Command
- * classes.
+ * Contains utility methods used for executing commands in the various *Command classes.
  */
 public class CommandUtil {
 
@@ -31,7 +30,7 @@ public class CommandUtil {
                                                                     + "patient instead of registering him/her again.";
 
     /**
-     * Helper method to get the checked in patient from the Model.
+     * Gets the checked in patient from the model.
      * This method also throws several Exceptions if the patient cannot be retrieved from the model.
      *
      * @param nric The NRIC of the patient (should be unique to the patient).
@@ -61,7 +60,7 @@ public class CommandUtil {
     }
 
     /**
-     * Helper method to get the checked out patient when checking in that patient.
+     * Gets the checked out patient when checking in that patient.
      * This method also throws several Exceptions if the patient cannot be retrieved from the model.
      *
      * @param nric The NRIC of the patient (should be unique to the patient).
@@ -86,7 +85,7 @@ public class CommandUtil {
     }
 
     /**
-     * Helper method to verify the validity to register the {@code patient} with the given {@code model}.
+     * Verifies the validity to register the {@code patient} with the given {@code model}.
      * This method also throws several Exceptions if the patient cannot be registered to the model.
      *
      * @param patient The patient being registered.
@@ -104,14 +103,14 @@ public class CommandUtil {
     }
 
     /**
-     * Helper method to get the patients list from {@code model} filtered by the given {@code nric}.
+     * Gets the patients list from {@code model} filtered by the given {@code nric}.
      */
     private static ObservableList<Person> getFilteredPatientsByNric(Nric nric, Model model) {
         return model.getFilteredPersonList().filtered(p -> nric.equals(p.getNric()));
     }
 
     /**
-     * Helper method to get the checked out patients list from {@code model} filtered by the given {@code nric}.
+     * Gets the checked out patients list from {@code model} filtered by the given {@code nric}.
      */
     private static ObservableList<Person> getFilteredCheckedOutPatientsByNric(Nric nric, Model model) {
         return model.getFilteredCheckedOutPersonList().filtered(p -> nric.equals(p.getNric()));

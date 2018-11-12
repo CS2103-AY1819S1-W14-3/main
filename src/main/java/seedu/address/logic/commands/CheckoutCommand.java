@@ -12,7 +12,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Check out a patient from the HealthBase system.
+ * Checks out a patient from the HealthBase system.
  * @author yuntongzhang
  */
 public class CheckoutCommand extends Command {

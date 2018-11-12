@@ -14,10 +14,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Represents a Collection of dietary requirement for a patient.
- * Guarantees: field values are validated and immutable.
+ * Represents a collection of dietary requirement for a patient.
+ * @author yuntongzhang
  */
 public class DietCollection {
+
     private final Set<Diet> dietSet;
 
     public DietCollection() {
@@ -44,6 +45,9 @@ public class DietCollection {
         this.dietSet = new HashSet<>(dietCollection.dietSet);
     }
 
+    /**
+     * Gets all dietary requirements of type ALLERGY in this DietCollection.
+     */
     public List<Diet> getAllergies() {
         List<Diet> allergies = new LinkedList<>();
         for (Diet diet: dietSet) {
@@ -54,6 +58,9 @@ public class DietCollection {
         return allergies;
     }
 
+    /**
+     * Gets all dietary requirements of type CULTURAL in this DietCollection.
+     */
     public List<Diet> getCulturalRequirements() {
         List<Diet> culturalRequirements = new LinkedList<>();
         for (Diet diet: dietSet) {
@@ -64,6 +71,9 @@ public class DietCollection {
         return culturalRequirements;
     }
 
+    /**
+     * Gets all dietary requirements of type PHYSICAL in this DietCollection.
+     */
     public List<Diet> getPhysicalDifficulties() {
         List<Diet> physicalDifficulties = new LinkedList<>();
         for (Diet diet: dietSet) {
@@ -75,7 +85,7 @@ public class DietCollection {
     }
 
     /**
-     * Add one diet requirement to an existing Diet Collection, without creating new copy.
+     * Adds one diet requirement to this DietCollection.
      * @param newDiet The new diet requirement to be added.
      */
     public void add(Diet newDiet) {
@@ -83,7 +93,7 @@ public class DietCollection {
     }
 
     /**
-     * Add more diet requirement to a copy of the existing Diet Collection.
+     * Adds more diet requirement to a copy of the existing DietCollection.
      * @param newDietCollection The new diet requirements to be added.
      * @return A new copy of DietCollection which has the updated diet requirements.
      */
@@ -99,7 +109,7 @@ public class DietCollection {
     }
 
     /**
-     * Get a list of allergies for JavaFX TableView.
+     * Gets a list of allergies for JavaFX TableView.
      * @return A {@code ObservableList} of allergies.
      */
     public ObservableList<Diet> getObservableAllergies() {
@@ -107,7 +117,7 @@ public class DietCollection {
     }
 
     /**
-     * Get a list of cultural requirements for JavaFX TableView.
+     * Gets a list of cultural requirements for JavaFX TableView.
      * @return A {@code ObservableList} of cultural requirements.
      */
     public ObservableList<Diet> getObservableCulturalRequirements() {
@@ -115,7 +125,7 @@ public class DietCollection {
     }
 
     /**
-     * Get a list of physical difficulties for JavaFX TableView.
+     * Gets a list of physical difficulties for JavaFX TableView.
      * @return A {@code ObservableList} of physical difficulties.
      */
     public ObservableList<Diet> getObservablePhysicalDifficulties() {
@@ -125,8 +135,8 @@ public class DietCollection {
     /**
      * Returns true if the two collections of diet requirements are the same.
      *
-     * @param other The other Object to be compared with
-     * @return Whether this DietCollection is the same as the other Object
+     * @param other The other Object to be compared with.
+     * @return True if this DietCollection is equal to the other Object.
      */
     @Override
     public boolean equals(Object other) {

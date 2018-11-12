@@ -12,7 +12,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Check in a patient whose records already exist in the HealthBase system.
+ * Checks in a patient whose records already exist in the HealthBase system.
  * @author yuntongzhang
  */
 public class CheckinCommand extends Command {

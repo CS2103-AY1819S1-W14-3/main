@@ -10,12 +10,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Nric;
 
 /**
- * Parse input argument and create a new CheckinCommand object.
+ * Parses input argument and create a new CheckinCommand object.
  * @author yuntongzhang
  */
 public class CheckinCommandParser implements Parser<CheckinCommand> {
     /**
-     * Parse the given {@code String} of arguments in the context of the CheckinCommand
+     * Parses the given {@code String} of arguments in the context of the CheckinCommand
      * and returns a CheckinCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
