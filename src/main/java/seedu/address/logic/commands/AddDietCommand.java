@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CULTURAL_REQUIREMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHYSICAL_DIFFICULTY;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -39,9 +38,6 @@ public class AddDietCommand extends Command {
                                                + PREFIX_PHYSICAL_DIFFICULTY + "Hands cannot move. ";
 
     public static final String MESSAGE_SUCCESS = "Dietary requirements added for patient: %1$s";
-    static final String MESSAGE_NO_SUCH_PATIENT = "No such patient exists.";
-    static final String MESSAGE_MULTIPLE_PATIENTS = "Multiple such patients exist. "
-                                                           + "Please contact the system administrator.";
 
     private final DietCollection dietsToAdd;
     private final Nric patientNric;
@@ -60,18 +56,7 @@ public class AddDietCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
-                .filtered(p-> patientNric.equals(p.getNric()));
-
-        if (filteredByNric.size() < 1) {
-            throw new CommandException(MESSAGE_NO_SUCH_PATIENT);
-        }
-
-        if (filteredByNric.size() > 1) {
-            throw new CommandException(MESSAGE_MULTIPLE_PATIENTS);
-        }
-
-        Person patientToUpdate = filteredByNric.get(0);
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
         Person updatedPatient = addDietsForPatient(patientToUpdate, dietsToAdd);
 
         model.updatePerson(patientToUpdate, updatedPatient);

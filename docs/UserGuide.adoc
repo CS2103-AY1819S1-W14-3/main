@@ -80,17 +80,43 @@ the input month has `31` days (for months except February) and `29` days for Feb
 
 //tag::adddiet[]
 === Add patient’s dietary needs: `adddiet`
-Add a patient’s dietary needs into the system.
-
+Add a patient’s dietary requirements into the system.
 
 Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY`
+
+There are three types of dietary requirements, which can be added to a patient with their own prefixes:
+
+|=====================================================
+| Type of dietary requirement | Prefix | Usage Example
+| Allergy | `alg` | `alg/Egg`
+| Cultural Requirement | `cr` | `cr/Halal`
+| Physical Difficulty | `pd` | `pd/Hands cannot move.`
+|=====================================================
+
 ****
-* User can pass in any number of allergies, cultural requirements and physical difficulties in one command.
+NOTE: The number of dietary requirements in an `adddiet` command must adhere to the following rules:
+
+* All three types are optional to be included, but there must be at least one dietary requirement in the command.
+* For each type, more than one requirements can be specified in the command.
+****
+
+****
+WARNING: The following inputs are considered as invalid when entering a dietary requirement:
+
+* Input with non-alphabetical characters. Eg. `alg/1Egg`
+* Input with only empty whitespaces or blank input. Eg. `cr/        pd/`
+****
+
+****
+TIP: Adding two same dietary requirements to a patient will only result in one copy of the requirements being saved to
+the patient.
 ****
 
 Example(s):
 
 * `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
+* `adddiet ic/S1234567A cr/Vegetarian`
+
 //end::adddiet[]
 
 //tag::addmeds[]
@@ -176,8 +202,8 @@ WARNING: If the NRIC does not match that of any checked in patient in the system
 ****
 
 ****
-WARNING: After a patient has been checked out from the system, any commands which select or add information to this
-patient will be considered as an invalid command.
+WARNING: After a patient has been checked out from the system, all commands with the NRIC of this patient as parameter
+(except the `checkin` command) will be considered as invalid commands.
 ****
 
 Example(s):
@@ -224,7 +250,7 @@ How this affects the sorting exactly depends on each view, and will be explained
 | View Name | Sortable? | What `SORT_ORDER` refers to
 | Default | No | -
 | Apppointment | Yes | The columns of the table in the view, one-indexed.
-| Diet | Yes | The columns of the table(s) in the view, one-indexed.
+| Diet | No | -
 | Medication | Yes | The columns of the table in the view, one-indexed.
 | Medical History | Yes | The columns of the table in the view, one-indexed.
 |=======================================================================
@@ -239,6 +265,7 @@ Example(s):
 //end::sort[]
 
 //tag::select[]
+[#select-command]
 === Select patient: `select`
 Select a patient through pure command-line functionality.
 The alternative is to click on the patient's card.
@@ -259,7 +286,10 @@ Example(s):
 //tag::view[]
 [#view-command]
 === View patient’s information: `view`
-View a patient’s information in the panel on the right. Exactly what information is displayed depends on the choice of view.
+View a selected patient’s information in the panel on the right. Exactly what information is displayed depends on the choice of view.
+
+[NOTE]
+Selected here refers to the use of the <<#select-command,`select`>> command. To view the information of a given patient, he must first be `select` ed.
 
 Format: `view VIEW_NAME`
 

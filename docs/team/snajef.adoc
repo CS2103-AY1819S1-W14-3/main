@@ -36,7 +36,7 @@ This section's purpose is to summarise my contributions to this project. For mor
 ** Highlights: this command affects existing internal representations of the Person class and required significant retooling of tests to fit the new member of the Person class. The implementation was somewhat challenging as it required an extension of the current Person data representation and storage functionality.
 * *Major enhancement*: Added `view` command (Pull request(s): link:{prlink}95[#95], link:{prlink}127[#127], link:{prlink}169[#169])
 ** What it does: this command adds functionality for users to view patient-specific information in the right-side panel of the UI.
-** Justification: this command provides a code functionality of HealthBase (viewing patient data), while preventing UI clutter.
+** Justification: this command provides a core functionality of HealthBase (viewing patient data), while preventing UI clutter.
 ** Highlights: this command was designed to be extensible and allows developers to design their own panels for data display without impacting other developers' data displays.
 * *Minor enhancement*:
 ** Added `sort` command
@@ -48,14 +48,16 @@ This section's purpose is to summarise my contributions to this project. For mor
 *** nil
 ** Enhancements to existing features:
 *** Refactored out a large portion of dead code for deprecated features (Pull request(s): link:{prlink}73[#73])
+*** Refactored a bloated class to make it more extensible (Pull request(s): link:{prlink}189[#189])
 *** Wrote additional tests for existing features to cover modifications to the Person class (Pull request(s): link:{prlink}22[#22])
 ** Documentation:
+*** Updated User Guide and Developer Guide to reflect changes made (Pull request(s): link:{prlink}29[#29], link:{prlink}75[#75], link:{prlink}85[#85], link:{prlink}109[#109], link:{prlink}130[#130], link:{prlink}140[#140], link:{prlink}212[#212])
 *** Updated class diagrams in the User Guide (Pull request(s): link:{prlink}97[#97])
 *** Ordered commands in the User Guide in lexicographical order (Pull request(s): link:{prlink}97[#97])
 *** Standardised language in the User Guide and Developer Guide (Pull request(s): link:{prlink}97[#97])
 ** Community:
-*** Reviewed PRs (with non-trivial review comments): (Pull request(s): link:{prlink}76[#76], link:{prlink}77[#77], link:{prlink}79[#79])
-*** Contributed to forum discussions (Examples:  https://github.com/nus-cs2103-AY1819S1/forum/issues/94[#94], https://github.com/nus-cs2103-AY1819S1/forum/issues/91[#91])
+*** Reviewed PRs (with non-trivial review comments): (Pull request(s): link:{prlink}76[#76], link:{prlink}77[#77], link:{prlink}79[#79], link:{prlink}209[#209])
+*** Contributed to forum discussions (Examples:  https://github.com/nus-cs2103-AY1819S1/forum/issues/91[#91], https://github.com/nus-cs2103-AY1819S1/forum/issues/94[#94])
 // *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Adoption by several other class mates of parts of the code for the addmeds feature I wrote (Pull request(s): link:{prlink}42[#42], link:{prlink}64[#64], link:{prlink}76[#76], link:{prlink}77[#77])
 

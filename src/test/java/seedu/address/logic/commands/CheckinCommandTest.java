@@ -67,7 +67,7 @@ public class CheckinCommandTest {
         CheckinCommand command = new CheckinCommand(nonExistingNric);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(String.format(CheckinCommand.MESSAGE_RECORD_NOT_FOUND, nonExistingNric));
+        thrown.expectMessage(String.format(CommandUtil.MESSAGE_RECORD_NOT_FOUND, nonExistingNric));
         command.execute(modelStub, commandHistory);
     }
 

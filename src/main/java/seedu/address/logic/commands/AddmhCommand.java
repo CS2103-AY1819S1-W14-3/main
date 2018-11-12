@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MED_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,7 +32,6 @@ public class AddmhCommand extends Command {
             + PREFIX_DOCTOR + "Dr.Ross";
 
     public static final String MESSAGE_SUCCESS = "New medical history/record successfully added: %1$s";
-    public static final String MESSAGE_UNREGISTERED = "Patient %1$s is not registered within the system.";
 
     private final Nric patientNric;
     private final Diagnosis newRecord;
@@ -52,31 +50,12 @@ public class AddmhCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Person patientToUpdate = getPatient(model);
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
         Person updatedPatient = addMedicalHistoryForPatient(patientToUpdate, this.newRecord);
 
         model.updatePerson(patientToUpdate, updatedPatient);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
-    }
-
-    // todo refactor, multiple usages in other command methods as well. consider in future
-    /**
-     * Getter method to get the patient.
-     *
-     * @param model the model used that stores the data of HMK2K18
-     * @return the `Person` with the matching NRIC
-     * @throws CommandException if there is no person in the `model` that matches the person's NRIC.
-     */
-    private Person getPatient(Model model) throws CommandException {
-        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
-                .filtered(p -> patientNric.equals(p.getNric()));
-
-        if (filteredByNric.size() < 1) {
-            throw new CommandException(MESSAGE_UNREGISTERED);
-        }
-
-        return filteredByNric.get(0);
     }
 
     @Override

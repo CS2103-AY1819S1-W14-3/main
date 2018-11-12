@@ -88,7 +88,7 @@ public class AddmedsCommandTest {
         // if we want to expect a certain message as well.
         // Hence the choice of thrown.expect(Exception) over the @Test(expected=Exception) annotation.
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddmedsCommand.MESSAGE_NO_SUCH_PATIENT);
+        thrown.expectMessage(CommandUtil.MESSAGE_NO_SUCH_PATIENT);
         addmedsCommand.execute(modelStub, commandHistory);
     }
 
@@ -147,6 +147,15 @@ public class AddmedsCommandTest {
 
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            // called by {@code AddmedsCommand#execute()}
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
 
         @Override

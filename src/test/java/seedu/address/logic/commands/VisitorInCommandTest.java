@@ -127,6 +127,14 @@ public class VisitorInCommandTest {
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
         }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
+        }
     }
 
 }

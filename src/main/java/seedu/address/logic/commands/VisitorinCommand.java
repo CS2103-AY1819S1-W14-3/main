@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISITOR;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -34,7 +33,6 @@ public class VisitorinCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New visitor checked in: %1$s";
     public static final String MESSAGE_DUPLICATE_VISITORS = "This person is already in the list";
-    public static final String MESSAGE_UNREGISTERED = "Patient %1$s is not registered within the system.";
     public static final String MESSAGE_FULL = "Patient can not has more than 5 visitor in the list";
 
     private final Nric patientNric;
@@ -54,14 +52,7 @@ public class VisitorinCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
-                .filtered(p -> patientNric.equals(p.getNric()));
-
-        if (filteredByNric.size() < 1) {
-            throw new CommandException(MESSAGE_UNREGISTERED);
-        }
-
-        Person patientToUpdate = filteredByNric.get(0);
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
 
         if (patientToUpdate.getVisitorList().getSize() >= 5) {
             throw new CommandException(MESSAGE_FULL);

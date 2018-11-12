@@ -175,19 +175,15 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other
-     * identity field that is the same. This defines a weaker notion of equality
-     * between two persons.
+     * Returns true if both persons have the same NRIC. NRIC is used as the
+     * unique identifier of Person objects.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null && otherPerson.getNric().equals(getNric())
-            && otherPerson.getName().equals(getName())
-            && (otherPerson.getPhone().equals(getPhone())
-                || otherPerson.getEmail().equals(getEmail()));
+        return otherPerson != null && otherPerson.getNric().equals(getNric());
     }
 
     private void setPropertyForObject(String fieldName, Object prop, Object obj) {
@@ -217,18 +213,13 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getNric().equals(getNric())
-            && otherPerson.getName().equals(getName())
-            && otherPerson.getPhone().equals(getPhone())
-            && otherPerson.getEmail().equals(getEmail())
-            && otherPerson.getAddress().equals(getAddress())
-            && otherPerson.getTags().equals(getTags());
+        return otherPerson.getNric().equals(getNric());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(nric, name, phone, email, address, tags, medicalHistory);
+        return Objects.hash(nric);
     }
 
     @Override

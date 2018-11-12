@@ -103,6 +103,14 @@ public class ViewvisitorsCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
+        }
+
+        @Override
         public void updatePerson(Person personToUpdate, Person updatedPerson) {
             requireAllNonNull(personToUpdate, updatedPerson);
             patient = updatedPerson;

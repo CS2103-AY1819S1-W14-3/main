@@ -7,16 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROCEDURE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.time.LocalDateTime;
-
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentsList;
-import seedu.address.model.appointment.Type;
-import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -41,22 +37,8 @@ public class AddApptCommand extends Command {
             + PREFIX_DOCTOR + "Dr. Pepper";
 
     public static final String MESSAGE_SUCCESS = "Appointment added for patient: %1$s";
-    public static final String MESSAGE_NO_SUCH_PATIENT = "No such patient exists.";
-    public static final String MESSAGE_MULTIPLE_PATIENTS = "Multiple such patients exist. "
-            + "Please contact the system administrator.";
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String PROCEDURE_VALIDATION_REGEX = "^[A-Za-z- ]+$";
-
-    public static final String MESSAGE_INVALID_PROCEDURE = "Procedure name can take any alphabet, and should not be "
-            + "blank.";
-    public static final String MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT = "Input date and time is before current date "
-            + "and time.";
     public static final String MESSAGE_DUPLICATE_DATE_TIME = "There is already an existing appointment at this "
             + "date and time";
-    public static final String MESSAGE_INVALID_TYPE = "Invalid input type. Valid types are: PROP, DIAG, THP, SRG";
 
     private final Appointment appt;
     private final Nric patientNric;
@@ -73,28 +55,13 @@ public class AddApptCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Person patientToUpdate = getPatient(patientNric, model);
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
 
-        if (!isValidType(appt.getType())) {
-            throw new CommandException(MESSAGE_INVALID_TYPE);
-        }
-
-        if (!isValidProcedure(appt.getProcedure_name())) {
-            throw new CommandException(MESSAGE_INVALID_PROCEDURE);
-        }
-
-        if (!isDateTimeAfterCurrent(appt.getDate_time())) {
-            throw new CommandException(MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT);
-        }
-
+        // The check for duplicate date and time has to be in this class as it requires the model to check for existing
+        // patients' appointments
         if (!isNotDuplicateDateTime(appt.getDate_time(), patientToUpdate)) {
             throw new CommandException(MESSAGE_DUPLICATE_DATE_TIME);
         }
-
-        if (!Diagnosis.isValidDoctor(appt.getDoc_name())) {
-            throw new CommandException(Diagnosis.MESSAGE_NAME_CONSTRAINTS_DOCTOR);
-        }
-
         Person updatedPatient = addApptForPerson(patientToUpdate, appt);
 
         model.updatePerson(patientToUpdate, updatedPatient);
@@ -127,40 +94,6 @@ public class AddApptCommand extends Command {
     }
 
     /**
-     * Checks if the type entered by user is valid
-     * @param typeAbbr abbreviation of type
-     * @return true if valid
-     */
-    public static boolean isValidType(String typeAbbr) {
-        for (Type t: Type.values()) {
-            if (t.getAbbreviation().equals(typeAbbr)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Checks if the procedure name is valid
-     * @param test the procedure name input by user
-     * @return true if valid
-     */
-    public static boolean isValidProcedure(String test) {
-        return test.matches(PROCEDURE_VALIDATION_REGEX);
-    }
-
-    /**
-     * Checks if date and time input by user is after current time
-     * @param test date and time input by user
-     * @return true if after current time
-     */
-    public static boolean isDateTimeAfterCurrent(String test) {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime apptDateTime = LocalDateTime.parse(test, Appointment.DATE_TIME_FORMAT);
-        return apptDateTime.isAfter(now);
-    }
-
-    /**
      * Checks if input date and time is not a duplicate
      * @param test date and time input by user
      * @return true if not duplicate
@@ -174,28 +107,5 @@ public class AddApptCommand extends Command {
             }
         }
         return true;
-    }
-
-    /**
-     * Helper method to get the requested patient from the Model.
-     *
-     * @param nric The NRIC of the patient (should be unique to the patient)
-     * @param model The backing model to query
-     * @return The patient in the model
-     * @throws CommandException if there are no/multiple patients matching the NRIC given.
-     */
-    private static Person getPatient(Nric nric, Model model) throws CommandException {
-        ObservableList<Person> patientCandidates = model.getFilteredPersonList()
-                .filtered(p -> nric.equals(p.getNric()));
-
-        if (patientCandidates.size() < 1) {
-            throw new CommandException(MESSAGE_NO_SUCH_PATIENT);
-        }
-
-        if (patientCandidates.size() > 1) {
-            throw new CommandException(MESSAGE_MULTIPLE_PATIENTS);
-        }
-
-        return patientCandidates.get(0);
     }
 }
