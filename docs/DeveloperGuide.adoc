@@ -1121,20 +1121,100 @@ Details on the exact range of values that the mock data can take on can be found
 
 // end::gendata[]
 
-=== Deleting a patient
+=== Adding medication for a patient
 
-. Deleting a patient while all patients are listed
+. Adding medication for a given patient
 
-.. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+// Valid inputs: Paracetamol / 2 / tablets / 4 / 14
+// Invalid inputs: "", " ", / 0, -1 / "", " " / -1, 0, 0.5 / -0.5, 0, 3.2, "a"
 
-_{ more test cases ... }_
+.. Prerequisites: Select a patient in the app using the `select` command. If there are no patients to be selected, add a new patient using the `register` command. Let this selected patient's NRIC be denoted by `$nric`.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/4 t/14` +
+   Expected: A prescription corresponding to "Paracetamol, 2 tablets 4 times a day for 14 days" is added to the patient's medications.
+.. Test case: `addmeds ic/$nric d/ q/2 u/tablets n/4 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/  q/2 u/tablets n/4 t/14` (Whitespace character as drug name) +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/0 u/tablets n/4 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/-1 u/tablets n/4 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/ u/tablets n/4 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/A u/tablets n/4 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/ n/4 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/ n/4 t/14` (Empty string as input for dosage unit) +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/  n/4 t/14` (Whitespace as input for dosage unit) +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/0 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/-1 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/-1 t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/A t/14` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/4 t/0` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/4 t/-1` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/4 t/0.5` +
+   Expected: No prescription is added. Error details shown in the status message.
+.. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/4 t/AAA` +
+   Expected: No prescription is added. Error details shown in the status message.
 
+=== Changing the view 
+
+. Changing the view (right-side panel of the UI)
+
+.. Prerequisites: None
+
+.. Test case: `view default` +
+   Expected: The view changes to a blank panel (the default view).
+.. Test case: `view appt` +
+   Expected: The view changes to the Appointment View.
+.. Test case: `view diets` +
+   Expected: The view changes to the Diet View.
+.. Test case: `view meds` +
+   Expected: The view changes to the Medication View.
+.. Test case: `view mh` +
+   Expected: The view changes to the Medical History view.
+.. Test case: `view AAA` +
+   Expected: The view does not change. An error message is shown.
+.. Test case: `view` +
+   Expected: The view does not change. An error message is shown.
+
+=== Sorting the view
+
+. Sorting a given view
+
+.. Prerequisites: The current view is a sortable view. Change the view to the Medication View (guaranteed sortable) using `view meds`.
+.. Test case: `sort a 1` +
+   Expected: The first column is used to sort the entries in the Medication View in ascending order. The natural ordering is lexicographical (for alphabetical data) and numerical (for numerical data).
+.. Test case: `sort` +
+   Expected: The view remains unsorted. An error message is shown.
+.. Test case: `sort x` +
+   Expected: The view remains unsorted. An error message is shown.
+.. Test case: `sort a` + 
+   Expected: The view remains unsorted. An error message is shown.
+
+=== Generating data
+
+. Generating data for testing
+
+.. Prerequisites: The application must be in developer mode. Toggle developer mode using the `dev-mode` command.
+.. Test case: `gendata 10` +
+   Expected: The application's data is cleared. 10 patients's worth of data is generated.
+.. Test case: `gendata` +
+   Expected: No data is generated. An error message is shown.
+.. Test case: `gendata -1` +
+   Expected: No data is generated. An error message is shown.
+.. Test case: `gendata A` +
+   Expected: No data is generated. An error message is shown.
+   
 === Saving data
 
 . Dealing with missing/corrupted data files
