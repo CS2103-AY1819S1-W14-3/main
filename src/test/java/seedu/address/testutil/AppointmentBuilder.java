@@ -55,7 +55,7 @@ public class AppointmentBuilder {
     }
 
     /**
-     * Setter for DateTime
+     * Setter for dateTime
      * @param d The string object to defensively copy and use.
      * @return this
      */

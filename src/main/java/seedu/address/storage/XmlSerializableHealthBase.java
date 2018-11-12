@@ -8,15 +8,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.HealthBase;
+import seedu.address.model.ReadOnlyHealthBase;
 import seedu.address.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable HealthBase that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook {
+@XmlRootElement(name = "healthbase")
+public class XmlSerializableHealthBase {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CHECKED_OUT_PERSON =
@@ -29,10 +29,10 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedPerson> checkedOutPersons;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableHealthBase.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableHealthBase() {
         persons = new ArrayList<>();
         checkedOutPersons = new ArrayList<>();
     }
@@ -40,7 +40,7 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableHealthBase(ReadOnlyHealthBase src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         checkedOutPersons.addAll(src.getCheckedOutPersonList().stream()
@@ -48,29 +48,29 @@ public class XmlSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code HealthBase} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public HealthBase toModelType() throws IllegalValueException {
+        HealthBase healthBase = new HealthBase();
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (healthBase.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            healthBase.addPerson(person);
         }
 
         for (XmlAdaptedPerson p : checkedOutPersons) {
             Person person = p.toModelType();
-            if (addressBook.hasCheckedOutPerson(person)) {
+            if (healthBase.hasCheckedOutPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CHECKED_OUT_PERSON);
             }
-            addressBook.addCheckedOutPerson(person);
+            healthBase.addCheckedOutPerson(person);
         }
-        return addressBook;
+        return healthBase;
     }
 
     @Override
@@ -79,10 +79,10 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableHealthBase)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons)
-            && checkedOutPersons.equals(((XmlSerializableAddressBook) other).checkedOutPersons);
+        return persons.equals(((XmlSerializableHealthBase) other).persons)
+            && checkedOutPersons.equals(((XmlSerializableHealthBase) other).checkedOutPersons);
     }
 }

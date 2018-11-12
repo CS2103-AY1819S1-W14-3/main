@@ -32,9 +32,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HealthBase;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyHealthBase;
 import seedu.address.model.appointment.Type;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -63,10 +63,14 @@ public class CommandTestUtil {
     public static final String VALID_VISITOR = "GAO JIAXIN";
 
     public static final String VALID_TYPE = Type.SURGICAL.getAbbreviation();
+    public static final String INVALID_TYPE = "SRGy";
     public static final String VALID_PROCEDURE = "Heart Bypass";
+    public static final String INVALID_PROCEDURE = "123";
     public static final String VALID_DATE_TIME = "12-12-2022 12:00";
     public static final String INVALID_DATE_TIME = "12-13-2025 23:30";
+    public static final String INVALID_DATE_TIME_BEFORE_CURRENT = "12-12-1018 23:20";
     public static final String VALID_DOCTOR = "Dr. Gregory House";
+    public static final String INVALID_DOCTOR = "12 Pepper";
 
     public static final String VALID_DRUGNAME = "Paracetamol";
     public static final int VALID_DOSE = 2;
@@ -143,7 +147,17 @@ public class CommandTestUtil {
             + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
+    public static final String INVALID_APPOINTMENT_DESC_INVALID_TYPE = " " + PREFIX_TYPE + INVALID_TYPE
+            + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
+            + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
+            + " " + PREFIX_DOCTOR + VALID_DOCTOR;
+
     public static final String INVALID_APPOINTMENT_DESC_MISSING_PROCEDURE = " " + PREFIX_TYPE + VALID_TYPE
+            + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
+            + " " + PREFIX_DOCTOR + VALID_DOCTOR;
+
+    public static final String INVALID_APPOINTMENT_DESC_INVALID_PROCEDURE = " " + PREFIX_TYPE + VALID_TYPE
+            + " " + PREFIX_PROCEDURE + INVALID_PROCEDURE
             + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
@@ -156,9 +170,20 @@ public class CommandTestUtil {
             + " " + PREFIX_DATE_TIME + INVALID_DATE_TIME
             + " " + PREFIX_DOCTOR + VALID_DOCTOR;
 
+    public static final String INVALID_APPOINTMENT_DESC_INVALID_DATE_TIME_BEFORE_CURRENT = " "
+            + PREFIX_TYPE + VALID_TYPE
+            + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
+            + " " + PREFIX_DATE_TIME + INVALID_DATE_TIME_BEFORE_CURRENT
+            + " " + PREFIX_DOCTOR + VALID_DOCTOR;
+
     public static final String INVALID_APPOINTMENT_DESC_MISSING_DOCTOR = " " + PREFIX_TYPE + VALID_TYPE
             + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
             + " " + PREFIX_DATE_TIME + VALID_DATE_TIME;
+
+    public static final String INVALID_APPOINTMENT_DESC_INVALID_DOCTOR = " " + PREFIX_TYPE + VALID_TYPE
+            + " " + PREFIX_PROCEDURE + VALID_PROCEDURE
+            + " " + PREFIX_DATE_TIME + VALID_DATE_TIME
+            + " " + PREFIX_DOCTOR + INVALID_DOCTOR;
 
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "AAAAAA"; // NRIC must match NRIC format.
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -214,7 +239,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        HealthBase expectedHealthBase = new HealthBase(actualModel.getHealthBase());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -224,7 +249,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedHealthBase, actualModel.getHealthBase());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
@@ -263,12 +288,12 @@ public class CommandTestUtil {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyHealthBase newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyHealthBase getHealthBase() {
             throw new AssertionError("This method should not be called.");
         }
 

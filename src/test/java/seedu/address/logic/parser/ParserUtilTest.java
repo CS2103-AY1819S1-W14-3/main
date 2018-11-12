@@ -33,6 +33,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DIET = "1Egg";
     private static final String INVALID_DATE_TIME = "a";
 
     private static final String VALID_NRIC = "S1234567A";
@@ -42,7 +43,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final List<String> VALID_DIETS = Arrays.asList("Egg", "Milk");
+    private static final String VALID_DIET_1 = "Egg";
+    private static final String VALID_DIET_2 = "Milk";
     private static final DietType VALID_DIET_TYPE = DietType.ALLERGY;
 
     private static final String WHITESPACE = " \t\r\n";
@@ -80,17 +82,31 @@ public class ParserUtilTest {
 
     @Test
     public void parseDiet_nullType_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDiet(VALID_DIETS, null));
+        List<String> validDietList = Arrays.asList(VALID_DIET_1, VALID_DIET_2);
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDiet(validDietList, null));
     }
 
     @Test
-    public void parseDiet_allValid_returnDiets() {
+    public void parseDiet_nonAlphabetDetail_throwsParseException() {
+        List<String> invalidDietList = Arrays.asList(VALID_DIET_1, INVALID_DIET);
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDiet(invalidDietList, VALID_DIET_TYPE));
+    }
+
+    @Test
+    public void parseDiet_blankDetail_throwsParseException() {
+        List<String> invalidDietList = Arrays.asList(VALID_DIET_1, "");
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDiet(invalidDietList, VALID_DIET_TYPE));
+    }
+
+    @Test
+    public void parseDiet_allValid_returnDiets() throws Exception {
         Set<Diet> expectedDiets = new HashSet<>();
-        for (String diet: VALID_DIETS) {
+        List<String> validDietList = Arrays.asList(VALID_DIET_1, VALID_DIET_2);
+        for (String diet: validDietList) {
             String trimmedDiet = diet.trim();
             expectedDiets.add(new Diet(trimmedDiet, VALID_DIET_TYPE));
         }
-        assertEquals(expectedDiets, ParserUtil.parseDiet(VALID_DIETS, VALID_DIET_TYPE));
+        assertEquals(expectedDiets, ParserUtil.parseDiet(validDietList, VALID_DIET_TYPE));
     }
 
     //@@author snajef

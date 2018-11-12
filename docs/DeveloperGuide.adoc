@@ -151,7 +151,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `HealthBaseChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -191,7 +191,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `HealthBaseParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a patient) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `UI`.
@@ -237,7 +237,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.healthbase.commons` package.
 
 == Implementation
 
@@ -288,8 +288,8 @@ This command has the following intent: Record the following appointment to a pat
 |Dr. Pepper
 |===
 
-The command is passed to an instance of the `LogicManager` class, which in turn executes `AddressBookParser::parse`.
-The `AddressBookParser` parses the command word (`addappt`) and executes `AddApptCommandParser::parse`.
+The command is passed to an instance of the `LogicManager` class, which in turn executes `HealthBaseParser::parse`.
+The `HealthBaseParser` parses the command word (`addappt`) and executes `AddApptCommandParser::parse`.
 
 The `AddApptCommandParser::parse` method returns an `AddApptCommand` object which encapsulates the necessary information to update the Person 's appointments(s).
 Control then passes back to the `LogicManager`, which calls `AddApptCommand::execute`.
@@ -358,7 +358,7 @@ Given below is an usage scenario and the details when executing `adddiet` comman
 For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`:
 
 * The command text is passed to an instance of the `Logic Manager` class.
-* The `Logic Manager` instance calls `AddressBookParser#parseCommand`, which parses the `adddiet` command word.
+* The `Logic Manager` instance calls `HealthBaseParser#parseCommand`, which parses the `adddiet` command word.
 * Next, the `AddDietCommandParser#parse` method parses the different dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
 * `Logic Manager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
 * In the `AddDietCommand#execute` method, the new `DietCollection` object is added to a new copy of the `Person` object.
@@ -437,8 +437,8 @@ This command has the following intent: Prescribe the following medication to a p
 |=======================================================================
 
 
-The command text is passed to an instance of the `LogicManager` class, which in turn executes `AddressBookParser::parse`. +
-The `AddressBookParser` parses the command word (`addmeds`) and executes `AddmedsCommandParser::parse`. +
+The command text is passed to an instance of the `LogicManager` class, which in turn executes `HealthBaseParser::parse`. +
+The `HealthBaseParser` parses the command word (`addmeds`) and executes `AddmedsCommandParser::parse`. +
 This causes the `AddmedsCommandParser` to construct the following objects in the following order: +
 
 |===
@@ -511,8 +511,8 @@ The sequence diagram below shows the execution of the given scenario:
 image::AddmhSequenceDiagram.png[width="800"]
 
 * `addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol`
-** When the user-executed `addmh` line is passed into an instance of the LogicManager class, the method `AddressBookParser::parse` is executed.
-`AddressBookParser` then parses the command word `addmh` and subsequently executes `AddmhCommandParser::parse`.
+** When the user-executed `addmh` line is passed into an instance of the LogicManager class, the method `HealthBaseParser::parse` is executed.
+`HealthBaseParser` then parses the command word `addmh` and subsequently executes `AddmhCommandParser::parse`.
 
 ** Next, arguments prefixed by `ic/` and `mh/` are parsed into `NRIC` and `Diagnosis` objects to be used in the `AddmhCommand` constructor.
 
@@ -568,7 +568,7 @@ To illustrate how the three commands work, examples are given below.
 
 * `visitorin ic/S1234567A v/Jane`
 ** The command inputs are passed to an instance of the `LogicManager` class.
-** `AddressBookParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
+** `HealthBaseParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
 ** `VisitorInCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitorinCommand` object.
 ** In `VisitorinCommand`, new `Visitor` object is created and added to a copy of the required `Person` object's `VisitorList`
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.

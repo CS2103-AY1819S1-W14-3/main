@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_INVALID_DATE_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_INVALID_DATE_TIME_BEFORE_CURRENT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_INVALID_DOCTOR;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_INVALID_PROCEDURE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_INVALID_TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_MISSING_DATE_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_MISSING_DOCTOR;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC_MISSING_PROCEDURE;
@@ -14,6 +18,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROCEDURE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE;
 import static seedu.address.logic.parser.AddApptCommandParser.MESSAGE_INVALID_DATE_TIME;
+import static seedu.address.logic.parser.AddApptCommandParser.MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT;
+import static seedu.address.logic.parser.AddApptCommandParser.MESSAGE_INVALID_PROCEDURE;
+import static seedu.address.logic.parser.AddApptCommandParser.MESSAGE_INVALID_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -22,6 +29,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.person.Nric;
 
 public class AddApptCommandParserTest {
@@ -44,9 +52,32 @@ public class AddApptCommandParserTest {
     }
 
     @Test
+    public void parse_invalidType_failure() {
+        assertParseFailure(parser, NRIC_DESC_BOB + INVALID_APPOINTMENT_DESC_INVALID_TYPE,
+                MESSAGE_INVALID_TYPE);
+    }
+
+    @Test
     public void parse_invalidDateTime_failure() {
         assertParseFailure(parser, NRIC_DESC_BOB + INVALID_APPOINTMENT_DESC_INVALID_DATE_TIME,
                 MESSAGE_INVALID_DATE_TIME);
+    }
+    @Test
+    public void parse_invalidDateTimeBeforeCurrent_failure() {
+        assertParseFailure(parser, NRIC_DESC_BOB + INVALID_APPOINTMENT_DESC_INVALID_DATE_TIME_BEFORE_CURRENT,
+                MESSAGE_INVALID_DATE_TIME_BEFORE_CURRENT);
+    }
+
+    @Test
+    public void parse_invalidProcedure_failure() {
+        assertParseFailure(parser, NRIC_DESC_BOB + INVALID_APPOINTMENT_DESC_INVALID_PROCEDURE,
+                MESSAGE_INVALID_PROCEDURE);
+    }
+
+    @Test
+    public void parse_invalidDoctor_failure() {
+        assertParseFailure(parser, NRIC_DESC_BOB + INVALID_APPOINTMENT_DESC_INVALID_DOCTOR,
+                Diagnosis.MESSAGE_NAME_CONSTRAINTS_DOCTOR);
     }
 
     @Test

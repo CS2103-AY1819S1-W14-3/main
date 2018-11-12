@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HealthBase;
 import seedu.address.model.Model;
 import seedu.address.model.person.DataGenerator;
 import seedu.address.model.person.Person;
@@ -35,7 +35,7 @@ public class GendataCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        model.resetData(new AddressBook());
+        model.resetData(new HealthBase());
 
         for (int i = 0; i < numPersons; i++) {
             model.addPerson(generatePerson());

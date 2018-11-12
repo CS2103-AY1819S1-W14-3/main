@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "snajef",
+      "displayName": "DARIE...G HAN",
+      "authorNames": ["snajef"]
+    },
+    {
+      "githubId": "GAOJIAXIN666",
+      "displayName": "GAO J...IAXIN",
+      "authorNames": ["GAOJIAXIN666", "GAO_JIAXIN", "GAOJIAXIN"]
+    },
+    {
+      "githubId": "omegafishy",
+      "displayName": "LING ...HI YU",
+      "authorNames": ["omegafishy", "Ling Zhi Yu"]
+    },
+    {
+      "githubId": "jeffypie369",
+      "displayName": "SIE X...ERSON",
+      "authorNames": ["jeffypie369", "Jefferson Sie"]
+    },
+    {
+      "githubId": "yuntongzhang",
+      "displayName": "ZHANG...NTONG",
+      "authorNames": ["yuntongzhang", "Zhang Yuntong"]
+    }
+  ]
+}

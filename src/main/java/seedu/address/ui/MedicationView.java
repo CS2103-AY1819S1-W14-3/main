@@ -175,7 +175,7 @@ public class MedicationView extends UiPart<Region> implements Swappable, Sortabl
     }
 
     /**
-     * The AddressBook {@code Person} object is immutable, hence any changes
+     * The HealthBase {@code Person} object is immutable, hence any changes
      * results in a wholly new {@code Person} object being created. This method
      * helps to refresh our reference to the currently selected {@code Person} object
      * to point to the new {@code Person} object.
