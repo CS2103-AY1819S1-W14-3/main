@@ -69,7 +69,7 @@ If you can type fast, HealthBase can get your hospital management tasks done fas
 <p>Double-click the file to start the app. The Graphical User Interface (GUI) should appear in a few seconds.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
+<img src="images/Ui.png" alt="Ui" width="1000">
 </div>
 <div class="title">Figure 1. The GUI of HealthBase</div>
 </div>
@@ -327,11 +327,52 @@ the patient.
 <div class="sect2">
 <h3 id="add-to-patient-s-medical-history-code-addmh-code"><a class="link" href="#add-to-patient-s-medical-history-code-addmh-code">3.4. Add to patient’s medical history: <code>addmh</code></a></h3>
 <div class="paragraph">
-<p>Add an non-blank diagnosis entry to an existing patient’s medical history.
+<p>Add a non-blank diagnosis entry with the name of the doctor-in-charge to an existing patient’s medical history.
 The patient must be registered within the system.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE</code></p>
+</div>
+<div class="paragraph">
+<p>Example(s):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
+rest and rehydrate. doc/Dr. Zhang De</code></p>
+</li>
+<li>
+<p><code>addmh ic/T9876543Z mh/Patient appears to have chronic cough. Referred to specialist. doc/Dr.Timothy</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To try out the <code>addmh</code> command:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Type out a valid <code>addmh</code> command which follows the stated format into the command box.
+Such an example can be seen in the figure below.</p>
+</li>
+<li>
+<p>Submit the input into HealthBase by pressing <kbd>Enter</kbd>.
+The result display panel will show a successful <code>addmh</code> command message, and should show the further figure below.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/beforeAddmhCommand.png" alt="beforeAddmhCommand" width="1000">
+</div>
+<div class="title">Figure 2. Command box and result display panel before entering an <code>addmh</code> command.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/afterAddmhCommand.png" alt="afterAddmhCommand" width="1000">
+</div>
+<div class="title">Figure 3. Command box and result display panel after entering the valid <code>addmh</code> command.</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -373,7 +414,7 @@ The following invalid inputs will result in a command failure, and the display o
 </div>
 </li>
 <li>
-<p>Blank Diagnosis</p>
+<p>Blank diagnosis</p>
 <div class="ulist">
 <ul>
 <li>
@@ -382,26 +423,20 @@ The following invalid inputs will result in a command failure, and the display o
 </ul>
 </div>
 </li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Example(s):</p>
-</div>
+<li>
+<p>Missing prefixes</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
-rest and rehydrate. doc/Dr. Zhang De</code></p>
-</li>
-<li>
-<p><code>addmh ic/T9876543Z mh/Patient appears to have chronic cough. Referred to specialist. doc/Dr.Timothy</code></p>
+<p>Not all the prefixes in the stated command format have been included.</p>
 </li>
 </ul>
 </div>
-<div class="sidebarblock">
-<div class="content">
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -409,14 +444,14 @@ rest and rehydrate. doc/Dr. Zhang De</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If you want to view the newly added diagnoses to a particular patient, simply enter <code>view mh</code>.
+<div class="paragraph">
+<p>If you want to view the newly added diagnoses to a particular patient, simply enter <code>view mh</code>.
 You may have to enter select &lt;patient index&gt;` or click on the patient panel card.
-To use the full capabilities of the <code>view</code> command, click <a href="#view-command">here</a>.
+To use the full capabilities of the <code>view</code> command, click <a href="#view-command">here</a>.</p>
+</div>
 </td>
 </tr>
 </table>
-</div>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -681,9 +716,9 @@ The alternative is to click on the patient&#8217;s card.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/highlightIndex.png" alt="highlightIndex" width="800">
+<img src="images/highlightIndex.png" alt="highlightIndex" width="1000">
 </div>
-<div class="title">Figure 2. Indication of the location of the index on the patient&#8217;s card</div>
+<div class="title">Figure 4. Indication of the location of the index on the patient&#8217;s card</div>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -746,9 +781,9 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/highlightUserViewLocation.png" alt="highlightUserViewLocation" width="800">
+<img src="images/highlightUserViewLocation.png" alt="highlightUserViewLocation" width="1000">
 </div>
-<div class="title">Figure 3. Indication of the location of the user view</div>
+<div class="title">Figure 5. Indication of the location of the user view</div>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -762,9 +797,9 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/blankPanel.png" alt="blankPanel" width="800">
+<img src="images/blankPanel.png" alt="blankPanel" width="1000">
 </div>
-<div class="title">Figure 4. Default view</div>
+<div class="title">Figure 6. Default view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -775,9 +810,9 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/apptView.png" alt="apptView" width="800">
+<img src="images/apptView.png" alt="apptView" width="1000">
 </div>
-<div class="title">Figure 5. Appointment view</div>
+<div class="title">Figure 7. Appointment view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -788,9 +823,9 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/dietView.png" alt="dietView" width="800">
+<img src="images/dietView.png" alt="dietView" width="1000">
 </div>
-<div class="title">Figure 6. Diet view</div>
+<div class="title">Figure 8. Diet view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -801,9 +836,9 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/medsView.png" alt="medsView" width="800">
+<img src="images/medsView.png" alt="medsView" width="1000">
 </div>
-<div class="title">Figure 7. Medication view</div>
+<div class="title">Figure 9. Medication view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -814,9 +849,52 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/mhView.png" alt="mhView" width="800">
+<img src="images/mhView.png" alt="mhView" width="1000">
 </div>
-<div class="title">Figure 8. Medical history view</div>
+<div class="title">Figure 10. Medical history view</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When a user clears all the stored entries with the <code>clear</code> command,
+the view panels of the last selected person (if any) are still accessible via the <code>view</code> command.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For example, the following <code>view</code> commands will function fine for the last selected person.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>view default</code></p>
+</li>
+<li>
+<p><code>view meds</code></p>
+</li>
+<li>
+<p><code>view appt</code></p>
+</li>
+<li>
+<p><code>view mh</code></p>
+</li>
+<li>
+<p><code>view diet</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="ulist">
 <ul>
@@ -829,7 +907,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/visitorsView.png" alt="visitorsView" width="800">
 </div>
-<div class="title">Figure 9. Visitor view</div>
+<div class="title">Figure 11. Visitor view</div>
 </div>
 </div>
 <div class="sect2">
@@ -898,7 +976,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/viewvisitors_screenshot.png" alt="viewvisitors screenshot" width="800">
+<img src="images/viewvisitors_screenshot.png" alt="viewvisitors screenshot" width="1000">
 </div>
 </div>
 <div class="sidebarblock">
@@ -994,7 +1072,7 @@ The limit size for a visitor list is five.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/visitorout_screenshot.png" alt="visitorout screenshot" width="800">
+<img src="images/visitorout_screenshot.png" alt="visitorout screenshot" width="1000">
 </div>
 </div>
 <div class="sidebarblock">
@@ -1247,4 +1325,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:10:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:14:43 UTC</div></div></div></body></html>

@@ -1282,8 +1282,7 @@ The command execution then ends.</p>
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The functionalities of the <code>addmh</code> command are interlinked: the former allows the user to record a diagnosis
-into a patient’s medical history, while the latter permits the viewing of a patient’s past diagnoses as recorded in
-medical history.</p>
+into a patient’s medical history</p>
 </div>
 <div class="paragraph">
 <p>Each patient’s information is stored within the <code>Person</code> objects. The execution of the <code>addmh</code> command results in the retrieval of
@@ -1293,21 +1292,17 @@ a particular <code>Person</code> object, and the consequent updating of the pati
 <p>Stated below is an example usage scenario and an explanation of the interactions that occurs as a result of the code execution.</p>
 </div>
 <div class="paragraph">
-<p>The user executes the following commands:</p>
+<p>The user executes the following input:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol</code></p>
-</li>
-</ul>
+<div class="paragraph">
+<p><code>addmh ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Intent</strong></p>
 </div>
 <div class="paragraph">
-<p>The purpose of the keyed <code>addmh</code> command line is to register and record a diagnosis under the registered patient with
-the <code>NRIC</code> S9123124A.</p>
+<p>The purpose of the entered input is to record a diagnosis issued by <code>Dr.Amos</code>, <code>"Hypertension, diagnosed “years ago”, well contracted with Metoponol"</code>,
+into the medical history of the patient with the NRIC <code>S1234567A</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1317,46 +1312,206 @@ the <code>NRIC</code> S9123124A.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddmhSequenceDiagram.png" alt="AddmhSequenceDiagram" width="800">
+<img src="images/AddmhSequenceDiagram.png" alt="AddmhSequenceDiagram" width="1000">
 </div>
 <div class="title">Figure 13. Execution sequence of the <code>addmh</code> command</div>
 </div>
+<div class="paragraph lead">
+<p><code>addmh ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos</code></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Firstly, the <code>String</code> user input is passed into the <code>LogicManager::execute</code> method of the LogicManager instance as the only parameter.</p>
+</li>
+<li>
+<p>Then, the <code>LogicManager::execute</code> method calls <code>AddressBookParser::parseCommand</code> which receives the user input as a parameter.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>addmh ic/S9123124A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>When the user-executed <code>addmh</code> line is passed into an instance of the LogicManager class, the method <code>HealthBaseParser::parse</code> is executed.
-<code>HealthBaseParser</code> then parses the command word <code>addmh</code> and subsequently executes <code>AddmhCommandParser::parse</code>.</p>
+<p>The user input is formatted: the first <code>String</code> token is taken as the command word, while the remaining <code>String</code> is grouped as arguments to be used later in <code>AddmhCommandParser</code>.</p>
 </li>
 <li>
-<p>Next, arguments prefixed by <code>ic/</code> and <code>mh/</code> are parsed into <code>NRIC</code> and <code>Diagnosis</code> objects to be used in the <code>AddmhCommand</code> constructor.</p>
-</li>
-<li>
-<p>The instantiated <code>AddmhCommand</code> will be the medium through which the <code>Person</code> with the <code>NRIC</code> S9123124A is updated.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>In the <code>AddmhCommand#execute</code> method, a new <code>MedicalHistory</code> object is added to a new copy of the <code>Person</code> object.</p>
-</li>
-<li>
-<p>The new <code>Person</code> object is updated by the model by the <code>Model::updatePerson</code> method.</p>
-</li>
-<li>
-<p>A new <code>CommandResult</code> object is returned.</p>
+<p>From the command word, the AddressBookParser instance identifies the user input as an <code>addmh</code> command  and constructs an <code>AddmhCommandParser</code> instance.</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>Next, the <code>AddressBookParser</code> calls the <code>AddmhCommandParser::parse</code> method. The <code>AddmhCommandParser</code> takes in the
+remaining string, <code>ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The string is tokenised to arguments according to their prefixes.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MED_HISTORY, PREFIX_DOCTOR);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>A check on the presence of the relevant prefixes <code>ic/</code>, <code>mh/</code> and <code>doc/</code> is done.</p>
+</li>
+<li>
+<p>If not all prefixes are present, a <code>ParseException</code> will be thrown with an error message on the proper usage of the <code>addmh</code> command.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_MED_HISTORY, PREFIX_DOCTOR)
+        || !argMultimap.getPreamble().isEmpty()) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>((<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                                AddmhCommand.MESSAGE_USAGE)));
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Otherwise, <code>Diagnosis</code> and <code>Nric</code>  objects are constructed and used as fields in the creation of an <code>AddmhCommand</code> object.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Subsequently, the newly created <code>AddmhCommand</code> is returned to back to the <code>LogicManager</code> instance through <code>AddmhCommandParser</code> and <code>AddressBookParser</code> objects.</p>
+</li>
+<li>
+<p>When control is returned to the <code>LogicManager</code> object, it calls the <code>AddmhCommand::execute</code> method.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The method takes in a <code>Model</code> object to access the application’s data context, the stored data of all persons.</p>
+</li>
+<li>
+<p>Its execution sequence may be broken down into the numbered steps in the code below.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> CommandResult execute(Model model, CommandHistory history) <span class="directive">throws</span> CommandException {
+    requireNonNull(model);
+
+    Person patientToUpdate = CommandUtil.getPatient(patientNric, model); <i class="conum" data-value="6"></i><b>(6)</b>
+    Person updatedPatient = addMedicalHistoryForPatient(patientToUpdate, <span class="local-variable">this</span>.newRecord); <i class="conum" data-value="7"></i><b>(7)</b>
+
+    model.updatePerson(patientToUpdate, updatedPatient); <i class="conum" data-value="8"></i><b>(8)</b>
+
+    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_SUCCESS, patientNric)); <i class="conum" data-value="9"></i><b>(9)</b>
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The stored persons data is accessed in the <code>CommandUtil::getPatient</code> class method.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model::getFilteredPersonList</code> is called to search for a person with a <code>Nric</code> that matches the <code>Nric</code> field in the <code>AddmhCommand</code></p>
+</li>
+<li>
+<p>If a match is found, the <code>Person</code> is returned to the <code>AddmhCommand::execute</code> method.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">static</span> Person getPatient(Nric nric, Model model) <span class="directive">throws</span> CommandException {
+    ObservableList&lt;Person&gt; matchedCheckedOutPatients = model.getFilteredCheckedOutPersonList()
+        .filtered(p -&gt; nric.equals(p.getNric()));
+
+    <span class="keyword">if</span> (matchedCheckedOutPatients.size() &gt; <span class="integer">0</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_PATIENT_CHECKED_OUT);
+    }
+
+    ObservableList&lt;Person&gt; matchedCheckedInPatients = model.getFilteredPersonList()
+        .filtered(p -&gt; nric.equals(p.getNric()));
+
+    <span class="keyword">if</span> (matchedCheckedInPatients.size() &lt; <span class="integer">1</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_NO_SUCH_PATIENT);
+    }
+
+    <span class="keyword">if</span> (matchedCheckedInPatients.size() &gt; <span class="integer">1</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_MULTIPLE_PATIENTS);
+    }
+
+    <span class="keyword">return</span> matchedCheckedInPatients.get(<span class="integer">0</span>);
+}</code></pre>
+</div>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Command execution ends.</p>
+<p>Following that, the <code>Person</code> 's medical history is to be updated.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The person’s current <code>medicalHistory</code> is retrieved, and the <code>Diagnosis</code> field in the <code>AddmhCommand</code> is added it.</p>
+</li>
+<li>
+<p>Then, a new <code>Person</code> is created with the updated fields, as part of the immutability of the <code>Person</code> class.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="directive">static</span> Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosis diagnosis) {
+    requireAllNonNull(patientToEdit, diagnosis);
+
+    MedicalHistory updatedMedicalHistory = patientToEdit.getMedicalHistory();
+    updatedMedicalHistory.add(diagnosis);
+
+    <span class="keyword">return</span> patientToEdit.withMedicalHistory(updatedMedicalHistory);
+}</code></pre>
+</div>
+</div>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>Then, the old <code>Person</code> 's data will be replaced with the updated <code>Person</code> 's data.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Here the <code>Model::updatePerson</code> method is called, and it subsequently calls the <code>AddressBook::updatePerson</code> method.</p>
+</li>
+<li>
+<p>Replaces the person’s existing data in the addressbook storage with the person’s updated data.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// ModelManager.java</span>
+<span class="directive">public</span> <span class="type">void</span> updatePerson(Person target, Person editedPerson) {
+    requireAllNonNull(target, editedPerson);
+
+    internalAddressBook.updatePerson(target, editedPerson);
+    indicateAddressBookChanged();
+}
+
+<span class="comment">// AddressBook.java</span>
+<span class="directive">public</span> <span class="type">void</span> updatePerson(Person target, Person editedPerson) {
+    requireNonNull(editedPerson);
+
+    persons.setPerson(target, editedPerson);
+}</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The <code>AddmhCommand::execute</code> execution completes by returning a new <code>CommandResult</code> that contains a success message to its calling method, <code>LogicManager::execute</code>.</p>
+</li>
+<li>
+<p>Finally the <code>CommandResult</code> is returned to the caller of <code>LogicManager::execute</code>, and the execution sequence ends.</p>
+</li>
+</ol>
+</div>
+<hr>
+<div class="paragraph">
+<p>The activity diagram below summarises what happens when a user executes the <code>addmh</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddmhActivityDiagram.png" alt="AddmhActivityDiagram" width="1000">
+</div>
+<div class="title">Figure 14. The activity diagram for the <code>addmh</code> command</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1378,7 +1533,39 @@ with an appropriate error message before the use case ends.
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.3. Design Considerations</a></h4>
-
+<div class="sect4">
+<h5 id="aspect-how-to-represent-a-timestamp-in-a-diagnosis"><a class="link" href="#aspect-how-to-represent-a-timestamp-in-a-diagnosis">Aspect: How to represent a timestamp in a diagnosis</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current implementation):</strong> Use a POJO class to represent the timestamp data in the <code>Diagnosis</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Results in improved readability and modularity of code, due to a stronger adherence to the Object-Oriented Programming paradigm.</p>
+</li>
+<li>
+<p>Cons: Increases in modularity can make it difficult to find information, if code becomes over-modularised.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (alternative implementation):</strong> Use a <code>String</code> to represent the timestamp and contain date-time related functions in the <code>Diagnosis</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Results in more compact code.</p>
+</li>
+<li>
+<p>Cons: Decreases code modularity, and this decreases code readability.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1682,7 +1869,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 14. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 15. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2762,4 +2949,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:10:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:14:43 UTC</div></div></div></body></html>
