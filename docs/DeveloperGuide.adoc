@@ -366,17 +366,20 @@ With reference to Figures 5 and 6, the following steps occur upon the execution 
     }
 ...
 ----
-<1> The command is first passed to an instance of the `LogicManager` class which in turn executes `HealthBaseParser::parseCommand`.
-<2> The `HealthBaseParser` parses the command word (`addappt`) and executes `AddApptCommandParser::parse`.
-<3> The `AddApptCommandParser::parse` method returns an `AddApptCommand` object which encapsulates the necessary information to update the `Person` 's `Appointment` (s).
-<4> Control then passes back to the `LogicManager`, which calls `AddApptCommand::execute`.
-<5> The `AddApptCommand::execute` method constructs a new `Person` object using all the details of the old `Person` with one exception: the
-`AppointmentsList` is a copy of the original `Person` 's `AppointmentsList` with an added `Appointment`. This is done by calling the static method
-`CommandUtil::getPatient` and adding the `Appointment` to the obtained `Patient` object.
-<6> This updated `Person` object is used to update the existing `Person` object using the `Model::updatePerson` method of the backing model.
-<7> Finally, the `AddApptCommand::execute` method terminates, returning a `CommandResult` with a success message
-<8> The `LogicManager` then returns the same `CommandResult` as the return value of the `LogicManager::execute` method.
-<9> The command execution ends.
+<1> The command is executed and passed to an instance of the `LogicManager` class,
+<2> which in turn executes `HealthBaseParser::parseCommand`.
+<3> The `HealthBaseParser` first parses the command word (`addappt`),
+<4> then executes `AddApptCommandParser::parse`.
+<5> The `AddApptCommandParser::parse` method returns an `AddApptCommand` object which encapsulates the necessary information to update the `Person` 's `Appointment` (s).
+Control is also passed back to the `LogicManager`.
+<6> Next, the instance of `LogicManager` calls `AddApptCommand::execute`. The `AddApptCommand::execute` method constructs a new `Person` object using all the details of the old `Person` with one exception: the
+`AppointmentsList` is a copy of the original `Person` 's `AppointmentsList` with an added `Appointment`.
+<7> This is done by obtaining a `Person` object from the static method `CommandUtil::getPatient`
+<8> then adding the `Appointment` to the obtained `Person`.
+<9> This updated `Person` object is used to update the existing `Person` by using `Model::updatePerson` of the backing model.
+<10> Finally, the `AddApptCommand::execute` method terminates, returning a `CommandResult` with a success message.
+<11> The `LogicManager` returns the same `CommandResult` as the value of the `LogicManager::execute` method.
+<12> The command execution ends.
 
 [NOTE]
 If no/multiple patient(s) with that `NRIC` exist(s), then the `AddApptCommand::execute` method will throw a `CommandException` with the appropriate error message and the usage case will end.
