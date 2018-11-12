@@ -83,7 +83,7 @@ public class VisitorList {
 
     /**
      * Get a a copy of visitorlist for JavaFX TableView.
-     * @return A {@code ObservableList} of allergies.
+     * @return A {@code ObservableList} of visitors.
      */
     public ObservableList<Visitor> getObservableCopyOfVisitorlist() {
         return FXCollections.observableArrayList(new ArrayList<>(visitorList));
