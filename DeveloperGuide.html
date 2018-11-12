@@ -76,11 +76,14 @@
 <li><a href="#launch-and-shutdown">F.1. Launch and shutdown</a></li>
 <li><a href="#generating-test-data">F.2. Generating test data</a></li>
 <li><a href="#adding-an-appointment-for-a-patient">F.3. Adding an appointment for a patient</a></li>
-<li><a href="#adding-medication-for-a-patient">F.4. Adding medication for a patient</a></li>
-<li><a href="#changing-the-view">F.5. Changing the view</a></li>
-<li><a href="#sorting-the-view">F.6. Sorting the view</a></li>
-<li><a href="#generating-data">F.7. Generating data</a></li>
-<li><a href="#saving-data">F.8. Saving data</a></li>
+<li><a href="#adding-dietary-requirements-for-a-patient">F.4. Adding dietary requirements for a patient</a></li>
+<li><a href="#adding-medication-for-a-patient">F.5. Adding medication for a patient</a></li>
+<li><a href="#changing-the-view">F.6. Changing the view</a></li>
+<li><a href="#sorting-the-view">F.7. Sorting the view</a></li>
+<li><a href="#checking-out-a-patient">F.8. Checking out a patient</a></li>
+<li><a href="#checking-in-a-patient">F.9. Checking in a patient</a></li>
+<li><a href="#generating-data">F.10. Generating data</a></li>
+<li><a href="#saving-data">F.11. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -958,7 +961,8 @@ the validity of the command and are not crucial in the sequence of events.
 <div class="paragraph">
 <p>The <code>adddiet</code> command provides functionality for users to add dietary requirements for a given patient.<br>
 This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty.<br>
-This command adds these dietary requirements to a given <code>Person</code> , so that the dietary requirements can be viewed later on.</p>
+This command adds these dietary requirements to a given <code>Person</code> , so that the dietary requirements can be viewed later on.<br>
+This command blocks non-alphabetical or empty input as the detail of a dietary requirement.</p>
 </div>
 <div class="sect4">
 <h5 id="classes-involved"><a class="link" href="#classes-involved">Classes involved</a></h5>
@@ -996,7 +1000,10 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="ulist">
 <ul>
 <li>
-<p>Every <code>Person</code> object has a <code>Diet Collection</code>, which is a collection of all the dietary requirements of the given patient.</p>
+<p>Every <code>Person</code> object has a <code>Diet Collection</code> object.</p>
+</li>
+<li>
+<p>This class encapsulates a collection of all the dietary requirements of the given patient.</p>
 </li>
 <li>
 <p>This class is a wrapper class around the internal representation of a <code>Set</code> of <code>Diet</code> s.</p>
@@ -1009,7 +1016,7 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="ulist">
 <ul>
 <li>
-<p>This class encapsulate the information of a single dietary requirement.</p>
+<p>This class encapsulates the information of a single dietary requirement.</p>
 </li>
 <li>
 <p>Specifically, an instance of this class is composed of</p>
@@ -1032,10 +1039,10 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="ulist">
 <ul>
 <li>
-<p>This is a <code>Enum</code> class representing the three different types of dietary requirements.</p>
+<p>This class is an <code>Enum</code> class representing the three different types of dietary requirements.</p>
 </li>
 <li>
-<p>Implemented as <code>Enum</code> class to avoid typo and invalid types being entered.</p>
+<p>This class is implemented as <code>Enum</code> class to avoid typo and invalid types being entered.</p>
 </li>
 </ul>
 </div>
@@ -1046,22 +1053,22 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="sect4">
 <h5 id="execution-of-the-command"><a class="link" href="#execution-of-the-command">Execution of the command</a></h5>
 <div class="paragraph">
-<p>Given below is an usage scenario and the details when executing <code>adddiet</code> command.<br>
-For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code>:</p>
+<p>Given below is a usage scenario and the details when executing <code>adddiet</code> command.<br>
+For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move</code>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The command text is passed to an instance of the <code>Logic Manager</code> class.</p>
+<p>The command text is passed to an instance of the <code>LogicManager</code> class.</p>
 </li>
 <li>
-<p>The <code>Logic Manager</code> instance calls <code>HealthBaseParser#parseCommand</code>, which parses the <code>adddiet</code> command word.</p>
+<p>The <code>LogicManager</code> instance calls <code>HealthBaseParser#parseCommand</code>, which parses the <code>adddiet</code> command word.</p>
 </li>
 <li>
 <p>Next, the <code>AddDietCommandParser#parse</code> method parses the different dietary requirements into one <code>DietCollection</code> object. An instance of <code>AddDietCommand</code> is returned after the parsing.</p>
 </li>
 <li>
-<p><code>Logic Manager</code> then execute this <code>AddDietCommand</code> by calling <code>AddDietCommand#execute</code>.</p>
+<p><code>LogicManager</code> then execute this <code>AddDietCommand</code> by calling <code>AddDietCommand#execute</code>.</p>
 </li>
 <li>
 <p>In the <code>AddDietCommand#execute</code> method, the new <code>DietCollection</code> object is added to a new copy of the <code>Person</code> object.</p>
@@ -3143,7 +3150,44 @@ Expected: Appointment is not added because of the missing salutation for Doctor.
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-medication-for-a-patient"><a class="link" href="#adding-medication-for-a-patient">F.4. Adding medication for a patient</a></h3>
+<h3 id="adding-dietary-requirements-for-a-patient"><a class="link" href="#adding-dietary-requirements-for-a-patient">F.4. Adding dietary requirements for a patient</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adds dietary requirements for a checked in patient</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Select a patient in the app using the <code>select</code> command. If there are no patients to be selected, add a new patient using the <code>register</code> command. Let this selected patient&#8217;s NRIC be denoted by <code>$nric</code>. The test cases must be executed in the sequence listed.</p>
+</li>
+<li>
+<p>Test case: <code>adddiet ic/$nric alg/Egg alg/Milk cr/Halal pd/Hands cannot move</code>
+Expected: Dietary requirements are added for patient. To verify, run <code>view diets</code>.</p>
+</li>
+<li>
+<p>Test case: <code>adddiet ic/$nric cr/Vegetarian</code>
+Expected: Dietary requirement is added for patient. To verify, run <code>view diets</code>.</p>
+</li>
+<li>
+<p>Test case: <code>adddiet ic/$nric alg/Egg</code>
+Expected: No new dietary requirement is added, since the new allergy has been added before.</p>
+</li>
+<li>
+<p>Test case: <code>adddiet ic/$nric pd/1 hand cannot move.</code>
+Expected: Dietary requirement is not added due to the invalid input.</p>
+</li>
+<li>
+<p>Test case: <code>adddiet ic/$nric alg/Fish cr/</code>
+Expected: Dietary requirement is not added due to the invalid <code>cr</code> input.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-medication-for-a-patient"><a class="link" href="#adding-medication-for-a-patient">F.5. Adding medication for a patient</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3232,7 +3276,7 @@ Expected: No prescription is added. Error details shown in the status message.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-the-view"><a class="link" href="#changing-the-view">F.5. Changing the view</a></h3>
+<h3 id="changing-the-view"><a class="link" href="#changing-the-view">F.6. Changing the view</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3277,7 +3321,7 @@ Expected: The view does not change. An error message is shown.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sorting-the-view"><a class="link" href="#sorting-the-view">F.6. Sorting the view</a></h3>
+<h3 id="sorting-the-view"><a class="link" href="#sorting-the-view">F.7. Sorting the view</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3310,7 +3354,65 @@ Expected: The view remains unsorted. An error message is shown.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="generating-data"><a class="link" href="#generating-data">F.7. Generating data</a></h3>
+<h3 id="checking-out-a-patient"><a class="link" href="#checking-out-a-patient">F.8. Checking out a patient</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Checking out a patient who is in the system</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: A patient is registered and checked in to the system, and is visible on the left panel. Let <code>$nric</code> denotes this patient&#8217;s NRIC. Let <code>$nricOther</code> denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.</p>
+</li>
+<li>
+<p>Test case: <code>checkout ic/$nricOther</code>
+Expected: The patient is not checked out. Error detail shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>checkout ic/$nric</code>
+Expected: The patient with <code>$nric</code> is checked out.</p>
+</li>
+<li>
+<p>Test case: <code>checkout ic/$nric</code>
+Expected: The patient is not checked out. Error detail shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checking-in-a-patient"><a class="link" href="#checking-in-a-patient">F.9. Checking in a patient</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Checking in a previously checked out patient</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: A patient is registered and previously checked out from the system. Let <code>$nric</code> denotes this patient&#8217;s NRIC. Let <code>$nricOther</code> denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.</p>
+</li>
+<li>
+<p>Test case: <code>checkin ic/$otherNric</code>
+Expected: The patient is not checked in. Error detail shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>checkin ic/$nric</code>
+Expected: The patient with <code>$nric</code> is checked in.</p>
+</li>
+<li>
+<p>Test case: <code>checkin ic/$nric</code>
+Expected: The patient is not checked in. Error detail shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generating-data"><a class="link" href="#generating-data">F.10. Generating data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3343,7 +3445,7 @@ Expected: No data is generated. An error message is shown.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.8. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.11. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3363,4 +3465,4 @@ Expected: No data is generated. An error message is shown.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:01:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:02:22 UTC</div></div></div></body></html>

@@ -247,6 +247,12 @@ To use the full capabilities of the <code>view</code> command, click <a href="#v
 <div class="paragraph">
 <p>Format: <code>adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY</code></p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addapptcommand.jpg" alt="addapptcommand" width="1000">
+</div>
+<div class="title">Figure 4. Adding an appointment for patient</div>
+</div>
 <div class="paragraph">
 <p>There are three types of dietary requirements, which can be added to a patient with their own prefixes:</p>
 </div>
@@ -275,7 +281,7 @@ To use the full capabilities of the <code>view</code> command, click <a href="#v
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Physical Difficulty</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd/Hands cannot move.</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd/Hands cannot move</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -354,12 +360,21 @@ the patient.
 <div class="ulist">
 <ul>
 <li>
-<p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code></p>
+<p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move</code></p>
 </li>
 <li>
 <p><code>adddiet ic/S1234567A cr/Vegetarian</code></p>
 </li>
 </ul>
+</div>
+<div id="img-adddietcommand" class="paragraph">
+<p>Result of executing the first example command above:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/adddietcommand.png" alt="adddietcommand" width="1000">
+</div>
+<div class="title">Figure 5. Adding dietary requirements for a patient</div>
 </div>
 </div>
 <div class="sect2">
@@ -423,13 +438,13 @@ The result display panel will show a successful <code>addmh</code> command messa
 <div class="content">
 <img src="images/beforeAddmhCommand.png" alt="beforeAddmhCommand" width="1000">
 </div>
-<div class="title">Figure 4. Command box and result display panel before entering an <code>addmh</code> command.</div>
+<div class="title">Figure 6. Command box and result display panel before entering an <code>addmh</code> command.</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/afterAddmhCommand.png" alt="afterAddmhCommand" width="1000">
 </div>
-<div class="title">Figure 5. Command box and result display panel after entering the valid <code>addmh</code> command.</div>
+<div class="title">Figure 7. Command box and result display panel after entering the valid <code>addmh</code> command.</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -516,7 +531,7 @@ To use the full capabilities of the <code>view</code> command, click <a href="#v
 <div class="paragraph">
 <p>Check in a returning patient back to the HealthBase system, and retrieve his/her information from backend and display
 them in the left panel of the application window. The patient being checked in must have been previously registered
-to the system and were checked out of the system sometime before with the <code>checkout</code> command.</p>
+to the system and were checked out of the system sometime before by using the <code>checkout</code> command.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>checkin ic/NRIC</code></p>
@@ -531,8 +546,8 @@ to the system and were checked out of the system sometime before with the <code>
 </td>
 <td class="content">
 If there is no record of this patient in our system (which means that the patient with the specified <code>NRIC</code> has
-not visited the hospital and registered in the system, the application will direct user to use the <code>register</code> command
-to register this new patient with his necessary information.
+not visited the hospital and not been registered in the system, the application will direct the user to use the <code>register</code> command
+to register this new patient with his/her necessary information.
 </td>
 </tr>
 </table>
@@ -551,7 +566,7 @@ to register this new patient with his necessary information.
 If the patient with the specified <code>NRIC</code> is still active in the system (which means that the patient in the system has
 not been checked out yet), the command is considered as invalid.<br>
 The <code>checkin</code> command is only considered valid when the patient with the <code>NRIC</code> specified were checked out before
-with the <code>checkout</code> command.
+by using the <code>checkout</code> command.
 </td>
 </tr>
 </table>
@@ -566,7 +581,7 @@ with the <code>checkout</code> command.
 <li>
 <p><code>checkin ic/S1234567A</code><br>
 Note that the patient with <code>NRIC S1234567A</code> must have been previously registered to the system and were checked out of
-the system sometime before with the <code>checkout</code> command.</p>
+the system sometime before by using the <code>checkout</code> command.</p>
 </li>
 </ul>
 </div>
@@ -686,7 +701,7 @@ The prefix <code>da/</code> must be separated from the last input by a whitespac
 <div class="content">
 <img src="images/registercommand.jpg" alt="registercommand" width="1000">
 </div>
-<div class="title">Figure 6. Registering a new patient</div>
+<div class="title">Figure 8. Registering a new patient</div>
 </div>
 <div id="img-registerresult" class="olist arabic">
 <ol class="arabic" start="2">
@@ -699,7 +714,7 @@ The prefix <code>da/</code> must be separated from the last input by a whitespac
 <div class="content">
 <img src="images/registerresult.jpg" alt="registerresult" width="1000">
 </div>
-<div class="title">Figure 7. Patient has been registered</div>
+<div class="title">Figure 9. Patient has been registered</div>
 </div>
 </div>
 <div class="sect2">
@@ -801,7 +816,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 <div class="content">
 <img src="images/highlightIndex.png" alt="highlightIndex" width="1000">
 </div>
-<div class="title">Figure 8. Indication of the location of the index on the patient&#8217;s card</div>
+<div class="title">Figure 10. Indication of the location of the index on the patient&#8217;s card</div>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -866,7 +881,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/highlightUserViewLocation.png" alt="highlightUserViewLocation" width="1000">
 </div>
-<div class="title">Figure 9. Indication of the location of the user view</div>
+<div class="title">Figure 11. Indication of the location of the user view</div>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -882,7 +897,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/blankPanel.png" alt="blankPanel" width="1000">
 </div>
-<div class="title">Figure 10. Default view</div>
+<div class="title">Figure 12. Default view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -895,7 +910,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/apptView.png" alt="apptView" width="1000">
 </div>
-<div class="title">Figure 11. Appointment view</div>
+<div class="title">Figure 13. Appointment view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -908,7 +923,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/dietView.png" alt="dietView" width="1000">
 </div>
-<div class="title">Figure 12. Diet view</div>
+<div class="title">Figure 14. Diet view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -921,7 +936,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/medsView.png" alt="medsView" width="1000">
 </div>
-<div class="title">Figure 13. Medication view</div>
+<div class="title">Figure 15. Medication view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -934,7 +949,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/mhView.png" alt="mhView" width="1000">
 </div>
-<div class="title">Figure 14. Medical history view</div>
+<div class="title">Figure 16. Medical history view</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -990,7 +1005,7 @@ the view panels of the last selected person (if any) are still accessible via th
 <div class="content">
 <img src="images/visitorsView.png" alt="visitorsView" width="800">
 </div>
-<div class="title">Figure 15. Visitor view</div>
+<div class="title">Figure 17. Visitor view</div>
 </div>
 </div>
 <div class="sect2">
@@ -1260,7 +1275,7 @@ There is no need to save manually.</p>
 <p><code>adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY</code></p>
 </li>
 <li>
-<p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code></p>
+<p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move</code></p>
 </li>
 </ul>
 </div>
@@ -1408,4 +1423,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:01:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:02:22 UTC</div></div></div></body></html>

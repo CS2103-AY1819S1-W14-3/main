@@ -7,18 +7,18 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<h2 id="1-overview"><a class="link" href="#1-overview">1. Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This portfolio documents my contributions to the development of application for CS2103T (Software Engineering) project, as part of the team W14-3. My contributions mainly include the addition of a new command and project management.</p>
+<p>This portfolio documents my contributions to the development of application for CS2103T (Software Engineering) project, as part of the team W14-3. My contributions mainly include the addition of several new commands and project management.</p>
 </div>
 <div class="paragraph">
-<p>HealthBase is a desktop application designed to aid in the management of clinics and hospitals. Doctors and nurses can use this application to record patient information such as medical history, medication, dietary requirement and medical appointments, through a command line interface. Besides, receptionists can use this application to register the visitors for each patient. The recorded data can be viewed through a graphical user interface.</p>
+<p>HealthBase is a desktop application designed to aid the management of clinics and hospitals. Doctors and nurses can use this application to record patient information such as medical history, medication, dietary requirement and medical appointments, through a command line interface. Besides, receptionists can use this application to register the visitors for each patient. The recorded data can be viewed through a graphical user interface. The application also provides functionality to check out a patient when he/she leaves the hospital, and check in the same patient when he/she returns to the hospital.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<h2 id="2-summary-of-contributions"><a class="link" href="#2-summary-of-contributions">2. Summary of contributions</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -27,16 +27,45 @@
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user enter dietary requirements information for a given patient.</p>
+<p>What it does: This command allows the user to enter dietary requirements information for a given patient.</p>
 </li>
 <li>
 <p>Justification: This feature enables the dietary information of a patient to be recorded upon checking in or being registered, and to be reviewed subsequently, so that the nurses can prepare food for patients efficiently.</p>
 </li>
 <li>
-<p>Highlights: This enhancement brings a unique feature for the application, which is not usually included in other hospital management systems. There are three types of dietary requirements included, so the implementation required to take into consideration how to separate different types of dietary requirements.</p>
+<p>Highlights: This enhancement brings a unique feature for the application, which is not usually included in other hospital management systems. There are three types of dietary requirements included, so the implementation needs to take into consideration how to separate different types of dietary requirements. Also, this feature blocks invalid dietary requirement inputs to ensure data integrity.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p><strong>Major enhancement</strong>: added <strong><code>checkout</code> command</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: This command allows user to check out a patient from the application when the patient leaves the hospital, while still stores his/her information in the system for future usages.</p>
+</li>
+<li>
+<p>Justification: This feature makes the application more suitable for the workflow in hospitals, as patients need to be checked out from the hospital at the end of his/her hospitalization period.</p>
+</li>
+<li>
+<p>Highlights: This enhancement makes the application highly extensible, as the information of the checked out patient are stored, which enables more operations and features to utilize these stored information.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: added <strong><code>checkin</code> command</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: This command allows user to check in a returning patient, and also restores all his/her information (medication, medical history, dietary requirements, appointments etc.) back to the application.</p>
+</li>
+<li>
+<p>Justification: This feature completes the workflow after checking out a patient, by providing a way to admit him/her back to the hospital if he/she is returning to the hospital after a period of time.</p>
+</li>
+<li>
+<p>Highlights: This enhancement makes uses of the information stored by <code>checkout</code> command, and restores these information so that other commands can be valid on a given patient. Besides, this command differentiates whether the given patient is already registered or not, and direct the user to the <code>register</code> command if the patient is on his/her first visit.</p>
 </li>
 </ul>
 </div>
@@ -45,7 +74,7 @@
 <p><strong>Minor enhancement</strong>: added a view panel that allows the user to inspect the added dietary requirements of a patient.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=yuntongzhang">Functional and Test code</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -56,10 +85,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.1</code> - <code>v1.3</code> (3 releases) on GitHub</p>
+<p>Managed organisation code repository as administrator.</p>
 </li>
 <li>
-<p>Managed the project dashboard on Github</p>
+<p>Managed releases <code>v1.1</code> - <code>v1.4</code> (5 releases) on GitHub.</p>
+</li>
+<li>
+<p>Managed the project dashboard on Github.</p>
 </li>
 </ul>
 </div>
@@ -69,10 +101,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Refactored <code>checkin</code> command to <code>register</code> command (Commit: <code>link to commit</code>)</p>
+<p>Refactored several <code>*Command</code> classes to avoid code duplication (Pull request <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/209">#209</a>).</p>
 </li>
 <li>
-<p>Updated the user interface mockup to be consistent with our proposed product (Pull request <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/18">#18</a>)</p>
+<p>Modified the equality definition of <code>Person</code> class to make it suitable for HealthBase (Pull request <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/209">#209</a>).</p>
 </li>
 </ul>
 </div>
@@ -82,7 +114,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the User Guide to be aligned with the newly created <code>adddiet</code> command: <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/83">#83</a></p>
+<p>Updated the UserGuide to include <code>adddiet</code>, <code>checkout</code> and <code>checkin</code> command.</p>
+</li>
+<li>
+<p>Updated the DeveloperGuide to include implementation details of the <code>adddiet</code> command.</p>
+</li>
+<li>
+<p>Updated the user interface mockup to be consistent with our proposed product (Pull request <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/18">#18</a>).</p>
 </li>
 </ul>
 </div>
@@ -92,16 +130,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/20">#20</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/22">#22</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/29">#29</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/82">#82</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/95">#95</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/110">#110</a></p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/20">#20</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/22">#22</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/29">#29</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/82">#82</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/95">#95</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/110">#110</a>.</p>
 </li>
 <li>
-<p>Assisted teammates during integration of code for each release</p>
+<p>Reported several issues related to the UserGuide (Issues: <a href="https://github.com/CS2103-AY1819S1-W14-3/main/issues/123">#123</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/issues/193">#193</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/issues/194">#194</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/issues/195">#195</a>, <a href="https://github.com/CS2103-AY1819S1-W14-3/main/issues/200">#200</a>).</p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples: <code>coming soon</code>)</p>
+<p>Reported bugs and suggestions for other teams in the class (Examples: <a href="https://github.com/CS2103-AY1819S1-T12-2/main/issues/118">#118</a>, <a href="https://github.com/CS2103-AY1819S1-T12-2/main/issues/128">#128</a>, <a href="https://github.com/CS2103-AY1819S1-T12-2/main/issues/130">#130</a>, <a href="https://github.com/CS2103-AY1819S1-T12-2/main/issues/138">#138</a>).</p>
 </li>
 <li>
-<p>Reported bugs and suggestions for other teams in the class (examples: <code>coming soon</code>)</p>
+<p>Assisted teammates during integration of code for each release.</p>
 </li>
 </ul>
 </div>
@@ -111,7 +149,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>nil</p>
+<p>Set up Reposense for the organisation repository (Pull request <a href="https://github.com/CS2103-AY1819S1-W14-3/main/pull/221">#221</a>).</p>
 </li>
 </ul>
 </div>
@@ -124,7 +162,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<h2 id="3-contributions-to-the-user-guide"><a class="link" href="#3-contributions-to-the-user-guide">3. Contributions to the User Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -143,6 +181,12 @@
 </div>
 <div class="paragraph">
 <p>Format: <code>adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addapptcommand.jpg" alt="addapptcommand" width="1000">
+</div>
+<div class="title">Figure 1. Adding an appointment for patient</div>
 </div>
 <div class="paragraph">
 <p>There are three types of dietary requirements, which can be added to a patient with their own prefixes:</p>
@@ -172,7 +216,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Physical Difficulty</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd/Hands cannot move.</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd/Hands cannot move</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -251,12 +295,21 @@ the patient.
 <div class="ulist">
 <ul>
 <li>
-<p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code></p>
+<p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move</code></p>
 </li>
 <li>
 <p><code>adddiet ic/S1234567A cr/Vegetarian</code></p>
 </li>
 </ul>
+</div>
+<div id="img-adddietcommand" class="paragraph">
+<p>Result of executing the first example command above:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/adddietcommand.png" alt="adddietcommand" width="1000">
+</div>
+<div class="title">Figure 2. Adding dietary requirements for a patient</div>
 </div>
 </div>
 <div class="sect2">
@@ -264,7 +317,7 @@ the patient.
 <div class="paragraph">
 <p>Check in a returning patient back to the HealthBase system, and retrieve his/her information from backend and display
 them in the left panel of the application window. The patient being checked in must have been previously registered
-to the system and were checked out of the system sometime before with the <code>checkout</code> command.</p>
+to the system and were checked out of the system sometime before by using the <code>checkout</code> command.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>checkin ic/NRIC</code></p>
@@ -279,8 +332,8 @@ to the system and were checked out of the system sometime before with the <code>
 </td>
 <td class="content">
 If there is no record of this patient in our system (which means that the patient with the specified <code>NRIC</code> has
-not visited the hospital and registered in the system, the application will direct user to use the <code>register</code> command
-to register this new patient with his necessary information.
+not visited the hospital and not been registered in the system, the application will direct the user to use the <code>register</code> command
+to register this new patient with his/her necessary information.
 </td>
 </tr>
 </table>
@@ -299,7 +352,7 @@ to register this new patient with his necessary information.
 If the patient with the specified <code>NRIC</code> is still active in the system (which means that the patient in the system has
 not been checked out yet), the command is considered as invalid.<br>
 The <code>checkin</code> command is only considered valid when the patient with the <code>NRIC</code> specified were checked out before
-with the <code>checkout</code> command.
+by using the <code>checkout</code> command.
 </td>
 </tr>
 </table>
@@ -314,7 +367,7 @@ with the <code>checkout</code> command.
 <li>
 <p><code>checkin ic/S1234567A</code><br>
 Note that the patient with <code>NRIC S1234567A</code> must have been previously registered to the system and were checked out of
-the system sometime before with the <code>checkout</code> command.</p>
+the system sometime before by using the <code>checkout</code> command.</p>
 </li>
 </ul>
 </div>
@@ -375,7 +428,7 @@ After a patient has been checked out from the system, all commands with the NRIC
 </div>
 </div>
 <div class="sect1">
-<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<h2 id="4-contributions-to-the-developer-guide"><a class="link" href="#4-contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -394,7 +447,8 @@ After a patient has been checked out from the system, all commands with the NRIC
 <div class="paragraph">
 <p>The <code>adddiet</code> command provides functionality for users to add dietary requirements for a given patient.<br>
 This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty.<br>
-This command adds these dietary requirements to a given <code>Person</code> , so that the dietary requirements can be viewed later on.</p>
+This command adds these dietary requirements to a given <code>Person</code> , so that the dietary requirements can be viewed later on.<br>
+This command blocks non-alphabetical or empty input as the detail of a dietary requirement.</p>
 </div>
 <div class="sect4">
 <h5 id="classes-involved"><a class="link" href="#classes-involved">Classes involved</a></h5>
@@ -432,7 +486,10 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="ulist">
 <ul>
 <li>
-<p>Every <code>Person</code> object has a <code>Diet Collection</code>, which is a collection of all the dietary requirements of the given patient.</p>
+<p>Every <code>Person</code> object has a <code>Diet Collection</code> object.</p>
+</li>
+<li>
+<p>This class encapsulates a collection of all the dietary requirements of the given patient.</p>
 </li>
 <li>
 <p>This class is a wrapper class around the internal representation of a <code>Set</code> of <code>Diet</code> s.</p>
@@ -445,7 +502,7 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="ulist">
 <ul>
 <li>
-<p>This class encapsulate the information of a single dietary requirement.</p>
+<p>This class encapsulates the information of a single dietary requirement.</p>
 </li>
 <li>
 <p>Specifically, an instance of this class is composed of</p>
@@ -468,10 +525,10 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="ulist">
 <ul>
 <li>
-<p>This is a <code>Enum</code> class representing the three different types of dietary requirements.</p>
+<p>This class is an <code>Enum</code> class representing the three different types of dietary requirements.</p>
 </li>
 <li>
-<p>Implemented as <code>Enum</code> class to avoid typo and invalid types being entered.</p>
+<p>This class is implemented as <code>Enum</code> class to avoid typo and invalid types being entered.</p>
 </li>
 </ul>
 </div>
@@ -482,22 +539,22 @@ This command adds these dietary requirements to a given <code>Person</code> , so
 <div class="sect4">
 <h5 id="execution-of-the-command"><a class="link" href="#execution-of-the-command">Execution of the command</a></h5>
 <div class="paragraph">
-<p>Given below is an usage scenario and the details when executing <code>adddiet</code> command.<br>
-For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code>:</p>
+<p>Given below is a usage scenario and the details when executing <code>adddiet</code> command.<br>
+For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move</code>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The command text is passed to an instance of the <code>Logic Manager</code> class.</p>
+<p>The command text is passed to an instance of the <code>LogicManager</code> class.</p>
 </li>
 <li>
-<p>The <code>Logic Manager</code> instance calls <code>HealthBaseParser#parseCommand</code>, which parses the <code>adddiet</code> command word.</p>
+<p>The <code>LogicManager</code> instance calls <code>HealthBaseParser#parseCommand</code>, which parses the <code>adddiet</code> command word.</p>
 </li>
 <li>
 <p>Next, the <code>AddDietCommandParser#parse</code> method parses the different dietary requirements into one <code>DietCollection</code> object. An instance of <code>AddDietCommand</code> is returned after the parsing.</p>
 </li>
 <li>
-<p><code>Logic Manager</code> then execute this <code>AddDietCommand</code> by calling <code>AddDietCommand#execute</code>.</p>
+<p><code>LogicManager</code> then execute this <code>AddDietCommand</code> by calling <code>AddDietCommand#execute</code>.</p>
 </li>
 <li>
 <p>In the <code>AddDietCommand#execute</code> method, the new <code>DietCollection</code> object is added to a new copy of the <code>Person</code> object.</p>
@@ -517,7 +574,7 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <div class="content">
 <img src="../images/AdddietSequenceDiagram.png" alt="AdddietSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 1. Execution sequence of the <code>adddiet</code> command</div>
+<div class="title">Figure 3. Execution sequence of the <code>adddiet</code> command</div>
 </div>
 </div>
 </div>
@@ -592,4 +649,4 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:01:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:02:22 UTC</div></div></div></body></html>
