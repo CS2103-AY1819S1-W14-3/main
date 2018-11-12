@@ -40,7 +40,6 @@ public class XmlAdaptedVisitorList implements Iterable<XmlAdaptedVisitor> {
     }
 
     @Override
-    //todo amend
     public boolean equals(Object o) {
         if (this == o) {
             return true;
