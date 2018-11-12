@@ -3145,7 +3145,7 @@ Expected: The most recent window size and location is retained.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Adds an appointment for a checked in patient</p>
+<p>Adding an appointment for a checked in patient</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3186,7 +3186,7 @@ Expected: Appointment is not added because of the missing salutation for Doctor.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Adds dietary requirements for a checked in patient</p>
+<p>Adding dietary requirements for a checked in patient</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3398,7 +3398,7 @@ Expected: The view remains unsorted. An error message is shown.</p>
 </li>
 <li>
 <p>Test case: <code>checkout ic/$nricOther</code>
-Expected: The patient is not checked out. Error detail shown in the status message.</p>
+Expected: The command fails. Error detail shown in the status message.</p>
 </li>
 <li>
 <p>Test case: <code>checkout ic/$nric</code>
@@ -3406,7 +3406,7 @@ Expected: The patient with <code>$nric</code> is checked out.</p>
 </li>
 <li>
 <p>Test case: <code>checkout ic/$nric</code>
-Expected: The patient is not checked out. Error detail shown in the status message.</p>
+Expected: The command fails. Error detail shown in the status message.</p>
 </li>
 </ol>
 </div>
@@ -3426,8 +3426,8 @@ Expected: The patient is not checked out. Error detail shown in the status messa
 <p>Prerequisites: A patient is registered and previously checked out from the system. Let <code>$nric</code> denotes this patient&#8217;s NRIC. Let <code>$nricOther</code> denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.</p>
 </li>
 <li>
-<p>Test case: <code>checkin ic/$otherNric</code>
-Expected: The patient is not checked in. Error detail shown in the status message.</p>
+<p>Test case: <code>checkin ic/$nricOther</code>
+Expected: The command fails. Error detail shown in the status message.</p>
 </li>
 <li>
 <p>Test case: <code>checkin ic/$nric</code>
@@ -3435,7 +3435,7 @@ Expected: The patient with <code>$nric</code> is checked in.</p>
 </li>
 <li>
 <p>Test case: <code>checkin ic/$nric</code>
-Expected: The patient is not checked in. Error detail shown in the status message.</p>
+Expected: The command fails. Error detail shown in the status message.</p>
 </li>
 </ol>
 </div>
@@ -3585,4 +3585,4 @@ Expected: Failed addition, doctor&#8217;s name cannot be a whitespace.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:25:34 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:26:07 UTC</div></div></div></body></html>
