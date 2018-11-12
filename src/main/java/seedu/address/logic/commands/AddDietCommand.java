@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+//@@author yuntongzhang
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CULTURAL_REQUIREMENT;
@@ -13,14 +15,13 @@ import seedu.address.model.diet.DietCollection;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
-
-//@author yuntongzhang
 /**
- * Add Diet requirements for a patient.
+ * Adds diet requirements to a patient.
  *
  * @author yuntongzhang
  */
 public class AddDietCommand extends Command {
+
     public static final String COMMAND_WORD = "adddiet";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds dietary requirements for a patient. "
@@ -43,9 +44,9 @@ public class AddDietCommand extends Command {
     private final Nric patientNric;
 
     /**
-     * Creates an AddDietCommand to add Diet to a patient.
+     * Creates an AddDietCommand to add dietary requirements to a patient.
      * @param patientNric NRIC of the patient to be updated.
-     * @param dietCollection The collection of dietary requirements to be added to a patient..
+     * @param dietCollection The collection of dietary requirements to be added to a patient.
      */
     public AddDietCommand(Nric patientNric, DietCollection dietCollection) {
         this.patientNric = requireNonNull(patientNric);
@@ -64,17 +65,16 @@ public class AddDietCommand extends Command {
     }
 
     /**
-     * Update a patient with the new dietary requirement.
+     * Adds more dietary requirements to a patient.
      *
      * @param patientToUpdate The patient to be updated.
-     * @param dietsToAdd The diet to be added to the patient.
-     * @return An updated patient with the appropriate diet added.
+     * @param dietsToAdd The diet requirements to be added to the patient.
+     * @return An updated patient with the specified diet requirements added.
      */
     private static Person addDietsForPatient(Person patientToUpdate, DietCollection dietsToAdd) {
         assert patientToUpdate != null;
 
         DietCollection updatedDiet = new DietCollection(patientToUpdate.getDietCollection()).addMoreDiets(dietsToAdd);
-
         return patientToUpdate.withDietCollection(updatedDiet);
     }
 

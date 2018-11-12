@@ -12,10 +12,11 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Check in a patient whose records already exist in the HealthBase system.
+ * Checks in a patient whose records already exist in the HealthBase system.
  * @author yuntongzhang
  */
 public class CheckinCommand extends Command {
+
     public static final String COMMAND_WORD = "checkin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check in a patient whose information was "
@@ -30,7 +31,7 @@ public class CheckinCommand extends Command {
     private final Nric patientNric;
 
     /**
-     * Creates a CheckinCommand to check in an pre-existing patient to the system.
+     * Creates a CheckinCommand to check in an pre-existing checked out patient to the system.
      * @param patientNric NRIC of the patient to be checked in.
      */
     public CheckinCommand(Nric patientNric) {

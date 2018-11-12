@@ -91,7 +91,7 @@ public class AppointmentView extends UiPart<Region> implements Swappable, Sortab
     }
 
     /**
-     * The AddressBook {@code Person} is immutable, hence any changes results in a new
+     * The HealthBase {@code Person} is immutable, hence any changes results in a new
      * {@code Person} object being created. This method helps to refresh our reference
      * to the currently selected {@code Person} object to point to the new {@code Person} object
      */

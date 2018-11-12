@@ -50,6 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private HistoryView historyView;
     private DietView dietView;
     private AppointmentView appointmentView;
+    private VisitorView visitorView;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -144,6 +145,7 @@ public class MainWindow extends UiPart<Stage> {
         historyView = new HistoryView(logic.getFilteredPersonList());
         dietView = new DietView(logic.getFilteredPersonList());
         appointmentView = new AppointmentView(logic.getFilteredPersonList());
+        visitorView = new VisitorView(logic.getFilteredPersonList());
 
         // Set up the HashMap of Swappable panels
         panels.put(SwappablePanelName.BLANK, blankPanel);
@@ -151,6 +153,7 @@ public class MainWindow extends UiPart<Stage> {
         panels.put(SwappablePanelName.HISTORY, historyView);
         panels.put(SwappablePanelName.DIET, dietView);
         panels.put(SwappablePanelName.APPOINTMENT, appointmentView);
+        panels.put(SwappablePanelName.VISITOR, visitorView);
     }
 
     /**
@@ -164,7 +167,7 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getHealthBaseFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);

@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.HealthBaseBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -31,12 +31,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInHealthBase_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInHealthBase_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -48,15 +48,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasCheckedOutPerson_personNotInAddressBook_returnsFalse() {
+    public void hasCheckedOutPerson_personNotInHealthBase_returnsFalse() {
         assertFalse(modelManager.hasCheckedOutPerson(ALICE));
     }
 
     @Test
-    public void hasCheckedOutPerson_personInAddressBook_returnsTrue() {
-        AddressBook internalAddressBook = new AddressBook();
-        internalAddressBook.addCheckedOutPerson(ALICE);
-        modelManager.resetData(internalAddressBook);
+    public void hasCheckedOutPerson_personInHealthBase_returnsTrue() {
+        HealthBase internalHealthBase = new HealthBase();
+        internalHealthBase.addCheckedOutPerson(ALICE);
+        modelManager.resetData(internalHealthBase);
         assertTrue(modelManager.hasCheckedOutPerson(ALICE));
     }
 
@@ -74,15 +74,15 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder()
+        HealthBase healthBase = new HealthBaseBuilder()
             .withPerson(ALICE).withPerson(BENSON)
             .withCheckedOutPerson(CARL).withCheckedOutPerson(DANIEL).build();
-        AddressBook differentAddressBook = new AddressBook();
+        HealthBase differentHealthBase = new HealthBase();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(healthBase, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(healthBase, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -94,20 +94,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different healthBase -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentHealthBase, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(healthBase, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setHealthBaseFilePath(Paths.get("differentFilePath"));
+        assertTrue(modelManager.equals(new ModelManager(healthBase, differentUserPrefs)));
     }
 }

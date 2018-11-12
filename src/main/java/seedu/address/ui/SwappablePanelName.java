@@ -11,7 +11,8 @@ public enum SwappablePanelName {
     MEDICATION("meds"),
     HISTORY("mh"),
     DIET("diets"),
-    APPOINTMENT("appt");
+    APPOINTMENT("appt"),
+    VISITOR("visitors");
 
     private String shortForm;
 

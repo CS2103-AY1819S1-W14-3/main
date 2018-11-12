@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalHealthBase;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,14 +33,14 @@ public class RegisterCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalHealthBase(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getHealthBase(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new RegisterCommand(validPerson), model, commandHistory,
@@ -49,20 +49,20 @@ public class RegisterCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
+        Person personInList = model.getHealthBase().getPersonList().get(0);
         assertCommandFailure(new RegisterCommand(personInList), model, commandHistory,
-                RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+                CommandUtil.MESSAGE_ALREADY_REGISTERED);
     }
 
     @Test
     public void execute_duplicateNric_throwsCommandException() {
-        Nric nricInList = model.getAddressBook().getPersonList().get(0).getNric();
+        Nric nricInList = model.getHealthBase().getPersonList().get(0).getNric();
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("insulin"));
         Person personWithDuplicateNric = new Person(nricInList, new Name("Boon Ping"), new Phone("90000000"),
                 new Email("newemail@email.com"), new Address("New Address Road"), tags);
         assertCommandFailure(new RegisterCommand(personWithDuplicateNric), model, commandHistory,
-                RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+                CommandUtil.MESSAGE_ALREADY_REGISTERED);
     }
 
 }

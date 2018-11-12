@@ -25,6 +25,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.visitor.Visitor;
 import seedu.address.model.visitor.VisitorList;
 
 /**
@@ -54,6 +55,8 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
     @XmlElement
     private XmlAdaptedMedicalHistory medicalHistory = new XmlAdaptedMedicalHistory();
+    @XmlElement
+    private XmlAdaptedVisitorList visitorList = new XmlAdaptedVisitorList();
 
     /**
      * Constructs an XmlAdaptedPerson. This is the no-arg constructor that is
@@ -81,9 +84,9 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String nric, String name, String phone, String email, String address,
-        List<XmlAdaptedTag> tagged, List<XmlAdaptedPrescription> prescriptions,
-        List<XmlAdaptedAppointment> appointments, List<XmlAdaptedDiagnosis> diagnoses,
-        Set<XmlAdaptedDiet> diets) {
+                            List<XmlAdaptedTag> tagged, List<XmlAdaptedPrescription> prescriptions,
+                            List<XmlAdaptedAppointment> appointments, List<XmlAdaptedDiagnosis> diagnoses,
+                            Set<XmlAdaptedDiet> diets, List<XmlAdaptedVisitor> visitors) {
         this(nric, name, phone, email, address, tagged);
         if (prescriptions != null) {
             this.prescriptions.setPrescription(prescriptions);
@@ -96,6 +99,9 @@ public class XmlAdaptedPerson {
         }
         if (diets != null) {
             this.diets.setDiet(diets);
+        }
+        if (visitors != null) {
+            this.visitorList.setVisitorList(visitors);
         }
     }
 
@@ -129,6 +135,10 @@ public class XmlAdaptedPerson {
             .stream()
             .map(XmlAdaptedDiet::new)
             .collect(Collectors.toSet()));
+        this.visitorList.setVisitorList(source.getVisitorList()
+            .stream()
+            .map(XmlAdaptedVisitor::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -142,6 +152,7 @@ public class XmlAdaptedPerson {
         final List<Prescription> prescriptions = new ArrayList<>();
         final List<Appointment> appointments = new ArrayList<>();
         final List<Diagnosis> diagnoses = new ArrayList<>();
+        final List<Visitor> visitors = new ArrayList<>();
         final Set<Diet> diets = new HashSet<>();
 
 
@@ -159,6 +170,10 @@ public class XmlAdaptedPerson {
 
         for (XmlAdaptedDiagnosis diagnosis : this.medicalHistory) {
             diagnoses.add(diagnosis.toModelType());
+        }
+
+        for (XmlAdaptedVisitor visitor : this.visitorList) {
+            visitors.add(visitor.toModelType());
         }
 
         for (XmlAdaptedDiet diet : this.diets) {
@@ -222,9 +237,9 @@ public class XmlAdaptedPerson {
 
         final MedicalHistory medicalHistory = new MedicalHistory(new ArrayList<>(diagnoses));
 
-        final DietCollection dietCollection = new DietCollection(new HashSet<>(diets));
+        final VisitorList visitorList = new VisitorList(new ArrayList<>(visitors));
 
-        final VisitorList visitorList = new VisitorList();
+        final DietCollection dietCollection = new DietCollection(new HashSet<>(diets));
 
         return new Person(modelNric, modelName, modelPhone, modelEmail, modelAddress, modelTags)
             .withPrescriptionList(prescriptionList)
@@ -253,6 +268,7 @@ public class XmlAdaptedPerson {
             && prescriptions.equals(otherPerson.prescriptions)
             && appointments.equals(otherPerson.appointments)
             && medicalHistory.equals(otherPerson.medicalHistory)
+            && visitorList.equals(otherPerson.visitorList)
             && diets.equals(otherPerson.diets);
     }
 }

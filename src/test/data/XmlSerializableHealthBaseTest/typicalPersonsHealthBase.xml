@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- AddressBook save file which contains the same Person values as in Typicalperson#getTypicalAddressBook() -->
-<addressbook>
+<!-- HealthBase save file which contains the same Person values as in Typicalperson#getTypicalHealthBase() -->
+<healthbase>
     <person>
     	<nric>S1234567A</nric>
         <name>Alice Pauline</name>
@@ -68,4 +68,4 @@
         <email>hans@example.com</email>
         <address>chicago ave</address>
     </checkedout>
-</addressbook>
+</healthbase>

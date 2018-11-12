@@ -71,8 +71,6 @@ public class CheckinCommandTest {
         command.execute(modelStub, commandHistory);
     }
 
-    //TODO: another test to check the situation when a person is already checked in.
-
     @Test
     public void equals() {
         Person otherPatient = new PersonBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB).build();

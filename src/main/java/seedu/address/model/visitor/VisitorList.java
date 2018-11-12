@@ -3,6 +3,10 @@ package seedu.address.model.visitor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 //@@auth0r GAO JIAXIN666
 /**
@@ -75,5 +79,17 @@ public class VisitorList {
         }
 
         return false;
+    }
+
+    /**
+     * Get a a copy of visitorlist for JavaFX TableView.
+     * @return A {@code ObservableList} of visitors.
+     */
+    public ObservableList<Visitor> getObservableCopyOfVisitorlist() {
+        return FXCollections.observableArrayList(new ArrayList<>(visitorList));
+    }
+
+    public Stream<Visitor> stream() {
+        return visitorList.stream();
     }
 }

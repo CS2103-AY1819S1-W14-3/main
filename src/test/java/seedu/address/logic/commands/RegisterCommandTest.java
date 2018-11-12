@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalHealthBase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +16,10 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HealthBase;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyHealthBase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -58,7 +58,7 @@ public class RegisterCommandTest {
         CommandTestUtil.ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(CommandUtil.MESSAGE_ALREADY_REGISTERED);
         registerCommand.execute(modelStub, commandHistory);
     }
 
@@ -110,7 +110,7 @@ public class RegisterCommandTest {
     private class ModelStubAcceptingPersonAdded extends CommandTestUtil.ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
         final ArrayList<Person> personsCheckedOut = new ArrayList<>();
-        private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        private Model model = new ModelManager(getTypicalHealthBase(), new UserPrefs());
 
         @Override
         public boolean hasPerson(Person person) {
@@ -136,8 +136,8 @@ public class RegisterCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyHealthBase getHealthBase() {
+            return new HealthBase();
         }
     }
 

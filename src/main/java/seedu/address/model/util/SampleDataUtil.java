@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.HealthBase;
+import seedu.address.model.ReadOnlyHealthBase;
 import seedu.address.model.medicalhistory.Diagnosis;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -20,7 +20,7 @@ import seedu.address.model.visitor.Visitor;
 import seedu.address.model.visitor.VisitorList;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code HealthBase} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -45,8 +45,8 @@ public class SampleDataUtil {
                     getTagSet("penicillin")) };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyHealthBase getSampleHealthBase() {
+        HealthBase sampleAb = new HealthBase();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

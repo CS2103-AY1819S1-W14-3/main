@@ -17,7 +17,7 @@ import org.junit.Test;
 import seedu.address.testutil.Assert;
 
 /**
- * Test driver for DietCollection wrapper class functionality.
+ * Test driver for DietCollection class functionality.
  * @author yuntongzhang
  */
 public class DietCollectionTest {

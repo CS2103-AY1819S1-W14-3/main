@@ -33,11 +33,9 @@ public class CliSyntax {
 
     /** Ordered prefixes for the adddiet command. */
     public static final Prefix PREFIX_ALLERGY = new Prefix("alg/");
-
-    /** Ordered prefixes for the visitorin command. */
-    public static final Prefix PREFIX_VISITOR = new Prefix("v/");
-
     public static final Prefix PREFIX_CULTURAL_REQUIREMENT = new Prefix("cr/");
     public static final Prefix PREFIX_PHYSICAL_DIFFICULTY = new Prefix("pd/");
 
+    /** Ordered prefixes for the visitorin command. */
+    public static final Prefix PREFIX_VISITOR = new Prefix("v/");
 }

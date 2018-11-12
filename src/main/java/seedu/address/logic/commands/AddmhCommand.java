@@ -21,14 +21,15 @@ public class AddmhCommand extends Command {
 
     public static final String COMMAND_WORD = "addmh";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patients's medical history. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a diagnosis to a patient's existing medical history. "
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
-            + PREFIX_MED_HISTORY + "DIAGNOSIS/REMARK"
+            + PREFIX_MED_HISTORY + "DIAGNOSIS/REMARK "
             + PREFIX_DOCTOR + "DOCTOR\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "S9271847A"
-            + PREFIX_MED_HISTORY + "Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately."
+            + PREFIX_NRIC + "S1234567A" + " "
+            + PREFIX_MED_HISTORY + "Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. "
             + PREFIX_DOCTOR + "Dr.Ross";
 
     public static final String MESSAGE_SUCCESS = "New medical history/record successfully added: %1$s";

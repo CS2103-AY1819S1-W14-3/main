@@ -15,13 +15,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class XmlAdaptedDietCollection implements Iterable<XmlAdaptedDiet> {
+
     @XmlElement(required = true, name = "diet")
     private Set<XmlAdaptedDiet> dietSet;
 
+    /**
+     * Constructs a {@code XmlAdaptedDietCollection} with an empty {@code dietSet}.
+     */
     public XmlAdaptedDietCollection() {
         this.dietSet = new HashSet<>();
     }
 
+    /**
+     * Constructs a {@code XmlAdaptedDietCollection} with the given {@code dietSet}.
+     */
     public XmlAdaptedDietCollection(Set<XmlAdaptedDiet> dietSet) {
         this.dietSet = new HashSet<>(dietSet);
     }

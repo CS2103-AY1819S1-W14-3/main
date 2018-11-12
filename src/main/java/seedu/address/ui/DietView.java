@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
 
 /**
  * The Diet Panel of the App.
+ * @author yuntongzhang
  */
 public class DietView extends UiPart<Region> implements Swappable {
     private static final String FXML = "DietPanel.fxml";
@@ -69,27 +70,34 @@ public class DietView extends UiPart<Region> implements Swappable {
         setDataSourcesForTableColumns(allergyCol, culturalRequirementCol, physicalDifficultyCol);
     }
 
+    /**
+     * Sets the {@code source} for the {@code TableView<Diet>}.
+     */
     private void setDataSourceForTable(ObservableList<Diet> source, TableView<Diet> table) {
         table.setItems(source);
     }
 
+    /**
+     * Sets all the data sources for each column.
+     */
     private void setDataSourcesForTableColumns(TableColumn<Diet, String>... cols) {
         for (TableColumn<Diet, String> col : cols) {
             col.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getDetail()));
         }
     }
 
+    /**
+     * Refreshes the current selection, in case there are new data available to be displayed.
+     */
     private void refreshCurrentSelection() {
         currentSelection = persons.filtered(person -> currentSelection.isSamePerson(person)).get(0);
     }
 
     /**
      * Set the current selection to the given {@code Person}. Only used for testing purposes.
-     * @param p
      */
-    // TODO: replace this method with other means as it only helps testing.
-    public void setCurrentSelection(Person p) {
-        currentSelection = p;
+    public void setCurrentSelection(Person person) {
+        currentSelection = person;
     }
 
     @Override
@@ -100,7 +108,7 @@ public class DietView extends UiPart<Region> implements Swappable {
         refreshAllTables(currentSelection);
     }
 
-    /* ====================== Event handling ====================== */
+    /* ===================================== Event handling ============================================ */
 
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {

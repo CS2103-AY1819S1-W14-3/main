@@ -57,11 +57,11 @@ import seedu.address.testutil.PrescriptionUtil;
 import seedu.address.testutil.VisitorBuilder;
 import seedu.address.testutil.VisitorUtil;
 
-public class AddressBookParserTest {
+public class HealthBaseParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final HealthBaseParser parser = new HealthBaseParser();
 
     @Test
     public void parseCommand_addmeds() throws Exception {

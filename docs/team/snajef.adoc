@@ -7,8 +7,6 @@
 
 == PROJECT: HealthBase
 
----
-
 == Introduction
 
 This project portfolio page’s purpose is to document my contributions to the project.
@@ -17,11 +15,7 @@ HealthBase is a desktop application designed to aid in clinic patient data manag
 
 * Management of check-in/check-out status of patients
 * Real-time management of the check-in/out status of patients
-* Patient medication data entry and retrieval
-* Patient medical history data entry and retrieval
-* Patient dietary restriction(s) data entry and retrieval
-* Patient visitor history data entry and retrieval
-* Real-time management of the number of visitors any given patient has
+* Patient medication, medical history, dietary restriction(s), and visitor history data entry and retrieval
 * Patient appointment management for doctors
 
 HealthBase was designed and built by me and my team of NUS Year 2 Computer Science students for the CS2103T module. For more information about us, click link:{staticpageslink}AboutUs.html[here].
@@ -41,9 +35,8 @@ This section's purpose is to summarise my contributions to this project. For mor
 * *Minor enhancement*:
 ** Added `sort` command
 ** Added `gendata` command
-* *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=snajef[my commits]]
-* *Other contributions*:
 
+* *Other contributions*:
 ** Project management:
 *** nil
 ** Enhancements to existing features:
@@ -64,14 +57,12 @@ This section's purpose is to summarise my contributions to this project. For mor
 == Contributions to the User Guide
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are (some) sections I contributed to the User Guide. For brevity, not all of the portions of the User Guide that I wrote have been included. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=sort]
 
 include::../UserGuide.adoc[tag=select]
-
-include::../UserGuide.adoc[tag=view]
 
 include::../UserGuide.adoc[tag=addmeds]
 

@@ -14,6 +14,7 @@ import org.junit.Test;
 
 /**
  * Test driver class for XmlAdaptedDietCollection class.
+ * @author yuntongzhang
  */
 public class XmlAdaptedDietCollectionTest {
     private XmlAdaptedDietCollection xmlAdaptedDietCollection;

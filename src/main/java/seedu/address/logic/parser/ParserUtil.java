@@ -57,6 +57,8 @@ public class ParserUtil {
     /**
      * Parse a {@code List<String> diets} in to a {@code Set<Diet> diets}, given the {@code DietType type}.
      * Leading and trialing whitespaces for each item in the List will be trimmed.
+     *
+     * @throws ParseException if any of the diet details is invalid.
      */
     public static Set<Diet> parseDiet(List<String> diets, DietType type) throws ParseException {
         requireAllNonNull(diets, type);
