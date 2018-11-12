@@ -85,3 +85,9 @@ include::../UserGuide.adoc[tag=viewdiets]
 |===
 
 include::../DeveloperGuide.adoc[tag=adddiet]
+
+include::../DeveloperGuide.adoc[tag=adddiettests]
+
+include::../DeveloperGuide.adoc[tag=checkintests]
+
+include::../DeveloperGuide.adoc[tag=checkouttests]
