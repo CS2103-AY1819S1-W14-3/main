@@ -771,16 +771,16 @@ This command has the following intent: Record the following appointment to a pat
 </div>
 <div class="paragraph">
 <p>With reference to the above figures, the following steps occur upon the execution of the <code>addappt</code> command
-(code snippets have been included for the first 3 steps to further aid understanding):</p>
+(code snippets have been included for the first 4 steps to further aid understanding):</p>
 </div>
 <div class="listingblock java">
 <div class="content">
 <pre>...
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, ParseException { <i class="conum" data-value="1"></i><b>(1)</b>
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = addressBookParser.parseCommand(commandText); <i class="conum" data-value="1"></i><b>(1)</b>
+            Command command = healthBaseParser.parseCommand(commandText); <i class="conum" data-value="2"></i><b>(2)</b>
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -792,7 +792,7 @@ This command has the following intent: Record the following appointment to a pat
 <div class="listingblock java">
 <div class="content">
 <pre>...
-    public Command parseCommand(String userInput) throws ParseException { <i class="conum" data-value="1"></i><b>(1)</b>
+    public Command parseCommand(String userInput) throws ParseException { <i class="conum" data-value="2"></i><b>(2)</b>
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -807,7 +807,7 @@ This command has the following intent: Record the following appointment to a pat
             return new RegisterCommandParser().parse(arguments);
         ...
         case AddApptCommand.COMMAND_WORD:
-            return new AddApptCommandParser().parse(arguments); <i class="conum" data-value="2"></i><b>(2)</b>
+            return new AddApptCommandParser().parse(arguments); <i class="conum" data-value="3"></i><b>(3)</b>
         ...
     }
 ...</pre>
@@ -817,7 +817,7 @@ This command has the following intent: Record the following appointment to a pat
 <div class="content">
 <pre>...
     @Override
-    public AddApptCommand parse(String args) throws ParseException { <i class="conum" data-value="2"></i><b>(2)</b>
+    public AddApptCommand parse(String args) throws ParseException { <i class="conum" data-value="3"></i><b>(3)</b>
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_TYPE, PREFIX_PROCEDURE,
                 PREFIX_DATE_TIME, PREFIX_DOCTOR);
 
@@ -829,7 +829,7 @@ This command has the following intent: Record the following appointment to a pat
         nric = new Nric(patientNric);
         appt = new Appointment(type, procedure, dateTime, doctor);
 
-        return new AddApptCommand(nric, appt); <i class="conum" data-value="3"></i><b>(3)</b>
+        return new AddApptCommand(nric, appt); <i class="conum" data-value="4"></i><b>(4)</b>
     }
 ...</pre>
 </div>
@@ -3303,4 +3303,4 @@ Expected: No data is generated. An error message is shown.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:22:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:49:20 UTC</div></div></div></body></html>
