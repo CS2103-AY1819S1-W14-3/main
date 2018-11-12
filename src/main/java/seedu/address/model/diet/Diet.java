@@ -2,10 +2,13 @@ package seedu.address.model.diet;
 
 //@@author yuntongzhang
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 /**
  * Represents dietary requirement for a person.
+ * @author yuntongzhang
  */
 public class Diet {
 
@@ -23,8 +26,7 @@ public class Diet {
      * @param type The type of this Diet requirement.
      */
     public Diet(String detail, DietType type) {
-        Objects.requireNonNull(detail);
-        Objects.requireNonNull(type);
+        requireAllNonNull(detail, type);
         this.detail = detail;
         this.type = type;
     }

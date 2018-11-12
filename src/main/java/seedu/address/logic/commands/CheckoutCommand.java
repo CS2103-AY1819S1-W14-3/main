@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
  * @author yuntongzhang
  */
 public class CheckoutCommand extends Command {
+
     public static final String COMMAND_WORD = "checkout";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Check out a patient from the system. "

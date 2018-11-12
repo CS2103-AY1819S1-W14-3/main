@@ -58,7 +58,7 @@ public class RegisterCommandTest {
         CommandTestUtil.ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(CommandUtil.MESSAGE_ALREADY_REGISTERED);
         registerCommand.execute(modelStub, commandHistory);
     }
 

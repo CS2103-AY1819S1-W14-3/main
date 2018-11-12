@@ -36,6 +36,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandUtil;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -106,26 +107,26 @@ public class RegisterCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: register a duplicate person -> rejected */
         command = PersonUtil.getRegisterCommand(HOON);
-        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, CommandUtil.MESSAGE_ALREADY_REGISTERED);
 
         /* Case: register a duplicate person except with different phone -> rejected */
         toRegister = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
         command = PersonUtil.getRegisterCommand(toRegister);
-        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, CommandUtil.MESSAGE_ALREADY_REGISTERED);
 
         /* Case: register a duplicate person except with different email -> rejected */
         toRegister = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getRegisterCommand(toRegister);
-        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, CommandUtil.MESSAGE_ALREADY_REGISTERED);
 
         /* Case: register a duplicate person except with different address -> rejected */
         toRegister = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = PersonUtil.getRegisterCommand(toRegister);
-        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, CommandUtil.MESSAGE_ALREADY_REGISTERED);
 
         /* Case: register a duplicate person except with different tags -> rejected */
         command = PersonUtil.getRegisterCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, CommandUtil.MESSAGE_ALREADY_REGISTERED);
 
         /* Case: missing nric -> rejected */
         command = RegisterCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
