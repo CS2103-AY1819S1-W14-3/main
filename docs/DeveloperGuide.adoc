@@ -743,7 +743,7 @@ with an appropriate error message before the use case ends.
 There three commands related to manage patients' visitors. +
 
 * The `visitorin` command allows user to add visitors into patient's visitorList. Each patient has a `VisitorList` and
-the maximum size of the list is 5 so that patients can have a comfortable environment. +
+the maximum size of the list is 5 so that patients can have a comfortable environment. 
 
 * The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
 `visitorList` in order of entry. +
