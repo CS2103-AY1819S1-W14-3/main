@@ -147,7 +147,7 @@ To illustrate how the three commands work, examples are given below.
 
 * `visitorin ic/S1234567A v/Jane`
 ** The command inputs are passed to an instance of the `LogicManager` class.
-** `AddressBookParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
+** `HealthBaseParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
 ** `VisitorInCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitorinCommand` object.
 Below shows the part of code:
 
