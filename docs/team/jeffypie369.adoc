@@ -6,9 +6,12 @@
 == PROJECT: HealthBase
 
 == 1. Overview
-HealthBase is an application that evolved from a brown-field project, Addressbook,
-which consisted of 10KLOC. Over the course of 3 months, my team has gradually morphed the Addressbook into
-HealthBase by fortnightly meeting milestones that we set in the infancy stages of the project.
+
+|===
+|HealthBase is an application that evolved from a brown-field project, AddressBook,
+  which consisted of 10KLOC. Over the course of 3 months, my team has gradually morphed the AddressBook into
+  HealthBase by fortnightly meeting milestones that we set in the infancy stages of the project.
+|===
 
 This page encompasses my contributions to HealthBase. This includes the implementation of features, refactoring
 and documentation.
