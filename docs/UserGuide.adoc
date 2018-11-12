@@ -31,7 +31,7 @@ If you can type fast, HealthBase can get your hospital management tasks done fas
 .  Double-click the file to start the app. The Graphical User Interface (GUI) should appear in a few seconds.
 +
 .The GUI of HealthBase
-image::Ui.png[width="790"]
+image::Ui.png[width="1000"]
 +
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -132,10 +132,32 @@ Example(s):
 //end::addmeds[]
 //tag::addmh[]
 === Add to patient’s medical history: `addmh`
-Add an non-blank diagnosis entry to an existing patient’s medical history.
+Add a non-blank diagnosis entry with the name of the doctor-in-charge to an existing patient’s medical history.
 The patient must be registered within the system.
 
 Format: `addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE`
+
+Example(s):
+
+* `addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
+rest and rehydrate. doc/Dr. Zhang De`
+* `addmh ic/T9876543Z mh/Patient appears to have chronic cough. Referred to specialist. doc/Dr.Timothy`
+
+To try out the `addmh` command:
+
+1. Type out a valid `addmh` command which follows the stated format into the command box.
+ Such an example can be seen in the figure below.
+
+2. Submit the input into HealthBase by pressing kbd:[Enter].
+The result display panel will show a successful `addmh` command message, and should show the further figure below.
+
+.Command box and result display panel before entering an `addmh` command.
+image::beforeAddmhCommand.png[width="1000"]
+
+.Command box and result display panel after entering the valid `addmh` command.
+image::afterAddmhCommand.png[width="1000"]
+
+
 ****
 WARNING: The following invalid inputs will result in a command failure, and the display of an appropriate error message.
 
@@ -144,21 +166,17 @@ WARNING: The following invalid inputs will result in a command failure, and the 
 * Incorrect format of the doctor's name.
 ** Doctor's title must be included.
 ** The first letter of all words in doctor's name must be captalised.
-* Blank Diagnosis
+* Blank diagnosis
 ** An empty diagnosis will not be accepted as a valid diagnosis.
+* Missing prefixes
+** Not all the prefixes in the stated command format have been included.
 ****
-
-Example(s):
-
-* `addmh ic/S1234567A mh/Patient shows symptoms of flu. Prescribed 2 weeks of panadol, advised patient to
-rest and rehydrate. doc/Dr. Zhang De`
-* `addmh ic/T9876543Z mh/Patient appears to have chronic cough. Referred to specialist. doc/Dr.Timothy`
-
-****
-TIP: If you want to view the newly added diagnoses to a particular patient, simply enter `view mh`.
+[TIP]
+====
+If you want to view the newly added diagnoses to a particular patient, simply enter `view mh`.
 You may have to enter select <patient index>` or click on the patient panel card.
 To use the full capabilities of the `view` command, click <<#view-command, here>>.
-****
+====
 
 //end::addmh[]
 
@@ -275,7 +293,7 @@ Format: `select INDEX`
 where INDEX refers to the index of the patient's card (listed in the card)
 
 .Indication of the location of the index on the patient's card
-image::highlightIndex.png[width=800]
+image::highlightIndex.png[width=1000]
 
 Example(s):
 
@@ -300,38 +318,57 @@ Current choices for views include:
 * diets (Diet view, contains patient's dietary requirements)
 * meds (Medication view, contains information about the patient's medications)
 * mh (Medical history view, contains patient's previous medical diagnoses)
+* visitors (Visitor list view, contains patient's visitors' names)
 
 This command switches the user's view (right panel of the UI, indicated in the figure directly below) to a chosen view. +
 
 .Indication of the location of the user view
-image::highlightUserViewLocation.png[width=800]
+image::highlightUserViewLocation.png[width=1000]
 
 Example(s):
 
 * `view default`
 
 .Default view
-image::blankPanel.png[width=800]
+image::blankPanel.png[width=1000]
 
 * `view appt`
 
 .Appointment view
-image::apptView.png[width=800]
+image::apptView.png[width=1000]
 
 * `view diets`
 
 .Diet view
-image::dietView.png[width=800]
+image::dietView.png[width=1000]
 
 * `view meds`
 
 .Medication view
-image::medsView.png[width=800]
+image::medsView.png[width=1000]
 
 * `view mh`
 
 .Medical history view
-image::mhView.png[width=800]
+image::mhView.png[width=1000]
+
+****
+NOTE: When a user clears all the stored entries with the `clear` command,
+the view panels of the last selected person (if any) are still accessible via the `view` command.
+
+* For example, the following `view` commands will function fine for the last selected person.
+** `view default`
+** `view meds`
+** `view appt`
+** `view mh`
+** `view diet`
+****
+
+
+* `view visitors`
+
+.Visitor view
+image::visitorsView.png[width=800]
 
 //end::view[]
 
@@ -348,6 +385,10 @@ See <<#view-command, entry>> on the `view` command.
 === View patient medication: `view meds`
 See <<#view-command, entry>> on the `view` command.
 
+=== View patient visitors: `view visitors`
+See <<#view-command, entry>> on the `view` command.
+
+
 === View patient’s medical history: `view mh`
 View an existing patient’s recorded medical history.
 
@@ -358,15 +399,19 @@ Example(s):
 * `view mh ic/S1234567A`
 
 === View patient’s visitors: `viewvisitors`
-View a patient’s visitors.
+View a particular patient’s visitors.
 
 Format: `viewvisitors ic/PATIENT_NRIC`
 
-Example(s):
+Example:
 
 * `viewvisitors ic/S1234567A`
 
-image::viewvisitors_screenshot.png[width=800]
+image::viewvisitors_screenshot.png[width=1000]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
 
 //tag::visitorin[]
 === Sign in patient’s visitors: `visitorin`
@@ -374,11 +419,20 @@ Sign in a visitor for a patient.
 
 Format: `visitorin ic/PATIENT_NRIC v/VISITOR_NAME`
 
-Example(s):
+Example:
 
 * `visitorin ic/S1234567A v/Amy`
 
 image::visitorin_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: The limit size for a visitor list is five.
+****
+
 //end::visitorin[]
 
 === Sign out patient’s visitors: `visitorout`
@@ -386,11 +440,19 @@ Sign out a visitor for a patient.
 
 Format: `visitorout ic/PATIENT_NRIC v/VISITOR_NAME`
 
-Example(s):
+Example:
 
 * `visitorout ic/S1234567A v/Amy`
 
-image::visitorout_screenshot.png[width=800]
+image::visitorout_screenshot.png[width=1000]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: If the required visitor is not in the patient's visitor list, an error message will be displayed.
+****
 
 === Saving the data
 

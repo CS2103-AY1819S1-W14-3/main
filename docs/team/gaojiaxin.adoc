@@ -1,0 +1,177 @@
+= Gao JiaXin - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: HealthBase
+
+---
+
+== 1. Introduction
+
+=== My role in the Project
+
+This project is done in a team of 5 for a school moulde CS2103T in 2018. My role in this team is to add in three new features(visitorin, visitorout, viewvisitors)to the application and ensures the features will works correctly without any error and the features do not cause conflicts with the functionality of the app.
+
+=== Description of the Application
+
+HealthBase is a desktop application designed to aid in the management of a hospital. It provides patient data input and management capabilities through a command line interface for input and a graphical UI for data display. Its main features include (among others):
+
+* Management of check-in/out status of patients
+* Real-time management of the check-in/out status of patients
+* Patient medication data entry and retrieval
+* Patient medical history data entry and retrieval
+* Patient dietary restriction(s) data entry and retrieval
+* Patient visitor history data entry and retrieval
+* Real-time management of the number of visitors any given patient has
+* Patient appointment management for doctors
+
+== 2. Summary of contributions
+
+* *Major enhancements*: added visitorin, visitorout and viewvisitors commands
+** What the features can do:
+*** *visitorin* allows user to select a patient and add a new visitor into the patient's visitor List.
+*** *visitorout* allows user to select a patient and remove a particular visitor from the patient's visitor List.
+*** *visitorin* user to select a patient and show all the patient's visitors in the list.
+** Justification: This feature designed to provide clerical staff with feature to view and control the patient's visitors.Eventually, it create better resting environment for the patients.
+
+* *Minor enhancements*: Incorporate `visitors` with the `view` command
+
+** Project management:
+*** nil
+** Documentation:
+*** Add visual guide to User guide in the relative features about visitors.
+*** Update diagram and clear steps to Developer guide in the fields of visitors.
+** Community:
+*** PRs reviewed:#129
+
+== 3. Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== View patient’s visitors: `viewvisitors`
+View a particular patient’s visitors.
+
+Format: `viewvisitors ic/PATIENT_NRIC`
+
+Example:
+
+* `viewvisitors ic/S1234567A`
+
+image::viewvisitors_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+//tag::visitorin[]
+=== Sign in patient’s visitors: `visitorin`
+Sign in a visitor for a patient.
+
+Format: `visitorin ic/PATIENT_NRIC v/VISITOR_NAME`
+
+Example:
+
+* `visitorin ic/S1234567A v/Amy`
+
+image::visitorin_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: User can't add visitor to a patient who has more than 5 visitors.
+****
+//end::visitorin[]
+
+=== Sign out patient’s visitors: `visitorout`
+Sign out a visitor for a patient.
+
+Format: `visitorout ic/PATIENT_NRIC v/VISITOR_NAME`
+
+Example:
+
+* `visitorout ic/S1234567A v/Amy`
+
+image::visitorout_screenshot.png[width=800]
+
+****
+WARNING: If the NRIC does not match that of any checked in patient in the system, an error message will be displayed.
+****
+
+****
+WARNING: If the required visior in not in the patient's visitor list, an error message will be displayed.
+****
+== 3. Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+=== Visitorin/Viewvisitors/Visitorout
+
+==== Current implementation
+There three commands related to manage patients' visitors. +
+
+* The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
+the maximum number of visitors for a patient is 5 in order to provide patient's a comfortable resting environment. +
+
+* The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
+`visitorList` in order of entry. +
+
+* The `visitorout` command allows user to remove a visitor from patient's `VisitorList`.
+
+===== Classes associated
+The three commands are executed mainly depends on the classes of `VisitorList` and `Visitor`. Each `Person` object contains a
+`VisitorList`. The `visitorin` and `visitorout` commands are created to add/remove a `Visitor` in the required `Person` 's `VisitorList`.
+The `viewvisitors` command display the `Person` 's `VisitorList`.
+
+* `VisitorList`, a list of
+** `Visitor` s
+
+A more detailed description of the classes involved is as follows:
+
+* `Visitor`
+** This class encapsulates the given name of the visitor.
+** `String` represent the visitor name.
+
+* `VisitorList`
+** Using `List` type of structure to store all the `Visitor` s stored for a particular patient
+
+==== Commands Execution
+To illustrate how the three commands work, examples are given below.
+
+* `visitorin ic/S1234567A v/Jane`
+** The command inputs are passed to an instance of the `LogicManager` class.
+** `AddressBookParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
+** `VisitorInCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitorinCommand` object.
+** In `VisitorinCommand`, new `Visitor` object is created and added to a copy of the required `Person` object's `VisitorList`
+*** The new `Person` object is updated to the model by `Model#updatePerson` method.
+*** A new CommandResult object is returned and the execution ends.
+
+Here is `visitorin` sequence diagram below:
+
+image::VisitorinSequenceDiagram.png[width="800"]
+
+* `viewvisitor ic/S1234567A`
+** Similar to the `visitorin` command, `ViewvisitorsCommandParser::parse` the required patient's ic(S1234567A) and returns a `ViewvisitorsCommand` object
+** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
+*** A new CommandResult object is returned and the execution ends.
+
+Here is `viewvisitor` sequence diagram below:
+
+image::ViewvisitorsSequenceDiagram.png[width="800"]
+
+* `visitorout ic/S1234567A v/Jane`
+** Similar to the `visitorin` command, `VisitoroutCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitoroutCommand` object.
+** In `VisitoroutCommand`, new `Visitor` object is created and removed from the copy of the required `Person` object's `VisitorList`
+*** The new `Person` object is updated to the model by `Model#updatePerson` method.
+*** A new CommandResult object is returned and the execution ends.
+
+Here is `visitorout` sequence diagram below:
+
+image::VisitoroutSequenceDiagram.png[width="800"]

@@ -7,7 +7,8 @@ import java.time.format.FormatStyle;
 import java.util.Locale;
 
 /**
- * Timestamp class used in the {@code Diagnosis} class.
+ * POJO class used in the {@code Diagnosis} class, contains the time stamp data that is formatted
+ * according to a defined {@code DateTimeFormatter}.
  * Provides an immutable timestamp of when a diagnosis was created.
  */
 public class Timestamp {
