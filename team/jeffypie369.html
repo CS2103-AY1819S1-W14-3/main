@@ -89,7 +89,17 @@ HealtBase, doctors will be able to view the appointments they have with differen
 <p><strong>Minor enhancement</strong>: Incorporate <code>appt</code> with the <code>view</code> command</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=jeffypie369">commits</a>]</p>
+<p><strong>Code contributed</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>[<a href="https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=jeffypie369">commits</a>]</p>
+</li>
+<li>
+<p>[<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=jeffypie369">code</a>]</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -699,47 +709,6 @@ the validity of the command and are not crucial in the sequence of events.
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="adding-an-appointment-for-a-patient"><a class="link" href="#adding-an-appointment-for-a-patient">Adding an appointment for a patient</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Adds an appointment for a checked in patient</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Patient must not have an existing appointment at the same Date and Time</p>
-</li>
-<li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code>
-Expected: Appointment is added for patient. To verify, run <code>view appt</code>.</p>
-</li>
-<li>
-<p>Test case: <code>addappt ic/S1234567 type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code>
-Expected: Appointment is not added due to the invalid NRIC input.</p>
-</li>
-<li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code> (after (b) has been run)
-Expected: Appointment is not added due to the duplicate Date and Time from an existing appointment.</p>
-</li>
-<li>
-<p>Test case: <code>addappt ic/S1234567A type/apple pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code>
-Expected: Appointment is not added due to the invalid Type input.</p>
-</li>
-<li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/123 dt/27-04-2019 10:30 doc/Dr. Pepper</code>
-Expected: Appointment is not added because Procedure Name must only consist of alphabets.</p>
-</li>
-<li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper</code>
-Expected: Appointment is not added because of the missing salutation for Doctor.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -762,4 +731,4 @@ Expected: Appointment is not added because of the missing salutation for Doctor.
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:02:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:04:07 UTC</div></div></div></body></html>
