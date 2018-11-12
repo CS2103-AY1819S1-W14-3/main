@@ -275,14 +275,14 @@ Example(s):
 * `register ic/S1234567A n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 da/aspirin da/insulin`
 
 [#img-registercommand]
-. Type the example command into the input box as shown in Figure 3 and hit the kbd:[Enter] key:
+. Type the example command into the input box as shown in the figure below and hit the kbd:[Enter] key:
 
 .Registering a new patient
 image::registercommand.jpg[width="1000"]
 
 [#img-registerresult]
 [start=2]
-. The resulting output will be as shown in Figure 4:
+. The resulting output will be as shown in the figure below:
 
 .Patient has been registered
 image::registerresult.jpg[width="1000"]
