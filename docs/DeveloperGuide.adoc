@@ -1293,7 +1293,7 @@ Details on the exact range of values that the mock data can take on can be found
 .. Test case: `addmeds ic/$nric d/Paracetamol q/2 u/tablets n/4 t/AAA` +
    Expected: No prescription is added. Error details shown in the status message.
 
-=== Changing the view 
+=== Changing the view
 
 . Changing the view (right-side panel of the UI)
 
@@ -1325,7 +1325,7 @@ Details on the exact range of values that the mock data can take on can be found
    Expected: The view remains unsorted. An error message is shown.
 .. Test case: `sort x` +
    Expected: The view remains unsorted. An error message is shown.
-.. Test case: `sort a` + 
+.. Test case: `sort a` +
    Expected: The view remains unsorted. An error message is shown.
 
 === Generating data
@@ -1341,7 +1341,7 @@ Details on the exact range of values that the mock data can take on can be found
    Expected: No data is generated. An error message is shown.
 .. Test case: `gendata A` +
    Expected: No data is generated. An error message is shown.
-   
+
 === Saving data
 
 . Dealing with missing/corrupted data files
