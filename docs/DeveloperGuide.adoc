@@ -1222,3 +1222,22 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
+=== Adding appointment for a patient
+
+. Adds an appointment for a checked in patient
+
+.. Prerequisites: Patient must not have another appointment at the same date and time
+.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is added for patient. To verify, run `view appt`.
+.. Test case: `addappt ic/S1234567 type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is not added due to invalid NRIC.
+.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper` (after (b) has been run)
+   Expected: Appointment is not added due to duplicate Date and Time.
+.. Test case: `addappt ic/S1234567A type/apple pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is not added due to invalid Type.
+.. Test case: `addappt ic/S1234567A type/SRG pn/123 dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is not added because Procedure Name must only consist of alphabets.
+.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper`
+   Expected: Appointment is not added because of missing salutation for Doctor.
+   
