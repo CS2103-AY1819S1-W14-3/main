@@ -369,7 +369,7 @@ WARNING: If the NRIC does not match that of any checked in patient in the system
 ****
 
 ****
-WARNING: User can't add visitor to a patient who has more than 5 visitors.
+WARNING: The limit size for a visitor list is five.
 ****
 //end::visitorin[]
 
@@ -389,7 +389,7 @@ WARNING: If the NRIC does not match that of any checked in patient in the system
 ****
 
 ****
-WARNING: If the required visior in not in the patient's visitor list, an error message will be displayed.
+WARNING: If the required visitor is not in the patient's visitor list, an error message will be displayed.
 ****
 
 === Saving the data

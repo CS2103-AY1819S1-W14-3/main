@@ -538,8 +538,8 @@ with an appropriate error message before the use case ends.
 ==== Current implementation
 There three commands related to manage patients' visitors. +
 
-* The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
-the maximum number of visitors for a patient is 5 in order to provide patient's a comfortable resting environment. +
+* The `visitorin` command allows user to add visitors into patient's visitorList. Each patient has a `VisitorList` and
+the maximum size of the list is 5 so that patients can have a comfortable environment.
 
 * The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
 `visitorList` in order of entry. +
@@ -574,7 +574,7 @@ To illustrate how the three commands work, examples are given below.
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `visitorin` sequence diagram below:
+Below is a `visitorin` sequence diagram:
 
 image::VisitorinSequenceDiagram.png[width="800"]
 
@@ -583,7 +583,7 @@ image::VisitorinSequenceDiagram.png[width="800"]
 ** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `viewvisitor` sequence diagram below:
+Below is a `viewvisitor` sequence diagram:
 
 image::ViewvisitorsSequenceDiagram.png[width="800"]
 
@@ -593,7 +593,7 @@ image::ViewvisitorsSequenceDiagram.png[width="800"]
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `visitorout` sequence diagram below:
+Below is a `visitorout` sequence diagram:
 
 image::VisitoroutSequenceDiagram.png[width="800"]
 
@@ -949,7 +949,7 @@ Use case ends.
 
 *MSS*
 
-1.  Counter staff inputs the visited patient’s Nric
+1.  Counter staff inputs the visited patient’s NRIC
 3.  Visitor is registered
 
 +
@@ -970,7 +970,7 @@ Use case ends.
 
 *MSS*
 
-1.  Counter staff inputs the visited patient's Nric and visitor name
+1.  Counter staff inputs the visited patient's NRIC and visitor name
 2.  Visitor is signed out
 +
 Use case ends
