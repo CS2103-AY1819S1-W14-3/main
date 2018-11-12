@@ -108,13 +108,16 @@ Add a patient’s dietary requirements into the system.
 
 Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY`
 
+.Adding an appointment for patient
+image::addapptcommand.jpg[width="1000"]
+
 There are three types of dietary requirements, which can be added to a patient with their own prefixes:
 
 |=====================================================
 | Type of dietary requirement | Prefix | Usage Example
 | Allergy | `alg` | `alg/Egg`
 | Cultural Requirement | `cr` | `cr/Halal`
-| Physical Difficulty | `pd` | `pd/Hands cannot move.`
+| Physical Difficulty | `pd` | `pd/Hands cannot move`
 |=====================================================
 
 ****
@@ -138,9 +141,14 @@ the patient.
 
 Example(s):
 
-* `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
+* `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move`
 * `adddiet ic/S1234567A cr/Vegetarian`
 
+[#img-adddietcommand]
+Result of executing the first example command above:
+
+.Adding dietary requirements for a patient
+image::adddietcommand.png[width="1000"]
 //end::adddiet[]
 
 //tag::addmeds[]
@@ -526,7 +534,7 @@ Each command below will be summarised in the following format:
 *adddiet*
 
 * `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY`
-* `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`
+* `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move`
 
 *addmeds*
 

@@ -30,7 +30,7 @@ public class DietTest {
         allergyOne = "Egg";
         allergyTwo = "Milk";
         culturalRequirement = "Halal";
-        physicalDifficulty = "Hands cannot move.";
+        physicalDifficulty = "Hands cannot move";
     }
 
     @Test

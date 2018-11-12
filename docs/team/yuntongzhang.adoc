@@ -34,7 +34,7 @@ HealthBase is a desktop application designed to aid the management of clinics an
 
 * *Minor enhancement*: added a view panel that allows the user to inspect the added dietary requirements of a patient.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yuntong&sort=displayName&since=2018-09-12&until=2018-11-12&timeframe=day&reverse=false&repoSort=true[Functional and Test code]]
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yuntongzhang[Functional and Test code]]
 
 * *Other contributions*:
 

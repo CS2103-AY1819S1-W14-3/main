@@ -437,7 +437,7 @@ A more detailed description of the classes involved is as follows:
 ===== Execution of the command
 
 Given below is a usage scenario and the details when executing `adddiet` command. +
-For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`:
+For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move`:
 
 * The command text is passed to an instance of the `LogicManager` class.
 * The `LogicManager` instance calls `HealthBaseParser#parseCommand`, which parses the `adddiet` command word.
@@ -1355,7 +1355,7 @@ Details on the exact range of values that the mock data can take on can be found
 . Adds dietary requirements for a checked in patient
 
 .. Prerequisites: Select a patient in the app using the `select` command. If there are no patients to be selected, add a new patient using the `register` command. Let this selected patient's NRIC be denoted by `$nric`. The test cases must be executed in the sequence listed.
-.. Test case: `adddiet ic/$nric alg/Egg alg/Milk cr/Halal pd/Hands cannot move.`
+.. Test case: `adddiet ic/$nric alg/Egg alg/Milk cr/Halal pd/Hands cannot move`
    Expected: Dietary requirements are added for patient. To verify, run `view diets`.
 .. Test case: `adddiet ic/$nric cr/Vegetarian`
    Expected: Dietary requirement is added for patient. To verify, run `view diets`.
