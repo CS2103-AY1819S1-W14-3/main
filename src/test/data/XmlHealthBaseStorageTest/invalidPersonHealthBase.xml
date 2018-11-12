@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<healthbase>
     <!-- Person with invalid name field -->
     <person>
         <nric>S1234567A</nric>
@@ -8,4 +8,4 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
     </person>
-</addressbook>
+</healthbase>

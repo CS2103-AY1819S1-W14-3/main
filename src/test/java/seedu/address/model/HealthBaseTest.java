@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DRUG_ALLERGY_PENICILLIN;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalHealthBase;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,30 +24,30 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class HealthBaseTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final HealthBase healthBase = new HealthBase();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
-        assertEquals(Collections.emptyList(), addressBook.getCheckedOutPersonList());
+        assertEquals(Collections.emptyList(), healthBase.getPersonList());
+        assertEquals(Collections.emptyList(), healthBase.getCheckedOutPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.resetData(null);
+        healthBase.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyHealthBase_replacesData() {
+        HealthBase newData = getTypicalHealthBase();
+        healthBase.resetData(newData);
+        assertEquals(newData, healthBase);
     }
 
     @Test
@@ -57,82 +57,82 @@ public class AddressBookTest {
                 .withTags(VALID_DRUG_ALLERGY_PENICILLIN).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Person> checkedOutPersons = Arrays.asList(BENSON);
-        AddressBookStub newData = new AddressBookStub(newPersons, checkedOutPersons);
+        HealthBaseStub newData = new HealthBaseStub(newPersons, checkedOutPersons);
 
         thrown.expect(DuplicatePersonException.class);
-        addressBook.resetData(newData);
+        healthBase.resetData(newData);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.hasPerson(null);
+        healthBase.hasPerson(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInHealthBase_returnsFalse() {
+        assertFalse(healthBase.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInHealthBase_returnsTrue() {
+        healthBase.addPerson(ALICE);
+        assertTrue(healthBase.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInHealthBase_returnsTrue() {
+        healthBase.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_DRUG_ALLERGY_PENICILLIN).build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(healthBase.hasPerson(editedAlice));
     }
 
     @Test
     public void hasCheckedOutPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.hasCheckedOutPerson(null);
+        healthBase.hasCheckedOutPerson(null);
     }
 
     @Test
-    public void hasCheckOutPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasCheckedOutPerson(ALICE));
+    public void hasCheckOutPerson_personNotInHealthBase_returnsFalse() {
+        assertFalse(healthBase.hasCheckedOutPerson(ALICE));
     }
 
     @Test
-    public void hasCheckedOutPerson_personInAddressBook_returnsTrue() {
-        addressBook.addCheckedOutPerson(ALICE);
-        assertTrue(addressBook.hasCheckedOutPerson(ALICE));
+    public void hasCheckedOutPerson_personInHealthBase_returnsTrue() {
+        healthBase.addCheckedOutPerson(ALICE);
+        assertTrue(healthBase.hasCheckedOutPerson(ALICE));
     }
 
     @Test
-    public void hasCheckedOutPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addCheckedOutPerson(ALICE);
+    public void hasCheckedOutPerson_personWithSameIdentityFieldsInHealthBase_returnsTrue() {
+        healthBase.addCheckedOutPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_DRUG_ALLERGY_PENICILLIN).build();
-        assertTrue(addressBook.hasCheckedOutPerson(editedAlice));
+        assertTrue(healthBase.hasCheckedOutPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+        healthBase.getPersonList().remove(0);
     }
 
     @Test
     public void getCheckedOutPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getCheckedOutPersonList().remove(0);
+        healthBase.getCheckedOutPersonList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list and checkedOutPersons list can violate interface constraints.
+     * A stub ReadOnlyHealthBase whose persons list and checkedOutPersons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class HealthBaseStub implements ReadOnlyHealthBase {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Person> checkedOutPersons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Person> checkedOutPersons) {
+        HealthBaseStub(Collection<Person> persons, Collection<Person> checkedOutPersons) {
             this.persons.setAll(persons);
             this.checkedOutPersons.setAll(checkedOutPersons);
         }
