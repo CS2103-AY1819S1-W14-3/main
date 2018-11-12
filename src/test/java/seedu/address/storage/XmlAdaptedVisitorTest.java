@@ -14,15 +14,15 @@ import seedu.address.model.visitor.Visitor;
 
 public class XmlAdaptedVisitorTest {
     public static final String VALID_VISITOR = "GAO JIAXIN";
-    public static final String VALID_VISITOR1 = "AMY";
+    public static final String OTHER_VALID_VISITOR = "AMY";
 
     private Visitor visitor;
-    private Visitor visitor1;
+    private Visitor other_visitor;
 
     @Before
     public void setUp() throws IllegalValueException {
         visitor = new Visitor(VALID_VISITOR);
-        visitor1 = new Visitor(VALID_VISITOR1);
+        other_visitor = new Visitor(OTHER_VALID_VISITOR);
     }
 
     @Test
@@ -34,8 +34,8 @@ public class XmlAdaptedVisitorTest {
     @Test
     public void equals_copyOfSource_returnsTrue() {
         XmlAdaptedVisitor xv = new XmlAdaptedVisitor(VALID_VISITOR);
-        XmlAdaptedVisitor xv1 = new XmlAdaptedVisitor(visitor);
-        assertTrue(xv.equals(xv1));
+        XmlAdaptedVisitor copy_xv = new XmlAdaptedVisitor(visitor);
+        assertTrue(xv.equals(copy_xv));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class XmlAdaptedVisitorTest {
     @Test
     public void equals_differntVisitorName_returnsFalse() {
         XmlAdaptedVisitor xv = new XmlAdaptedVisitor(visitor);
-        XmlAdaptedVisitor xv1 = new XmlAdaptedVisitor(visitor1);
-        assertFalse(xv.equals(xv1));
+        XmlAdaptedVisitor other_xv = new XmlAdaptedVisitor(other_visitor);
+        assertFalse(xv.equals(other_xv));
     }
 }
