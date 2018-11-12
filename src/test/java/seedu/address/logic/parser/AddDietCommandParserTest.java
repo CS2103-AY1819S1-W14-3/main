@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+//@@author yuntongzhang
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY;
@@ -21,8 +23,6 @@ import seedu.address.model.diet.Diet;
 import seedu.address.model.diet.DietCollection;
 import seedu.address.model.diet.DietType;
 import seedu.address.model.person.Nric;
-
-//@@author yuntongzhang
 
 /**
  * Test driver for AddDietCommandParser class.

@@ -14,6 +14,7 @@ import seedu.address.model.diet.DietType;
 
 /**
  * Test driver for XmlAdaptedDiet class.
+ * @author yuntongzhang
  */
 public class XmlAdaptedDietTest {
     static final String VALID_DETAIL = "Milk";

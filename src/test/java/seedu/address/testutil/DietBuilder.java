@@ -7,6 +7,7 @@ import seedu.address.model.diet.DietType;
 
 /**
  * A utility class for building Diet object for testing.
+ * @author yuntongzhang
  */
 public class DietBuilder {
     private static final String DEFAULT_DETAIL = "Egg";

@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+//@@author yuntongzhang
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -30,8 +32,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
-
-//@@author yuntongzhang
 
 /**
  * Test driver for AddDietCommand class.
