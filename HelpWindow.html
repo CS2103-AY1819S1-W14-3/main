@@ -145,16 +145,6 @@ Features are sorted by their command word in lexicographical order.
 <div class="paragraph">
 <p>Format: <code>addappt ic/NRIC type/TYPE pn/PROCEDURE_NAME dt/DD-MM-YYYY HH:MM doc/DOCTOR-IN-CHARGE</code></p>
 </div>
-<div class="paragraph">
-<p>Example(s):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code></p>
-</li>
-</ul>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -164,6 +154,19 @@ Features are sorted by their command word in lexicographical order.
 <td class="content">
 The only valid types are <code>PROP</code> (PROPAEDEUTIC), <code>DIAG</code> (DIAGNOSTIC), <code>THP</code> (THERAPEUTIC), <code>SRG</code> (SURGICAL).
 <strong>Other inputs are not allowed.</strong>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is useful to note that HealthBase does not permit appointments of duplicate date and time for any one patient. This is
+to prevent appointment clashes.
 </td>
 </tr>
 </table>
@@ -180,6 +183,60 @@ the input month has <code>31</code> days (for months except February) and <code>
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Example(s):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code></p>
+</li>
+</ul>
+</div>
+<div id="img-addapptcommand" class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Type the example command into the input box as shown in the figure below and hit the <kbd>Enter</kbd> key:</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addapptcommand.jpg" alt="addapptcommand" width="1000">
+</div>
+<div class="title">Figure 2. Adding an appointment for patient</div>
+</div>
+<div id="img-addapptresult" class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>The resulting output will be as shown in the figure below:</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addapptresult.jpg" alt="addapptresult" width="1000">
+</div>
+<div class="title">Figure 3. Appointment has been added</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you want to view the newly added appointments for a particular patient, simply enter <code>view appt</code>.
+You may have to enter select <code>&lt;patient index&gt;</code> or click on the patient panel card.
+To use the full capabilities of the <code>view</code> command, click <a href="#view-command">here</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -366,13 +423,13 @@ The result display panel will show a successful <code>addmh</code> command messa
 <div class="content">
 <img src="images/beforeAddmhCommand.png" alt="beforeAddmhCommand" width="1000">
 </div>
-<div class="title">Figure 2. Command box and result display panel before entering an <code>addmh</code> command.</div>
+<div class="title">Figure 4. Command box and result display panel before entering an <code>addmh</code> command.</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/afterAddmhCommand.png" alt="afterAddmhCommand" width="1000">
 </div>
-<div class="title">Figure 3. Command box and result display panel after entering the valid <code>addmh</code> command.</div>
+<div class="title">Figure 5. Command box and result display panel after entering the valid <code>addmh</code> command.</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -603,7 +660,7 @@ If the patient is already registered, the command will not be allowed.
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-The prefix <code>da/</code> must be separated from the last character of the previous input by a whitespace
+The prefix <code>da/</code> must be separated from the last input by a whitespace
 </td>
 </tr>
 </table>
@@ -614,9 +671,35 @@ The prefix <code>da/</code> must be separated from the last character of the pre
 <div class="ulist">
 <ul>
 <li>
-<p><code>register ic/S1234567A n/Ling Zhi Yu p/91234567 e/zhiyu@example.com a/6 College Avenue East, #00-00, University Town, National University of Singapore, 138614 da/insulin da/aspirin</code></p>
+<p><code>register ic/S1234567A n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 da/aspirin da/insulin</code></p>
 </li>
 </ul>
+</div>
+<div id="img-registercommand" class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Type the example command into the input box as shown in Figure 3 and hit the <kbd>Enter</kbd> key:</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/registercommand.jpg" alt="registercommand" width="1000">
+</div>
+<div class="title">Figure 6. Registering a new patient</div>
+</div>
+<div id="img-registerresult" class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>The resulting output will be as shown in Figure 4:</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/registerresult.jpg" alt="registerresult" width="1000">
+</div>
+<div class="title">Figure 7. Patient has been registered</div>
 </div>
 </div>
 <div class="sect2">
@@ -718,7 +801,7 @@ The alternative is to click on the patient&#8217;s card.</p>
 <div class="content">
 <img src="images/highlightIndex.png" alt="highlightIndex" width="1000">
 </div>
-<div class="title">Figure 4. Indication of the location of the index on the patient&#8217;s card</div>
+<div class="title">Figure 8. Indication of the location of the index on the patient&#8217;s card</div>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -783,7 +866,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/highlightUserViewLocation.png" alt="highlightUserViewLocation" width="1000">
 </div>
-<div class="title">Figure 5. Indication of the location of the user view</div>
+<div class="title">Figure 9. Indication of the location of the user view</div>
 </div>
 <div class="paragraph">
 <p>Example(s):</p>
@@ -799,7 +882,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/blankPanel.png" alt="blankPanel" width="1000">
 </div>
-<div class="title">Figure 6. Default view</div>
+<div class="title">Figure 10. Default view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -812,7 +895,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/apptView.png" alt="apptView" width="1000">
 </div>
-<div class="title">Figure 7. Appointment view</div>
+<div class="title">Figure 11. Appointment view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -825,7 +908,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/dietView.png" alt="dietView" width="1000">
 </div>
-<div class="title">Figure 8. Diet view</div>
+<div class="title">Figure 12. Diet view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -838,7 +921,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/medsView.png" alt="medsView" width="1000">
 </div>
-<div class="title">Figure 9. Medication view</div>
+<div class="title">Figure 13. Medication view</div>
 </div>
 <div class="ulist">
 <ul>
@@ -851,7 +934,7 @@ Selected here refers to the use of the <a href="#select-command"><code>select</c
 <div class="content">
 <img src="images/mhView.png" alt="mhView" width="1000">
 </div>
-<div class="title">Figure 10. Medical history view</div>
+<div class="title">Figure 14. Medical history view</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -907,7 +990,7 @@ the view panels of the last selected person (if any) are still accessible via th
 <div class="content">
 <img src="images/visitorsView.png" alt="visitorsView" width="800">
 </div>
-<div class="title">Figure 11. Visitor view</div>
+<div class="title">Figure 15. Visitor view</div>
 </div>
 </div>
 <div class="sect2">
@@ -1325,4 +1408,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:02:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:21:22 UTC</div></div></div></body></html>
