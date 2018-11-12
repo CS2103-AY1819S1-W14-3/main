@@ -306,16 +306,16 @@ The following sequence diagram shows the execution of the `addappt` command:
 image::AddapptSequenceDiagram.png[width="1000"]
 
 With reference to the above figures, the following steps occur upon the execution of the `addappt` command
-(code snippets have been included for the first 3 steps to further aid understanding):
+(code snippets have been included for the first 4 steps to further aid understanding):
 
 [LogicManager.java, java]
 ----
 ...
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, ParseException { // <1>
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = addressBookParser.parseCommand(commandText); // <1>
+            Command command = healthBaseParser.parseCommand(commandText); // <2>
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -326,7 +326,7 @@ With reference to the above figures, the following steps occur upon the executio
 [AddressBookParser.java, java]
 ----
 ...
-    public Command parseCommand(String userInput) throws ParseException { // <1>
+    public Command parseCommand(String userInput) throws ParseException { // <2>
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -341,7 +341,7 @@ With reference to the above figures, the following steps occur upon the executio
             return new RegisterCommandParser().parse(arguments);
         ...
         case AddApptCommand.COMMAND_WORD:
-            return new AddApptCommandParser().parse(arguments); // <2>
+            return new AddApptCommandParser().parse(arguments); // <3>
         ...
     }
 ...
@@ -350,7 +350,7 @@ With reference to the above figures, the following steps occur upon the executio
 ----
 ...
     @Override
-    public AddApptCommand parse(String args) throws ParseException { // <2>
+    public AddApptCommand parse(String args) throws ParseException { // <3>
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_TYPE, PREFIX_PROCEDURE,
                 PREFIX_DATE_TIME, PREFIX_DOCTOR);
 
@@ -362,7 +362,7 @@ With reference to the above figures, the following steps occur upon the executio
         nric = new Nric(patientNric);
         appt = new Appointment(type, procedure, dateTime, doctor);
 
-        return new AddApptCommand(nric, appt); // <3>
+        return new AddApptCommand(nric, appt); // <4>
     }
 ...
 ----
