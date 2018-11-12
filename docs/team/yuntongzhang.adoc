@@ -9,28 +9,28 @@
 
 ---
 
-== Overview
+== 1. Overview
 
-This portfolio documents my contributions to the development of application for CS2103T (Software Engineering) project, as part of the team W14-3. My contributions mainly include the addition of a new command and project management.
+This portfolio documents my contributions to the development of application for CS2103T (Software Engineering) project, as part of the team W14-3. My contributions mainly include the addition of several new commands and project management.
 
-HealthBase is a desktop application designed to aid in the management of clinics and hospitals. Doctors and nurses can use this application to record patient information such as medical history, medication, dietary requirement and medical appointments, through a command line interface. Besides, receptionists can use this application to register the visitors for each patient. The recorded data can be viewed through a graphical user interface.
+HealthBase is a desktop application designed to aid the management of clinics and hospitals. Doctors and nurses can use this application to record patient information such as medical history, medication, dietary requirement and medical appointments, through a command line interface. Besides, receptionists can use this application to register the visitors for each patient. The recorded data can be viewed through a graphical user interface. The application also provides functionality to check out a patient when he/she leaves the hospital, and check in the same patient when he/she returns to the hospital.
 
-== Summary of contributions
+== 2. Summary of contributions
 
 * *Major enhancement*: added *`adddiet` command*
-** What it does: This command allows the user enter dietary requirements information for a given patient.
+** What it does: This command allows the user to enter dietary requirements information for a given patient.
 ** Justification: This feature enables the dietary information of a patient to be recorded upon checking in or being registered, and to be reviewed subsequently, so that the nurses can prepare food for patients efficiently.
-** Highlights: This enhancement brings a unique feature for the application, which is not usually included in other hospital management systems. There are three types of dietary requirements included, so the implementation required to take into consideration how to separate different types of dietary requirements. Also, this feature blocks invalid dietary requirement input to ensure data integrity.
+** Highlights: This enhancement brings a unique feature for the application, which is not usually included in other hospital management systems. There are three types of dietary requirements included, so the implementation needs to take into consideration how to separate different types of dietary requirements. Also, this feature blocks invalid dietary requirement inputs to ensure data integrity.
 
 * *Major enhancement*: added *`checkout` command*
-** What it does: This command allows user to check out a patient from the application when the patient leaves the hospital, while still stores his information in the system for future usages.
-** Justification: This feature makes the application more suitable for the workflow in hospitals, as patients need to be checked out from the hospital after the end of his hospitalization.
-** Highlights: This enhancement makes the application highly extensible, as the information of the checked out patient is stored, which enables more operations and features to utilize these stored information.
+** What it does: This command allows user to check out a patient from the application when the patient leaves the hospital, while still stores his/her information in the system for future usages.
+** Justification: This feature makes the application more suitable for the workflow in hospitals, as patients need to be checked out from the hospital at the end of his/her hospitalization period.
+** Highlights: This enhancement makes the application highly extensible, as the information of the checked out patient are stored, which enables more operations and features to utilize these stored information.
 
 * *Major enhancement*: added *`checkin` command*
 ** What it does: This command allows user to check in a returning patient, and also restores all his/her information (medication, medical history, dietary requirements, appointments etc.) back to the application.
 ** Justification: This feature completes the workflow after checking out a patient, by providing a way to admit him/her back to the hospital if he/she is returning to the hospital after a period of time.
-** Highlights: This enhancement makes uses of the information stored by `checkout` command, and restores these information so that other commands can be valid on a given patient. Besides, this command differentiates whether the given patient is already registered or not, and direct user to the `register` command if the patient is on his/her first visit.
+** Highlights: This enhancement makes uses of the information stored by `checkout` command, and restores these information so that other commands can be valid on a given patient. Besides, this command differentiates whether the given patient is already registered or not, and direct the user to the `register` command if the patient is on his/her first visit.
 
 * *Minor enhancement*: added a view panel that allows the user to inspect the added dietary requirements of a patient.
 
@@ -62,7 +62,7 @@ HealthBase is a desktop application designed to aid in the management of clinics
 *** Set up Reposense for the organisation repository (Pull request https://github.com/CS2103-AY1819S1-W14-3/main/pull/221[#221]).
 
 
-== Contributions to the User Guide
+== 3. Contributions to the User Guide
 
 
 |===
@@ -75,19 +75,11 @@ include::../UserGuide.adoc[tag=checkin]
 
 include::../UserGuide.adoc[tag=checkout]
 
-include::../UserGuide.adoc[tag=viewdiets]
 
-
-== Contributions to the Developer Guide
+== 4. Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=adddiet]
-
-include::../DeveloperGuide.adoc[tag=adddiettests]
-
-include::../DeveloperGuide.adoc[tag=checkintests]
-
-include::../DeveloperGuide.adoc[tag=checkouttests]

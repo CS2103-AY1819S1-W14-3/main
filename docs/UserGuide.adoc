@@ -208,28 +208,28 @@ To use the full capabilities of the `view` command, click <<#view-command, here>
 === Check in a returning patient: `checkin`
 Check in a returning patient back to the HealthBase system, and retrieve his/her information from backend and display
 them in the left panel of the application window. The patient being checked in must have been previously registered
-to the system and were checked out of the system sometime before with the `checkout` command.
+to the system and were checked out of the system sometime before by using the `checkout` command.
 
 Format: `checkin ic/NRIC`
 
 ****
 TIP: If there is no record of this patient in our system (which means that the patient with the specified `NRIC` has
-not visited the hospital and registered in the system, the application will direct user to use the `register` command
-to register this new patient with his necessary information.
+not visited the hospital and not been registered in the system, the application will direct the user to use the `register` command
+to register this new patient with his/her necessary information.
 ****
 
 ****
 WARNING: If the patient with the specified `NRIC` is still active in the system (which means that the patient in the system has
 not been checked out yet), the command is considered as invalid. +
 The `checkin` command is only considered valid when the patient with the `NRIC` specified were checked out before
-with the `checkout` command.
+by using the `checkout` command.
 ****
 
 Example(s):
 
 * `checkin ic/S1234567A` +
    Note that the patient with `NRIC S1234567A` must have been previously registered to the system and were checked out of
-   the system sometime before with the `checkout` command.
+   the system sometime before by using the `checkout` command.
 //end::checkin[]
 
 //tag::checkout[]

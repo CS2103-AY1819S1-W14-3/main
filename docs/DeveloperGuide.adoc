@@ -406,7 +406,8 @@ the validity of the command and are not crucial in the sequence of events.
 
 The `adddiet` command provides functionality for users to add dietary requirements for a given patient. +
 This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty. +
-This command adds these dietary requirements to a given `Person` , so that the dietary requirements can be viewed later on.
+This command adds these dietary requirements to a given `Person` , so that the dietary requirements can be viewed later on. +
+This command blocks non-alphabetical or empty input as the detail of a dietary requirement.
 
 ===== Classes involved
 
@@ -419,28 +420,29 @@ The adding of the dietary requirements involve the following classes:
 A more detailed description of the classes involved is as follows:
 
 * `Diet Collection`
-** Every `Person` object has a `Diet Collection`, which is a collection of all the dietary requirements of the given patient.
+** Every `Person` object has a `Diet Collection` object.
+** This class encapsulates a collection of all the dietary requirements of the given patient.
 ** This class is a wrapper class around the internal representation of a `Set` of `Diet` s.
 
 * `Diet`
-** This class encapsulate the information of a single dietary requirement.
+** This class encapsulates the information of a single dietary requirement.
 ** Specifically, an instance of this class is composed of
 *** a `String` representing the details of the requirement in text, and
 *** a `DietType` representing the type of this dietary requirement (allergy, cultural requirement, or physical difficulty).
 
 * `DietType`
-** This is a `Enum` class representing the three different types of dietary requirements.
-** Implemented as `Enum` class to avoid typo and invalid types being entered.
+** This class is an `Enum` class representing the three different types of dietary requirements.
+** This class is implemented as `Enum` class to avoid typo and invalid types being entered.
 
 ===== Execution of the command
 
-Given below is an usage scenario and the details when executing `adddiet` command. +
+Given below is a usage scenario and the details when executing `adddiet` command. +
 For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`:
 
-* The command text is passed to an instance of the `Logic Manager` class.
-* The `Logic Manager` instance calls `HealthBaseParser#parseCommand`, which parses the `adddiet` command word.
+* The command text is passed to an instance of the `LogicManager` class.
+* The `LogicManager` instance calls `HealthBaseParser#parseCommand`, which parses the `adddiet` command word.
 * Next, the `AddDietCommandParser#parse` method parses the different dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
-* `Logic Manager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
+* `LogicManager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
 * In the `AddDietCommand#execute` method, the new `DietCollection` object is added to a new copy of the `Person` object.
 * The new `Person` object is updated to the model by `Model#updatePerson` method.
 * A new `CommandResult` is returned and the execution ends.
