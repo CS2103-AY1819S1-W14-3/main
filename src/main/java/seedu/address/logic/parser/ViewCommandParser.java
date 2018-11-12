@@ -7,7 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.SwappablePanelName;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new ViewCommand object.
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
     public static final String MESSAGE_NO_SUCH_PANEL = "No such panel by the name \"%1$s\" exists!";

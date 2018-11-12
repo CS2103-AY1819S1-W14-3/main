@@ -5,7 +5,7 @@ import javafx.scene.control.TableView;
 import seedu.address.model.medicine.Prescription;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
+ * Provides a handle for {@code MedicationView}.
  */
 public class MedicationViewHandle extends NodeHandle<TableView<Prescription>> {
     public static final String PRESCRIPTION_TABLE_VIEW_ID = "#prescriptionTableView";
