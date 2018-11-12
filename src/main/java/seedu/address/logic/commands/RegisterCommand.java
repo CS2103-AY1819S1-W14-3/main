@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -39,9 +38,13 @@ public class RegisterCommand extends Command {
             + PREFIX_DRUG_ALLERGY + "aspirin "
             + PREFIX_DRUG_ALLERGY + "insulin";
 
-    public static final String MESSAGE_SUCCESS = "New patient registered successfully: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person is already registered in the system";
-    public static final String MESSAGE_DUPLICATE_NRIC = "A person of this NRIC is already registered";
+    public static final String MESSAGE_SUCCESS = "New patient with NRIC %1$s registered successfully.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "A patient with this NRIC is already registered and "
+                                                          + "checked in.";
+    public static final String MESSAGE_ALREADY_CHECKED_OUT = "A patient with this NRIC is already registered, but "
+                                                             + "was previously checked out. \n"
+                                                             + "Please use the checkin command to check in this "
+                                                             + "patient instead of registering him/her again.";
 
     private final Person toRegister;
 
@@ -56,17 +59,7 @@ public class RegisterCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model); // note: throws a nullpt exception
-
-        if (model.hasPerson(toRegister) || model.hasCheckedOutPerson(toRegister)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        ObservableList<Person> filteredByNric = model.getFilteredPersonList()
-                                                        .filtered(p -> toRegister.getNric().equals(p.getNric()));
-
-        if (filteredByNric.size() == 1) {
-            throw new CommandException(MESSAGE_DUPLICATE_NRIC);
-        }
+        checkValidRegister(toRegister, model);
 
         model.addPerson(toRegister);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRegister));
@@ -77,5 +70,21 @@ public class RegisterCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof RegisterCommand // instanceof handles nulls
                         && toRegister.equals(((RegisterCommand) other).toRegister));
+    }
+
+    /**
+     * Checks whether is valid to register the {@code person} with the given {@model}.
+     * @param person The person being registered.
+     * @param model The backing model.
+     * @throws CommandException If the person was previously registered, or was registered and checked out.
+     */
+    private static void checkValidRegister(Person person, Model model) throws CommandException {
+        if (model.hasPerson(person)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasCheckedOutPerson(person)) {
+            throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
+        }
     }
 }

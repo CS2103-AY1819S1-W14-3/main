@@ -25,6 +25,7 @@ import seedu.address.model.medicine.Duration;
 import seedu.address.model.medicine.Prescription;
 import seedu.address.model.medicine.PrescriptionList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.visitor.Visitor;
 import seedu.address.model.visitor.VisitorList;
 
 //@@author snajef
@@ -1247,11 +1248,22 @@ public class DataGenerator {
                     type.getAbbreviation(),
                     getRandom(procedureNames),
                     Appointment.DATE_TIME_FORMAT.format(
-                        LocalDateTime.of(getRandomFutureLocalDate(), getRandomLocalTime())),
+                        LocalDateTime.of(getRandomFutureLocalDate(), getRandomLocalTimeInHalfHourIntervals())),
                     "Dr. " + getRandom(nameGenerator.firstNames)));
             }
 
             return toReturn;
+        }
+
+        private LocalTime getRandomLocalTimeInHalfHourIntervals() {
+            LocalTime rand = getRandomLocalTime();
+            if (rand.getMinute() < 30) {
+                rand = rand.minusMinutes(rand.getMinute());
+            } else {
+                rand = rand.minusMinutes(rand.getMinute() - 30);
+            }
+
+            return rand;
         }
     }
 
@@ -1351,10 +1363,17 @@ public class DataGenerator {
      * Generates visitors and stores them in a {@code VisitorList}.
      */
     class VisitorListGenerator implements Generator<VisitorList> {
+        private static final int MAX_VISITORS = 5;
         @Override
         public VisitorList generate() {
-            // TODO Auto-generated method stub
-            return new VisitorList();
+            VisitorList toReturn = new VisitorList();
+            int numVisitors = randomInt(0, MAX_VISITORS + 1);
+
+            for (int i = 0; i < numVisitors; i++) {
+                toReturn.add(new Visitor(getRandom(nameGenerator.firstNames)));
+            }
+
+            return toReturn;
         }
     }
 

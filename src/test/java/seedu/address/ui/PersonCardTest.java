@@ -3,6 +3,7 @@ package seedu.address.ui;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
 import org.junit.Test;
@@ -47,7 +48,7 @@ public class PersonCardTest extends GuiUnitTest {
         assertFalse(personCard.equals(0));
 
         // different person, same index -> returns false
-        Person differentPerson = new PersonBuilder().withName("differentName").build();
+        Person differentPerson = new PersonBuilder().withNric(VALID_NRIC_BOB).build();
         assertFalse(personCard.equals(new PersonCard(differentPerson, 0)));
 
         // same person, different index -> returns false

@@ -64,8 +64,8 @@ public class RegisterCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").withNric("S1234567A").build();
+        Person bob = new PersonBuilder().withName("Bob").withNric("S7654321A").build();
         RegisterCommand registerAliceCommand = new RegisterCommand(alice);
         RegisterCommand registerBobCommand = new RegisterCommand(bob);
 

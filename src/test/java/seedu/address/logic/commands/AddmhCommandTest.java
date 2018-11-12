@@ -76,7 +76,7 @@ public class AddmhCommandTest {
         AddmhCommand addmhCommand = new AddmhCommand(diffValidPerson.getNric(), record);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddmhCommand.MESSAGE_UNREGISTERED);
+        thrown.expectMessage(CommandUtil.MESSAGE_NO_SUCH_PATIENT);
         addmhCommand.execute(modelStub, commandHistory);
     }
 
@@ -148,6 +148,15 @@ public class AddmhCommandTest {
 
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            // is called by {@code AddmhCommand#execute()}
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
     }
 

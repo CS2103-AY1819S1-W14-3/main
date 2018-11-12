@@ -67,7 +67,7 @@ public class CheckoutCommandTest {
         CheckoutCommand command = new CheckoutCommand(nonExistingNric);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(CheckoutCommand.MESSAGE_NO_SUCH_PATIENT);
+        thrown.expectMessage(CommandUtil.MESSAGE_NO_SUCH_PATIENT);
         command.execute(modelStub, commandHistory);
     }
 
@@ -123,6 +123,15 @@ public class CheckoutCommandTest {
 
             FilteredList<Person> filteredPatients = new FilteredList<>(patients);
             return FXCollections.unmodifiableObservableList(filteredPatients);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredCheckedOutPersonList() {
+            // called by {@code CheckedoutCommand#execute()}
+            ObservableList<Person> checkedOutPatients = FXCollections.observableArrayList();
+
+            FilteredList<Person> filteredCheckedOutPatients = new FilteredList<>(checkedOutPatients);
+            return FXCollections.unmodifiableObservableList(filteredCheckedOutPatients);
         }
     }
 }

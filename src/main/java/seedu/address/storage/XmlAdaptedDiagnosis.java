@@ -19,7 +19,7 @@ public class XmlAdaptedDiagnosis {
     private String doctorInCharge;
 
     @XmlElement(required = true)
-    private Timestamp timestamp;
+    private XmlAdaptedTimestamp timestamp;
 
     /**
      * Constructs an XmlAdaptedDiagnosis.
@@ -33,7 +33,7 @@ public class XmlAdaptedDiagnosis {
     public XmlAdaptedDiagnosis(String description, String doctorName, Timestamp timestamp) {
         this.description = description;
         this.doctorInCharge = doctorName;
-        this.timestamp = timestamp;
+        this.timestamp = new XmlAdaptedTimestamp(timestamp);
     }
 
     /**
@@ -42,14 +42,14 @@ public class XmlAdaptedDiagnosis {
     public XmlAdaptedDiagnosis(Diagnosis source) {
         this.description = source.getDiagnosis();
         this.doctorInCharge = source.getDoctorInCharge();
-        this.timestamp = source.getTimestamp();
+        this.timestamp = new XmlAdaptedTimestamp(source.getTimestamp());
     }
 
     /**
      * Converts this JAXB-friendly adapted Diagnosis object into the model's Diagnosis object.
      */
     public Diagnosis toModelType() {
-        return new Diagnosis(this.description, this.doctorInCharge, this.timestamp);
+        return new Diagnosis(this.description, this.doctorInCharge, this.timestamp.toModelType());
     }
 
     @Override
