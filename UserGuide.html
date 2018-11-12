@@ -184,19 +184,109 @@ the input month has <code>31</code> days (for months except February) and <code>
 <div class="sect2">
 <h3 id="add-patient-s-dietary-needs-code-adddiet-code"><a class="link" href="#add-patient-s-dietary-needs-code-adddiet-code">3.2. Add patient’s dietary needs: <code>adddiet</code></a></h3>
 <div class="paragraph">
-<p>Add a patient’s dietary needs into the system.</p>
+<p>Add a patient’s dietary requirements into the system.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY</code></p>
 </div>
+<div class="paragraph">
+<p>There are three types of dietary requirements, which can be added to a patient with their own prefixes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of dietary requirement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prefix</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usage Example</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allergy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alg/Egg</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cultural Requirement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cr/Halal</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Physical Difficulty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pd/Hands cannot move.</code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock">
 <div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The number of dietary requirements in an <code>adddiet</code> command must adhere to the following rules:
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>User can pass in any number of allergies, cultural requirements and physical difficulties in one command.</p>
+<p>All three types are optional to be included, but there must be at least one dietary requirement in the command.</p>
+</li>
+<li>
+<p>For each type, more than one requirements can be specified in the command.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The following inputs are considered as invalid when entering a dietary requirement:
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Input with non-alphabetical characters. Eg. <code>alg/1Egg</code></p>
+</li>
+<li>
+<p>Input with only empty whitespaces or blank input. Eg. <code>cr/        pd/</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Adding two same dietary requirements to a patient will only result in one copy of the requirements being saved to
+the patient.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -207,6 +297,9 @@ the input month has <code>31</code> days (for months except February) and <code>
 <ul>
 <li>
 <p><code>adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.</code></p>
+</li>
+<li>
+<p><code>adddiet ic/S1234567A cr/Vegetarian</code></p>
 </li>
 </ul>
 </div>
@@ -419,8 +512,8 @@ If the NRIC does not match that of any checked in patient in the system, an erro
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-After a patient has been checked out from the system, all commands concerning this patient (except <code>checkin</code>
-command) will be considered as invalid commands.
+After a patient has been checked out from the system, all commands with the NRIC of this patient as parameter
+(except the <code>checkin</code> command) will be considered as invalid commands.
 </td>
 </tr>
 </table>
@@ -1051,4 +1144,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:03:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:10:31 UTC</div></div></div></body></html>
