@@ -22,7 +22,7 @@ public class XmlAdaptedVisitorListTest {
     @Before
     public void setUp() {
         xmlAdaptedVisitor = new XmlAdaptedVisitor(XmlAdaptedVisitorTest.VALID_VISITOR);
-        xmlAdaptedVisitor1 = new XmlAdaptedVisitor(XmlAdaptedVisitorTest.VALID_VISITOR1);
+        xmlAdaptedVisitor1 = new XmlAdaptedVisitor(XmlAdaptedVisitorTest.OTHER_VALID_VISITOR);
         xmLvL.add(xmlAdaptedVisitor);
         xmLvL1.add(xmlAdaptedVisitor1);
         xmlAdaptedVisitorList = new XmlAdaptedVisitorList(xmLvL);
