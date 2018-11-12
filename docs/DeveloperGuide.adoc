@@ -305,7 +305,7 @@ The following sequence diagram shows the execution of the `addappt` command:
 .Execution sequence of the `addappt` command
 image::AddapptSequenceDiagram.png[width="1000"]
 
-With reference to Figures 5 and 6, the following steps occur upon the execution of the `addappt` command
+With reference to the above figures, the following steps occur upon the execution of the `addappt` command
 (code snippets have been included for the first 3 steps to further aid understanding):
 
 [LogicManager.java, java]
@@ -1200,6 +1200,25 @@ The application will then generate that number of patients with mock data for th
 Details on the exact range of values that the mock data can take on can be found in the related `.java` files.
 
 // end::gendata[]
+// tag::addappttests[]
+=== Adding an appointment for a patient
+
+. Adds an appointment for a checked in patient
+
+.. Prerequisites: Patient must not have an existing appointment at the same Date and Time
+.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is added for patient. To verify, run `view appt`.
+.. Test case: `addappt ic/S1234567 type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is not added due to the invalid NRIC input.
+.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper` (after (b) has been run)
+   Expected: Appointment is not added due to the duplicate Date and Time from an existing appointment.
+.. Test case: `addappt ic/S1234567A type/apple pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is not added due to the invalid Type input.
+.. Test case: `addappt ic/S1234567A type/SRG pn/123 dt/27-04-2019 10:30 doc/Dr. Pepper`
+   Expected: Appointment is not added because Procedure Name must only consist of alphabets.
+.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper`
+   Expected: Appointment is not added because of the missing salutation for Doctor.
+// end::addappttests[]
 
 === Deleting a patient
 
@@ -1222,21 +1241,3 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
-
-=== Adding appointment for a patient
-
-. Adds an appointment for a checked in patient
-
-.. Prerequisites: Patient must not have another appointment at the same date and time
-.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
-   Expected: Appointment is added for patient. To verify, run `view appt`.
-.. Test case: `addappt ic/S1234567 type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
-   Expected: Appointment is not added due to invalid NRIC.
-.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper` (after (b) has been run)
-   Expected: Appointment is not added due to duplicate Date and Time.
-.. Test case: `addappt ic/S1234567A type/apple pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
-   Expected: Appointment is not added due to invalid Type.
-.. Test case: `addappt ic/S1234567A type/SRG pn/123 dt/27-04-2019 10:30 doc/Dr. Pepper`
-   Expected: Appointment is not added because Procedure Name must only consist of alphabets.
-.. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper`
-   Expected: Appointment is not added because of missing salutation for Doctor.

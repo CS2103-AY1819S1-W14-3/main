@@ -82,14 +82,14 @@ Example(s):
 * `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
 
 [#img-addapptcommand]
-. Type the example command into the input box as shown in Figure 1 and hit the kbd:[Enter] key:
+. Type the example command into the input box as shown in the figure below and hit the kbd:[Enter] key:
 
 .Adding an appointment for patient
 image::addapptcommand.jpg[width="1000"]
 
 [#img-addapptresult]
 [start=2]
-. The resulting output will be as shown in Figure 2:
+. The resulting output will be as shown in the figure below:
 
 .Appointment has been added
 image::addapptresult.jpg[width="1000"]
