@@ -108,9 +108,6 @@ Add a patient’s dietary requirements into the system.
 
 Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY`
 
-.Adding an appointment for patient
-image::addapptcommand.jpg[width="1000"]
-
 There are three types of dietary requirements, which can be added to a patient with their own prefixes:
 
 |=====================================================
