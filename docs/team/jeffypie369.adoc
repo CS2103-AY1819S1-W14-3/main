@@ -44,6 +44,7 @@ HealtBase, doctors will be able to view the appointments they have with differen
 *** Bug Tester
 ** Enhancements to existing features:
 *** Refactored `add` command to `register` command (Pull request: https://github.com/CS2103-AY1819S1-W14-3/main/pull/33[#33])
+*** Refactored AddressBook to HealthBase (Pull request: https://github.com/CS2103-AY1819S1-W14-3/main/pull/218[#218])
 ** Documentation:
 *** Added sequence diagram for `addappt`: https://github.com/CS2103-AY1819S1-W14-3/main/pull/91[#91]
 ** Community:
