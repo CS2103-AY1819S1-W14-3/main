@@ -85,7 +85,7 @@ Add a patient’s dietary needs into the system.
 
 Format: `adddiet ic/NRIC alg/ALLERGY1 alg/ALLERGY2 cr/CULTURAL_REQUIREMENT pd/PHYSICAL_DIFFICULTY`
 ****
-* User can pass in any number of allergies, cultural requirements and physical difficulties in one command.
+* NOTE: User can pass in any number of allergies, cultural requirements and physical difficulties in one command.
 ****
 
 Example(s):
@@ -176,8 +176,8 @@ WARNING: If the NRIC does not match that of any checked in patient in the system
 ****
 
 ****
-WARNING: After a patient has been checked out from the system, all commands concerning this patient (except `checkin`
-command) will be considered as invalid commands.
+WARNING: After a patient has been checked out from the system, all commands with the NRIC of this patient as parameter
+(except the `checkin` command) will be considered as invalid commands.
 ****
 
 Example(s):

@@ -11,6 +11,9 @@ public class Diet {
     private final String detail;
     private final DietType type;
 
+    public static final String MESSAGE_INVALID_DIET = "Diet detail can only take alphabets, and should not be blank.";
+    private static final String DIET_VALIDATION_REGEX = "^[A-Za-z- ]+$";
+
     /**
      * Constructor for a Diet Object.
      * All fields must be non-null.
@@ -65,6 +68,13 @@ public class Diet {
         return this.type == DietType.PHYSICAL;
     }
 
+    /**
+     * Returns true if the given {@code dietDetail} is a String that matches the regex.
+     * @param dietDetail The String of diet detail to be tested.
+     */
+    public static boolean isValidDietDetail(String dietDetail) {
+        return dietDetail.matches(DIET_VALIDATION_REGEX);
+    }
 
     /**
      * Check whether this diet is equal to the given object.
