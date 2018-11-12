@@ -35,7 +35,7 @@ This section's purpose is to summarise my contributions to this project. For mor
 * *Minor enhancement*:
 ** Added `sort` command
 ** Added `gendata` command
-
+* Code contributions: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=snajef[my contributions]
 * *Other contributions*:
 ** Project management:
 *** nil
