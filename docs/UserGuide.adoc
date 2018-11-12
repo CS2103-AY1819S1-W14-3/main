@@ -94,6 +94,12 @@ image::addapptcommand.jpg[width="1000"]
 .Appointment has been added
 image::addapptresult.jpg[width="1000"]
 
+****
+TIP: If you want to view the newly added appointments for a particular patient, simply enter `view appt`.
+You may have to enter select `<patient index>` or click on the patient panel card.
+To use the full capabilities of the `view` command, click <<#view-command, here>>.
+****
+
 //end::addappt[]
 
 //tag::adddiet[]

@@ -1240,4 +1240,3 @@ _{ more test cases ... }_
    Expected: Appointment is not added because Procedure Name must only consist of alphabets.
 .. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper`
    Expected: Appointment is not added because of missing salutation for Doctor.
-   
