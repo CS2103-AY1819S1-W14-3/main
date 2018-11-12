@@ -15,10 +15,10 @@ made up of 10KLoC in Java.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Throughout the 8-week period, we were challenged to incorporate the new Software Engineering condcepts taught in class
+<p>Throughout the 8-week period, we were challenged to incorporate the new Software Engineering concepts taught in class
 via a series of milestones which were part of the project management process. On top of that, we planned out weekly
 goals and consistently reassessed our employed programming methodologies and practices, developing our software HealthBase
-incrementally and iteratively. Figure 1 shows the transformation we made in this brownfield project.</p>
+incrementally and iteratively. Figure 1 shows the transformations we made in this brownfield project.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -38,9 +38,6 @@ These features include (among others):</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Real-time management of the check-in/out status of patients</p>
-</li>
-<li>
 <p>Patient medication data entry and retrieval</p>
 </li>
 <li>
@@ -53,10 +50,13 @@ These features include (among others):</p>
 <p>Patient visitor history data entry and retrieval</p>
 </li>
 <li>
-<p>Real-time management of the number of visitors any given patient has</p>
+<p>Patient appointment management for doctors</p>
 </li>
 <li>
-<p>Patient appointment management for doctors</p>
+<p>Real-time management of the check-in/out status of patients</p>
+</li>
+<li>
+<p>Real-time management of the number of visitors any given patient has</p>
 </li>
 </ul>
 </div>
@@ -78,7 +78,7 @@ These features include (among others):</p>
 <p>Justification: This feature serves as the primary storage of important patient data, as adjudged by the examining doctor&#8217;s assessment. Past diagnoses are easily viewed on the desktop application to provide quick access for the examining doctor.</p>
 </li>
 <li>
-<p>Highlights: This enhancement required a detailed understanding of the Java Architecture for XML Binding software frame work (JAXB) for data storage as XML files.
+<p>Highlights: This enhancement required a detailed understanding of the Java Architecture for XML Binding software framework (JAXB) for data storage as XML files.
 Also, the integration of the UI in the feature needed JavaFX knowledge.</p>
 </li>
 </ul>
@@ -180,7 +180,8 @@ Also, the integration of the UI in the feature needed JavaFX knowledge.</p>
 <h3 id="add-to-patient-s-medical-history-code-addmh-code"><a class="link" href="#add-to-patient-s-medical-history-code-addmh-code">Add to patient’s medical history: <code>addmh</code></a></h3>
 <div class="paragraph">
 <p>Add a non-blank diagnosis entry with the name of the doctor-in-charge to an existing patient’s medical history.
-The patient must be registered within the system.</p>
+The patient must be registered within the system and the doctor&#8217;s name should contain his title, which is followed by his full name.
+For all words in the doctor&#8217;s name, the starting letter must be capitalised.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE</code></p>
@@ -210,7 +211,7 @@ Such an example can be seen in Figure 2.</p>
 </li>
 <li>
 <p>Submit the input into HealthBase by pressing <kbd>Enter</kbd>.
-The result display panel will show a successful <code>addmh</code> command message, and should show Figure 3.</p>
+The result display panel will show a successful <code>addmh</code> command message, and should show the same results in Figure 3.</p>
 </li>
 </ol>
 </div>
@@ -298,7 +299,7 @@ The following invalid inputs will result in a command failure, and the display o
 <td class="content">
 <div class="paragraph">
 <p>If you want to view the newly added diagnoses to a particular patient, simply enter <code>view mh</code>.
-You may have to enter select &lt;patient index&gt;` or click on the patient panel card.
+You may have to enter <code>select &lt;patient index&gt;</code> or click on the patient panel card.
 To use the full capabilities of the <code>view</code> command, click <a href="#view-command">here</a>.</p>
 </div>
 </td>
@@ -326,11 +327,8 @@ To use the full capabilities of the <code>view</code> command, click <a href="#v
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
 <div class="paragraph">
-<p>The functionalities of the <code>addmh</code> command are interlinked: the former allows the user to record a diagnosis
-into a patient’s medical history</p>
-</div>
-<div class="paragraph">
-<p>Each patient’s information is stored within the <code>Person</code> objects. The execution of the <code>addmh</code> command results in the retrieval of
+<p>The function of the <code>addmh</code> command is to allow the user to add a diagnosis to a patient&#8217;s medical history.
+Each patient’s information is stored within a <code>Person</code> object. The execution of the <code>addmh</code> command results in the retrieval of
 a particular <code>Person</code> object, and the consequent updating of the patient’s <code>MedicalHistory</code>.</p>
 </div>
 <div class="paragraph">
@@ -341,9 +339,6 @@ a particular <code>Person</code> object, and the consequent updating of the pati
 </div>
 <div class="paragraph">
 <p><code>addmh ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Intent</strong></p>
 </div>
 <div class="paragraph">
 <p>The purpose of the entered input is to record a diagnosis issued by <code>Dr.Amos</code>, <code>"Hypertension, diagnosed “years ago”, well contracted with Metoponol"</code>,
@@ -367,23 +362,23 @@ into the medical history of the patient with the NRIC <code>S1234567A</code>.</p
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Firstly, the <code>String</code> user input is passed into the <code>LogicManager::execute</code> method of the LogicManager instance as the only parameter.</p>
+<p>Firstly, the <code>String</code> user input is passed into the <code>LogicManager::execute</code> method of the <code>LogicManager</code> instance as the only parameter.</p>
 </li>
 <li>
-<p>Then, the <code>LogicManager::execute</code> method calls <code>AddressBookParser::parseCommand</code> which receives the user input as a parameter.</p>
+<p>Then, the <code>LogicManager::execute</code> method calls <code>HealthBaseParser::parseCommand</code> which receives the user input as a parameter.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The user input is formatted: the first <code>String</code> token is taken as the command word, while the remaining <code>String</code> is grouped as arguments to be used later in <code>AddmhCommandParser</code>.</p>
+<p>The user input is formatted: the first <code>String</code> token is taken as the command word, while the remaining <code>String</code> is grouped as arguments to be used later by a <code>AddmhCommandParser</code>.</p>
 </li>
 <li>
-<p>From the command word, the AddressBookParser instance identifies the user input as an <code>addmh</code> command  and constructs an <code>AddmhCommandParser</code> instance.</p>
+<p>From the command word, the HealthBaseParser instance identifies the user input as an <code>addmh</code> command  and constructs an <code>AddmhCommandParser</code> instance.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Next, the <code>AddressBookParser</code> calls the <code>AddmhCommandParser::parse</code> method. The <code>AddmhCommandParser</code> takes in the
+<p>Next, the <code>HealthBaseParser</code> calls the <code>AddmhCommandParser::parse</code> method. The <code>AddmhCommandParser</code> takes in the
 remaining string, <code>ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos</code>.</p>
 <div class="ulist">
 <ul>
@@ -417,17 +412,17 @@ remaining string, <code>ic/S1234567A mh/Hypertension, diagnosed “years ago”,
 </div>
 </li>
 <li>
-<p>Subsequently, the newly created <code>AddmhCommand</code> is returned to back to the <code>LogicManager</code> instance through <code>AddmhCommandParser</code> and <code>AddressBookParser</code> objects.</p>
+<p>Subsequently, the newly created <code>AddmhCommand</code> is returned to back to the <code>LogicManager</code> instance through the <code>AddmhCommandParser</code> and <code>HealthBaseParser</code> objects.</p>
 </li>
 <li>
-<p>When control is returned to the <code>LogicManager</code> object, it calls the <code>AddmhCommand::execute</code> method.</p>
+<p>Afterwards, when control is returned to the <code>LogicManager</code> object, it calls the <code>AddmhCommand::execute</code> method.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>The method takes in a <code>Model</code> object to access the application’s data context, the stored data of all persons.</p>
 </li>
 <li>
-<p>Its execution sequence may be broken down into the numbered steps in the code below.</p>
+<p>Its execution sequence may be broken down into the numbered steps in the code snippet below.</p>
 </li>
 </ul>
 </div>
@@ -447,7 +442,7 @@ remaining string, <code>ic/S1234567A mh/Hypertension, diagnosed “years ago”,
 </div>
 </li>
 <li>
-<p>The stored persons data is accessed in the <code>CommandUtil::getPatient</code> class method.</p>
+<p>Next, the stored persons data is accessed in the <code>CommandUtil::getPatient</code> class method.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -489,7 +484,7 @@ remaining string, <code>ic/S1234567A mh/Hypertension, diagnosed “years ago”,
 <div class="ulist">
 <ul>
 <li>
-<p>The person’s current <code>medicalHistory</code> is retrieved, and the <code>Diagnosis</code> field in the <code>AddmhCommand</code> is added it.</p>
+<p>The person’s current <code>medicalHistory</code> is retrieved, and the <code>Diagnosis</code> field in the <code>AddmhCommand</code> is added to it.</p>
 </li>
 <li>
 <p>Then, a new <code>Person</code> is created with the updated fields, as part of the immutability of the <code>Person</code> class.</p>
@@ -514,21 +509,21 @@ remaining string, <code>ic/S1234567A mh/Hypertension, diagnosed “years ago”,
 <div class="ulist">
 <ul>
 <li>
-<p>Here the <code>Model::updatePerson</code> method is called, and it subsequently calls the <code>AddressBook::updatePerson</code> method.</p>
+<p>Here the <code>Model::updatePerson</code> method is called, and it subsequently calls the <code>HealthBase::updatePerson</code> method.</p>
 </li>
 <li>
-<p>Replaces the person’s existing data in the addressbook storage with the person’s updated data.</p>
+<p>It replaces the person’s existing data in the storage with the person’s updated data.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// ModelManager.java</span>
 <span class="directive">public</span> <span class="type">void</span> updatePerson(Person target, Person editedPerson) {
     requireAllNonNull(target, editedPerson);
 
-    internalAddressBook.updatePerson(target, editedPerson);
-    indicateAddressBookChanged();
+    internalHealthBase.updatePerson(target, editedPerson);
+    indicateHealthBaseChanged();
 }
 
-<span class="comment">// AddressBook.java</span>
+<span class="comment">// HealthBase.java</span>
 <span class="directive">public</span> <span class="type">void</span> updatePerson(Person target, Person editedPerson) {
     requireNonNull(editedPerson);
 
@@ -579,7 +574,7 @@ with an appropriate error message before the use case ends.
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-to-represent-a-timestamp-in-a-diagnosis"><a class="link" href="#aspect-how-to-represent-a-timestamp-in-a-diagnosis">Aspect: How to represent a timestamp in a diagnosis</a></h5>
+<h5 id="1-aspect-how-to-represent-a-timestamp-in-a-diagnosis"><a class="link" href="#1-aspect-how-to-represent-a-timestamp-in-a-diagnosis">1. Aspect: How to represent a timestamp in a diagnosis</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -611,7 +606,41 @@ with an appropriate error message before the use case ends.
 </ul>
 </div>
 </div>
+<div class="sect4">
+<h5 id="2-aspect-how-to-store-medical-history"><a class="link" href="#2-aspect-how-to-store-medical-history">2. Aspect: How to store medical history</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current implementation):</strong> Use an ArrayList to store diagnoses in a person.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows expandable storage of diagnoses with its dynamic size. As an ArrayList implements the list interface,
+its contracted functionality suitably represents a list of diagnoses, which makes its usage in developing intuitive.</p>
+</li>
+<li>
+<p>Cons: Slows down performance if the ArrayList capacity is constantly filled due to resizing costs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (alternative implementation):</strong> Use an Array to store diagnoses in a person.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reduces performance losses that may arise from constant resizing of filled ArrayLists.</p>
+</li>
+<li>
+<p>Cons: Decreases flexibility in developing as the Arrays do not support generics in Java.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:04:07 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:25:34 UTC</div></div></div></body></html>
