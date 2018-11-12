@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">HealthBase</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-W14-3/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Darien Chong - Project Portfolio</h1></div><div id="content"><div class="sect1">
 <h2 id="project-healthbase"><a class="link" href="#project-healthbase">PROJECT: HealthBase</a></h2>
 <div class="sectionbody">
-<hr>
+
 </div>
 </div>
 <div class="sect1">
@@ -24,19 +24,7 @@
 <p>Real-time management of the check-in/out status of patients</p>
 </li>
 <li>
-<p>Patient medication data entry and retrieval</p>
-</li>
-<li>
-<p>Patient medical history data entry and retrieval</p>
-</li>
-<li>
-<p>Patient dietary restriction(s) data entry and retrieval</p>
-</li>
-<li>
-<p>Patient visitor history data entry and retrieval</p>
-</li>
-<li>
-<p>Real-time management of the number of visitors any given patient has</p>
+<p>Patient medication, medical history, dietary restriction(s), and visitor history data entry and retrieval</p>
 </li>
 <li>
 <p>Patient appointment management for doctors</p>
@@ -100,9 +88,6 @@
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=snajef">my commits</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -185,7 +170,7 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are (some) sections I contributed to the User Guide. For brevity, not all of the portions of the User Guide that I wrote have been included. They showcase my ability to write documentation targeting end-users.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -299,142 +284,6 @@ The alternative is to click on the patient&#8217;s card.</p>
 <p><code>select 1</code></p>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="view-command"><a class="link" href="#view-command">View patient’s information: <code>view</code></a></h3>
-<div class="paragraph">
-<p>View a selected patient’s information in the panel on the right. Exactly what information is displayed depends on the choice of view.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Selected here refers to the use of the <a href="#select-command"><code>select</code></a> command. To view the information of a given patient, he must first be <code>select</code> ed.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Format: <code>view VIEW_NAME</code></p>
-</div>
-<div class="paragraph">
-<p>Current choices for views include:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>default (This is the default blank view, which is displayed when the application is started)</p>
-</li>
-<li>
-<p>appt (Appointment view, contains patient&#8217;s appointments)</p>
-</li>
-<li>
-<p>diets (Diet view, contains patient&#8217;s dietary requirements)</p>
-</li>
-<li>
-<p>meds (Medication view, contains information about the patient&#8217;s medications)</p>
-</li>
-<li>
-<p>mh (Medical history view, contains patient&#8217;s previous medical diagnoses)</p>
-</li>
-<li>
-<p>visitors (Visitor list view, contains patient&#8217;s visitors' names)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This command switches the user&#8217;s view (right panel of the UI, indicated in the figure directly below) to a chosen view.<br></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/highlightUserViewLocation.png" alt="highlightUserViewLocation" width="800">
-</div>
-<div class="title">Figure 2. Indication of the location of the user view</div>
-</div>
-<div class="paragraph">
-<p>Example(s):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>view default</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/blankPanel.png" alt="blankPanel" width="800">
-</div>
-<div class="title">Figure 3. Default view</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>view appt</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/apptView.png" alt="apptView" width="800">
-</div>
-<div class="title">Figure 4. Appointment view</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>view diets</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/dietView.png" alt="dietView" width="800">
-</div>
-<div class="title">Figure 5. Diet view</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>view meds</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/medsView.png" alt="medsView" width="800">
-</div>
-<div class="title">Figure 6. Medication view</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>view mh</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/mhView.png" alt="mhView" width="800">
-</div>
-<div class="title">Figure 7. Medical history view</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>view visitors</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/visitorsView.png" alt="visitorsView" width="800">
-</div>
-<div class="title">Figure 8. Visitor view</div>
 </div>
 </div>
 <div class="sect2">
@@ -697,7 +546,7 @@ The command execution then ends.</p>
 <div class="content">
 <img src="../images/AddmedsSequenceDiagram.png" alt="AddmedsSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 9. Execution sequence of the <code>addmeds</code> command</div>
+<div class="title">Figure 2. Execution sequence of the <code>addmeds</code> command</div>
 </div>
 </div>
 <div class="sect3">
@@ -815,4 +664,4 @@ The command execution then ends.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:07:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:10:12 UTC</div></div></div></body></html>
