@@ -273,7 +273,12 @@ A more detailed description of the classes follows below:
 *** `SURGICAL`, with `SRG` as abbreviation
 
 Given below is an example usage scenario and how the relevant classes behave at each step.
-At the end of the explanation is a link:{repoURL}/src/main/docs/images/AddApptSequenceDiagram.png[sequence diagram] of a typical addappt command execution.
+
+[NOTE]
+Activity and sequence diagrams are different ways to represent the execution of a command: +
+*The activity diagram provides a general view of the execution* and +
+*The sequence diagram provides an intricate view of the execution* +
+Both diagrams have been included to better aid you through the execution of the `addappt` command.
 
 The user executes `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`.
 This command has the following intent: Record the following appointment to a patient with NRIC = S1234567A:
@@ -288,6 +293,11 @@ This command has the following intent: Record the following appointment to a pat
 |Dr. Pepper
 |===
 
+[#img-addapptactivitydiagram]
+The following activity diagram shows the execution of the `addappt` command:
+
+.Execution activity of the `addappt` command
+image::AddapptActivityDiagram.png[width="1000"]
 
 [#img-addapptsequencediagram]
 The following sequence diagram shows the execution of the `addappt` command:
@@ -295,13 +305,7 @@ The following sequence diagram shows the execution of the `addappt` command:
 .Execution sequence of the `addappt` command
 image::AddapptSequenceDiagram.png[width="1000"]
 
-[#img-addapptactivitydiagram]
-The following activity diagram shows the execution of the `addappt` command:
-
-.Execution activity of the `addappt` command
-image::AddapptActivityDiagram.png[width="1000"]
-
-With reference to Figure 5 and 6, the following steps occur on the execution of the `addappt` command
+With reference to Figures 5 and 6, the following steps occur upon the execution of the `addappt` command
 (code snippets have been included for the first 3 steps to further aid understanding):
 
 [LogicManager.java, java]
