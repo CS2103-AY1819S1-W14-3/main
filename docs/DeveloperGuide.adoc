@@ -1383,7 +1383,7 @@ Details on the exact range of values that the mock data can take on can be found
 // tag::addappttests[]
 === Adding an appointment for a patient
 
-. Adds an appointment for a checked in patient
+. Adding an appointment for a checked in patient
 
 .. Prerequisites: Patient must not have an existing appointment at the same Date and Time
 .. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
@@ -1403,7 +1403,7 @@ Details on the exact range of values that the mock data can take on can be found
 //tag::adddiettests[]
 === Adding dietary requirements for a patient
 
-. Adds dietary requirements for a checked in patient
+. Adding dietary requirements for a checked in patient
 
 .. Prerequisites: Select a patient in the app using the `select` command. If there are no patients to be selected, add a new patient using the `register` command. Let this selected patient's NRIC be denoted by `$nric`. The test cases must be executed in the sequence listed.
 .. Test case: `adddiet ic/$nric alg/Egg alg/Milk cr/Halal pd/Hands cannot move`
