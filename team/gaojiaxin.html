@@ -83,19 +83,19 @@
 </div>
 </li>
 <li>
-<p><strong>Minor enhancements</strong>: Incorporate <code>visitors</code> with the <code>view</code> command</p>
+<p><strong>Code contributed</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Project management:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>nil</p>
+<p><a href="https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=GAOJIAXIN666">GitHub Commits</a></p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p><strong>Minor enhancements</strong>: Incorporate <code>visitors</code> with the <code>view</code> command</p>
+<div class="ulist">
+<ul>
 <li>
 <p>Documentation:</p>
 <div class="ulist">
@@ -316,8 +316,8 @@ If the required visior in not in the patient&#8217;s visitor list, an error mess
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>visitorin</code> command allows user to add visitors into patient&#8217;s visitorList. Every patient will has his/her own <code>VisitorList</code> and
-the maximum number of visitors for a patient is 5 in order to provide patient&#8217;s a comfortable resting environment.<br></p>
+<p>The <code>visitorin</code> command allows user to add visitors into patient&#8217;s visitorList. Each patient has a <code>VisitorList</code> and
+the maximum size of the list is 5 so that patients can have a comfortable environment.<br></p>
 </li>
 <li>
 <p>The <code>viewvisitors</code> command allows user to view a patient&#8217;s current visitors in his/her <code>VisitorList</code>. It displays all the visitors from the requested patient&#8217;s
@@ -396,11 +396,42 @@ The <code>viewvisitors</code> command display the <code>Person</code> 's <code>V
 <p>The command inputs are passed to an instance of the <code>LogicManager</code> class.</p>
 </li>
 <li>
-<p><code>AddressBookParser</code> parses the command word (<code>visitorin</code>) and executes <code>VisitorInCommandParser::parse</code>.</p>
+<p><code>HealthBaseParser</code> parses the command word (<code>visitorin</code>) and executes <code>VisitorInCommandParser::parse</code>.</p>
 </li>
 <li>
-<p><code>VisitorInCommandParser::parse</code> construct and a <code>Visitor</code> (Jane), <code>Nric</code> (S1234567A) of the patient provided by the user and then returns <code>VisitorinCommand</code> object.</p>
+<p><code>VisitorInCommandParser::parse</code> construct and a <code>Visitor</code> (Jane), <code>Nric</code> (S1234567A) of the patient provided by the user and then returns <code>VisitorinCommand</code> object.
+Below shows the part of code:</p>
 </li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
+
+        if (patientToUpdate.getVisitorList().getSize() &gt;= 5) {
+            throw new CommandException(MESSAGE_FULL);
+        }
+
+        if (patientToUpdate.getVisitorList().contains(visitorName)) {
+            throw new CommandException(MESSAGE_DUPLICATE_VISITORS);
+        }
+
+        Person updatedPatient = addVisitorForPatient(patientToUpdate, this.visitorName);
+
+        model.updatePerson(patientToUpdate, updatedPatient);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+    }</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>In <code>VisitorinCommand</code>, new <code>Visitor</code> object is created and added to a copy of the required <code>Person</code> object&#8217;s <code>VisitorList</code></p>
 <div class="ulist">
@@ -416,16 +447,14 @@ The <code>viewvisitors</code> command display the <code>Person</code> 's <code>V
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>Here is <code>visitorin</code> sequence diagram below:</p>
+<p>Below is a <code>visitorin</code> sequence diagram (Figure 1):</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/VisitorinSequenceDiagram.png" alt="VisitorinSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 1. <code>visitorin</code> sequence diagram</div>
 </div>
 <div class="ulist">
 <ul>
@@ -452,12 +481,13 @@ The <code>viewvisitors</code> command display the <code>Person</code> 's <code>V
 </ul>
 </div>
 <div class="paragraph">
-<p>Here is <code>viewvisitor</code> sequence diagram below:</p>
+<p>Below is a <code>viewvisitor</code> sequence diagram (Figure 2):</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/ViewvisitorsSequenceDiagram.png" alt="ViewvisitorsSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 2. <code>viewvisitor</code> sequence diagram</div>
 </div>
 <div class="ulist">
 <ul>
@@ -466,8 +496,40 @@ The <code>viewvisitors</code> command display the <code>Person</code> 's <code>V
 <div class="ulist">
 <ul>
 <li>
-<p>Similar to the <code>visitorin</code> command, <code>VisitoroutCommandParser::parse</code> construct and a <code>Visitor</code> (Jane), <code>Nric</code> (S1234567A) of the patient provided by the user and then returns <code>VisitoroutCommand</code> object.</p>
+<p>Similar to the <code>visitorin</code> command, <code>VisitoroutCommandParser::parse</code> construct and a <code>Visitor</code> (Jane), <code>Nric</code> (S1234567A) of the patient provided by the user and then returns <code>VisitoroutCommand</code> object.
+Below shows the part of code:</p>
 </li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+
+        Person selectedPatient = CommandUtil.getPatient(patientNric, model);
+        VisitorList patientVisitorList = selectedPatient.getVisitorList();
+
+        if (patientVisitorList.getSize() == 0) {
+            return new CommandResult(String.format(MESSAGE_NO_VISITORS, patientNric));
+        }
+
+        if (!patientVisitorList.contains(visitorName)) {
+            return new CommandResult(String.format(MESSAGE_NO_REQUIRED_VISITOR, patientNric));
+        }
+
+        Person updatedPatient = removeVisitorForPatient(selectedPatient, this.visitorName);
+
+        model.updatePerson(selectedPatient, updatedPatient);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+    }</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>In <code>VisitoroutCommand</code>, new <code>Visitor</code> object is created and removed from the copy of the required <code>Person</code> object&#8217;s <code>VisitorList</code></p>
 <div class="ulist">
@@ -483,18 +545,16 @@ The <code>viewvisitors</code> command display the <code>Person</code> 's <code>V
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>Here is <code>visitorout</code> sequence diagram below:</p>
+<p>Below is a <code>visitorout</code> sequence diagram (Figure 3):</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/VisitoroutSequenceDiagram.png" alt="VisitoroutSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 3. <code>visitorout</code> sequence diagram</div>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:41:09 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:01:11 UTC</div></div></div></body></html>
