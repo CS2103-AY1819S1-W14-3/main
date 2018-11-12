@@ -293,9 +293,15 @@ This command has the following intent: Record the following appointment to a pat
 The following sequence diagram shows the execution of the `addappt` command:
 
 .Execution sequence of the `addappt` command
-image::AddapptSequenceDiagram.png[width="800"]
+image::AddapptSequenceDiagram.png[width="1000"]
 
-With reference to Figure 10, the following steps occur on the execution of the `addappt` command
+[#img-addapptactivitydiagram]
+The following activity diagram shows the execution of the `addappt` command:
+
+.Execution activity of the `addappt` command
+image::AddapptActivityDiagram.png[width="1000"]
+
+With reference to Figure 5 and 6, the following steps occur on the execution of the `addappt` command
 (code snippets have been included for the first 3 steps to further aid understanding):
 
 [LogicManager.java, java]
