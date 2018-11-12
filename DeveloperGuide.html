@@ -410,7 +410,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
+Note how the <code>Model</code> simply raises a <code>HealthBaseChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
 </td>
 </tr>
 </table>
@@ -489,7 +489,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Logic</code> uses the <code>AddressBookParser</code> class to parse the user command.</p>
+<p><code>Logic</code> uses the <code>HealthBaseParser</code> class to parse the user command.</p>
 </li>
 <li>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
@@ -585,7 +585,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>seedu.healthbase.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -734,8 +734,8 @@ This command has the following intent: Record the following appointment to a pat
 </tbody>
 </table>
 <div class="paragraph">
-<p>The command is passed to an instance of the <code>LogicManager</code> class, which in turn executes <code>AddressBookParser::parse</code>.
-The <code>AddressBookParser</code> parses the command word (<code>addappt</code>) and executes <code>AddApptCommandParser::parse</code>.</p>
+<p>The command is passed to an instance of the <code>LogicManager</code> class, which in turn executes <code>HealthBaseParser::parse</code>.
+The <code>HealthBaseParser</code> parses the command word (<code>addappt</code>) and executes <code>AddApptCommandParser::parse</code>.</p>
 </div>
 <div class="paragraph">
 <p>The <code>AddApptCommandParser::parse</code> method returns an <code>AddApptCommand</code> object which encapsulates the necessary information to update the Person 's appointments(s).
@@ -910,7 +910,7 @@ For example, when the user executes <code>adddiet ic/S1234567A alg/Egg alg/Crab 
 <p>The command text is passed to an instance of the <code>Logic Manager</code> class.</p>
 </li>
 <li>
-<p>The <code>Logic Manager</code> instance calls <code>AddressBookParser#parseCommand</code>, which parses the <code>adddiet</code> command word.</p>
+<p>The <code>Logic Manager</code> instance calls <code>HealthBaseParser#parseCommand</code>, which parses the <code>adddiet</code> command word.</p>
 </li>
 <li>
 <p>Next, the <code>AddDietCommandParser#parse</code> method parses the different dietary requirements into one <code>DietCollection</code> object. An instance of <code>AddDietCommand</code> is returned after the parsing.</p>
@@ -1152,8 +1152,8 @@ This command has the following intent: Prescribe the following medication to a p
 </tbody>
 </table>
 <div class="paragraph">
-<p>The command text is passed to an instance of the <code>LogicManager</code> class, which in turn executes <code>AddressBookParser::parse</code>.<br>
-The <code>AddressBookParser</code> parses the command word (<code>addmeds</code>) and executes <code>AddmedsCommandParser::parse</code>.<br>
+<p>The command text is passed to an instance of the <code>LogicManager</code> class, which in turn executes <code>HealthBaseParser::parse</code>.<br>
+The <code>HealthBaseParser</code> parses the command word (<code>addmeds</code>) and executes <code>AddmedsCommandParser::parse</code>.<br>
 This causes the <code>AddmedsCommandParser</code> to construct the following objects in the following order:<br></p>
 </div>
 <table class="tableblock frame-all grid-all spread">
@@ -1328,8 +1328,8 @@ the <code>NRIC</code> S9123124A.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>When the user-executed <code>addmh</code> line is passed into an instance of the LogicManager class, the method <code>AddressBookParser::parse</code> is executed.
-<code>AddressBookParser</code> then parses the command word <code>addmh</code> and subsequently executes <code>AddmhCommandParser::parse</code>.</p>
+<p>When the user-executed <code>addmh</code> line is passed into an instance of the LogicManager class, the method <code>HealthBaseParser::parse</code> is executed.
+<code>HealthBaseParser</code> then parses the command word <code>addmh</code> and subsequently executes <code>AddmhCommandParser::parse</code>.</p>
 </li>
 <li>
 <p>Next, arguments prefixed by <code>ic/</code> and <code>mh/</code> are parsed into <code>NRIC</code> and <code>Diagnosis</code> objects to be used in the <code>AddmhCommand</code> constructor.</p>
@@ -1467,7 +1467,7 @@ The <code>viewvisitors</code> command display the <code>Person</code> 's <code>V
 <p>The command inputs are passed to an instance of the <code>LogicManager</code> class.</p>
 </li>
 <li>
-<p><code>AddressBookParser</code> parses the command word (<code>visitorin</code>) and executes <code>VisitorInCommandParser::parse</code>.</p>
+<p><code>HealthBaseParser</code> parses the command word (<code>visitorin</code>) and executes <code>VisitorInCommandParser::parse</code>.</p>
 </li>
 <li>
 <p><code>VisitorInCommandParser::parse</code> construct and a <code>Visitor</code> (Jane), <code>Nric</code> (S1234567A) of the patient provided by the user and then returns <code>VisitorinCommand</code> object.</p>
@@ -2747,4 +2747,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:08:34 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:54:08 UTC</div></div></div></body></html>
