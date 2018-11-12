@@ -259,7 +259,7 @@ The adding of appointment-related information is facilitated by the following cl
 A more detailed description of the classes follows below:
 
 * `AppointmentsList`
-** Every `Person` has an `AppointmentsList`, the purpose of which is to store all `Appointment`s belonging to a `Person`.
+** Every `Person` has an `AppointmentsList`, the purpose of which is to store all `Appointment` s belonging to a `Person`.
 ** A wrapper class around the internal representation of a list of appointments that exposes only a few select methods in the `List` API.
 *** The methods relevant to the `addappt` command from the API are: `add`.
 * `Appointment`
