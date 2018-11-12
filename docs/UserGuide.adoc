@@ -224,7 +224,7 @@ How this affects the sorting exactly depends on each view, and will be explained
 | View Name | Sortable? | What `SORT_ORDER` refers to
 | Default | No | -
 | Apppointment | Yes | The columns of the table in the view, one-indexed.
-| Diet | Yes | The columns of the table(s) in the view, one-indexed.
+| Diet | No | -
 | Medication | Yes | The columns of the table in the view, one-indexed.
 | Medical History | Yes | The columns of the table in the view, one-indexed.
 |=======================================================================
@@ -239,6 +239,7 @@ Example(s):
 //end::sort[]
 
 //tag::select[]
+[#select-command]
 === Select patient: `select`
 Select a patient through pure command-line functionality.
 The alternative is to click on the patient's card.
@@ -259,7 +260,10 @@ Example(s):
 //tag::view[]
 [#view-command]
 === View patient’s information: `view`
-View a patient’s information in the panel on the right. Exactly what information is displayed depends on the choice of view.
+View a selected patient’s information in the panel on the right. Exactly what information is displayed depends on the choice of view.
+
+[NOTE]
+Selected here refers to the use of the <<#select-command,`select`>> command. To view the information of a given patient, he must first be `select` ed.
 
 Format: `view VIEW_NAME`
 
