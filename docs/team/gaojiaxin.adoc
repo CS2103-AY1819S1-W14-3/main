@@ -117,8 +117,8 @@ WARNING: If the required visior in not in the patient's visitor list, an error m
 ==== Current implementation
 There three commands related to manage patients' visitors. +
 
-* The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
-the maximum number of visitors for a patient is 5 in order to provide patient's a comfortable resting environment. +
+* The `visitorin` command allows user to add visitors into patient's visitorList. Each patient has a `VisitorList` and
+the maximum size of the list is 5 so that patients can have a comfortable environment. +
 
 * The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
 `visitorList` in order of entry. +
@@ -176,7 +176,7 @@ public CommandResult execute(Model model, CommandHistory history) throws Command
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `visitorin` sequence diagram below(Figure 1):
+Below is a `visitorin` sequence diagram (Figure 1):
 
 .`visitorin` sequence diagram
 image::VisitorinSequenceDiagram.png[width="800"]
@@ -186,7 +186,7 @@ image::VisitorinSequenceDiagram.png[width="800"]
 ** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `viewvisitor` sequence diagram below(Figure 2):
+Below is a `viewvisitor` sequence diagram (Figure 2):
 
 .`viewvisitor` sequence diagram
 image::ViewvisitorsSequenceDiagram.png[width="800"]
@@ -222,7 +222,7 @@ public CommandResult execute(Model model, CommandHistory history) throws Command
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `visitorout` sequence diagram below(Figure 3):
+Below is a `visitorout` sequence diagram (Figure 3):
 
 .`visitorout` sequence diagram
 image::VisitoroutSequenceDiagram.png[width="800"]
