@@ -74,9 +74,9 @@ Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> docume
 
 ==== Updating documentation to match your fork
 
-After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/HealthBase-level4` repo.
+After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/AddressBook-level4` repo.
 
-If you plan to develop this fork (separate product (i.e. instead of contributing to `se-edu/HealthBase-level4`)) | you should do the following:
+If you plan to develop this fork (separate product (i.e. instead of contributing to `se-edu/AddressBook-level4`)) | you should do the following:
 
 . Configure the <<Docs-SiteWideDocSettings, site-wide documentation settings>> in link:{repoURL}/build.gradle[`build.gradle`], such as the `site-name`, to suit your own project.
 
@@ -1551,7 +1551,7 @@ Details on the exact range of values that the mock data can take on can be found
 * Add diagnosis to a registered patient while all patients are listed.
 .. Prerequisites:
 *** Patient must be listed in the list on the panel on the left-hand side. Use the `list` command to list them, if there are no listed patients.
-*** Patient must be registered in HealthBase already.
+*** Patient must be registered in AddressBook already.
 *** Enter the following commands to set up a test scenario with only one registered patient:
 . `clear`
 . `register ic/S1234567A n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 da/aspirin da/insulin`
@@ -1570,7 +1570,7 @@ Details on the exact range of values that the mock data can take on can be found
    Expected: Failed addition, diagnosis should not be blank.
 .. Test case: `addmh ic/S1234567A mh/  doc/Dr.Ross` +
    Expected: Failed addition, diagnosis should not be a whitespace.
-.. Test case: `addmh ic/S1234567A mh/!#$!#$@#!!  doc/Dr.Ross` +
+.. Test case: `addmh ic/S1234567A mh/!$!#!  doc/Dr.Ross` +
    Expected: Patient's diagnosis is successfully added, diagnosis does not need to be made up of word letters.
 .. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/dr.Ross` +
    Expected: Failed addition, doctor's title should precede his full name. The starting letter of all words in the doctor's title should be should be spelt out with capitalisation.
@@ -1578,14 +1578,6 @@ Details on the exact range of values that the mock data can take on can be found
    Expected: Patient's diagnosis is successfully added as doctor's name is valid.
 .. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/` +
    Expected: Failed addition, doctor's name should not be blank.
-.. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/ ` +
+.. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/` +
    Expected: Failed addition, doctor's name cannot be a whitespace.
 
-
-=== Saving data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
