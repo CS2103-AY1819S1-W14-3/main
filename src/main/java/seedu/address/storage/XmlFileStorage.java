@@ -25,7 +25,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns HealthBase in the file or an empty HealthBase
      */
     public static XmlSerializableHealthBase loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {

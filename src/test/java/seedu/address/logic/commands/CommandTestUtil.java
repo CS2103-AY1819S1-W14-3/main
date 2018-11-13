@@ -231,7 +231,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book and the filtered person list in the {@code actualModel}
+     * - HealthBase and the filtered person list in the {@code actualModel}
      * remain unchanged <br>
      * - {@code actualCommandHistory} remains unchanged.
      */
@@ -257,7 +257,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the person at the given
-     * {@code targetIndex} in the {@code model}'s address book.
+     * {@code targetIndex} in the {@code model}'s HealthBase.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
@@ -271,7 +271,7 @@ public class CommandTestUtil {
 
     /**
      * Deletes the first person in {@code model}'s filtered list from
-     * {@code model}'s address book.
+     * {@code model}'s HealthBase.
      */
     public static void deleteFirstPerson(Model model) {
         Person firstPerson = model.getFilteredPersonList().get(0);

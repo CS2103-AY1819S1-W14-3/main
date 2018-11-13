@@ -19,7 +19,7 @@ public interface Model {
     ReadOnlyHealthBase getHealthBase();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in HealthBase.
      */
     boolean hasPerson(Person person);
 
@@ -30,32 +30,32 @@ public interface Model {
 
     /**
      * Checkout the given person.
-     * The person must exist in person list of the address book.
+     * The person must exist in person list of HealthBase.
      */
     void checkOutPerson(Person person);
 
     /**
      * Re-checkin the given person.
-     * The person must exist in the checkedOutPerson list of the address book.
+     * The person must exist in the checkedOutPerson list of HealthBase.
      */
     void reCheckInPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in HealthBase.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in HealthBase.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in HealthBase.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in HealthBase.
      */
     void updatePerson(Person target, Person editedPerson);
 

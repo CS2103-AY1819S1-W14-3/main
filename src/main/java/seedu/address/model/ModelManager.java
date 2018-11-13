@@ -15,7 +15,7 @@ import seedu.address.commons.events.model.HealthBaseChangedEvent;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of HealthBase data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -31,7 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         requireAllNonNull(healthBase, userPrefs);
 
-        logger.fine("Initializing with address book: " + healthBase + " and user prefs " + userPrefs);
+        logger.fine("Initializing with HealthBase: " + healthBase + " and user prefs " + userPrefs);
 
         internalHealthBase = new HealthBase(healthBase);
         filteredPersons = new FilteredList<>(internalHealthBase.getPersonList());

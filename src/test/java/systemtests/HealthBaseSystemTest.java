@@ -124,7 +124,7 @@ public abstract class HealthBaseSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all persons in HealthBase.
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
@@ -148,7 +148,7 @@ public abstract class HealthBaseSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all persons in HealthBase.
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);

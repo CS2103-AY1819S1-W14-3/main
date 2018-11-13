@@ -10,7 +10,7 @@ import seedu.address.model.person.DataGenerator;
 import seedu.address.model.person.Person;
 
 /**
- * Resets the address book and adds new people based on a set of templates.
+ * Resets HealthBase and adds new people based on a set of templates.
  * Developer-mode only command.
  */
 public class GendataCommand extends Command {

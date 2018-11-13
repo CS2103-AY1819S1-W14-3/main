@@ -151,7 +151,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `HealthBaseChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `HealthBaseChangedEvent` when HealthBase data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -212,12 +212,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores HealthBase data.
+* exposes an unmodifiable `ObservableList<patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `HealthBase`, which `patient` can reference. This would allow `HealthBase` to only require one `Tag` object per unique `Tag`, instead of each `patient` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
  image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -232,7 +232,7 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save HealthBase data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author snajef
 /**
- * Represents a Person's NRIC in the address book. Guarantees: immutable; is
+ * Represents a Person's NRIC in HealthBase. Guarantees: immutable; is
  * valid as declared in {@link #isValidNric(String)}
  */
 public class Nric {

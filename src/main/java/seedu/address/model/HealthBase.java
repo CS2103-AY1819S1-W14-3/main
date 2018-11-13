@@ -71,7 +71,7 @@ public class HealthBase implements ReadOnlyHealthBase {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in HealthBase.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -108,16 +108,16 @@ public class HealthBase implements ReadOnlyHealthBase {
     }
 
     /**
-     * Adds a person to the checkedOutPerson list of the address book.
-     * The person must not already exist in the checkedOutPerson list of the address book.
+     * Adds a person to the checkedOutPerson list of HealthBase.
+     * The person must not already exist in the checkedOutPerson list of HealthBase.
      */
     public void addCheckedOutPerson(Person p) {
         checkedOutPersons.add(p);
     }
 
     /**
-     * Adds a person to the person list of address book.
-     * The person must not already exist in person list of the address book.
+     * Adds a person to the person list of HealthBase.
+     * The person must not already exist in person list of HealthBase.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -125,8 +125,8 @@ public class HealthBase implements ReadOnlyHealthBase {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in HealthBase.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in HealthBase.
      */
     public void updatePerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -136,7 +136,7 @@ public class HealthBase implements ReadOnlyHealthBase {
 
     /**
      * Removes {@code key} from this {@code HealthBase}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in HealthBase.
      */
     public void removePerson(Person key) {
         persons.remove(key);

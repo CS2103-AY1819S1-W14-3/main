@@ -48,7 +48,7 @@ public class XmlSerializableHealthBase {
     }
 
     /**
-     * Converts this address book into the model's {@code HealthBase} object.
+     * Converts this HealthBase into the model's {@code HealthBase} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.

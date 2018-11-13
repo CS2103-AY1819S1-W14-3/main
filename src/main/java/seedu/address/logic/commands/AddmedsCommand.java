@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 
 //@@author snajef
 /**
- * Adds a person to the address book.
+ * Adds a person to HealthBase.
  */
 public class AddmedsCommand extends Command {
     public static final String COMMAND_WORD = "addmeds";

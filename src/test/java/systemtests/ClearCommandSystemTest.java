@@ -14,13 +14,13 @@ public class ClearCommandSystemTest extends HealthBaseSystemTest {
     public void clear() {
         final Model defaultModel = getModel();
 
-        /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
+        /* Case: clear non-empty HealthBase, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
         assertCommandSuccess("   " + ClearCommand.COMMAND_WORD + " ab12   ");
         assertSelectedCardUnchanged();
 
-        /* Case: clear empty address book -> cleared */
+        /* Case: clear empty HealthBase -> cleared */
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 

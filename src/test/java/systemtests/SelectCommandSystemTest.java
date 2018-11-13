@@ -42,14 +42,14 @@ public class SelectCommandSystemTest extends HealthBaseSystemTest {
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
-        /* Case: filtered person list, select index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, select index within bounds of HealthBase but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getHealthBase().getPersonList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* Case: filtered person list, select index within bounds of address book and person list -> selected */
+        /* Case: filtered person list, select index within bounds of HealthBase and person list -> selected */
         Index validIndex = Index.fromOneBased(1);
         assertTrue(validIndex.getZeroBased() < getModel().getFilteredPersonList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
@@ -80,7 +80,7 @@ public class SelectCommandSystemTest extends HealthBaseSystemTest {
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: select from empty address book -> rejected */
+        /* Case: select from empty HealthBase -> rejected */
         deleteAllPersons();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
