@@ -39,7 +39,10 @@ Its main features (among others) include:
 HealtBase, doctors will be able to view the appointments they have with different patients.
 * *Minor enhancement*: Incorporate `appt` with the `view` command
 
-* *Code contributed*: [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=jeffypie369[commits]]
+* *Code contributed*:
+
+** [https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=jeffypie369[commits]]
+** [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jeffypie369[code]]
 
 * *Other contributions*:
 
@@ -72,8 +75,6 @@ include::../UserGuide.adoc[tag=register]
 |===
 
 include::../DeveloperGuide.adoc[tag=addappt]
-
-include::../DeveloperGuide.adoc[tag=addappttests]
 
 == 5. PROJECT: Accuride SG
 

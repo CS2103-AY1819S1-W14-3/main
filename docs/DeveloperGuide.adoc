@@ -74,9 +74,9 @@ Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> docume
 
 ==== Updating documentation to match your fork
 
-After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/addressbook-level4` repo.
+After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/HealthBase-level4` repo.
 
-If you plan to develop this fork (separate product (i.e. instead of contributing to `se-edu/addressbook-level4`)) | you should do the following:
+If you plan to develop this fork (separate product (i.e. instead of contributing to `se-edu/HealthBase-level4`)) | you should do the following:
 
 . Configure the <<Docs-SiteWideDocSettings, site-wide documentation settings>> in link:{repoURL}/build.gradle[`build.gradle`], such as the `site-name`, to suit your own project.
 
@@ -323,7 +323,7 @@ With reference to the above figures, the following steps occur upon the executio
     }
 ...
 ----
-[AddressBookParser.java, java]
+[HealthBaseParser.java, java]
 ----
 ...
     public Command parseCommand(String userInput) throws ParseException { // <2>
@@ -406,7 +406,8 @@ the validity of the command and are not crucial in the sequence of events.
 
 The `adddiet` command provides functionality for users to add dietary requirements for a given patient. +
 This command allows users to add three different types of dietary requirements: allergy, cultural requirement and physical difficulty. +
-This command adds these dietary requirements to a given `Person` , so that the dietary requirements can be viewed later on.
+This command adds these dietary requirements to a given `Person` , so that the dietary requirements can be viewed later on. +
+This command blocks non-alphabetical or empty input as the detail of a dietary requirement.
 
 ===== Classes involved
 
@@ -419,28 +420,29 @@ The adding of the dietary requirements involve the following classes:
 A more detailed description of the classes involved is as follows:
 
 * `Diet Collection`
-** Every `Person` object has a `Diet Collection`, which is a collection of all the dietary requirements of the given patient.
+** Every `Person` object has a `Diet Collection` object.
+** This class encapsulates a collection of all the dietary requirements of the given patient.
 ** This class is a wrapper class around the internal representation of a `Set` of `Diet` s.
 
 * `Diet`
-** This class encapsulate the information of a single dietary requirement.
+** This class encapsulates the information of a single dietary requirement.
 ** Specifically, an instance of this class is composed of
 *** a `String` representing the details of the requirement in text, and
 *** a `DietType` representing the type of this dietary requirement (allergy, cultural requirement, or physical difficulty).
 
 * `DietType`
-** This is a `Enum` class representing the three different types of dietary requirements.
-** Implemented as `Enum` class to avoid typo and invalid types being entered.
+** This class is an `Enum` class representing the three different types of dietary requirements.
+** This class is implemented as `Enum` class to avoid typo and invalid types being entered.
 
 ===== Execution of the command
 
-Given below is an usage scenario and the details when executing `adddiet` command. +
-For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move.`:
+Given below is a usage scenario and the details when executing `adddiet` command. +
+For example, when the user executes `adddiet ic/S1234567A alg/Egg alg/Crab cr/Halal pd/Hands cannot move`:
 
-* The command text is passed to an instance of the `Logic Manager` class.
-* The `Logic Manager` instance calls `HealthBaseParser#parseCommand`, which parses the `adddiet` command word.
+* The command text is passed to an instance of the `LogicManager` class.
+* The `LogicManager` instance calls `HealthBaseParser#parseCommand`, which parses the `adddiet` command word.
 * Next, the `AddDietCommandParser#parse` method parses the different dietary requirements into one `DietCollection` object. An instance of `AddDietCommand` is returned after the parsing.
-* `Logic Manager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
+* `LogicManager` then execute this `AddDietCommand` by calling `AddDietCommand#execute`.
 * In the `AddDietCommand#execute` method, the new `DietCollection` object is added to a new copy of the `Person` object.
 * The new `Person` object is updated to the model by `Model#updatePerson` method.
 * A new `CommandResult` is returned and the execution ends.
@@ -564,12 +566,9 @@ image::AddmedsSequenceDiagram.png[width=800]
 === Addmh
 ==== Current implementation
 
-The functionalities of the `addmh` command are interlinked: the former allows the user to record a diagnosis
-into a patient’s medical history
-
+The function of the `addmh` command is to allow the user to add a diagnosis to a patient's medical history.
 Each patient’s information is stored within the `Person` objects. The execution of the `addmh` command results in the retrieval of
 a particular `Person` object, and the consequent updating of the patient’s `MedicalHistory`.
-
 
 Stated below is an example usage scenario and an explanation of the interactions that occurs as a result of the code execution.
 
@@ -594,11 +593,11 @@ image::AddmhSequenceDiagram.png[width="1000"]
 
 1. Firstly, the `String` user input is passed into the `LogicManager::execute` method of the LogicManager instance as the only parameter.
 
-2. Then, the `LogicManager::execute` method calls `AddressBookParser::parseCommand` which receives the user input as a parameter.
+2. Then, the `LogicManager::execute` method calls `HealthBaseParser::parseCommand` which receives the user input as a parameter.
 * The user input is formatted: the first `String` token is taken as the command word, while the remaining `String` is grouped as arguments to be used later in `AddmhCommandParser`.
-* From the command word, the AddressBookParser instance identifies the user input as an `addmh` command  and constructs an `AddmhCommandParser` instance.
+* From the command word, the HealthBaseParser instance identifies the user input as an `addmh` command  and constructs an `AddmhCommandParser` instance.
 
-3.  Next, the `AddressBookParser` calls the `AddmhCommandParser::parse` method. The `AddmhCommandParser` takes in the
+3.  Next, the `HealthBaseParser` calls the `AddmhCommandParser::parse` method. The `AddmhCommandParser` takes in the
 remaining string, `ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos`.
 * The string is tokenised to arguments according to their prefixes.
 +
@@ -621,7 +620,7 @@ if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_MED_HISTORY, PREFIX_DOC
 
 * Otherwise, `Diagnosis` and `Nric`  objects are constructed and used as fields in the creation of an `AddmhCommand` object.
 
-4. Subsequently, the newly created `AddmhCommand` is returned to back to the `LogicManager` instance through `AddmhCommandParser` and `AddressBookParser` objects.
+4. Subsequently, the newly created `AddmhCommand` is returned to back to the `LogicManager` instance through `AddmhCommandParser` and `HealthBaseParser` objects.
 
 5. When control is returned to the `LogicManager` object, it calls the `AddmhCommand::execute` method.
 * The method takes in a `Model` object to access the application’s data context, the stored data of all persons.
@@ -688,8 +687,8 @@ private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosi
 ----
 
 8. Then, the old `Person` 's data will be replaced with the updated `Person` 's data.
-* Here the `Model::updatePerson` method is called, and it subsequently calls the `AddressBook::updatePerson` method.
-* Replaces the person’s existing data in the addressbook storage with the person’s updated data.
+* Here the `Model::updatePerson` method is called, and it subsequently calls the `HealthBase::updatePerson` method.
+* Replaces the person’s existing data in the storage with the person’s updated data.
 +
 [source, java]
 ----
@@ -697,11 +696,11 @@ private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosi
 public void updatePerson(Person target, Person editedPerson) {
     requireAllNonNull(target, editedPerson);
 
-    internalAddressBook.updatePerson(target, editedPerson);
-    indicateAddressBookChanged();
+    internalHealthBase.updatePerson(target, editedPerson);
+    indicateHealthBaseChanged();
 }
 
-// AddressBook.java
+// HealthBase.java
 public void updatePerson(Person target, Person editedPerson) {
     requireNonNull(editedPerson);
 
@@ -734,6 +733,14 @@ with an appropriate error message before the use case ends.
 ** Pros: Results in more compact code.
 ** Cons: Decreases code modularity, and this decreases code readability.
 
+===== Aspect: How to store medical history
+* **Alternative 1 (current implementation):** Use an ArrayList to store diagnoses in a person.
+** Pros: Allows expandable storage of diagnoses with its dynamic size. As an ArrayList implements the list interface,
+its contracted functionality suitably represents a list of diagnoses and this makes its usage in developing intuitive.
+** Cons: Slows down performance if the ArrayList capacity is constantly filled due to resizing costs.
+* **Alternative 2 (alternative implementation):** Use an Array to store diagnoses in a person.
+** Pros: Reduces performance losses that may arise from constant resizing in ArrayLists.
+** Cons: Decreases flexibility in developing as Arrays do not support generics in Java.
 // end::addmh[]
 
 
@@ -774,12 +781,36 @@ To illustrate how the three commands work, examples are given below.
 ** The command inputs are passed to an instance of the `LogicManager` class.
 ** `HealthBaseParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
 ** `VisitorInCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitorinCommand` object.
+Below shows the part of code:
+
+----
+public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
+
+        if (patientToUpdate.getVisitorList().getSize() >= 5) {
+            throw new CommandException(MESSAGE_FULL);
+        }
+
+        if (patientToUpdate.getVisitorList().contains(visitorName)) {
+            throw new CommandException(MESSAGE_DUPLICATE_VISITORS);
+        }
+
+        Person updatedPatient = addVisitorForPatient(patientToUpdate, this.visitorName);
+
+        model.updatePerson(patientToUpdate, updatedPatient);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+    }
+----
 ** In `VisitorinCommand`, new `Visitor` object is created and added to a copy of the required `Person` object's `VisitorList`
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Below is a `visitorin` sequence diagram:
+Below is `visitorin` sequence diagram (Figure 1):
 
+.`visitorin` sequence diagram
 image::VisitorinSequenceDiagram.png[width="800"]
 
 * `viewvisitor ic/S1234567A`
@@ -787,18 +818,45 @@ image::VisitorinSequenceDiagram.png[width="800"]
 ** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
 *** A new CommandResult object is returned and the execution ends.
 
-Below is a `viewvisitor` sequence diagram:
+Below is `viewvisitor` sequence diagram (Figure 2):
 
+.`viewvisitor` sequence diagram
 image::ViewvisitorsSequenceDiagram.png[width="800"]
 
 * `visitorout ic/S1234567A v/Jane`
 ** Similar to the `visitorin` command, `VisitoroutCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitoroutCommand` object.
+Below shows the part of code:
+
+----
+public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+
+        Person selectedPatient = CommandUtil.getPatient(patientNric, model);
+        VisitorList patientVisitorList = selectedPatient.getVisitorList();
+
+        if (patientVisitorList.getSize() == 0) {
+            return new CommandResult(String.format(MESSAGE_NO_VISITORS, patientNric));
+        }
+
+        if (!patientVisitorList.contains(visitorName)) {
+            return new CommandResult(String.format(MESSAGE_NO_REQUIRED_VISITOR, patientNric));
+        }
+
+        Person updatedPatient = removeVisitorForPatient(selectedPatient, this.visitorName);
+
+        model.updatePerson(selectedPatient, updatedPatient);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+    }
+----
+
 ** In `VisitoroutCommand`, new `Visitor` object is created and removed from the copy of the required `Person` object's `VisitorList`
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Below is a `visitorout` sequence diagram:
+Below is `visitorout` sequence diagram (Figure 3):
 
+.`visitorout` sequence diagram
 image::VisitoroutSequenceDiagram.png[width="800"]
 
 // tag::dataencryption[]
@@ -1330,7 +1388,7 @@ Details on the exact range of values that the mock data can take on can be found
 // tag::addappttests[]
 === Adding an appointment for a patient
 
-. Adds an appointment for a checked in patient
+. Adding an appointment for a checked in patient
 
 .. Prerequisites: Patient must not have an existing appointment at the same Date and Time
 .. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper`
@@ -1346,6 +1404,25 @@ Details on the exact range of values that the mock data can take on can be found
 .. Test case: `addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper`
    Expected: Appointment is not added because of the missing salutation for Doctor.
 // end::addappttests[]
+
+//tag::adddiettests[]
+=== Adding dietary requirements for a patient
+
+. Adding dietary requirements for a checked in patient
+
+.. Prerequisites: Select a patient in the app using the `select` command. If there are no patients to be selected, add a new patient using the `register` command. Let this selected patient's NRIC be denoted by `$nric`. The test cases must be executed in the sequence listed.
+.. Test case: `adddiet ic/$nric alg/Egg alg/Milk cr/Halal pd/Hands cannot move`
+   Expected: Dietary requirements are added for patient. To verify, run `view diets`.
+.. Test case: `adddiet ic/$nric cr/Vegetarian`
+   Expected: Dietary requirement is added for patient. To verify, run `view diets`.
+.. Test case: `adddiet ic/$nric alg/Egg`
+   Expected: No new dietary requirement is added, since the new allergy has been added before.
+.. Test case: `adddiet ic/$nric pd/1 hand cannot move.`
+   Expected: Dietary requirement is not added due to the invalid input.
+.. Test case: `adddiet ic/$nric alg/Fish cr/`
+   Expected: Dietary requirement is not added due to the invalid `cr` input.
+//end::adddiettests[]
+
 
 === Adding medication for a patient
 
@@ -1427,6 +1504,34 @@ Details on the exact range of values that the mock data can take on can be found
 .. Test case: `sort a` +
    Expected: The view remains unsorted. An error message is shown.
 
+//tag::checkintests[]
+=== Checking out a patient
+
+. Checking out a patient who is in the system
+
+.. Prerequisites: A patient is registered and checked in to the system, and is visible on the left panel. Let `$nric` denotes this patient's NRIC. Let `$nricOther` denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.
+.. Test case: `checkout ic/$nricOther`
+   Expected: The command fails. Error detail shown in the status message.
+.. Test case: `checkout ic/$nric`
+   Expected: The patient with `$nric` is checked out.
+.. Test case: `checkout ic/$nric`
+   Expected: The command fails. Error detail shown in the status message.
+//end::checkintests[]
+
+//tag::checkouttests[]
+=== Checking in a patient
+
+. Checking in a previously checked out patient
+
+.. Prerequisites: A patient is registered and previously checked out from the system. Let `$nric` denotes this patient's NRIC. Let `$nricOther` denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.
+.. Test case: `checkin ic/$nricOther`
+   Expected: The command fails. Error detail shown in the status message.
+.. Test case: `checkin ic/$nric`
+   Expected: The patient with `$nric` is checked in.
+.. Test case: `checkin ic/$nric`
+   Expected: The command fails. Error detail shown in the status message.
+//end::checkouttests[]
+
 === Generating data
 
 . Generating data for testing
@@ -1440,6 +1545,42 @@ Details on the exact range of values that the mock data can take on can be found
    Expected: No data is generated. An error message is shown.
 .. Test case: `gendata A` +
    Expected: No data is generated. An error message is shown.
+
+=== Adding a diagnosis to a patient's medical record
+
+* Add diagnosis to a registered patient while all patients are listed.
+.. Prerequisites:
+*** Patient must be listed in the list on the panel on the left-hand side. Use the `list` command to list them, if there are no listed patients.
+*** Patient must be registered in HealthBase already.
+*** Enter the following commands to set up a test scenario with only one registered patient:
+. `clear`
+. `register ic/S1234567A n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 da/aspirin da/insulin`
+
+.. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/Dr.Ross` +
+   Expected: Patient's diagnosis is successfully added.
+.. Test case: `addmh ic/ mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/Dr.Ross` +
+   Expected: Failed addition, NRICs should consist of a starting letter (capital), followed by 7 numerical digits, followed by a letter (again capital). No such patient will exist.
+.. Test case: `addmh ic/S9876543Z mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/Dr.Ross` +
+   Expected: Failed addition, patient is not registered, cannot add diagnosis for an unregistered patient.
+.. Test case: `addmh ic/A1234567Z mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/Dr.Ross` +
+   Expected: NRICs should consist of a starting letter (capital), followed by 7 numerical digits, followed by a letter (again capital). No such patient will exist.
+.. Test case: `addmh ic/S12234598675667A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/Dr.Ross` +
+   Expected: Failed addition, NRICs should consist of a starting letter (capital), followed by 7 numerical digits, followed by a letter (again capital). No such patient will exist.
+.. Test case: `addmh ic/S1234567A mh/ doc/Dr.Ross` +
+   Expected: Failed addition, diagnosis should not be blank.
+.. Test case: `addmh ic/S1234567A mh/  doc/Dr.Ross` +
+   Expected: Failed addition, diagnosis should not be a whitespace.
+.. Test case: `addmh ic/S1234567A mh/!#$!#$@#!!  doc/Dr.Ross` +
+   Expected: Patient's diagnosis is successfully added, diagnosis does not need to be made up of word letters.
+.. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/dr.Ross` +
+   Expected: Failed addition, doctor's title should precede his full name. The starting letter of all words in the doctor's title should be should be spelt out with capitalisation.
+.. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/Dr.Ross Geller Stuart Jack Ma Steve Bombamama Nojobs` +
+   Expected: Patient's diagnosis is successfully added as doctor's name is valid.
+.. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/` +
+   Expected: Failed addition, doctor's name should not be blank.
+.. Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/ ` +
+   Expected: Failed addition, doctor's name cannot be a whitespace.
+
 
 === Saving data
 

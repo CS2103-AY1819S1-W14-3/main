@@ -41,7 +41,7 @@ public class DietViewTest extends GuiUnitTest {
                                                                  + DANIEL.getNric());
         allergy = new DietBuilder().withDetail("Fish").withType(DietType.ALLERGY).build();
         culturalRequirement = new DietBuilder().withDetail("Halal").withType(DietType.CULTURAL).build();
-        physicalDifficulty = new DietBuilder().withDetail("Hands cannot move.").withType(DietType.PHYSICAL).build();
+        physicalDifficulty = new DietBuilder().withDetail("Hands cannot move").withType(DietType.PHYSICAL).build();
         initUi();
     }
 

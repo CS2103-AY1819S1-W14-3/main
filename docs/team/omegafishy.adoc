@@ -14,10 +14,10 @@ CS2103T. Over the span of 8 weeks in AY18/19 Semester 1, my team and I were give
 made up of 10KLoC in Java.
 ****
 
-Throughout the 8-week period, we were challenged to incorporate the new Software Engineering condcepts taught in class
+Throughout the 8-week period, we were challenged to incorporate the new Software Engineering concepts taught in class
 via a series of milestones which were part of the project management process. On top of that, we planned out weekly
 goals and consistently reassessed our employed programming methodologies and practices, developing our software HealthBase
-incrementally and iteratively. Figure 1 shows the transformation we made in this brownfield project.
+incrementally and iteratively. Figure 1 shows the transformations we made in this brownfield project.
 
 .AB4 was morphed into a hospital management system, HealthBase.
 image::AB4toHealthBase.png[width="1600"]
@@ -29,20 +29,20 @@ efficiently manage patients’ information, thus easing their workload and allow
 The app's features can be easily accessed by typing short commands into an input field.
 These features include (among others):
 
-* Real-time management of the check-in/out status of patients
 * Patient medication data entry and retrieval
 * Patient medical history data entry and retrieval
 * Patient dietary restriction(s) data entry and retrieval
 * Patient visitor history data entry and retrieval
-* Real-time management of the number of visitors any given patient has
 * Patient appointment management for doctors
+* Real-time management of the check-in/out status of patients
+* Real-time management of the number of visitors any given patient has
 
 == 2. Summary of Contributions
 
 * *Major enhancement*: Added the functionality to record and view patients' past medical diagnoses
 ** What it does: Records a diagnosis entry into the medical history of a given patient. Each entry includes the diagnosis description, the name of the examining doctor and a timestamp.
 ** Justification: This feature serves as the primary storage of important patient data, as adjudged by the examining doctor's assessment. Past diagnoses are easily viewed on the desktop application to provide quick access for the examining doctor.
-** Highlights: This enhancement required a detailed understanding of the Java Architecture for XML Binding software frame work (JAXB) for data storage as XML files.
+** Highlights: This enhancement required a detailed understanding of the Java Architecture for XML Binding software framework (JAXB) for data storage as XML files.
 Also, the integration of the UI in the feature needed JavaFX knowledge.
 
 * *Code contributed*:
@@ -73,7 +73,8 @@ Also, the integration of the UI in the feature needed JavaFX knowledge.
 
 === Add to patient’s medical history: `addmh`
 Add a non-blank diagnosis entry with the name of the doctor-in-charge to an existing patient’s medical history.
-The patient must be registered within the system.
+The patient must be registered within the system and the doctor's name should contain his title, which is followed by his full name.
+For all words in the doctor's name, the starting letter must be capitalised.
 
 Format: `addmh ic/NRIC mh/DIAGNOSIS​ doc/DOCTOR-IN-CHARGE`
 
@@ -89,7 +90,7 @@ To try out the `addmh` command:
  Such an example can be seen in Figure 2.
 
 2. Submit the input into HealthBase by pressing kbd:[Enter].
-The result display panel will show a successful `addmh` command message, and should show Figure 3.
+The result display panel will show a successful `addmh` command message, and should show the same results in Figure 3.
 
 .Command box and result display panel before entering an `addmh` command.
 image::beforeAddmhCommand.png[width="1000"]
@@ -114,7 +115,7 @@ WARNING: The following invalid inputs will result in a command failure, and the 
 [TIP]
 ====
 If you want to view the newly added diagnoses to a particular patient, simply enter `view mh`.
-You may have to enter select <patient index>` or click on the patient panel card.
+You may have to enter `select <patient index>` or click on the patient panel card.
 To use the full capabilities of the `view` command, click <<#view-command, here>>.
 ====
 
@@ -128,20 +129,15 @@ To use the full capabilities of the `view` command, click <<#view-command, here>
 === Addmh
 ==== Current implementation
 
-The functionalities of the `addmh` command are interlinked: the former allows the user to record a diagnosis
-into a patient’s medical history
-
-Each patient’s information is stored within the `Person` objects. The execution of the `addmh` command results in the retrieval of
+The function of the `addmh` command is to allow the user to add a diagnosis to a patient's medical history.
+Each patient’s information is stored within a `Person` object. The execution of the `addmh` command results in the retrieval of
 a particular `Person` object, and the consequent updating of the patient’s `MedicalHistory`.
-
 
 Stated below is an example usage scenario and an explanation of the interactions that occurs as a result of the code execution.
 
 The user executes the following input:
 
 `addmh ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos`
-
-*Intent*
 
 The purpose of the entered input is to record a diagnosis issued by `Dr.Amos`, `"Hypertension, diagnosed “years ago”, well contracted with Metoponol"`,
 into the medical history of the patient with the NRIC `S1234567A`.
@@ -156,13 +152,13 @@ image::AddmhSequenceDiagram.png[width="1000"]
 [.lead]
 `addmh ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos`
 
-1. Firstly, the `String` user input is passed into the `LogicManager::execute` method of the LogicManager instance as the only parameter.
+1. Firstly, the `String` user input is passed into the `LogicManager::execute` method of the `LogicManager` instance as the only parameter.
 
-2. Then, the `LogicManager::execute` method calls `AddressBookParser::parseCommand` which receives the user input as a parameter.
-* The user input is formatted: the first `String` token is taken as the command word, while the remaining `String` is grouped as arguments to be used later in `AddmhCommandParser`.
-* From the command word, the AddressBookParser instance identifies the user input as an `addmh` command  and constructs an `AddmhCommandParser` instance.
+2. Then, the `LogicManager::execute` method calls `HealthBaseParser::parseCommand` which receives the user input as a parameter.
+* The user input is formatted: the first `String` token is taken as the command word, while the remaining `String` is grouped as arguments to be used later by a `AddmhCommandParser`.
+* From the command word, the HealthBaseParser instance identifies the user input as an `addmh` command  and constructs an `AddmhCommandParser` instance.
 
-3.  Next, the `AddressBookParser` calls the `AddmhCommandParser::parse` method. The `AddmhCommandParser` takes in the
+3.  Next, the `HealthBaseParser` calls the `AddmhCommandParser::parse` method. The `AddmhCommandParser` takes in the
 remaining string, `ic/S1234567A mh/Hypertension, diagnosed “years ago”, well contracted with Metoponol doc/Dr. Amos`.
 * The string is tokenised to arguments according to their prefixes.
 +
@@ -186,11 +182,11 @@ if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_MED_HISTORY, PREFIX_DOC
 * Otherwise, `Diagnosis` and `Nric`  objects are constructed and used as fields in the creation of an `AddmhCommand` object.
 
 
-4. Subsequently, the newly created `AddmhCommand` is returned to back to the `LogicManager` instance through `AddmhCommandParser` and `AddressBookParser` objects.
+4. Subsequently, the newly created `AddmhCommand` is returned to back to the `LogicManager` instance through the `AddmhCommandParser` and `HealthBaseParser` objects.
 
-5. When control is returned to the `LogicManager` object, it calls the `AddmhCommand::execute` method.
+5. Afterwards, when control is returned to the `LogicManager` object, it calls the `AddmhCommand::execute` method.
 * The method takes in a `Model` object to access the application’s data context, the stored data of all persons.
-* Its execution sequence may be broken down into the numbered steps in the code below.
+* Its execution sequence may be broken down into the numbered steps in the code snippet below.
 
 +
 [source, java]
@@ -207,7 +203,7 @@ public CommandResult execute(Model model, CommandHistory history) throws Command
 }
 ----
 
-6. The stored persons data is accessed in the `CommandUtil::getPatient` class method.
+6. Next, the stored persons data is accessed in the `CommandUtil::getPatient` class method.
 * `Model::getFilteredPersonList` is called to search for a person with a `Nric` that matches the `Nric` field in the `AddmhCommand`
 * If a match is found, the `Person` is returned to the `AddmhCommand::execute` method.
 +
@@ -237,7 +233,7 @@ public static Person getPatient(Nric nric, Model model) throws CommandException 
 ----
 
 7. Following that, the `Person` 's medical history is to be updated.
-* The person’s current `medicalHistory` is retrieved, and the `Diagnosis` field in the `AddmhCommand` is added it.
+* The person’s current `medicalHistory` is retrieved, and the `Diagnosis` field in the `AddmhCommand` is added to it.
 * Then, a new `Person` is created with the updated fields, as part of the immutability of the `Person` class.
 +
 [source, java]
@@ -253,8 +249,8 @@ private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosi
 ----
 
 8. Then, the old `Person` 's data will be replaced with the updated `Person` 's data.
-* Here the `Model::updatePerson` method is called, and it subsequently calls the `AddressBook::updatePerson` method.
-* Replaces the person’s existing data in the addressbook storage with the person’s updated data.
+* Here the `Model::updatePerson` method is called, and it subsequently calls the `HealthBase::updatePerson` method.
+* It replaces the person’s existing data in the storage with the person’s updated data.
 +
 [source, java]
 ----
@@ -262,11 +258,11 @@ private static Person addMedicalHistoryForPatient(Person patientToEdit, Diagnosi
 public void updatePerson(Person target, Person editedPerson) {
     requireAllNonNull(target, editedPerson);
 
-    internalAddressBook.updatePerson(target, editedPerson);
-    indicateAddressBookChanged();
+    internalHealthBase.updatePerson(target, editedPerson);
+    indicateHealthBaseChanged();
 }
 
-// AddressBook.java
+// HealthBase.java
 public void updatePerson(Person target, Person editedPerson) {
     requireNonNull(editedPerson);
 
@@ -290,7 +286,7 @@ with an appropriate error message before the use case ends.
 ****
 
 ==== Design Considerations
-===== Aspect: How to represent a timestamp in a diagnosis
+===== 1. Aspect: How to represent a timestamp in a diagnosis
 * **Alternative 1 (current implementation):** Use a POJO class to represent the timestamp data in the `Diagnosis` class.
 ** Pros: Results in improved readability and modularity of code, due to a stronger adherence to the Object-Oriented Programming paradigm.
 ** Cons: Increases in modularity can make it difficult to find information, if code becomes over-modularised.
@@ -299,3 +295,12 @@ with an appropriate error message before the use case ends.
 ** Pros: Results in more compact code.
 ** Cons: Decreases code modularity, and this decreases code readability.
 
+===== 2. Aspect: How to store medical history
+* **Alternative 1 (current implementation):** Use an ArrayList to store diagnoses in a person.
+** Pros: Allows expandable storage of diagnoses with its dynamic size. As an ArrayList implements the list interface,
+its contracted functionality suitably represents a list of diagnoses, which makes its usage in developing intuitive.
+** Cons: Slows down performance if the ArrayList capacity is constantly filled due to resizing costs.
+
+* **Alternative 2 (alternative implementation):** Use an Array to store diagnoses in a person.
+** Pros: Reduces performance losses that may arise from constant resizing of filled ArrayLists.
+** Cons: Decreases flexibility in developing as the Arrays do not support generics in Java.

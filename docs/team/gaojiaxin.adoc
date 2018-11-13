@@ -35,10 +35,10 @@ HealthBase is a desktop application designed to aid in the management of a hospi
 *** *visitorin* user to select a patient and show all the patient's visitors in the list.
 ** Justification: This feature designed to provide clerical staff with feature to view and control the patient's visitors.Eventually, it create better resting environment for the patients.
 
+* *Code contributed*:
+** https://github.com/CS2103-AY1819S1-W14-3/main/commits?author=GAOJIAXIN666[GitHub Commits]
 * *Minor enhancements*: Incorporate `visitors` with the `view` command
 
-** Project management:
-*** nil
 ** Documentation:
 *** Add visual guide to User guide in the relative features about visitors.
 *** Update diagram and clear steps to Developer guide in the fields of visitors.
@@ -117,8 +117,8 @@ WARNING: If the required visior in not in the patient's visitor list, an error m
 ==== Current implementation
 There three commands related to manage patients' visitors. +
 
-* The `visitorin` command allows user to add visitors into patient's visitorList. Every patient will has his/her own `VisitorList` and
-the maximum number of visitors for a patient is 5 in order to provide patient's a comfortable resting environment. +
+* The `visitorin` command allows user to add visitors into patient's visitorList. Each patient has a `VisitorList` and
+the maximum size of the list is 5 so that patients can have a comfortable environment. +
 
 * The `viewvisitors` command allows user to view a patient's current visitors in his/her `VisitorList`. It displays all the visitors from the requested patient's
 `visitorList` in order of entry. +
@@ -147,14 +147,38 @@ To illustrate how the three commands work, examples are given below.
 
 * `visitorin ic/S1234567A v/Jane`
 ** The command inputs are passed to an instance of the `LogicManager` class.
-** `AddressBookParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
+** `HealthBaseParser` parses the command word (`visitorin`) and executes `VisitorInCommandParser::parse`.
 ** `VisitorInCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitorinCommand` object.
+Below shows the part of code:
+
+----
+public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+
+        Person patientToUpdate = CommandUtil.getPatient(patientNric, model);
+
+        if (patientToUpdate.getVisitorList().getSize() >= 5) {
+            throw new CommandException(MESSAGE_FULL);
+        }
+
+        if (patientToUpdate.getVisitorList().contains(visitorName)) {
+            throw new CommandException(MESSAGE_DUPLICATE_VISITORS);
+        }
+
+        Person updatedPatient = addVisitorForPatient(patientToUpdate, this.visitorName);
+
+        model.updatePerson(patientToUpdate, updatedPatient);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+    }
+----
 ** In `VisitorinCommand`, new `Visitor` object is created and added to a copy of the required `Person` object's `VisitorList`
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `visitorin` sequence diagram below:
+Below is a `visitorin` sequence diagram (Figure 1):
 
+.`visitorin` sequence diagram
 image::VisitorinSequenceDiagram.png[width="800"]
 
 * `viewvisitor ic/S1234567A`
@@ -162,16 +186,44 @@ image::VisitorinSequenceDiagram.png[width="800"]
 ** `ViewvisitorsCommand` retrieves the person with the required patient's ic and construct a copy of selected patient's VisitorList for display
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `viewvisitor` sequence diagram below:
+Below is a `viewvisitor` sequence diagram (Figure 2):
 
+.`viewvisitor` sequence diagram
 image::ViewvisitorsSequenceDiagram.png[width="800"]
 
 * `visitorout ic/S1234567A v/Jane`
 ** Similar to the `visitorin` command, `VisitoroutCommandParser::parse` construct and a `Visitor` (Jane), `Nric` (S1234567A) of the patient provided by the user and then returns `VisitoroutCommand` object.
+Below shows the part of code:
+
+----
+public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+
+        Person selectedPatient = CommandUtil.getPatient(patientNric, model);
+        VisitorList patientVisitorList = selectedPatient.getVisitorList();
+
+        if (patientVisitorList.getSize() == 0) {
+            return new CommandResult(String.format(MESSAGE_NO_VISITORS, patientNric));
+        }
+
+        if (!patientVisitorList.contains(visitorName)) {
+            return new CommandResult(String.format(MESSAGE_NO_REQUIRED_VISITOR, patientNric));
+        }
+
+        Person updatedPatient = removeVisitorForPatient(selectedPatient, this.visitorName);
+
+        model.updatePerson(selectedPatient, updatedPatient);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, patientNric));
+    }
+----
+
 ** In `VisitoroutCommand`, new `Visitor` object is created and removed from the copy of the required `Person` object's `VisitorList`
 *** The new `Person` object is updated to the model by `Model#updatePerson` method.
 *** A new CommandResult object is returned and the execution ends.
 
-Here is `visitorout` sequence diagram below:
+Below is a `visitorout` sequence diagram (Figure 3):
 
+.`visitorout` sequence diagram
 image::VisitoroutSequenceDiagram.png[width="800"]
+

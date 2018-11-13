@@ -27,12 +27,12 @@ Responsibilities: In charge of the `Model` component +
 
 '''
 
-=== Ling Zhiyu
+=== Ling Zhi Yu
 image::omegafishy.png[width="150", align="left"]
 {empty}[http://github.com/omegafishy[github]] [<<omegafishy#, portfolio>>]
 
-Role: Developer +
-Responsibilities: TBD +
+Role: Developer + Project Leader +
+Responsibilities: In charge of documentation
 
 '''
 
@@ -50,6 +50,6 @@ image::gaojiaxin666.png[width="150", align="left"]
 {empty}[http://github.com/gaojiaxin666[github]] [<<GAOJIAXIN666#, portfolio>>]
 
 Role: Developer +
-Responsibilities: TBD +
+Responsibilities: In charge of code reviewing
 
 '''

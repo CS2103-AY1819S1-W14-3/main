@@ -36,7 +36,7 @@ public class AddDietCommand extends Command {
                                                + PREFIX_ALLERGY + "Egg "
                                                + PREFIX_ALLERGY + "Crab "
                                                + PREFIX_CULTURAL_REQUIREMENT + "Halal "
-                                               + PREFIX_PHYSICAL_DIFFICULTY + "Hands cannot move. ";
+                                               + PREFIX_PHYSICAL_DIFFICULTY + "Hands cannot move ";
 
     public static final String MESSAGE_SUCCESS = "Dietary requirements added for patient: %1$s";
 
