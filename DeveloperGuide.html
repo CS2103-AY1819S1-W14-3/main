@@ -78,13 +78,12 @@
 <li><a href="#adding-an-appointment-for-a-patient">F.3. Adding an appointment for a patient</a></li>
 <li><a href="#adding-dietary-requirements-for-a-patient">F.4. Adding dietary requirements for a patient</a></li>
 <li><a href="#adding-medication-for-a-patient">F.5. Adding medication for a patient</a></li>
-<li><a href="#changing-the-view">F.6. Changing the view</a></li>
-<li><a href="#sorting-the-view">F.7. Sorting the view</a></li>
-<li><a href="#checking-out-a-patient">F.8. Checking out a patient</a></li>
-<li><a href="#checking-in-a-patient">F.9. Checking in a patient</a></li>
-<li><a href="#generating-data">F.10. Generating data</a></li>
-<li><a href="#adding-a-diagnosis-to-a-patient-s-medical-record">F.11. Adding a diagnosis to a patient&#8217;s medical record</a></li>
-<li><a href="#saving-data">F.12. Saving data</a></li>
+<li><a href="#adding-a-diagnosis-to-a-patient-s-medical-record">F.6. Adding a diagnosis to a patient&#8217;s medical record</a></li>
+<li><a href="#changing-the-view">F.7. Changing the view</a></li>
+<li><a href="#sorting-the-view">F.8. Sorting the view</a></li>
+<li><a href="#checking-out-a-patient">F.9. Checking out a patient</a></li>
+<li><a href="#checking-in-a-patient">F.10. Checking in a patient</a></li>
+<li><a href="#generating-data">F.11. Generating data</a></li>
 </ul>
 </li>
 </ul>
@@ -172,7 +171,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 This will generate all resources required by the application and tests.</p>
 </li>
 <li>
-<p>Open <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/storage/XmlAdaptedpatient.java"><code>XmlAdaptedpatient.java</code></a> and <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow.java</code></a> and check for any code errors</p>
+<p>Open <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/storage/XmlAdaptedPerson.java"><code>XmlAdaptedPerson.java</code></a> and <a href="https://github.com/CS2103-AY1819S1-W14-3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow.java</code></a> and check for any code errors</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -240,10 +239,10 @@ This will generate all resources required by the application and tests.</p>
 <div class="sect3">
 <h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">1.4.2. Updating documentation to match your fork</a></h4>
 <div class="paragraph">
-<p>After forking the repo, the documentation will still have the SE-EDU branding and refer to the <code>se-edu/HealthBase-level4</code> repo.</p>
+<p>After forking the repo, the documentation will still have the SE-EDU branding and refer to the <code>se-edu/AddressBook-level4</code> repo.</p>
 </div>
 <div class="paragraph">
-<p>If you plan to develop this fork (separate product (i.e. instead of contributing to <code>se-edu/HealthBase-level4</code>)) | you should do the following:</p>
+<p>If you plan to develop this fork (separate product (i.e. instead of contributing to <code>se-edu/AddressBook-level4</code>)) | you should do the following:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -418,7 +417,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>HealthBaseChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
+Note how the <code>Model</code> simply raises a <code>HealthBaseChangedEvent</code> when HealthBase data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
 </td>
 </tr>
 </table>
@@ -540,7 +539,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores HealthBase data.</p>
 </li>
 <li>
 <p>exposes an unmodifiable <code>ObservableList&lt;patient&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
@@ -557,7 +556,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>patient</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>patient</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>HealthBase</code>, which <code>patient</code> can reference. This would allow <code>HealthBase</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>patient</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
  <span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
 </td>
@@ -585,7 +584,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Address Book data in xml format and read it back.</p>
+<p>can save HealthBase data in xml format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -593,7 +592,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.healthbase.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -2005,7 +2004,7 @@ Below shows the part of code:</p>
 <div class="sect2">
 <h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>Coming in V2.0.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2572,7 +2571,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>{More to be added}</em></p>
+<p><em>{More to be added in V2.0}</em></p>
 </div>
 </div>
 </div>
@@ -2966,7 +2965,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </ol>
 </div>
 <div class="paragraph">
-<p><em>{More to be added}</em></p>
+<p><em>{More to be added in V2.0}</em></p>
 </div>
 </div>
 </div>
@@ -3038,7 +3037,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with a set of sample patients. The window size may not be optimum.</p>
 </li>
 </ol>
 </div>
@@ -3058,9 +3057,6 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -3152,27 +3148,27 @@ Expected: The most recent window size and location is retained.</p>
 <p>Prerequisites: Patient must not have an existing appointment at the same Date and Time</p>
 </li>
 <li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code>
+<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code><br>
 Expected: Appointment is added for patient. To verify, run <code>view appt</code>.</p>
 </li>
 <li>
-<p>Test case: <code>addappt ic/S1234567 type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code>
+<p>Test case: <code>addappt ic/S1234567 type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code><br>
 Expected: Appointment is not added due to the invalid NRIC input.</p>
 </li>
 <li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code> (after (b) has been run)
+<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code> (after (b) has been run)<br>
 Expected: Appointment is not added due to the duplicate Date and Time from an existing appointment.</p>
 </li>
 <li>
-<p>Test case: <code>addappt ic/S1234567A type/apple pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code>
+<p>Test case: <code>addappt ic/S1234567A type/apple pn/Heart Bypass dt/27-04-2019 10:30 doc/Dr. Pepper</code><br>
 Expected: Appointment is not added due to the invalid Type input.</p>
 </li>
 <li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/123 dt/27-04-2019 10:30 doc/Dr. Pepper</code>
+<p>Test case: <code>addappt ic/S1234567A type/SRG pn/123 dt/27-04-2019 10:30 doc/Dr. Pepper</code><br>
 Expected: Appointment is not added because Procedure Name must only consist of alphabets.</p>
 </li>
 <li>
-<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper</code>
+<p>Test case: <code>addappt ic/S1234567A type/SRG pn/Heart Bypass dt/27-04-2019 10:30 doc/Pepper</code><br>
 Expected: Appointment is not added because of the missing salutation for Doctor.</p>
 </li>
 </ol>
@@ -3190,26 +3186,26 @@ Expected: Appointment is not added because of the missing salutation for Doctor.
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: Select a patient in the app using the <code>select</code> command. If there are no patients to be selected, add a new patient using the <code>register</code> command. Let this selected patient&#8217;s NRIC be denoted by <code>$nric</code>. The test cases must be executed in the sequence listed.</p>
+<p>Prerequisites: Select a patient in the app using the <code>select</code> command. If there are no patients to be selected, add a new patient using the <code>register</code> command. Let this selected patient&#8217;s NRIC be denoted by <code>$nric</code>. The test cases must be executed in the sequence listed.<br></p>
 </li>
 <li>
-<p>Test case: <code>adddiet ic/$nric alg/Egg alg/Milk cr/Halal pd/Hands cannot move</code>
+<p>Test case: <code>adddiet ic/$nric alg/Egg alg/Milk cr/Halal pd/Hands cannot move</code><br>
 Expected: Dietary requirements are added for patient. To verify, run <code>view diets</code>.</p>
 </li>
 <li>
-<p>Test case: <code>adddiet ic/$nric cr/Vegetarian</code>
+<p>Test case: <code>adddiet ic/$nric cr/Vegetarian</code><br>
 Expected: Dietary requirement is added for patient. To verify, run <code>view diets</code>.</p>
 </li>
 <li>
-<p>Test case: <code>adddiet ic/$nric alg/Egg</code>
+<p>Test case: <code>adddiet ic/$nric alg/Egg</code><br>
 Expected: No new dietary requirement is added, since the new allergy has been added before.</p>
 </li>
 <li>
-<p>Test case: <code>adddiet ic/$nric pd/1 hand cannot move.</code>
+<p>Test case: <code>adddiet ic/$nric pd/1 hand cannot move.</code><br>
 Expected: Dietary requirement is not added due to the invalid input.</p>
 </li>
 <li>
-<p>Test case: <code>adddiet ic/$nric alg/Fish cr/</code>
+<p>Test case: <code>adddiet ic/$nric alg/Fish cr/</code><br>
 Expected: Dietary requirement is not added due to the invalid <code>cr</code> input.</p>
 </li>
 </ol>
@@ -3308,176 +3304,7 @@ Expected: No prescription is added. Error details shown in the status message.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="changing-the-view"><a class="link" href="#changing-the-view">F.6. Changing the view</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Changing the view (right-side panel of the UI)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: None</p>
-</li>
-<li>
-<p>Test case: <code>view default</code><br>
-Expected: The view changes to a blank panel (the default view).</p>
-</li>
-<li>
-<p>Test case: <code>view appt</code><br>
-Expected: The view changes to the Appointment View.</p>
-</li>
-<li>
-<p>Test case: <code>view diets</code><br>
-Expected: The view changes to the Diet View.</p>
-</li>
-<li>
-<p>Test case: <code>view meds</code><br>
-Expected: The view changes to the Medication View.</p>
-</li>
-<li>
-<p>Test case: <code>view mh</code><br>
-Expected: The view changes to the Medical History view.</p>
-</li>
-<li>
-<p>Test case: <code>view AAA</code><br>
-Expected: The view does not change. An error message is shown.</p>
-</li>
-<li>
-<p>Test case: <code>view</code><br>
-Expected: The view does not change. An error message is shown.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sorting-the-view"><a class="link" href="#sorting-the-view">F.7. Sorting the view</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Sorting a given view</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: The current view is a sortable view. Change the view to the Medication View (guaranteed sortable) using <code>view meds</code>.</p>
-</li>
-<li>
-<p>Test case: <code>sort a 1</code><br>
-Expected: The first column is used to sort the entries in the Medication View in ascending order. The natural ordering is lexicographical (for alphabetical data) and numerical (for numerical data).</p>
-</li>
-<li>
-<p>Test case: <code>sort</code><br>
-Expected: The view remains unsorted. An error message is shown.</p>
-</li>
-<li>
-<p>Test case: <code>sort x</code><br>
-Expected: The view remains unsorted. An error message is shown.</p>
-</li>
-<li>
-<p>Test case: <code>sort a</code><br>
-Expected: The view remains unsorted. An error message is shown.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="checking-out-a-patient"><a class="link" href="#checking-out-a-patient">F.8. Checking out a patient</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Checking out a patient who is in the system</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: A patient is registered and checked in to the system, and is visible on the left panel. Let <code>$nric</code> denotes this patient&#8217;s NRIC. Let <code>$nricOther</code> denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.</p>
-</li>
-<li>
-<p>Test case: <code>checkout ic/$nricOther</code>
-Expected: The command fails. Error detail shown in the status message.</p>
-</li>
-<li>
-<p>Test case: <code>checkout ic/$nric</code>
-Expected: The patient with <code>$nric</code> is checked out.</p>
-</li>
-<li>
-<p>Test case: <code>checkout ic/$nric</code>
-Expected: The command fails. Error detail shown in the status message.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="checking-in-a-patient"><a class="link" href="#checking-in-a-patient">F.9. Checking in a patient</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Checking in a previously checked out patient</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: A patient is registered and previously checked out from the system. Let <code>$nric</code> denotes this patient&#8217;s NRIC. Let <code>$nricOther</code> denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.</p>
-</li>
-<li>
-<p>Test case: <code>checkin ic/$nricOther</code>
-Expected: The command fails. Error detail shown in the status message.</p>
-</li>
-<li>
-<p>Test case: <code>checkin ic/$nric</code>
-Expected: The patient with <code>$nric</code> is checked in.</p>
-</li>
-<li>
-<p>Test case: <code>checkin ic/$nric</code>
-Expected: The command fails. Error detail shown in the status message.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="generating-data"><a class="link" href="#generating-data">F.10. Generating data</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Generating data for testing</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: The application must be in developer mode. Toggle developer mode using the <code>dev-mode</code> command.</p>
-</li>
-<li>
-<p>Test case: <code>gendata 10</code><br>
-Expected: The application&#8217;s data is cleared. 10 patients&#8217;s worth of data is generated.</p>
-</li>
-<li>
-<p>Test case: <code>gendata</code><br>
-Expected: No data is generated. An error message is shown.</p>
-</li>
-<li>
-<p>Test case: <code>gendata -1</code><br>
-Expected: No data is generated. An error message is shown.</p>
-</li>
-<li>
-<p>Test case: <code>gendata A</code><br>
-Expected: No data is generated. An error message is shown.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="adding-a-diagnosis-to-a-patient-s-medical-record"><a class="link" href="#adding-a-diagnosis-to-a-patient-s-medical-record">F.11. Adding a diagnosis to a patient&#8217;s medical record</a></h3>
+<h3 id="adding-a-diagnosis-to-a-patient-s-medical-record"><a class="link" href="#adding-a-diagnosis-to-a-patient-s-medical-record">F.6. Adding a diagnosis to a patient&#8217;s medical record</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3539,7 +3366,7 @@ Expected: Failed addition, diagnosis should not be blank.</p>
 Expected: Failed addition, diagnosis should not be a whitespace.</p>
 </li>
 <li>
-<p>Test case: <code>addmh ic/S1234567A mh/!<mark>$!</mark>$@#!!  doc/Dr.Ross</code><br>
+<p>Test case: <code>addmh ic/S1234567A mh/!$!#!  doc/Dr.Ross</code><br>
 Expected: Patient&#8217;s diagnosis is successfully added, diagnosis does not need to be made up of word letters.</p>
 </li>
 <li>
@@ -3555,7 +3382,7 @@ Expected: Patient&#8217;s diagnosis is successfully added as doctor&#8217;s name
 Expected: Failed addition, doctor&#8217;s name should not be blank.</p>
 </li>
 <li>
-<p>Test case: `addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/ `<br>
+<p>Test case: <code>addmh ic/S1234567A mh/Patient has acute terminal stage brain cancer, refer to Dr.Zhang immediately. doc/</code><br>
 Expected: Failed addition, doctor&#8217;s name cannot be a whitespace.</p>
 </li>
 </ol>
@@ -3565,24 +3392,173 @@ Expected: Failed addition, doctor&#8217;s name cannot be a whitespace.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.12. Saving data</a></h3>
+<h3 id="changing-the-view"><a class="link" href="#changing-the-view">F.7. Changing the view</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Dealing with missing/corrupted data files</p>
+<p>Changing the view (right-side panel of the UI)</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Prerequisites: None</p>
+</li>
+<li>
+<p>Test case: <code>view default</code><br>
+Expected: The view changes to a blank panel (the default view).</p>
+</li>
+<li>
+<p>Test case: <code>view appt</code><br>
+Expected: The view changes to the Appointment View.</p>
+</li>
+<li>
+<p>Test case: <code>view diets</code><br>
+Expected: The view changes to the Diet View.</p>
+</li>
+<li>
+<p>Test case: <code>view meds</code><br>
+Expected: The view changes to the Medication View.</p>
+</li>
+<li>
+<p>Test case: <code>view mh</code><br>
+Expected: The view changes to the Medical History view.</p>
+</li>
+<li>
+<p>Test case: <code>view AAA</code><br>
+Expected: The view does not change. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>view</code><br>
+Expected: The view does not change. An error message is shown.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect2">
+<h3 id="sorting-the-view"><a class="link" href="#sorting-the-view">F.8. Sorting the view</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sorting a given view</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The current view is a sortable view. Change the view to the Medication View (guaranteed sortable) using <code>view meds</code>.</p>
+</li>
+<li>
+<p>Test case: <code>sort a 1</code><br>
+Expected: The first column is used to sort the entries in the Medication View in ascending order. The natural ordering is lexicographical (for alphabetical data) and numerical (for numerical data).</p>
+</li>
+<li>
+<p>Test case: <code>sort</code><br>
+Expected: The view remains unsorted. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>sort x</code><br>
+Expected: The view remains unsorted. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>sort a</code><br>
+Expected: The view remains unsorted. An error message is shown.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checking-out-a-patient"><a class="link" href="#checking-out-a-patient">F.9. Checking out a patient</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Checking out a patient who is in the system</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: A patient is registered and checked in to the system, and is visible on the left panel. Let <code>$nric</code> denotes this patient&#8217;s NRIC. Let <code>$nricOther</code> denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.</p>
+</li>
+<li>
+<p>Test case: <code>checkout ic/$nricOther</code><br>
+Expected: The command fails. Error detail shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>checkout ic/$nric</code><br>
+Expected: The patient with <code>$nric</code> is checked out.</p>
+</li>
+<li>
+<p>Test case: <code>checkout ic/$nric</code><br>
+Expected: The command fails. Error detail shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checking-in-a-patient"><a class="link" href="#checking-in-a-patient">F.10. Checking in a patient</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Checking in a previously checked out patient</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: A patient is registered and previously checked out from the system. Let <code>$nric</code> denotes this patient&#8217;s NRIC. Let <code>$nricOther</code> denotes an NRIC of a patient who is not registered in the system. The test cases must be executed in the sequence listed.</p>
+</li>
+<li>
+<p>Test case: <code>checkin ic/$nricOther</code><br>
+Expected: The command fails. Error detail shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>checkin ic/$nric</code><br>
+Expected: The patient with <code>$nric</code> is checked in.</p>
+</li>
+<li>
+<p>Test case: <code>checkin ic/$nric</code><br>
+Expected: The command fails. Error detail shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generating-data"><a class="link" href="#generating-data">F.11. Generating data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generating data for testing</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The application must be in developer mode. Toggle developer mode using the <code>dev-mode</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>gendata 10</code><br>
+Expected: The application&#8217;s data is cleared. 10 patients&#8217;s worth of data is generated.</p>
+</li>
+<li>
+<p>Test case: <code>gendata</code><br>
+Expected: No data is generated. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>gendata -1</code><br>
+Expected: No data is generated. An error message is shown.</p>
+</li>
+<li>
+<p>Test case: <code>gendata A</code><br>
+Expected: No data is generated. An error message is shown.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-13 10:12:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-13 12:26:24 UTC</div></div></div></body></html>
