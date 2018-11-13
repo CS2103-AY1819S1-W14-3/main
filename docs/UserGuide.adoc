@@ -85,14 +85,14 @@ Example(s):
 . Type the example command into the input box as shown in the figure below and hit the kbd:[Enter] key:
 
 .Adding an appointment for patient
-image::addapptcommand.jpg[width="1000"]
+image::addapptcommand.png[width="1000"]
 
 [#img-addapptresult]
 [start=2]
 . The resulting output will be as shown in the figure below:
 
 .Appointment has been added
-image::addapptresult.jpg[width="1000"]
+image::addapptresult.png[width="1000"]
 
 ****
 TIP: If you want to view the newly added appointments for a particular patient, simply enter `view appt`.
@@ -284,14 +284,14 @@ Example(s):
 . Type the example command into the input box as shown in the figure below and hit the kbd:[Enter] key:
 
 .Registering a new patient
-image::registercommand.jpg[width="1000"]
+image::registercommand.png[width="1000"]
 
 [#img-registerresult]
 [start=2]
 . The resulting output will be as shown in the figure below:
 
 .Patient has been registered
-image::registerresult.jpg[width="1000"]
+image::registerresult.png[width="1000"]
 
 //end::register[]
 
